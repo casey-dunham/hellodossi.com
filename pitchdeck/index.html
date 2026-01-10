@@ -266,6 +266,46 @@
             color: var(--text-dark);
         }
 
+        /* Gap grid */
+        .gap-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 1em;
+        }
+
+        .gap-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.2em 1.4em;
+            display: flex;
+            align-items: flex-start;
+            gap: 1em;
+        }
+
+        .gap-card i {
+            font-size: 1.4em;
+            color: var(--icon-gray);
+            margin-top: 0.1em;
+        }
+
+        .gap-card div {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2em;
+        }
+
+        .gap-card strong {
+            color: var(--text-dark);
+            font-size: 1em;
+            font-weight: 600;
+        }
+
+        .gap-card span {
+            color: var(--text-medium);
+            font-size: 0.9em;
+        }
+
         /* Stat boxes */
         .stat-row {
             display: flex;
@@ -730,6 +770,15 @@
         .reveal section.present .about-grid .about-card:nth-child(3) { animation-delay: 0.2s; }
         .reveal section.present .about-grid .about-card:nth-child(4) { animation-delay: 0.25s; }
 
+        .reveal section.present .gap-card {
+            animation: scaleIn 0.4s ease-out both;
+        }
+
+        .reveal section.present .gap-grid .gap-card:nth-child(1) { animation-delay: 0.1s; }
+        .reveal section.present .gap-grid .gap-card:nth-child(2) { animation-delay: 0.15s; }
+        .reveal section.present .gap-grid .gap-card:nth-child(3) { animation-delay: 0.2s; }
+        .reveal section.present .gap-grid .gap-card:nth-child(4) { animation-delay: 0.25s; }
+
         .reveal section.present .two-col > div {
             animation: fadeInUp 0.5s ease-out both;
         }
@@ -887,13 +936,13 @@
                 <div class="slide-content">
                     <h3>The Gap</h3>
                     <h2>What My Pump Doesn't Know</h2>
-                    <ul class="problem-list">
-                        <li><span class="dot"></span><span><strong>I ran 5 miles this morning</strong> — I'm more sensitive for hours</span></li>
-                        <li><span class="dot"></span><span><strong>I slept 4 hours last night</strong> — My glucose will run higher</span></li>
-                        <li><span class="dot"></span><span><strong>I'm eating pizza, not salad</strong> — Fat spikes me 4 hours later</span></li>
-                        <li><span class="dot"></span><span><strong>I'm getting sick</strong> — My needs are about to double</span></li>
-                    </ul>
-                    <p style="margin-top: 0.8em;"><em>I adjust for all of this manually. Every day.</em></p>
+                    <div class="gap-grid">
+                        <div class="gap-card"><i class="ph ph-person-simple-run"></i><div><strong>I ran 5 miles this morning</strong><span>I'm more sensitive for hours</span></div></div>
+                        <div class="gap-card"><i class="ph ph-moon"></i><div><strong>I slept 4 hours last night</strong><span>My glucose will run higher</span></div></div>
+                        <div class="gap-card"><i class="ph ph-pizza"></i><div><strong>I'm eating pizza, not salad</strong><span>Fat spikes me 4 hours later</span></div></div>
+                        <div class="gap-card"><i class="ph ph-thermometer"></i><div><strong>I'm getting sick</strong><span>My needs are about to double</span></div></div>
+                    </div>
+                    <p style="margin-top: 1em; color: var(--text-light);"><em>I adjust for all of this manually. Every day.</em></p>
                 </div>
             </section>
 
