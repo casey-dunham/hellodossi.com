@@ -8,20 +8,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <style>
         :root {
-            --accent: #6366F1;
-            --accent-light: #818CF8;
-            --accent-lighter: rgba(99, 102, 241, 0.1);
-            --accent-dark: #4F46E5;
-            --text-dark: #0f172a;
-            --text-medium: #475569;
-            --text-light: #94a3b8;
+            --accent: #737BF2;
+            --accent-light: rgba(115, 123, 242, 0.15);
+            --text-dark: #1a1a1a;
+            --text-medium: #636366;
+            --text-light: #8E8E93;
+            --icon-gray: #8E8E93;
             --bg-white: #ffffff;
-            --bg-gray: #f8fafc;
-            --bg-card: #f1f5f9;
-            --gradient: linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #A855F7 100%);
-            --gradient-soft: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
+            --bg-card: #f5f5f7;
         }
 
         * { box-sizing: border-box; }
@@ -191,7 +188,7 @@
             top: 0.55em;
             width: 8px;
             height: 8px;
-            background: var(--gradient);
+            background: var(--accent);
             border-radius: 50%;
         }
 
@@ -206,10 +203,8 @@
         }
 
         .gradient-text {
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--accent);
+            font-weight: 600;
         }
 
         .subtitle {
@@ -241,7 +236,6 @@
             background: var(--bg-card);
             border-radius: 20px;
             padding: 1.8em;
-            border: 1px solid rgba(0,0,0,0.04);
         }
 
         /* Stat boxes */
@@ -256,15 +250,12 @@
             border-radius: 20px;
             padding: 1.8em 2em;
             flex: 1;
-            border: 1px solid rgba(0,0,0,0.04);
         }
 
         .stat-box .number {
             font-size: 3em;
             font-weight: 800;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--accent);
             line-height: 1;
             margin-bottom: 0.15em;
         }
@@ -287,7 +278,6 @@
             background: var(--bg-card);
             border-radius: 20px;
             padding: 1.8em;
-            border: 1px solid rgba(0,0,0,0.04);
         }
 
         .two-col h4 {
@@ -321,18 +311,19 @@
             background: var(--bg-card);
             padding: 1.3em 1.5em;
             border-radius: 16px;
-            border: 1px solid rgba(0,0,0,0.04);
             display: flex;
             align-items: flex-start;
             gap: 1em;
         }
 
         .factor-item .factor-icon {
-            width: 40px;
-            height: 40px;
-            background: var(--gradient);
-            border-radius: 10px;
+            font-size: 1.6em;
+            color: var(--icon-gray);
             flex-shrink: 0;
+            width: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .factor-item .factor-content strong {
@@ -358,13 +349,12 @@
             margin: 0.6em 0;
             border-radius: 16px;
             background: var(--bg-card);
-            border: 1px solid rgba(0,0,0,0.04);
         }
 
         .step-num {
             width: 40px;
             height: 40px;
-            background: var(--gradient);
+            background: var(--accent);
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -398,11 +388,10 @@
             background: var(--bg-card);
             border-radius: 16px;
             overflow: hidden;
-            border: 1px solid rgba(0,0,0,0.04);
         }
 
         .reveal th {
-            background: var(--gradient-soft);
+            background: var(--accent-light);
             color: var(--text-dark);
             padding: 1em 1.2em;
             font-weight: 600;
@@ -474,7 +463,7 @@
             text-decoration: underline;
         }
 
-        /* Icon list - with gradient circles */
+        /* Icon list - with gray icons */
         .icon-list {
             list-style: none;
             padding: 0;
@@ -494,10 +483,12 @@
         }
 
         .icon-list .icon {
-            width: 44px;
-            height: 44px;
-            background: var(--gradient);
-            border-radius: 12px;
+            font-size: 1.5em;
+            color: var(--icon-gray);
+            width: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             flex-shrink: 0;
         }
 
@@ -529,7 +520,7 @@
         .problem-list .dot {
             width: 10px;
             height: 10px;
-            background: var(--gradient);
+            background: var(--accent);
             border-radius: 50%;
             flex-shrink: 0;
             margin-top: 0.45em;
@@ -620,12 +611,9 @@
             display: inline-block;
         }
 
-        /* Animated numbers in headings get gradient */
+        /* Animated numbers in headings */
         h2 [data-animate-number] {
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--accent);
             font-weight: 800;
         }
 
@@ -779,14 +767,6 @@
             box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
         }
 
-        /* Animated gradient on step numbers */
-        .step-num {
-            background-size: 200% 200%;
-            animation: gradientShift 3s ease infinite;
-            background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 25%, #A855F7 50%, #8B5CF6 75%, #6366F1 100%);
-            background-size: 300% 300%;
-        }
-
         /* Pulse effect on numbers */
         .stat-box .number.counting {
             animation: pulseGlow 0.8s ease-in-out;
@@ -796,9 +776,7 @@
         .big-percent {
             font-size: 4em;
             font-weight: 800;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--accent);
             line-height: 1;
             display: inline-block;
         }
@@ -838,10 +816,10 @@
                     <h3>About Me</h3>
                     <h2>Hi, I'm Casey</h2>
                     <ul class="icon-list">
-                        <li><span class="icon"></span><span>Georgia Tech, Industrial Design</span></li>
-                        <li><span class="icon"></span><span>I have <strong>Type 1 Diabetes</strong></span></li>
-                        <li><span class="icon"></span><span>Former Breakthrough T1D Youth Ambassador</span></li>
-                        <li><span class="icon"></span><span>Currently in Idea to Prototype (I2P)</span></li>
+                        <li><span class="icon"><i class="ph ph-graduation-cap"></i></span><span>Georgia Tech, Industrial Design</span></li>
+                        <li><span class="icon"><i class="ph ph-heart"></i></span><span>I have <strong>Type 1 Diabetes</strong></span></li>
+                        <li><span class="icon"><i class="ph ph-users"></i></span><span>Former Breakthrough T1D Youth Ambassador</span></li>
+                        <li><span class="icon"><i class="ph ph-lightbulb"></i></span><span>Currently in Idea to Prototype (I2P)</span></li>
                     </ul>
                     <p class="big-statement" style="margin-top: 1.5em;">I'm building something I wish existed.</p>
                 </div>
@@ -852,7 +830,7 @@
                 <div class="slide-content">
                     <h3>The Problem</h3>
                     <h2>My "Smart" Pump Isn't Very Smart</h2>
-                    <p>I wear a <span class="accent">$<span data-animate-number="6000" data-suffix="+">6,000+</span> insulin pump</span> and a CGM.</p>
+                    <p>I wear an <span class="accent">insulin pump</span> and a continuous glucose monitor.</p>
                     <p style="margin-top: 0.8em;"><strong>But it only knows two things:</strong></p>
                     <div class="stat-row">
                         <div class="stat-box" style="text-align: center;">
@@ -899,12 +877,12 @@
                     <h3>Context Awareness</h3>
                     <h2>The <span data-animate-number="40" data-suffix="">40</span> Factors</h2>
                     <div class="factor-grid">
-                        <div class="factor-item"><div class="factor-icon"></div><div class="factor-content"><strong>Glucose</strong><span>Value, trend, velocity, momentum, quality</span></div></div>
-                        <div class="factor-item"><div class="factor-icon"></div><div class="factor-content"><strong>Insulin</strong><span>IOB, decay curve, recent boluses, basal rate</span></div></div>
-                        <div class="factor-item"><div class="factor-icon"></div><div class="factor-content"><strong>Nutrition</strong><span>Carbs, protein, fat, fiber, meal timing</span></div></div>
-                        <div class="factor-item"><div class="factor-icon"></div><div class="factor-content"><strong>Activity</strong><span>Workouts, intensity, steps, heart rate</span></div></div>
-                        <div class="factor-item"><div class="factor-icon"></div><div class="factor-content"><strong>Physiology</strong><span>Sleep, cycle phase, illness, stress (HRV)</span></div></div>
-                        <div class="factor-item"><div class="factor-icon"></div><div class="factor-content"><strong>Context</strong><span>Time of day, site age, absorption quality</span></div></div>
+                        <div class="factor-item"><div class="factor-icon"><i class="ph ph-chart-line-up"></i></div><div class="factor-content"><strong>Glucose</strong><span>Value, trend, velocity, momentum, quality</span></div></div>
+                        <div class="factor-item"><div class="factor-icon"><i class="ph ph-drop"></i></div><div class="factor-content"><strong>Insulin</strong><span>IOB, decay curve, recent boluses, basal rate</span></div></div>
+                        <div class="factor-item"><div class="factor-icon"><i class="ph ph-fork-knife"></i></div><div class="factor-content"><strong>Nutrition</strong><span>Carbs, protein, fat, fiber, meal timing</span></div></div>
+                        <div class="factor-item"><div class="factor-icon"><i class="ph ph-person-simple-run"></i></div><div class="factor-content"><strong>Activity</strong><span>Workouts, intensity, steps, heart rate</span></div></div>
+                        <div class="factor-item"><div class="factor-icon"><i class="ph ph-moon-stars"></i></div><div class="factor-content"><strong>Physiology</strong><span>Sleep, cycle phase, illness, stress (HRV)</span></div></div>
+                        <div class="factor-item"><div class="factor-icon"><i class="ph ph-clock"></i></div><div class="factor-content"><strong>Context</strong><span>Time of day, site age, absorption quality</span></div></div>
                     </div>
                 </div>
             </section>
@@ -1090,41 +1068,6 @@
                 </div>
             </section>
 
-            <!-- 16. Tech Stack -->
-            <section>
-                <div class="slide-content">
-                    <h3>Technical</h3>
-                    <h2>How It's Built</h2>
-                    <ul class="icon-list">
-                        <li><span class="icon"></span><span><strong>SwiftUI / Swift 6</strong> — Native iOS</span></li>
-                        <li><span class="icon"></span><span><strong>HealthKit</strong> — CGM, insulin, activity, sleep</span></li>
-                        <li><span class="icon"></span><span><strong>Supabase</strong> — PostgreSQL backend</span></li>
-                        <li><span class="icon"></span><span><strong>CoreML</strong> — Glucose predictions</span></li>
-                        <li><span class="icon"></span><span><strong>Bayesian inference</strong> — Personalized learning</span></li>
-                    </ul>
-                    <p style="margin-top: 1.2em;"><strong><span data-animate-number="660" data-suffix="+">660+</span> unit tests</strong> on safety-critical paths</p>
-                </div>
-            </section>
-
-            <!-- 17. Status -->
-            <section>
-                <div class="slide-content">
-                    <h3>Progress</h3>
-                    <h2>Current Status</h2>
-                    <p><strong>Decision support</strong> — Recommends doses, I manually control my pump</p>
-                    <table style="margin-top: 1em;">
-                        <tbody>
-                            <tr><td>Core algorithm (40 factors)</td><td class="status-complete">✓ Complete</td></tr>
-                            <tr><td>5-layer safety validation</td><td class="status-complete">✓ Complete</td></tr>
-                            <tr><td>Bayesian learning engine</td><td class="status-complete">✓ Complete</td></tr>
-                            <tr><td>HealthKit integration</td><td class="status-complete">✓ Complete</td></tr>
-                            <tr><td>Caregiver app</td><td class="status-complete">✓ Complete</td></tr>
-                            <tr><td>Onboarding & polish</td><td class="status-progress">◐ In progress</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
             <!-- 18. What's Next -->
             <section>
                 <div class="slide-content">
@@ -1172,10 +1115,10 @@
                     <h3>Mentorship</h3>
                     <h2>Where I'd Love Guidance</h2>
                     <ul class="icon-list">
-                        <li><span class="icon"></span><span><strong>Technical</strong> — ML approaches, validation methods</span></li>
-                        <li><span class="icon"></span><span><strong>Research</strong> — Study design, IRB process</span></li>
-                        <li><span class="icon"></span><span><strong>Regulatory</strong> — FDA pathway priorities</span></li>
-                        <li><span class="icon"></span><span><strong>Business</strong> — Company vs research project?</span></li>
+                        <li><span class="icon"><i class="ph ph-code"></i></span><span><strong>Technical</strong> — ML approaches, validation methods</span></li>
+                        <li><span class="icon"><i class="ph ph-flask"></i></span><span><strong>Research</strong> — Study design, IRB process</span></li>
+                        <li><span class="icon"><i class="ph ph-certificate"></i></span><span><strong>Regulatory</strong> — FDA pathway priorities</span></li>
+                        <li><span class="icon"><i class="ph ph-briefcase"></i></span><span><strong>Business</strong> — Company vs research project?</span></li>
                     </ul>
                 </div>
             </section>
@@ -1190,20 +1133,12 @@
                 </div>
             </section>
 
-            <!-- 22. Demo -->
+            <!-- Thank You -->
             <section>
                 <div class="slide-content centered">
-                    <h2>Demo</h2>
-                    <p class="subtitle">Let me show you the app...</p>
-                </div>
-            </section>
-
-            <!-- 23. Questions -->
-            <section>
-                <div class="slide-content centered">
-                    <h2>Questions?</h2>
-                    <p style="margin-top: 2em;">Thank you for your time.</p>
-                    <p style="margin-top: 0.5em;"><a href="mailto:casey@hellodossi.com">casey@hellodossi.com</a></p>
+                    <img src="dossi-wordmark.png" alt="Dossi" class="logo-small">
+                    <h2>Thank you!</h2>
+                    <p style="margin-top: 1.5em;"><a href="mailto:casey@hellodossi.com">casey@hellodossi.com</a></p>
                 </div>
             </section>
 
