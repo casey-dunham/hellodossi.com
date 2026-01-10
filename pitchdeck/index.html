@@ -550,6 +550,36 @@
             height: 80px;
         }
 
+        /* Context sources */
+        .context-sources {
+            display: flex;
+            gap: 16px;
+            margin-top: 1.2em;
+            flex-wrap: wrap;
+        }
+
+        .context-source {
+            background: var(--bg-card);
+            border-radius: 14px;
+            padding: 1.2em 1.5em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6em;
+            min-width: 100px;
+        }
+
+        .context-source i {
+            font-size: 1.8em;
+            color: var(--icon-gray);
+        }
+
+        .context-source span {
+            font-size: 0.9em;
+            font-weight: 500;
+            color: var(--text-medium);
+        }
+
         /* Status */
         .status-complete { color: #10b981; font-weight: 600; }
         .status-progress { color: #f59e0b; font-weight: 600; }
@@ -845,6 +875,17 @@
         .reveal section.present .factor-grid-full .factor-item-full:nth-child(5) { animation-delay: 0.3s; }
         .reveal section.present .factor-grid-full .factor-item-full:nth-child(6) { animation-delay: 0.35s; }
 
+        .reveal section.present .context-source {
+            animation: scaleIn 0.4s ease-out both;
+        }
+
+        .reveal section.present .context-sources .context-source:nth-child(1) { animation-delay: 0.1s; }
+        .reveal section.present .context-sources .context-source:nth-child(2) { animation-delay: 0.15s; }
+        .reveal section.present .context-sources .context-source:nth-child(3) { animation-delay: 0.2s; }
+        .reveal section.present .context-sources .context-source:nth-child(4) { animation-delay: 0.25s; }
+        .reveal section.present .context-sources .context-source:nth-child(5) { animation-delay: 0.3s; }
+        .reveal section.present .context-sources .context-source:nth-child(6) { animation-delay: 0.35s; }
+
         .reveal section.present .two-col > div {
             animation: fadeInUp 0.5s ease-out both;
         }
@@ -1043,14 +1084,16 @@
                 <div class="slide-content">
                     <h3>How It Works</h3>
                     <h2>Step 1: Context Assembly</h2>
-                    <p>Every time I log a meal, Dossi gathers all 40 factors in parallel.</p>
-                    <div class="stat-row" style="max-width: 350px;">
-                        <div class="stat-box" style="text-align: center;">
-                            <div class="number">&lt;1s</div>
-                            <div class="label">For complete context snapshot</div>
-                        </div>
+                    <p>Every time I log a meal, Dossi pulls data from multiple sources in parallel:</p>
+                    <div class="context-sources">
+                        <div class="context-source"><i class="ph ph-heart-half"></i><span>HealthKit</span></div>
+                        <div class="context-source"><i class="ph ph-chart-line-up"></i><span>CGM</span></div>
+                        <div class="context-source"><i class="ph ph-moon"></i><span>Sleep</span></div>
+                        <div class="context-source"><i class="ph ph-person-simple-run"></i><span>Activity</span></div>
+                        <div class="context-source"><i class="ph ph-calendar"></i><span>History</span></div>
+                        <div class="context-source"><i class="ph ph-clock"></i><span>Time</span></div>
                     </div>
-                    <p>The result is a complete picture of my state — not just a glucose number.</p>
+                    <p style="margin-top: 1.2em;">The result: a <strong>complete snapshot</strong> of my current state in under 1 second.</p>
                 </div>
             </section>
 
