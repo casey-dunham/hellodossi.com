@@ -54,7 +54,12 @@
             border-radius: 4px;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
             position: relative;
+            overflow: visible;
+        }
+
+        .binder-page .reveal {
             overflow: hidden;
+            border-radius: 4px;
         }
 
         /* Hole punches */
@@ -82,7 +87,7 @@
         /* Section tabs */
         .section-tabs {
             position: absolute;
-            right: -24px;
+            right: 0;
             top: 0;
             bottom: 0;
             display: flex;
@@ -91,9 +96,8 @@
         }
 
         .tab {
-            width: 24px;
+            width: 28px;
             flex: 1;
-            margin-left: 4px;
             border-radius: 0 8px 8px 0;
             display: flex;
             align-items: center;
@@ -105,20 +109,19 @@
             font-weight: 600;
             letter-spacing: 0.5px;
             text-transform: uppercase;
-            color: rgba(0, 0, 0, 0.5);
+            color: rgba(0, 0, 0, 0.55);
             cursor: pointer;
-            transition: width 0.2s ease, margin-left 0.2s ease;
+            transition: transform 0.2s ease;
+            transform: translateX(0);
         }
 
         .tab:hover {
-            width: 28px;
-            margin-left: 0;
+            transform: translateX(4px);
         }
 
         .tab.active {
-            width: 26px;
-            margin-left: 2px;
-            color: rgba(0, 0, 0, 0.7);
+            transform: translateX(2px);
+            color: rgba(0, 0, 0, 0.75);
         }
 
         .tab-1 { background: var(--tab-1); }
