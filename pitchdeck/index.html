@@ -1273,6 +1273,51 @@
         .reveal section.present table tbody tr:nth-child(4) { animation-delay: 0.3s; }
         .reveal section.present table tbody tr:nth-child(5) { animation-delay: 0.35s; }
         .reveal section.present table tbody tr:nth-child(6) { animation-delay: 0.4s; }
+
+        /* Page turn effect */
+        .reveal .slides {
+            perspective: 1200px;
+        }
+
+        .reveal .slides section {
+            transform-origin: left center;
+            backface-visibility: hidden;
+        }
+
+        .reveal .slides section.past {
+            animation: pageTurnOut 0.5s ease-in-out forwards;
+        }
+
+        .reveal .slides section.future {
+            opacity: 0;
+            transform: rotateY(-15deg);
+        }
+
+        .reveal .slides section.present {
+            animation: pageTurnIn 0.5s ease-in-out forwards;
+        }
+
+        @keyframes pageTurnOut {
+            0% {
+                transform: rotateY(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: rotateY(15deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes pageTurnIn {
+            0% {
+                transform: rotateY(-15deg);
+                opacity: 0;
+            }
+            100% {
+                transform: rotateY(0deg);
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1639,8 +1684,8 @@
         Reveal.initialize({
             hash: true,
             slideNumber: false,
-            transition: 'fade',
-            transitionSpeed: 'fast',
+            transition: 'none',
+            transitionSpeed: 'default',
             controls: false,
             progress: false,
             center: false,
