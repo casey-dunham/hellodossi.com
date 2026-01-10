@@ -31,18 +31,24 @@
             overflow: hidden;
         }
 
-        /* Laptop Frame */
+        /* Laptop Frame - MacBook Style */
         .laptop-frame {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(var(--scale, 1));
-            background: linear-gradient(145deg, #2a2a2a 0%, #1a1a1a 100%);
-            border-radius: 24px;
-            padding: 16px 16px 40px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Screen bezel */
+        .laptop-lid {
+            background: linear-gradient(180deg, #2d2d2d 0%, #1a1a1a 100%);
+            border-radius: 20px 20px 0 0;
+            padding: 14px 14px 10px 14px;
             box-shadow:
-                0 50px 100px rgba(0, 0, 0, 0.5),
-                0 0 0 1px rgba(255, 255, 255, 0.1),
+                0 -2px 20px rgba(0, 0, 0, 0.3),
                 inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
@@ -50,7 +56,7 @@
             width: 1100px;
             height: 680px;
             background: #000;
-            border-radius: 12px;
+            border-radius: 8px;
             overflow: hidden;
             position: relative;
         }
@@ -62,26 +68,48 @@
 
         .laptop-notch {
             position: absolute;
-            top: 6px;
+            top: 8px;
             left: 50%;
             transform: translateX(-50%);
-            width: 100px;
-            height: 6px;
-            background: #0a0a0a;
-            border-radius: 3px;
+            width: 8px;
+            height: 8px;
+            background: #1a1a1a;
+            border-radius: 50%;
             z-index: 1000;
         }
 
-        .laptop-frame::after {
+        /* Keyboard base */
+        .laptop-base {
+            width: 1200px;
+            height: 50px;
+            background: linear-gradient(180deg, #3a3a3a 0%, #2a2a2a 50%, #1f1f1f 100%);
+            border-radius: 0 0 12px 12px;
+            position: relative;
+            box-shadow:
+                0 4px 20px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        }
+
+        /* Trackpad hint */
+        .laptop-base::after {
             content: "";
             position: absolute;
-            bottom: 10px;
+            top: 8px;
             left: 50%;
             transform: translateX(-50%);
-            width: 120px;
-            height: 8px;
-            background: linear-gradient(145deg, #3a3a3a 0%, #2a2a2a 100%);
+            width: 200px;
+            height: 30px;
+            background: linear-gradient(180deg, #2a2a2a 0%, #252525 100%);
             border-radius: 4px;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Hinge */
+        .laptop-hinge {
+            width: 1180px;
+            height: 8px;
+            background: linear-gradient(180deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
+            border-radius: 0 0 2px 2px;
         }
 
         /* Hide controls */
@@ -117,17 +145,17 @@
         }
 
         .reveal h1 {
-            font-size: 3em;
+            font-size: 4em;
             font-weight: 800;
         }
 
         .reveal h2 {
-            font-size: 2.2em;
+            font-size: 2.6em;
             margin-bottom: 0.5em;
         }
 
         .reveal h3 {
-            font-size: 0.85em;
+            font-size: 0.95em;
             color: var(--accent);
             font-weight: 600;
             text-transform: uppercase;
@@ -136,14 +164,14 @@
         }
 
         .reveal p {
-            font-size: 1.15em;
+            font-size: 1.4em;
             line-height: 1.5;
             color: var(--text-medium);
-            margin-bottom: 0.6em;
+            margin-bottom: 0.5em;
         }
 
         .reveal li {
-            font-size: 1.1em;
+            font-size: 1.3em;
             line-height: 1.4;
             margin-bottom: 0.5em;
             color: var(--text-medium);
@@ -180,7 +208,7 @@
         }
 
         .subtitle {
-            font-size: 1.3em !important;
+            font-size: 1.6em !important;
             color: var(--text-light) !important;
             font-weight: 500;
         }
@@ -212,19 +240,19 @@
 
         .stat-row {
             display: flex;
-            gap: 24px;
+            gap: 30px;
             margin: 1em 0;
         }
 
         .stat-box {
             background: var(--bg-gray);
-            border-radius: 16px;
-            padding: 1.2em 1.5em;
+            border-radius: 18px;
+            padding: 1.5em 2em;
             flex: 1;
         }
 
         .stat-box .number {
-            font-size: 2em;
+            font-size: 2.5em;
             font-weight: 800;
             color: var(--accent);
             line-height: 1;
@@ -232,7 +260,7 @@
         }
 
         .stat-box .label {
-            font-size: 0.95em;
+            font-size: 1.1em;
             color: var(--text-medium);
         }
 
@@ -263,20 +291,20 @@
         .factor-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 16px;
             margin-top: 0.8em;
         }
 
         .factor-item {
             background: var(--bg-gray);
-            padding: 0.9em 1.2em;
-            border-radius: 12px;
+            padding: 1.1em 1.4em;
+            border-radius: 14px;
         }
 
         .factor-item strong {
             color: var(--accent);
             display: block;
-            font-size: 0.7em;
+            font-size: 0.8em;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             margin-bottom: 0.3em;
@@ -284,7 +312,7 @@
 
         .factor-item span {
             color: var(--text-medium);
-            font-size: 0.85em;
+            font-size: 1em;
             line-height: 1.3;
         }
 
@@ -292,51 +320,51 @@
         .safety-layer {
             display: flex;
             align-items: center;
-            gap: 0.8em;
-            padding: 0.7em 1em;
-            margin: 0.4em 0;
-            border-radius: 10px;
-            font-size: 0.95em;
+            gap: 1em;
+            padding: 0.9em 1.2em;
+            margin: 0.5em 0;
+            border-radius: 12px;
+            font-size: 1.1em;
             color: var(--text-dark);
             background: var(--bg-gray);
         }
 
         .num-badge {
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             background: var(--accent);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 0.85em;
+            font-size: 0.95em;
             color: white;
             flex-shrink: 0;
         }
 
         /* Tables */
         .reveal table {
-            font-size: 0.9em;
+            font-size: 1em;
             margin: 0.8em 0;
             border-collapse: separate;
             border-spacing: 0;
             width: 100%;
             background: var(--bg-gray);
-            border-radius: 14px;
+            border-radius: 16px;
             overflow: hidden;
         }
 
         .reveal th {
             background: var(--accent-light);
             color: var(--text-dark);
-            padding: 0.8em 1em;
+            padding: 1em 1.2em;
             font-weight: 600;
             text-align: left;
         }
 
         .reveal td {
-            padding: 0.8em 1em;
+            padding: 0.9em 1.2em;
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
             color: var(--text-medium);
         }
@@ -347,7 +375,7 @@
 
         /* Big statement */
         .big-statement {
-            font-size: 1.4em !important;
+            font-size: 1.7em !important;
             font-weight: 600;
             color: var(--text-dark) !important;
             line-height: 1.3;
@@ -355,13 +383,13 @@
 
         /* Logo */
         .logo-large {
-            height: 60px;
-            margin-bottom: 1em;
+            height: 70px;
+            margin-bottom: 1.2em;
         }
 
         .logo-small {
-            height: 44px;
-            margin-bottom: 0.6em;
+            height: 50px;
+            margin-bottom: 0.7em;
         }
 
         /* Status */
@@ -405,13 +433,13 @@
         .problem-list {
             list-style: none;
             padding: 0;
-            margin: 0.4em 0;
+            margin: 0.5em 0;
         }
 
         .problem-list li {
-            padding: 0.4em 0;
+            padding: 0.5em 0;
             border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-            font-size: 1em;
+            font-size: 1.2em;
         }
 
         .problem-list li::before {
@@ -431,9 +459,9 @@
         .icon-list li {
             display: flex;
             align-items: center;
-            gap: 0.8em;
-            margin-bottom: 0.6em;
-            font-size: 1em;
+            gap: 1em;
+            margin-bottom: 0.8em;
+            font-size: 1.25em;
         }
 
         .icon-list li::before {
@@ -441,15 +469,15 @@
         }
 
         .icon-list .icon {
-            width: 40px;
-            height: 40px;
+            width: 48px;
+            height: 48px;
             background: var(--accent-light);
-            border-radius: 10px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            font-size: 1.1em;
+            font-size: 1.3em;
         }
 
         /* Quote callout */
@@ -475,10 +503,11 @@
 </head>
 <body>
     <div class="laptop-frame">
-        <div class="laptop-screen">
-            <div class="laptop-notch"></div>
-            <div class="reveal">
-                <div class="slides">
+        <div class="laptop-lid">
+            <div class="laptop-screen">
+                <div class="laptop-notch"></div>
+                <div class="reveal">
+                    <div class="slides">
 
             <!-- 1. Title -->
             <section>
@@ -532,12 +561,10 @@
                     <ul class="problem-list">
                         <li><strong>I ran 5 miles this morning</strong> — I'm more sensitive for hours</li>
                         <li><strong>I slept 4 hours last night</strong> — My glucose will run higher</li>
-                        <li><strong>I'm on day 22 of my cycle</strong> — I need ~15% more insulin</li>
                         <li><strong>I'm eating pizza, not salad</strong> — Fat spikes me 4 hours later</li>
-                        <li><strong>My pump site is 3 days old</strong> — Absorption is degrading</li>
                         <li><strong>I'm getting sick</strong> — My needs are about to double</li>
                     </ul>
-                    <p style="margin-top: 0.8em;"><em>I adjust for all of this manually. Every single day.</em></p>
+                    <p style="margin-top: 0.6em;"><em>I adjust for all of this manually. Every day.</em></p>
                 </div>
             </section>
 
@@ -557,14 +584,12 @@
                     <h3>Context Awareness</h3>
                     <h2>The 40 Factors</h2>
                     <div class="factor-grid">
-                        <div class="factor-item"><strong>Glucose</strong><span>Value, trend, velocity, momentum, quality, staleness</span></div>
-                        <div class="factor-item"><strong>Insulin</strong><span>IOB, decay curve, recent boluses, basal rate, type</span></div>
-                        <div class="factor-item"><strong>Nutrition</strong><span>Carbs, protein, fat, fiber, timing, meal type</span></div>
-                        <div class="factor-item"><strong>Activity</strong><span>Workouts, time since, intensity, steps, heart rate</span></div>
-                        <div class="factor-item"><strong>Sleep</strong><span>Hours, quality, sleep debt</span></div>
-                        <div class="factor-item"><strong>Physiology</strong><span>Cycle phase, post-low, illness, stress (HRV)</span></div>
-                        <div class="factor-item"><strong>Environment</strong><span>Time of day, day of week, temperature</span></div>
-                        <div class="factor-item"><strong>Infusion Site</strong><span>Age, location, absorption quality</span></div>
+                        <div class="factor-item"><strong>Glucose</strong><span>Value, trend, velocity, momentum, quality</span></div>
+                        <div class="factor-item"><strong>Insulin</strong><span>IOB, decay curve, recent boluses, basal rate</span></div>
+                        <div class="factor-item"><strong>Nutrition</strong><span>Carbs, protein, fat, fiber, meal timing</span></div>
+                        <div class="factor-item"><strong>Activity</strong><span>Workouts, intensity, steps, heart rate</span></div>
+                        <div class="factor-item"><strong>Physiology</strong><span>Sleep, cycle phase, illness, stress (HRV)</span></div>
+                        <div class="factor-item"><strong>Context</strong><span>Time of day, site age, absorption quality</span></div>
                     </div>
                 </div>
             </section>
@@ -827,9 +852,12 @@
                 </div>
             </section>
 
+                    </div>
+                </div>
             </div>
         </div>
-        </div>
+        <div class="laptop-hinge"></div>
+        <div class="laptop-base"></div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
@@ -851,8 +879,8 @@
         // Responsive scaling
         function scaleLaptop() {
             const frame = document.querySelector('.laptop-frame');
-            const frameWidth = 1132; // 1100 + padding
-            const frameHeight = 736; // 680 + padding
+            const frameWidth = 1200; // base width
+            const frameHeight = 780; // lid + hinge + base
             const padding = 40;
 
             const availableWidth = window.innerWidth - padding;
