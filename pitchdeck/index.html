@@ -599,6 +599,9 @@
             border-radius: 16px;
             padding: 1.4em;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
         }
 
         .phase-header {
@@ -650,8 +653,8 @@
             display: flex;
             align-items: center;
             padding-top: 2.5em;
-            color: var(--text-light);
-            font-size: 1.2em;
+            color: var(--accent);
+            font-size: 1.8em;
         }
 
         /* Big statement */
@@ -1645,18 +1648,18 @@
                                 <div class="phase-item">Validate algorithm</div>
                             </div>
                         </div>
-                        <div class="timeline-arrow"><i class="ph ph-arrow-right"></i></div>
+                        <div class="timeline-arrow"><i class="ph-bold ph-arrow-right"></i></div>
                         <div class="timeline-phase">
                             <div class="phase-header">
                                 <i class="ph ph-trophy"></i>
-                                <span>Spring '26</span>
+                                <span>Spring</span>
                             </div>
                             <div class="phase-items">
                                 <div class="phase-item">InVenture Prize</div>
                                 <div class="phase-item">Pilot with T1D users</div>
                             </div>
                         </div>
-                        <div class="timeline-arrow"><i class="ph ph-arrow-right"></i></div>
+                        <div class="timeline-arrow"><i class="ph-bold ph-arrow-right"></i></div>
                         <div class="timeline-phase">
                             <div class="phase-header">
                                 <i class="ph ph-rocket-launch"></i>
@@ -1677,10 +1680,10 @@
                 <div class="slide-content">
                     <h3>Motivation</h3>
                     <h2>Why I'm Doing This</h2>
-                    <ul>
-                        <li><strong>I live this problem</strong> — I know exactly what's missing</li>
-                        <li><strong>The tech is ready</strong> — HealthKit, Apple Watch, FDA pathway proven</li>
-                        <li><strong>Nobody else is doing this</strong> — Still stuck on glucose + carbs</li>
+                    <ul class="gap-list">
+                        <li><i class="ph ph-heart"></i><span><strong>I live this problem</strong> — I know exactly what's missing</span></li>
+                        <li><i class="ph ph-check-circle"></i><span><strong>The tech is ready</strong> — HealthKit, Apple Watch, FDA pathway proven</span></li>
+                        <li><i class="ph ph-lightbulb"></i><span><strong>Nobody else is doing this</strong> — Still stuck on glucose + carbs</span></li>
                     </ul>
                 </div>
             </section>
