@@ -266,44 +266,95 @@
             color: var(--text-dark);
         }
 
-        /* Gap grid */
-        .gap-grid {
+        /* Gap list */
+        .gap-list {
+            list-style: none;
+            padding: 0;
+            margin: 1em 0;
+        }
+
+        .gap-list li {
+            display: flex;
+            align-items: center;
+            gap: 1em;
+            padding: 0.8em 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            font-size: 1.1em;
+            color: var(--text-medium);
+        }
+
+        .gap-list li::before {
+            display: none;
+        }
+
+        .gap-list li:last-child {
+            border-bottom: none;
+        }
+
+        .gap-list i {
+            font-size: 1.3em;
+            color: var(--icon-gray);
+            width: 28px;
+        }
+
+        .gap-list strong {
+            color: var(--text-dark);
+        }
+
+        /* Factor grid full */
+        .factor-grid-full {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-top: 1em;
+            gap: 12px;
+            margin-top: 0.8em;
         }
 
-        .gap-card {
+        .factor-item-full {
             background: var(--bg-card);
-            border-radius: 16px;
-            padding: 1.2em 1.4em;
+            padding: 1em 1.2em;
+            border-radius: 14px;
             display: flex;
             align-items: flex-start;
-            gap: 1em;
+            gap: 0.8em;
         }
 
-        .gap-card i {
-            font-size: 1.4em;
+        .factor-item-full .factor-icon {
+            font-size: 1.3em;
             color: var(--icon-gray);
+            flex-shrink: 0;
+            width: 24px;
             margin-top: 0.1em;
         }
 
-        .gap-card div {
+        .factor-item-full .factor-content {
             display: flex;
             flex-direction: column;
-            gap: 0.2em;
+            gap: 0.15em;
         }
 
-        .gap-card strong {
+        .factor-item-full .factor-content strong {
             color: var(--text-dark);
-            font-size: 1em;
+            font-size: 0.95em;
             font-weight: 600;
+            display: inline;
         }
 
-        .gap-card span {
+        .factor-count {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            font-size: 0.7em;
+            font-weight: 600;
+            padding: 0.15em 0.5em;
+            border-radius: 6px;
+            margin-left: 0.5em;
+            vertical-align: middle;
+        }
+
+        .factor-list {
             color: var(--text-medium);
-            font-size: 0.9em;
+            font-size: 0.8em;
+            line-height: 1.4;
         }
 
         /* Stat boxes */
@@ -493,6 +544,10 @@
         .logo-small {
             height: 48px;
             margin-bottom: 1em;
+        }
+
+        .logo-hero {
+            height: 80px;
         }
 
         /* Status */
@@ -770,14 +825,25 @@
         .reveal section.present .about-grid .about-card:nth-child(3) { animation-delay: 0.2s; }
         .reveal section.present .about-grid .about-card:nth-child(4) { animation-delay: 0.25s; }
 
-        .reveal section.present .gap-card {
+        .reveal section.present .gap-list li {
+            animation: fadeInUp 0.4s ease-out both;
+        }
+
+        .reveal section.present .gap-list li:nth-child(1) { animation-delay: 0.1s; }
+        .reveal section.present .gap-list li:nth-child(2) { animation-delay: 0.15s; }
+        .reveal section.present .gap-list li:nth-child(3) { animation-delay: 0.2s; }
+        .reveal section.present .gap-list li:nth-child(4) { animation-delay: 0.25s; }
+
+        .reveal section.present .factor-item-full {
             animation: scaleIn 0.4s ease-out both;
         }
 
-        .reveal section.present .gap-grid .gap-card:nth-child(1) { animation-delay: 0.1s; }
-        .reveal section.present .gap-grid .gap-card:nth-child(2) { animation-delay: 0.15s; }
-        .reveal section.present .gap-grid .gap-card:nth-child(3) { animation-delay: 0.2s; }
-        .reveal section.present .gap-grid .gap-card:nth-child(4) { animation-delay: 0.25s; }
+        .reveal section.present .factor-grid-full .factor-item-full:nth-child(1) { animation-delay: 0.1s; }
+        .reveal section.present .factor-grid-full .factor-item-full:nth-child(2) { animation-delay: 0.15s; }
+        .reveal section.present .factor-grid-full .factor-item-full:nth-child(3) { animation-delay: 0.2s; }
+        .reveal section.present .factor-grid-full .factor-item-full:nth-child(4) { animation-delay: 0.25s; }
+        .reveal section.present .factor-grid-full .factor-item-full:nth-child(5) { animation-delay: 0.3s; }
+        .reveal section.present .factor-grid-full .factor-item-full:nth-child(6) { animation-delay: 0.35s; }
 
         .reveal section.present .two-col > div {
             animation: fadeInUp 0.5s ease-out both;
@@ -936,12 +1002,12 @@
                 <div class="slide-content">
                     <h3>The Gap</h3>
                     <h2>What My Pump Doesn't Know</h2>
-                    <div class="gap-grid">
-                        <div class="gap-card"><i class="ph ph-person-simple-run"></i><div><strong>I ran 5 miles this morning</strong><span>I'm more sensitive for hours</span></div></div>
-                        <div class="gap-card"><i class="ph ph-moon"></i><div><strong>I slept 4 hours last night</strong><span>My glucose will run higher</span></div></div>
-                        <div class="gap-card"><i class="ph ph-pizza"></i><div><strong>I'm eating pizza, not salad</strong><span>Fat spikes me 4 hours later</span></div></div>
-                        <div class="gap-card"><i class="ph ph-thermometer"></i><div><strong>I'm getting sick</strong><span>My needs are about to double</span></div></div>
-                    </div>
+                    <ul class="gap-list">
+                        <li><i class="ph ph-person-simple-run"></i><span><strong>I ran 5 miles this morning</strong> — I'm more sensitive for hours</span></li>
+                        <li><i class="ph ph-moon"></i><span><strong>I slept 4 hours last night</strong> — My glucose will run higher</span></li>
+                        <li><i class="ph ph-pizza"></i><span><strong>I'm eating pizza, not salad</strong> — Fat spikes me 4 hours later</span></li>
+                        <li><i class="ph ph-thermometer"></i><span><strong>I'm getting sick</strong> — My needs are about to double</span></li>
+                    </ul>
                     <p style="margin-top: 1em; color: var(--text-light);"><em>I adjust for all of this manually. Every day.</em></p>
                 </div>
             </section>
@@ -950,9 +1016,9 @@
             <section>
                 <div class="slide-content centered">
                     <h3>The Solution</h3>
-                    <img src="dossi-wordmark.png" alt="Dossi" class="logo-small">
-                    <p class="big-statement">An insulin advisor that sees the <span class="gradient-text">full picture</span></p>
-                    <p style="margin-top: 1.2em;">Instead of 2 inputs, Dossi considers <strong><span class="number" data-animate-number="40" data-suffix="+">40+</span> factors</strong>.<br>Then it <strong>learns your patterns</strong> over time.</p>
+                    <p class="big-statement" style="margin-bottom: 1.5em;">An insulin advisor that sees the <span class="gradient-text">full picture</span></p>
+                    <img src="dossi-wordmark.png" alt="Dossi" class="logo-hero">
+                    <p style="margin-top: 1.5em;">Dossi considers <strong><span class="number" data-animate-number="40" data-suffix="+">40+</span> factors</strong> and <strong>learns your patterns</strong> over time.</p>
                 </div>
             </section>
 
@@ -960,14 +1026,14 @@
             <section>
                 <div class="slide-content">
                     <h3>Context Awareness</h3>
-                    <h2>The <span data-animate-number="40" data-suffix="">40</span> Factors</h2>
-                    <div class="factor-grid">
-                        <div class="factor-item"><div class="factor-icon"><i class="ph ph-chart-line-up"></i></div><div class="factor-content"><strong>Glucose</strong><span>Value, trend, velocity, momentum, quality</span></div></div>
-                        <div class="factor-item"><div class="factor-icon"><i class="ph ph-drop"></i></div><div class="factor-content"><strong>Insulin</strong><span>IOB, decay curve, recent boluses, basal rate</span></div></div>
-                        <div class="factor-item"><div class="factor-icon"><i class="ph ph-fork-knife"></i></div><div class="factor-content"><strong>Nutrition</strong><span>Carbs, protein, fat, fiber, meal timing</span></div></div>
-                        <div class="factor-item"><div class="factor-icon"><i class="ph ph-person-simple-run"></i></div><div class="factor-content"><strong>Activity</strong><span>Workouts, intensity, steps, heart rate</span></div></div>
-                        <div class="factor-item"><div class="factor-icon"><i class="ph ph-moon-stars"></i></div><div class="factor-content"><strong>Physiology</strong><span>Sleep, cycle phase, illness, stress (HRV)</span></div></div>
-                        <div class="factor-item"><div class="factor-icon"><i class="ph ph-clock"></i></div><div class="factor-content"><strong>Context</strong><span>Time of day, site age, absorption quality</span></div></div>
+                    <h2>The <span data-animate-number="40" data-suffix="+">40+</span> Factors</h2>
+                    <div class="factor-grid-full">
+                        <div class="factor-item-full"><div class="factor-icon"><i class="ph ph-chart-line-up"></i></div><div class="factor-content"><strong>Glucose</strong><span class="factor-count">6</span><span class="factor-list">Value, trend direction, velocity, momentum, data quality, staleness</span></div></div>
+                        <div class="factor-item-full"><div class="factor-icon"><i class="ph ph-drop"></i></div><div class="factor-content"><strong>Insulin</strong><span class="factor-count">5</span><span class="factor-list">IOB, decay curve, recent boluses, basal rate, insulin type</span></div></div>
+                        <div class="factor-item-full"><div class="factor-icon"><i class="ph ph-fork-knife"></i></div><div class="factor-content"><strong>Nutrition</strong><span class="factor-count">6</span><span class="factor-list">Carbs, protein, fat, fiber, absorption timing, meal type</span></div></div>
+                        <div class="factor-item-full"><div class="factor-icon"><i class="ph ph-person-simple-run"></i></div><div class="factor-content"><strong>Activity</strong><span class="factor-count">5</span><span class="factor-list">Workouts, time since exercise, intensity, steps, heart rate</span></div></div>
+                        <div class="factor-item-full"><div class="factor-icon"><i class="ph ph-moon-stars"></i></div><div class="factor-content"><strong>Sleep & Body</strong><span class="factor-count">7</span><span class="factor-list">Hours, quality, sleep debt, menstrual phase, illness, stress (HRV)</span></div></div>
+                        <div class="factor-item-full"><div class="factor-icon"><i class="ph ph-clock"></i></div><div class="factor-content"><strong>Environment</strong><span class="factor-count">6</span><span class="factor-list">Time of day, day of week, temperature, site age, location, absorption</span></div></div>
                     </div>
                 </div>
             </section>
