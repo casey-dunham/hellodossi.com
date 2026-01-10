@@ -562,6 +562,75 @@
             border-bottom: none;
         }
 
+        /* Timeline */
+        .timeline {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-top: 1.5em;
+        }
+
+        .timeline-phase {
+            flex: 1;
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.4em;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6em;
+            margin-bottom: 1em;
+            padding-bottom: 0.8em;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .phase-header i {
+            font-size: 1.4em;
+            color: var(--accent);
+        }
+
+        .phase-header span {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .phase-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5em;
+        }
+
+        .phase-item {
+            font-size: 0.95em;
+            color: var(--text-medium);
+            padding: 0.4em 0;
+            padding-left: 1em;
+            position: relative;
+        }
+
+        .phase-item::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.7em;
+            width: 5px;
+            height: 5px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .timeline-arrow {
+            display: flex;
+            align-items: center;
+            padding-top: 2.5em;
+            color: var(--text-light);
+            font-size: 1.2em;
+        }
+
         /* Big statement */
         .big-statement {
             font-family: 'Playfair Display', Georgia, serif !important;
@@ -1538,24 +1607,40 @@
                 <div class="slide-content">
                     <h3>Roadmap</h3>
                     <h2>What's Next</h2>
-                    <div class="two-col">
-                        <div>
-                            <h4>Short Term</h4>
-                            <ul>
-                                <li>Finish designs</li>
-                                <li>Daily self-testing</li>
-                                <li>Validate algorithm</li>
-                                <li>InVenture Prize</li>
-                            </ul>
+                    <div class="timeline">
+                        <div class="timeline-phase">
+                            <div class="phase-header">
+                                <i class="ph ph-flag-pennant"></i>
+                                <span>Now</span>
+                            </div>
+                            <div class="phase-items">
+                                <div class="phase-item">Finish designs</div>
+                                <div class="phase-item">Daily self-testing</div>
+                                <div class="phase-item">Validate algorithm</div>
+                            </div>
                         </div>
-                        <div>
-                            <h4>Long Term</h4>
-                            <ul>
-                                <li>Pilot with T1D users</li>
-                                <li>CREATE-X (Summer '26)</li>
-                                <li>FDA 510(k) clearance</li>
-                                <li>Direct pump control</li>
-                            </ul>
+                        <div class="timeline-arrow"><i class="ph ph-arrow-right"></i></div>
+                        <div class="timeline-phase">
+                            <div class="phase-header">
+                                <i class="ph ph-trophy"></i>
+                                <span>Spring '26</span>
+                            </div>
+                            <div class="phase-items">
+                                <div class="phase-item">InVenture Prize</div>
+                                <div class="phase-item">Pilot with T1D users</div>
+                            </div>
+                        </div>
+                        <div class="timeline-arrow"><i class="ph ph-arrow-right"></i></div>
+                        <div class="timeline-phase">
+                            <div class="phase-header">
+                                <i class="ph ph-rocket-launch"></i>
+                                <span>Future</span>
+                            </div>
+                            <div class="phase-items">
+                                <div class="phase-item">CREATE-X</div>
+                                <div class="phase-item">FDA 510(k) clearance</div>
+                                <div class="phase-item">Direct pump control</div>
+                            </div>
                         </div>
                     </div>
                 </div>
