@@ -537,7 +537,7 @@
 
         /* Title slide with circles */
         .title-slide {
-            background: linear-gradient(135deg, #5B4ED4 0%, #7C6CF0 50%, #9F8FFF 100%) !important;
+            background: var(--accent) !important;
             position: relative;
             overflow: hidden;
         }
@@ -555,71 +555,53 @@
         .circle {
             position: absolute;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.08);
         }
 
         .circle-1 {
-            width: 500px;
-            height: 500px;
-            top: -150px;
-            left: -100px;
-            background: rgba(255, 255, 255, 0.1);
-            animation: float1 8s ease-in-out infinite;
+            width: 600px;
+            height: 600px;
+            top: -200px;
+            left: -150px;
+            background: rgba(255, 255, 255, 0.08);
+            animation: float1 12s ease-in-out infinite;
         }
 
         .circle-2 {
-            width: 350px;
-            height: 350px;
-            bottom: -100px;
-            right: -50px;
-            background: rgba(255, 255, 255, 0.07);
-            animation: float2 10s ease-in-out infinite;
+            width: 400px;
+            height: 400px;
+            bottom: -150px;
+            right: -100px;
+            background: rgba(255, 255, 255, 0.06);
+            animation: float2 15s ease-in-out infinite;
         }
 
         .circle-3 {
-            width: 200px;
-            height: 200px;
-            top: 50%;
-            right: 15%;
-            background: rgba(255, 255, 255, 0.05);
-            animation: float3 7s ease-in-out infinite;
-        }
-
-        .circle-4 {
-            width: 120px;
-            height: 120px;
-            bottom: 20%;
-            left: 10%;
-            background: rgba(255, 255, 255, 0.06);
-            animation: float4 9s ease-in-out infinite;
+            width: 250px;
+            height: 250px;
+            top: 60%;
+            left: 60%;
+            background: rgba(255, 255, 255, 0.04);
+            animation: float3 10s ease-in-out infinite;
         }
 
         @keyframes float1 {
             0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(30px, 20px); }
+            50% { transform: translate(20px, 15px); }
         }
 
         @keyframes float2 {
             0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(-20px, -30px); }
+            50% { transform: translate(-15px, -20px); }
         }
 
         @keyframes float3 {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(-15px, 25px) scale(1.05); }
-        }
-
-        @keyframes float4 {
             0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(25px, -15px); }
+            50% { transform: translate(-10px, 15px); }
         }
 
-        .hero-title {
-            font-size: 6em !important;
-            font-weight: 800 !important;
-            color: white !important;
-            letter-spacing: -0.03em;
-            text-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+        .hero-wordmark {
+            height: 100px;
+            filter: brightness(0) invert(1);
             position: relative;
             z-index: 10;
         }
@@ -1170,10 +1152,9 @@
                     <div class="circle circle-1"></div>
                     <div class="circle circle-2"></div>
                     <div class="circle circle-3"></div>
-                    <div class="circle circle-4"></div>
                 </div>
                 <div class="slide-content centered">
-                    <h1 class="hero-title">Dossi</h1>
+                    <img src="dossi-wordmark.png" alt="Dossi" class="hero-wordmark">
                 </div>
             </section>
 
@@ -1291,24 +1272,24 @@
                 <div class="slide-content">
                     <h3>Personalization</h3>
                     <h2>Your Insulin Footprint</h2>
-                    <p>Dossi learns how <strong>your body</strong> responds to insulin — not generic curves.</p>
+                    <p>Dossi learns how <strong>your body</strong> responds to insulin.</p>
                     <div class="two-col">
                         <div>
-                            <h4>What It Tracks</h4>
+                            <h4>Your Unique Curve</h4>
                             <ul>
-                                <li>How fast insulin kicks in</li>
-                                <li>When it peaks for you</li>
-                                <li>How long it stays active</li>
-                                <li>Absorption by site location</li>
+                                <li>Onset time (when it kicks in)</li>
+                                <li>Peak timing (max effect)</li>
+                                <li>Duration (how long active)</li>
+                                <li>Tail behavior</li>
                             </ul>
                         </div>
                         <div>
-                            <h4>Why It Matters</h4>
+                            <h4>Adapts To</h4>
                             <ul>
-                                <li>More accurate IOB calculations</li>
-                                <li>Better timing recommendations</li>
-                                <li>Smarter basal adjustments</li>
-                                <li>Fewer surprises</li>
+                                <li>Different injection sites</li>
+                                <li>Site age degradation</li>
+                                <li>Temperature effects</li>
+                                <li>Activity level changes</li>
                             </ul>
                         </div>
                     </div>
