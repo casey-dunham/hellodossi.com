@@ -19,13 +19,13 @@
             --icon-gray: #8E8E93;
             --bg-paper: #FAF9F6;
             --bg-card: #f0efeb;
-            /* Tab colors */
+            /* Tab colors - more vibrant */
             --tab-1: #F5E6D3;
-            --tab-2: #FFF3B8;
-            --tab-3: #E8D4F0;
-            --tab-4: #D4F0D4;
-            --tab-5: #D4E4F0;
-            --tab-6: #F0D4D8;
+            --tab-2: #FFF06B;
+            --tab-3: #D4B8E8;
+            --tab-4: #90EE90;
+            --tab-5: #87CEEB;
+            --tab-6: #FFB6C1;
         }
 
         * { box-sizing: border-box; }
@@ -82,7 +82,7 @@
         /* Section tabs */
         .section-tabs {
             position: absolute;
-            right: 0;
+            right: -24px;
             top: 0;
             bottom: 0;
             display: flex;
@@ -91,38 +91,33 @@
         }
 
         .tab {
-            width: 28px;
+            width: 24px;
             flex: 1;
-            border-radius: 0;
+            margin-left: 4px;
+            border-radius: 0 8px 8px 0;
             display: flex;
             align-items: center;
             justify-content: center;
             writing-mode: vertical-rl;
             text-orientation: mixed;
-            font-size: 9px;
+            font-family: 'Inter', sans-serif;
+            font-size: 8px;
             font-weight: 600;
             letter-spacing: 0.5px;
             text-transform: uppercase;
-            color: rgba(0, 0, 0, 0.4);
+            color: rgba(0, 0, 0, 0.5);
             cursor: pointer;
-            transition: width 0.2s ease, color 0.2s ease;
-        }
-
-        .tab:first-child {
-            border-radius: 0 4px 0 0;
-        }
-
-        .tab:last-child {
-            border-radius: 0 0 4px 0;
+            transition: width 0.2s ease, margin-left 0.2s ease;
         }
 
         .tab:hover {
-            width: 34px;
-            color: rgba(0, 0, 0, 0.6);
+            width: 28px;
+            margin-left: 0;
         }
 
         .tab.active {
-            width: 32px;
+            width: 26px;
+            margin-left: 2px;
             color: rgba(0, 0, 0, 0.7);
         }
 
