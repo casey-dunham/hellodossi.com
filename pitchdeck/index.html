@@ -238,6 +238,34 @@
             padding: 1.8em;
         }
 
+        /* About Me grid */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 1.2em;
+        }
+
+        .about-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.4em 1.6em;
+            display: flex;
+            align-items: center;
+            gap: 1em;
+            font-size: 1.1em;
+            color: var(--text-medium);
+        }
+
+        .about-card i {
+            font-size: 1.4em;
+            color: var(--icon-gray);
+        }
+
+        .about-card strong {
+            color: var(--text-dark);
+        }
+
         /* Stat boxes */
         .stat-row {
             display: flex;
@@ -693,6 +721,15 @@
         .reveal section.present .factor-grid .factor-item:nth-child(5) { animation-delay: 0.3s; }
         .reveal section.present .factor-grid .factor-item:nth-child(6) { animation-delay: 0.35s; }
 
+        .reveal section.present .about-card {
+            animation: scaleIn 0.4s ease-out both;
+        }
+
+        .reveal section.present .about-grid .about-card:nth-child(1) { animation-delay: 0.1s; }
+        .reveal section.present .about-grid .about-card:nth-child(2) { animation-delay: 0.15s; }
+        .reveal section.present .about-grid .about-card:nth-child(3) { animation-delay: 0.2s; }
+        .reveal section.present .about-grid .about-card:nth-child(4) { animation-delay: 0.25s; }
+
         .reveal section.present .two-col > div {
             animation: fadeInUp 0.5s ease-out both;
         }
@@ -815,13 +852,12 @@
                 <div class="slide-content">
                     <h3>About Me</h3>
                     <h2>Hi, I'm Casey</h2>
-                    <ul class="icon-list">
-                        <li><span class="icon"><i class="ph ph-graduation-cap"></i></span><span>Georgia Tech, Industrial Design</span></li>
-                        <li><span class="icon"><i class="ph ph-heart"></i></span><span>I have <strong>Type 1 Diabetes</strong></span></li>
-                        <li><span class="icon"><i class="ph ph-users"></i></span><span>Former Breakthrough T1D Youth Ambassador</span></li>
-                        <li><span class="icon"><i class="ph ph-lightbulb"></i></span><span>Currently in Idea to Prototype (I2P)</span></li>
-                    </ul>
-                    <p class="big-statement" style="margin-top: 1.5em;">I'm building something I wish existed.</p>
+                    <div class="about-grid">
+                        <div class="about-card"><i class="ph ph-graduation-cap"></i><span>Georgia Tech, Industrial Design</span></div>
+                        <div class="about-card"><i class="ph ph-heart"></i><span>I have <strong>Type 1 Diabetes</strong></span></div>
+                        <div class="about-card"><i class="ph ph-users"></i><span>Former Breakthrough T1D Youth Ambassador</span></div>
+                        <div class="about-card"><i class="ph ph-lightbulb"></i><span>Currently in Idea to Prototype (I2P)</span></div>
+                    </div>
                 </div>
             </section>
 
