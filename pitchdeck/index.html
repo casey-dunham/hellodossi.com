@@ -1788,6 +1788,17 @@
                 setTimeout(createConfetti, 300);
             }
         });
+
+        // Fullscreen mode - press F to toggle
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'f' || e.key === 'F') {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen();
+                } else {
+                    document.exitFullscreen();
+                }
+            }
+        });
     </script>
 </body>
 </html>
