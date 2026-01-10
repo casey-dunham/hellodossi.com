@@ -6,19 +6,22 @@
     <title>Dossi — Intelligent Insulin Dosing</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
     <style>
         :root {
-            --accent: #737BF2;
-            --accent-light: rgba(115, 123, 242, 0.08);
-            --accent-dark: #5B5FD4;
-            --text-dark: #1a1a1a;
-            --text-medium: #4a4a4a;
-            --text-light: #8E8E93;
+            --accent: #6366F1;
+            --accent-light: #818CF8;
+            --accent-lighter: rgba(99, 102, 241, 0.1);
+            --accent-dark: #4F46E5;
+            --text-dark: #0f172a;
+            --text-medium: #475569;
+            --text-light: #94a3b8;
             --bg-white: #ffffff;
-            --bg-gray: #F5F5F7;
-            --gradient: linear-gradient(135deg, #5B5FD4 0%, #A99FFF 100%);
+            --bg-gray: #f8fafc;
+            --bg-card: #f1f5f9;
+            --gradient: linear-gradient(135deg, #6366F1 0%, #8B5CF6 50%, #A855F7 100%);
+            --gradient-soft: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(168, 85, 247, 0.1) 100%);
         }
 
         * { box-sizing: border-box; }
@@ -31,7 +34,7 @@
             overflow: hidden;
         }
 
-        /* Laptop Frame - MacBook Style */
+        /* Laptop Frame */
         .laptop-frame {
             position: fixed;
             top: 50%;
@@ -42,11 +45,10 @@
             align-items: center;
         }
 
-        /* Screen bezel */
         .laptop-lid {
             background: #161616;
             border-radius: 24px 24px 0 0;
-            padding: 12px 12px 12px 12px;
+            padding: 12px;
             box-shadow: 0 0 0 2px #0a0a0a;
         }
 
@@ -76,7 +78,6 @@
             z-index: 1000;
         }
 
-        /* Keyboard base */
         .laptop-base {
             width: 1300px;
             height: 36px;
@@ -86,7 +87,6 @@
             position: relative;
         }
 
-        /* Top edge highlight */
         .laptop-base::before {
             content: "";
             position: absolute;
@@ -95,10 +95,8 @@
             right: 20px;
             height: 1px;
             background: rgba(255, 255, 255, 0.08);
-            border-radius: 1px;
         }
 
-        /* Center lip/notch for opening */
         .laptop-base::after {
             content: "";
             position: absolute;
@@ -109,25 +107,18 @@
             height: 8px;
             background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
             border-radius: 0 0 12px 12px;
-            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
-        /* Hide hinge - not needed */
-        .laptop-hinge {
-            display: none;
-        }
+        .laptop-hinge { display: none; }
 
-        /* Hide controls */
-        .reveal .controls {
-            display: none !important;
-        }
+        .reveal .controls { display: none !important; }
 
         .reveal-viewport {
             background: var(--bg-white);
         }
 
         .reveal {
-            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             color: var(--text-dark);
         }
 
@@ -136,7 +127,7 @@
         }
 
         .reveal .slides section {
-            padding: 40px 60px;
+            padding: 50px 70px;
             height: 100%;
             width: 100%;
         }
@@ -146,38 +137,38 @@
             font-weight: 700;
             color: var(--text-dark);
             letter-spacing: -0.03em;
-            line-height: 1.1;
+            line-height: 1.15;
         }
 
         .reveal h1 {
-            font-size: 4em;
+            font-size: 3.5em;
             font-weight: 800;
         }
 
         .reveal h2 {
-            font-size: 2.6em;
+            font-size: 2.4em;
             margin-bottom: 0.5em;
         }
 
         .reveal h3 {
-            font-size: 0.95em;
+            font-size: 0.8em;
             color: var(--accent);
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.4em;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.6em;
         }
 
         .reveal p {
-            font-size: 1.4em;
-            line-height: 1.5;
+            font-size: 1.25em;
+            line-height: 1.6;
             color: var(--text-medium);
-            margin-bottom: 0.5em;
+            margin-bottom: 0.6em;
         }
 
         .reveal li {
-            font-size: 1.3em;
-            line-height: 1.4;
+            font-size: 1.15em;
+            line-height: 1.5;
             margin-bottom: 0.5em;
             color: var(--text-medium);
         }
@@ -188,11 +179,20 @@
             margin: 0;
         }
 
+        .reveal ul li {
+            position: relative;
+            padding-left: 1.5em;
+        }
+
         .reveal ul li::before {
-            content: "→";
-            color: var(--accent);
-            font-weight: 700;
-            margin-right: 0.5em;
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.55em;
+            width: 8px;
+            height: 8px;
+            background: var(--gradient);
+            border-radius: 50%;
         }
 
         .reveal strong {
@@ -213,9 +213,9 @@
         }
 
         .subtitle {
-            font-size: 1.6em !important;
+            font-size: 1.5em !important;
             color: var(--text-light) !important;
-            font-weight: 500;
+            font-weight: 400;
         }
 
         /* Slide layouts */
@@ -224,7 +224,7 @@
             flex-direction: column;
             justify-content: center;
             height: 100%;
-            max-width: 900px;
+            max-width: 950px;
         }
 
         .centered {
@@ -236,60 +236,77 @@
             justify-content: center;
         }
 
-        /* Cards and boxes */
+        /* Cards */
         .card {
-            background: var(--bg-gray);
-            border-radius: 16px;
-            padding: 1.5em;
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 1.8em;
+            border: 1px solid rgba(0,0,0,0.04);
         }
 
+        /* Stat boxes */
         .stat-row {
             display: flex;
-            gap: 30px;
-            margin: 1em 0;
+            gap: 24px;
+            margin: 1.2em 0;
         }
 
         .stat-box {
-            background: var(--bg-gray);
-            border-radius: 18px;
-            padding: 1.5em 2em;
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 1.8em 2em;
             flex: 1;
+            border: 1px solid rgba(0,0,0,0.04);
         }
 
         .stat-box .number {
-            font-size: 2.5em;
+            font-size: 3em;
             font-weight: 800;
-            color: var(--accent);
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             line-height: 1;
-            margin-bottom: 0.2em;
+            margin-bottom: 0.15em;
         }
 
         .stat-box .label {
-            font-size: 1.1em;
+            font-size: 1em;
             color: var(--text-medium);
+            font-weight: 500;
         }
 
         /* Two column */
         .two-col {
             display: flex;
-            gap: 30px;
-            margin-top: 0.8em;
+            gap: 40px;
+            margin-top: 1em;
         }
 
         .two-col > div {
             flex: 1;
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 1.8em;
+            border: 1px solid rgba(0,0,0,0.04);
         }
 
         .two-col h4 {
-            font-size: 1.05em;
+            font-size: 1.1em;
             font-weight: 700;
             color: var(--text-dark);
-            margin-bottom: 0.5em;
+            margin-bottom: 0.8em;
             margin-top: 0;
         }
 
         .two-col ul li {
             font-size: 0.95em;
+            padding-left: 1.3em;
+        }
+
+        .two-col ul li::before {
+            width: 6px;
+            height: 6px;
+            top: 0.5em;
         }
 
         /* Factor grid */
@@ -297,71 +314,95 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
-            margin-top: 0.8em;
+            margin-top: 1em;
         }
 
         .factor-item {
-            background: var(--bg-gray);
-            padding: 1.1em 1.4em;
-            border-radius: 14px;
-        }
-
-        .factor-item strong {
-            color: var(--accent);
-            display: block;
-            font-size: 0.8em;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.3em;
-        }
-
-        .factor-item span {
-            color: var(--text-medium);
-            font-size: 1em;
-            line-height: 1.3;
-        }
-
-        /* Safety layers */
-        .safety-layer {
+            background: var(--bg-card);
+            padding: 1.3em 1.5em;
+            border-radius: 16px;
+            border: 1px solid rgba(0,0,0,0.04);
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             gap: 1em;
-            padding: 0.9em 1.2em;
-            margin: 0.5em 0;
-            border-radius: 12px;
-            font-size: 1.1em;
-            color: var(--text-dark);
-            background: var(--bg-gray);
         }
 
-        .num-badge {
-            width: 36px;
-            height: 36px;
-            background: var(--accent);
-            border-radius: 50%;
+        .factor-item .factor-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            border-radius: 10px;
+            flex-shrink: 0;
+        }
+
+        .factor-item .factor-content strong {
+            color: var(--text-dark);
+            display: block;
+            font-size: 0.95em;
+            font-weight: 600;
+            margin-bottom: 0.2em;
+        }
+
+        .factor-item .factor-content span {
+            color: var(--text-medium);
+            font-size: 0.85em;
+            line-height: 1.4;
+        }
+
+        /* Numbered steps */
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2em;
+            padding: 1.2em 1.5em;
+            margin: 0.6em 0;
+            border-radius: 16px;
+            background: var(--bg-card);
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .step-num {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: 0.95em;
+            font-size: 1em;
             color: white;
             flex-shrink: 0;
         }
 
+        .step-content {
+            flex: 1;
+        }
+
+        .step-content strong {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .step-content span {
+            color: var(--text-medium);
+        }
+
         /* Tables */
         .reveal table {
-            font-size: 1em;
-            margin: 0.8em 0;
+            font-size: 0.95em;
+            margin: 1em 0;
             border-collapse: separate;
             border-spacing: 0;
             width: 100%;
-            background: var(--bg-gray);
+            background: var(--bg-card);
             border-radius: 16px;
             overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.04);
         }
 
         .reveal th {
-            background: var(--accent-light);
+            background: var(--gradient-soft);
             color: var(--text-dark);
             padding: 1em 1.2em;
             font-weight: 600;
@@ -370,7 +411,7 @@
 
         .reveal td {
             padding: 0.9em 1.2em;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
             color: var(--text-medium);
         }
 
@@ -380,32 +421,32 @@
 
         /* Big statement */
         .big-statement {
-            font-size: 1.7em !important;
+            font-size: 1.6em !important;
             font-weight: 600;
             color: var(--text-dark) !important;
-            line-height: 1.3;
+            line-height: 1.4;
         }
 
         /* Logo */
         .logo-large {
-            height: 70px;
-            margin-bottom: 1.2em;
+            height: 64px;
+            margin-bottom: 1.5em;
         }
 
         .logo-small {
-            height: 50px;
-            margin-bottom: 0.7em;
+            height: 48px;
+            margin-bottom: 1em;
         }
 
         /* Status */
-        .status-complete { color: #34C759; }
-        .status-progress { color: #FF9500; }
+        .status-complete { color: #10b981; font-weight: 600; }
+        .status-progress { color: #f59e0b; font-weight: 600; }
 
         /* Code */
         code {
-            background: var(--accent-light);
-            padding: 0.3em 0.6em;
-            border-radius: 8px;
+            background: var(--gradient-soft);
+            padding: 0.25em 0.6em;
+            border-radius: 6px;
             font-family: 'SF Mono', Monaco, monospace;
             font-size: 0.9em;
             color: var(--accent-dark);
@@ -414,48 +455,26 @@
         /* Progress bar */
         .reveal .progress {
             background: var(--bg-gray);
-            height: 4px;
+            height: 3px;
         }
 
         .reveal .progress span {
             background: var(--gradient);
         }
 
-        .reveal .slide-number {
-            display: none;
-        }
-
-        .reveal .controls {
-            color: var(--accent);
-        }
+        .reveal .slide-number { display: none; }
 
         /* Links */
         .reveal a {
             color: var(--accent);
+            text-decoration: none;
         }
 
-        /* Problem list special styling */
-        .problem-list {
-            list-style: none;
-            padding: 0;
-            margin: 0.5em 0;
+        .reveal a:hover {
+            text-decoration: underline;
         }
 
-        .problem-list li {
-            padding: 0.5em 0;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-            font-size: 1.2em;
-        }
-
-        .problem-list li::before {
-            content: none;
-        }
-
-        .problem-list li:last-child {
-            border-bottom: none;
-        }
-
-        /* Icon list */
+        /* Icon list - with gradient circles */
         .icon-list {
             list-style: none;
             padding: 0;
@@ -465,45 +484,336 @@
             display: flex;
             align-items: center;
             gap: 1em;
-            margin-bottom: 0.8em;
-            font-size: 1.25em;
+            margin-bottom: 0.9em;
+            font-size: 1.15em;
+            padding-left: 0;
         }
 
         .icon-list li::before {
-            content: none;
+            display: none;
         }
 
         .icon-list .icon {
-            width: 48px;
-            height: 48px;
-            background: var(--accent-light);
+            width: 44px;
+            height: 44px;
+            background: var(--gradient);
             border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             flex-shrink: 0;
-            font-size: 1.3em;
         }
 
-        /* Quote callout */
-        .callout {
-            background: var(--bg-gray);
-            border-left: 4px solid var(--accent);
-            padding: 1.5em 2em;
-            border-radius: 0 16px 16px 0;
-            margin: 1.5em 0;
+        /* Problem list */
+        .problem-list {
+            list-style: none;
+            padding: 0;
+            margin: 0.8em 0;
         }
 
-        .callout p {
-            font-size: 1.4em;
-            font-style: italic;
-            margin: 0;
+        .problem-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1em;
+            padding: 0.8em 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            font-size: 1.1em;
+            padding-left: 0;
+        }
+
+        .problem-list li::before {
+            display: none;
+        }
+
+        .problem-list li:last-child {
+            border-bottom: none;
+        }
+
+        .problem-list .dot {
+            width: 10px;
+            height: 10px;
+            background: var(--gradient);
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 0.45em;
         }
 
         /* Ensure slides don't overflow */
         .reveal .slides section {
             overflow: hidden;
         }
+
+        /* Decorative elements */
+        .decoration-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--gradient-soft);
+            pointer-events: none;
+        }
+
+        /* ========== ANIMATIONS ========== */
+
+        /* Fade in up animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 20px 5px rgba(99, 102, 241, 0.2);
+            }
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Animated number counter */
+        .animate-number {
+            display: inline-block;
+        }
+
+        /* Animated numbers in headings get gradient */
+        h2 [data-animate-number] {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+
+        /* Numbers in paragraphs and tables */
+        p [data-animate-number],
+        td [data-animate-number] {
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        /* Slide animations - elements animate when slide becomes active */
+        .reveal section.present h2 {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .reveal section.present h3 {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        .reveal section.present p {
+            animation: fadeInUp 0.6s ease-out 0.1s both;
+        }
+
+        .reveal section.present .stat-box {
+            animation: scaleIn 0.5s ease-out both;
+        }
+
+        .reveal section.present .stat-row .stat-box:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .reveal section.present .stat-row .stat-box:nth-child(2) {
+            animation-delay: 0.35s;
+        }
+
+        .reveal section.present .stat-row .stat-box:nth-child(3) {
+            animation-delay: 0.5s;
+        }
+
+        .reveal section.present .icon-list li {
+            animation: slideInLeft 0.5s ease-out both;
+        }
+
+        .reveal section.present .icon-list li:nth-child(1) { animation-delay: 0.15s; }
+        .reveal section.present .icon-list li:nth-child(2) { animation-delay: 0.25s; }
+        .reveal section.present .icon-list li:nth-child(3) { animation-delay: 0.35s; }
+        .reveal section.present .icon-list li:nth-child(4) { animation-delay: 0.45s; }
+        .reveal section.present .icon-list li:nth-child(5) { animation-delay: 0.55s; }
+
+        .reveal section.present .problem-list li {
+            animation: fadeInUp 0.5s ease-out both;
+        }
+
+        .reveal section.present .problem-list li:nth-child(1) { animation-delay: 0.1s; }
+        .reveal section.present .problem-list li:nth-child(2) { animation-delay: 0.2s; }
+        .reveal section.present .problem-list li:nth-child(3) { animation-delay: 0.3s; }
+        .reveal section.present .problem-list li:nth-child(4) { animation-delay: 0.4s; }
+
+        .reveal section.present .step-item {
+            animation: slideInLeft 0.5s ease-out both;
+        }
+
+        .reveal section.present .step-item:nth-child(1) { animation-delay: 0.15s; }
+        .reveal section.present .step-item:nth-child(2) { animation-delay: 0.25s; }
+        .reveal section.present .step-item:nth-child(3) { animation-delay: 0.35s; }
+        .reveal section.present .step-item:nth-child(4) { animation-delay: 0.45s; }
+        .reveal section.present .step-item:nth-child(5) { animation-delay: 0.55s; }
+
+        .reveal section.present .factor-item {
+            animation: scaleIn 0.4s ease-out both;
+        }
+
+        .reveal section.present .factor-grid .factor-item:nth-child(1) { animation-delay: 0.1s; }
+        .reveal section.present .factor-grid .factor-item:nth-child(2) { animation-delay: 0.15s; }
+        .reveal section.present .factor-grid .factor-item:nth-child(3) { animation-delay: 0.2s; }
+        .reveal section.present .factor-grid .factor-item:nth-child(4) { animation-delay: 0.25s; }
+        .reveal section.present .factor-grid .factor-item:nth-child(5) { animation-delay: 0.3s; }
+        .reveal section.present .factor-grid .factor-item:nth-child(6) { animation-delay: 0.35s; }
+
+        .reveal section.present .two-col > div {
+            animation: fadeInUp 0.5s ease-out both;
+        }
+
+        .reveal section.present .two-col > div:nth-child(1) {
+            animation: slideInLeft 0.5s ease-out 0.2s both;
+        }
+
+        .reveal section.present .two-col > div:nth-child(2) {
+            animation: slideInRight 0.5s ease-out 0.3s both;
+        }
+
+        .reveal section.present table {
+            animation: fadeInUp 0.6s ease-out 0.2s both;
+        }
+
+        .reveal section.present .card {
+            animation: scaleIn 0.5s ease-out 0.2s both;
+        }
+
+        .reveal section.present .logo-large,
+        .reveal section.present .logo-small {
+            animation: scaleIn 0.6s ease-out forwards;
+        }
+
+        .reveal section.present .big-statement {
+            animation: fadeInUp 0.7s ease-out 0.2s both;
+        }
+
+        /* Hover effects */
+        .stat-box {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(99, 102, 241, 0.15);
+        }
+
+        .factor-item {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .factor-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.12);
+        }
+
+        .step-item {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .step-item:hover {
+            transform: translateX(4px);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.1);
+        }
+
+        .icon-list li {
+            transition: transform 0.3s ease;
+        }
+
+        .icon-list li:hover {
+            transform: translateX(8px);
+        }
+
+        .icon-list .icon {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .icon-list li:hover .icon {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Animated gradient on step numbers */
+        .step-num {
+            background-size: 200% 200%;
+            animation: gradientShift 3s ease infinite;
+            background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 25%, #A855F7 50%, #8B5CF6 75%, #6366F1 100%);
+            background-size: 300% 300%;
+        }
+
+        /* Pulse effect on numbers */
+        .stat-box .number.counting {
+            animation: pulseGlow 0.8s ease-in-out;
+        }
+
+        /* Big percentage numbers */
+        .big-percent {
+            font-size: 4em;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            display: inline-block;
+        }
+
+        /* Table row animations */
+        .reveal section.present table tbody tr {
+            animation: fadeInUp 0.4s ease-out both;
+        }
+
+        .reveal section.present table tbody tr:nth-child(1) { animation-delay: 0.15s; }
+        .reveal section.present table tbody tr:nth-child(2) { animation-delay: 0.2s; }
+        .reveal section.present table tbody tr:nth-child(3) { animation-delay: 0.25s; }
+        .reveal section.present table tbody tr:nth-child(4) { animation-delay: 0.3s; }
+        .reveal section.present table tbody tr:nth-child(5) { animation-delay: 0.35s; }
+        .reveal section.present table tbody tr:nth-child(6) { animation-delay: 0.4s; }
     </style>
 </head>
 <body>
@@ -528,10 +838,10 @@
                     <h3>About Me</h3>
                     <h2>Hi, I'm Casey</h2>
                     <ul class="icon-list">
-                        <li><span class="icon">🎓</span><span>Georgia Tech, Industrial Design</span></li>
-                        <li><span class="icon">💉</span><span>I have <strong>Type 1 Diabetes</strong></span></li>
-                        <li><span class="icon">🎗️</span><span>Former Breakthrough T1D Youth Ambassador</span></li>
-                        <li><span class="icon">🚀</span><span>Currently in Idea to Prototype (I2P)</span></li>
+                        <li><span class="icon"></span><span>Georgia Tech, Industrial Design</span></li>
+                        <li><span class="icon"></span><span>I have <strong>Type 1 Diabetes</strong></span></li>
+                        <li><span class="icon"></span><span>Former Breakthrough T1D Youth Ambassador</span></li>
+                        <li><span class="icon"></span><span>Currently in Idea to Prototype (I2P)</span></li>
                     </ul>
                     <p class="big-statement" style="margin-top: 1.5em;">I'm building something I wish existed.</p>
                 </div>
@@ -542,19 +852,19 @@
                 <div class="slide-content">
                     <h3>The Problem</h3>
                     <h2>My "Smart" Pump Isn't Very Smart</h2>
-                    <p>I wear a <span class="accent">$6,000+ insulin pump</span> and a continuous glucose monitor.</p>
-                    <p style="margin-top: 1em;"><strong>But it only knows two things:</strong></p>
+                    <p>I wear a <span class="accent">$<span data-animate-number="6000" data-suffix="+">6,000+</span> insulin pump</span> and a CGM.</p>
+                    <p style="margin-top: 0.8em;"><strong>But it only knows two things:</strong></p>
                     <div class="stat-row">
-                        <div class="stat-box">
-                            <div class="number">📊</div>
+                        <div class="stat-box" style="text-align: center;">
+                            <div class="number">1</div>
                             <div class="label">My current glucose</div>
                         </div>
-                        <div class="stat-box">
-                            <div class="number">🍞</div>
+                        <div class="stat-box" style="text-align: center;">
+                            <div class="number">2</div>
                             <div class="label">Carbs I'm about to eat</div>
                         </div>
                     </div>
-                    <p style="color: var(--text-light);">That's it. Nothing else.</p>
+                    <p style="color: var(--text-light); margin-top: 0.5em;">That's it. Nothing else.</p>
                 </div>
             </section>
 
@@ -564,12 +874,12 @@
                     <h3>The Gap</h3>
                     <h2>What My Pump Doesn't Know</h2>
                     <ul class="problem-list">
-                        <li><strong>I ran 5 miles this morning</strong> — I'm more sensitive for hours</li>
-                        <li><strong>I slept 4 hours last night</strong> — My glucose will run higher</li>
-                        <li><strong>I'm eating pizza, not salad</strong> — Fat spikes me 4 hours later</li>
-                        <li><strong>I'm getting sick</strong> — My needs are about to double</li>
+                        <li><span class="dot"></span><span><strong>I ran 5 miles this morning</strong> — I'm more sensitive for hours</span></li>
+                        <li><span class="dot"></span><span><strong>I slept 4 hours last night</strong> — My glucose will run higher</span></li>
+                        <li><span class="dot"></span><span><strong>I'm eating pizza, not salad</strong> — Fat spikes me 4 hours later</span></li>
+                        <li><span class="dot"></span><span><strong>I'm getting sick</strong> — My needs are about to double</span></li>
                     </ul>
-                    <p style="margin-top: 0.6em;"><em>I adjust for all of this manually. Every day.</em></p>
+                    <p style="margin-top: 0.8em;"><em>I adjust for all of this manually. Every day.</em></p>
                 </div>
             </section>
 
@@ -579,7 +889,7 @@
                     <h3>The Solution</h3>
                     <img src="dossi-wordmark.png" alt="Dossi" class="logo-small">
                     <p class="big-statement">An insulin advisor that sees the <span class="gradient-text">full picture</span></p>
-                    <p style="margin-top: 1.5em;">Instead of 2 inputs, Dossi considers <strong>40+ factors</strong>.<br>Then it <strong>learns your patterns</strong> over time.</p>
+                    <p style="margin-top: 1.2em;">Instead of 2 inputs, Dossi considers <strong><span class="number" data-animate-number="40" data-suffix="+">40+</span> factors</strong>.<br>Then it <strong>learns your patterns</strong> over time.</p>
                 </div>
             </section>
 
@@ -587,14 +897,14 @@
             <section>
                 <div class="slide-content">
                     <h3>Context Awareness</h3>
-                    <h2>The 40 Factors</h2>
+                    <h2>The <span data-animate-number="40" data-suffix="">40</span> Factors</h2>
                     <div class="factor-grid">
-                        <div class="factor-item"><strong>Glucose</strong><span>Value, trend, velocity, momentum, quality</span></div>
-                        <div class="factor-item"><strong>Insulin</strong><span>IOB, decay curve, recent boluses, basal rate</span></div>
-                        <div class="factor-item"><strong>Nutrition</strong><span>Carbs, protein, fat, fiber, meal timing</span></div>
-                        <div class="factor-item"><strong>Activity</strong><span>Workouts, intensity, steps, heart rate</span></div>
-                        <div class="factor-item"><strong>Physiology</strong><span>Sleep, cycle phase, illness, stress (HRV)</span></div>
-                        <div class="factor-item"><strong>Context</strong><span>Time of day, site age, absorption quality</span></div>
+                        <div class="factor-item"><div class="factor-icon"></div><div class="factor-content"><strong>Glucose</strong><span>Value, trend, velocity, momentum, quality</span></div></div>
+                        <div class="factor-item"><div class="factor-icon"></div><div class="factor-content"><strong>Insulin</strong><span>IOB, decay curve, recent boluses, basal rate</span></div></div>
+                        <div class="factor-item"><div class="factor-icon"></div><div class="factor-content"><strong>Nutrition</strong><span>Carbs, protein, fat, fiber, meal timing</span></div></div>
+                        <div class="factor-item"><div class="factor-icon"></div><div class="factor-content"><strong>Activity</strong><span>Workouts, intensity, steps, heart rate</span></div></div>
+                        <div class="factor-item"><div class="factor-icon"></div><div class="factor-content"><strong>Physiology</strong><span>Sleep, cycle phase, illness, stress (HRV)</span></div></div>
+                        <div class="factor-item"><div class="factor-icon"></div><div class="factor-content"><strong>Context</strong><span>Time of day, site age, absorption quality</span></div></div>
                     </div>
                 </div>
             </section>
@@ -605,7 +915,7 @@
                     <h3>How It Works</h3>
                     <h2>Step 1: Context Assembly</h2>
                     <p>Every time I log a meal, Dossi gathers all 40 factors in parallel.</p>
-                    <div class="stat-row" style="max-width: 400px;">
+                    <div class="stat-row" style="max-width: 350px;">
                         <div class="stat-box" style="text-align: center;">
                             <div class="number">&lt;1s</div>
                             <div class="label">For complete context snapshot</div>
@@ -621,17 +931,17 @@
                     <h3>How It Works</h3>
                     <h2>Step 2: Effective Parameters</h2>
                     <p>My doctor gives me base settings:</p>
-                    <div class="stat-row" style="max-width: 600px;">
+                    <div class="stat-row" style="max-width: 550px;">
                         <div class="stat-box">
-                            <div class="label" style="font-weight: 700; color: var(--text-dark); margin-bottom: 0.3em;">ISF</div>
+                            <div class="label" style="font-weight: 700; color: var(--text-dark); font-size: 1.1em;">ISF</div>
                             <div class="label">1 unit drops 50 mg/dL</div>
                         </div>
                         <div class="stat-box">
-                            <div class="label" style="font-weight: 700; color: var(--text-dark); margin-bottom: 0.3em;">ICR</div>
+                            <div class="label" style="font-weight: 700; color: var(--text-dark); font-size: 1.1em;">ICR</div>
                             <div class="label">1 unit covers 10g carbs</div>
                         </div>
                     </div>
-                    <p style="margin-top: 1em;">But these change with context.</p>
+                    <p style="margin-top: 0.8em;">But these change with context.</p>
                     <p>Dossi calculates my <span class="accent">effective</span> parameters <em>right now</em>.</p>
                 </div>
             </section>
@@ -643,11 +953,11 @@
                     <h2>Bayesian Learning</h2>
                     <p>Dossi doesn't use hardcoded rules like <code>exercise = +20%</code></p>
                     <p>It <strong>learns my patterns</strong> from actual glucose outcomes.</p>
-                    <div class="card" style="max-width: 700px; margin-top: 1em;">
-                        <p style="margin: 0 0 0.8em; color: var(--text-dark); font-size: 1.3em;"><strong>After each meal:</strong></p>
-                        <ol style="margin: 0; padding-left: 1.5em; font-size: 1.2em; color: var(--text-medium);">
-                            <li style="margin-bottom: 0.5em;">Observe outcome vs prediction</li>
-                            <li style="margin-bottom: 0.5em;">Update model based on evidence</li>
+                    <div class="card" style="max-width: 650px; margin-top: 1.2em;">
+                        <p style="margin: 0 0 0.8em; color: var(--text-dark); font-size: 1.15em;"><strong>After each meal:</strong></p>
+                        <ol style="margin: 0; padding-left: 1.5em; font-size: 1.05em; color: var(--text-medium);">
+                            <li style="margin-bottom: 0.4em;">Observe outcome vs prediction</li>
+                            <li style="margin-bottom: 0.4em;">Update model based on evidence</li>
                             <li>Build personalized modifiers over time</li>
                         </ol>
                     </div>
@@ -686,15 +996,12 @@
                     <h3>How It Learns</h3>
                     <h2>The Learning Loop</h2>
                     <p>After every meal, Dossi observes what actually happened:</p>
-                    <div class="card" style="max-width: 750px; margin-top: 0.8em;">
-                        <ol style="margin: 0; padding-left: 1.5em; font-size: 1.1em; color: var(--text-medium);">
-                            <li style="margin-bottom: 0.4em;"><strong>Predict</strong> — "Given this context, glucose should land at X"</li>
-                            <li style="margin-bottom: 0.4em;"><strong>Observe</strong> — "Actual glucose was Y" (higher or lower?)</li>
-                            <li style="margin-bottom: 0.4em;"><strong>Attribute</strong> — "Which factors were active? Exercise? Sleep?"</li>
-                            <li><strong>Update</strong> — "Adjust belief about how that factor affects ME"</li>
-                        </ol>
+                    <div style="margin-top: 0.8em;">
+                        <div class="step-item"><span class="step-num">1</span><div class="step-content"><strong>Predict</strong> <span>— "Given this context, glucose should land at X"</span></div></div>
+                        <div class="step-item"><span class="step-num">2</span><div class="step-content"><strong>Observe</strong> <span>— "Actual glucose was Y" (higher or lower?)</span></div></div>
+                        <div class="step-item"><span class="step-num">3</span><div class="step-content"><strong>Attribute</strong> <span>— "Which factors were active?"</span></div></div>
+                        <div class="step-item"><span class="step-num">4</span><div class="step-content"><strong>Update</strong> <span>— "Adjust belief about how that factor affects ME"</span></div></div>
                     </div>
-                    <p style="margin-top: 0.6em;">Over weeks, personal modifiers emerge from the data.</p>
                 </div>
             </section>
 
@@ -709,33 +1016,33 @@
                             <tr><th>Factor</th><th>Learned Effect</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td>Dawn (6-9 AM)</td><td>I need <strong>12% more</strong> insulin</td></tr>
-                            <tr><td>Post-cardio</td><td>I'm <strong>18% more sensitive</strong> for ~8 hrs</td></tr>
-                            <tr><td>Luteal phase</td><td>I need <strong>10% more</strong> insulin</td></tr>
+                            <tr><td>Dawn (6-9 AM)</td><td>I need <strong><span data-animate-number="12" data-suffix="%">12%</span> more</strong> insulin</td></tr>
+                            <tr><td>Post-cardio</td><td>I'm <strong><span data-animate-number="18" data-suffix="%">18%</span> more sensitive</strong> for ~8 hrs</td></tr>
+                            <tr><td>Luteal phase</td><td>I need <strong><span data-animate-number="10" data-suffix="%">10%</span> more</strong> insulin</td></tr>
                             <tr><td>High-fat meals</td><td><strong>Extended dosing</strong> over 3-4 hours</td></tr>
                         </tbody>
                     </table>
-                    <p style="margin-top: 1em;">These are <strong>my numbers</strong> from <strong>my data</strong>.</p>
+                    <p style="margin-top: 0.8em;">These are <strong>my numbers</strong> from <strong>my data</strong>.</p>
                 </div>
             </section>
 
-            <!-- 11. Safety -->
+            <!-- 13. Safety -->
             <section>
                 <div class="slide-content">
                     <h3>Safety First</h3>
-                    <h2>5 Layers of Validation</h2>
+                    <h2><span data-animate-number="5">5</span> Layers of Validation</h2>
                     <p>Insulin errors can be fatal. Every recommendation passes 5 checks:</p>
-                    <div style="margin-top: 0.8em;">
-                        <div class="safety-layer"><span class="num-badge">1</span><span><strong>Hard Limits</strong> — Never dose if glucose &lt;70 mg/dL</span></div>
-                        <div class="safety-layer"><span class="num-badge">2</span><span><strong>Physiological</strong> — Will this drop me too low?</span></div>
-                        <div class="safety-layer"><span class="num-badge">3</span><span><strong>Predictive</strong> — Hypo risk at 15/30/60/120 min?</span></div>
-                        <div class="safety-layer"><span class="num-badge">4</span><span><strong>Anomaly</strong> — Is this sensor data trustworthy?</span></div>
-                        <div class="safety-layer"><span class="num-badge">5</span><span><strong>Learning</strong> — Have recent outcomes been poor?</span></div>
+                    <div style="margin-top: 0.6em;">
+                        <div class="step-item"><span class="step-num">1</span><div class="step-content"><strong>Hard Limits</strong> <span>— Never dose if glucose &lt;70 mg/dL</span></div></div>
+                        <div class="step-item"><span class="step-num">2</span><div class="step-content"><strong>Physiological</strong> <span>— Will this drop me too low?</span></div></div>
+                        <div class="step-item"><span class="step-num">3</span><div class="step-content"><strong>Predictive</strong> <span>— Hypo risk at 15/30/60/120 min?</span></div></div>
+                        <div class="step-item"><span class="step-num">4</span><div class="step-content"><strong>Anomaly</strong> <span>— Is this sensor data trustworthy?</span></div></div>
+                        <div class="step-item"><span class="step-num">5</span><div class="step-content"><strong>Learning</strong> <span>— Have recent outcomes been poor?</span></div></div>
                     </div>
                 </div>
             </section>
 
-            <!-- 12. Comparison -->
+            <!-- 14. Comparison -->
             <section>
                 <div class="slide-content">
                     <h3>Differentiation</h3>
@@ -755,7 +1062,7 @@
                 </div>
             </section>
 
-            <!-- 13. Product Today -->
+            <!-- 15. Product Today -->
             <section>
                 <div class="slide-content">
                     <h3>Product</h3>
@@ -783,23 +1090,23 @@
                 </div>
             </section>
 
-            <!-- 14. Tech Stack -->
+            <!-- 16. Tech Stack -->
             <section>
                 <div class="slide-content">
                     <h3>Technical</h3>
                     <h2>How It's Built</h2>
                     <ul class="icon-list">
-                        <li><span class="icon">📱</span><span><strong>SwiftUI / Swift 6</strong> — Native iOS</span></li>
-                        <li><span class="icon">❤️</span><span><strong>HealthKit</strong> — CGM, insulin, activity, sleep</span></li>
-                        <li><span class="icon">☁️</span><span><strong>Supabase</strong> — PostgreSQL backend</span></li>
-                        <li><span class="icon">🧠</span><span><strong>CoreML</strong> — Glucose predictions</span></li>
-                        <li><span class="icon">📈</span><span><strong>Bayesian inference</strong> — Personalized learning</span></li>
+                        <li><span class="icon"></span><span><strong>SwiftUI / Swift 6</strong> — Native iOS</span></li>
+                        <li><span class="icon"></span><span><strong>HealthKit</strong> — CGM, insulin, activity, sleep</span></li>
+                        <li><span class="icon"></span><span><strong>Supabase</strong> — PostgreSQL backend</span></li>
+                        <li><span class="icon"></span><span><strong>CoreML</strong> — Glucose predictions</span></li>
+                        <li><span class="icon"></span><span><strong>Bayesian inference</strong> — Personalized learning</span></li>
                     </ul>
-                    <p style="margin-top: 1.5em;"><strong>660+ unit tests</strong> on safety-critical paths</p>
+                    <p style="margin-top: 1.2em;"><strong><span data-animate-number="660" data-suffix="+">660+</span> unit tests</strong> on safety-critical paths</p>
                 </div>
             </section>
 
-            <!-- 15. Status -->
+            <!-- 17. Status -->
             <section>
                 <div class="slide-content">
                     <h3>Progress</h3>
@@ -807,18 +1114,18 @@
                     <p><strong>Decision support</strong> — Recommends doses, I manually control my pump</p>
                     <table style="margin-top: 1em;">
                         <tbody>
-                            <tr><td>Core algorithm (40 factors)</td><td class="status-complete"><strong>✓ Complete</strong></td></tr>
-                            <tr><td>5-layer safety validation</td><td class="status-complete"><strong>✓ Complete</strong></td></tr>
-                            <tr><td>Bayesian learning engine</td><td class="status-complete"><strong>✓ Complete</strong></td></tr>
-                            <tr><td>HealthKit integration</td><td class="status-complete"><strong>✓ Complete</strong></td></tr>
-                            <tr><td>Caregiver app</td><td class="status-complete"><strong>✓ Complete</strong></td></tr>
-                            <tr><td>Onboarding & polish</td><td class="status-progress"><strong>◐ In progress</strong></td></tr>
+                            <tr><td>Core algorithm (40 factors)</td><td class="status-complete">✓ Complete</td></tr>
+                            <tr><td>5-layer safety validation</td><td class="status-complete">✓ Complete</td></tr>
+                            <tr><td>Bayesian learning engine</td><td class="status-complete">✓ Complete</td></tr>
+                            <tr><td>HealthKit integration</td><td class="status-complete">✓ Complete</td></tr>
+                            <tr><td>Caregiver app</td><td class="status-complete">✓ Complete</td></tr>
+                            <tr><td>Onboarding & polish</td><td class="status-progress">◐ In progress</td></tr>
                         </tbody>
                     </table>
                 </div>
             </section>
 
-            <!-- 16. What's Next -->
+            <!-- 18. What's Next -->
             <section>
                 <div class="slide-content">
                     <h3>Roadmap</h3>
@@ -845,7 +1152,7 @@
                 </div>
             </section>
 
-            <!-- 17. Why I'm Excited -->
+            <!-- 19. Why I'm Excited -->
             <section>
                 <div class="slide-content">
                     <h3>Motivation</h3>
@@ -859,32 +1166,31 @@
                 </div>
             </section>
 
-            <!-- 18. Where I'd Love Guidance -->
+            <!-- 20. Where I'd Love Guidance -->
             <section>
                 <div class="slide-content">
                     <h3>Mentorship</h3>
                     <h2>Where I'd Love Guidance</h2>
                     <ul class="icon-list">
-                        <li><span class="icon">🔬</span><span><strong>Technical</strong> — ML approaches, validation methods</span></li>
-                        <li><span class="icon">📋</span><span><strong>Research</strong> — Study design, IRB process</span></li>
-                        <li><span class="icon">🏛️</span><span><strong>Regulatory</strong> — FDA pathway priorities</span></li>
-                        <li><span class="icon">💼</span><span><strong>Business</strong> — Company vs research project?</span></li>
-                        <li><span class="icon">🧭</span><span><strong>General</strong> — Am I thinking about this right?</span></li>
+                        <li><span class="icon"></span><span><strong>Technical</strong> — ML approaches, validation methods</span></li>
+                        <li><span class="icon"></span><span><strong>Research</strong> — Study design, IRB process</span></li>
+                        <li><span class="icon"></span><span><strong>Regulatory</strong> — FDA pathway priorities</span></li>
+                        <li><span class="icon"></span><span><strong>Business</strong> — Company vs research project?</span></li>
                     </ul>
                 </div>
             </section>
 
-            <!-- 19. Vision -->
+            <!-- 21. Vision -->
             <section>
                 <div class="slide-content centered">
                     <h3>Vision</h3>
                     <h2>Where This Goes</h2>
                     <p class="big-statement"><strong>Short term:</strong> The smartest insulin advisor on your phone.</p>
-                    <p class="big-statement" style="margin-top: 0.8em;"><strong>Long term:</strong> The first insulin system that actually understands the person using it.</p>
+                    <p class="big-statement" style="margin-top: 0.6em;"><strong>Long term:</strong> The first insulin system that actually understands the person using it.</p>
                 </div>
             </section>
 
-            <!-- 20. Demo -->
+            <!-- 22. Demo -->
             <section>
                 <div class="slide-content centered">
                     <h2>Demo</h2>
@@ -892,7 +1198,7 @@
                 </div>
             </section>
 
-            <!-- 21. Questions -->
+            <!-- 23. Questions -->
             <section>
                 <div class="slide-content centered">
                     <h2>Questions?</h2>
@@ -928,8 +1234,8 @@
         // Responsive scaling
         function scaleLaptop() {
             const frame = document.querySelector('.laptop-frame');
-            const frameWidth = 1300; // base width
-            const frameHeight = 750; // lid + base
+            const frameWidth = 1300;
+            const frameHeight = 750;
             const padding = 40;
 
             const availableWidth = window.innerWidth - padding;
@@ -944,6 +1250,86 @@
 
         scaleLaptop();
         window.addEventListener('resize', scaleLaptop);
+
+        // Format number with commas
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        // Animated number counter
+        function animateNumber(element, start, end, duration, suffix = '', prefix = '') {
+            const startTime = performance.now();
+            const isDecimal = String(end).includes('.');
+            const needsCommas = end >= 1000;
+
+            element.classList.add('counting');
+
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+
+                // Easing function (ease-out cubic)
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+
+                const current = start + (end - start) * easeOut;
+
+                let displayValue;
+                if (isDecimal) {
+                    displayValue = current.toFixed(1);
+                } else {
+                    displayValue = Math.round(current);
+                    if (needsCommas) {
+                        displayValue = formatNumber(displayValue);
+                    }
+                }
+
+                element.textContent = prefix + displayValue + suffix;
+
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                } else {
+                    element.classList.remove('counting');
+                }
+            }
+
+            requestAnimationFrame(update);
+        }
+
+        // Animate percentage with smooth counting
+        function animatePercent(element, targetPercent, duration = 1500) {
+            animateNumber(element, 0, targetPercent, duration, '%');
+        }
+
+        // Find all animated numbers and trigger them on slide change
+        function triggerNumberAnimations() {
+            const currentSlide = Reveal.getCurrentSlide();
+            const animatedNumbers = currentSlide.querySelectorAll('[data-animate-number]');
+
+            animatedNumbers.forEach((el, index) => {
+                const value = el.getAttribute('data-animate-number');
+                const suffix = el.getAttribute('data-suffix') || '';
+                const prefix = el.getAttribute('data-prefix') || '';
+                const duration = parseInt(el.getAttribute('data-duration')) || 1200;
+                const delay = index * 150; // Stagger animations
+
+                // Reset to 0 first
+                el.textContent = prefix + '0' + suffix;
+
+                setTimeout(() => {
+                    if (value.includes('.')) {
+                        animateNumber(el, 0, parseFloat(value), duration, suffix, prefix);
+                    } else {
+                        animateNumber(el, 0, parseInt(value), duration, suffix, prefix);
+                    }
+                }, delay + 300); // Delay for slide transition
+            });
+        }
+
+        // Trigger on slide change
+        Reveal.on('slidechanged', triggerNumberAnimations);
+
+        // Initial trigger for first slide
+        setTimeout(triggerNumberAnimations, 500);
     </script>
 </body>
 </html>
