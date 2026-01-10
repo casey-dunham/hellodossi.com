@@ -706,13 +706,8 @@
         .phone-screen {
             width: 100%;
             height: 100%;
-            background: linear-gradient(180deg, #f8f8f8 0%, #e8e8e8 100%);
+            background: var(--bg-paper);
             border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
         }
 
         .phone-camera-ui {
@@ -781,20 +776,17 @@
             display: flex;
             align-items: center;
             gap: 0.8em;
-            font-size: 1.05em;
+            font-size: 1.1em;
             color: var(--text-medium);
-            background: var(--bg-card);
-            padding: 0.9em 1.1em;
-            border-radius: 6px;
-            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+            padding: 0.6em 0;
         }
 
         .photo-step .step-num {
             font-family: 'Playfair Display', Georgia, serif;
-            font-size: 1.2em;
+            font-size: 1.3em;
             font-weight: 400;
             color: var(--text-dark);
-            min-width: 1.2em;
+            min-width: 1.5em;
         }
 
         /* Thank you */
@@ -1340,7 +1332,7 @@
             <section>
                 <div class="slide-content centered">
                     <h3>The Solution</h3>
-                    <img src="dossi-wordmark.png" alt="Dossi" class="logo-hero" style="margin-top: 0.5em;">
+                    <img src="dossi-wordmark.png" alt="Dossi" class="logo-hero" style="margin-top: 0.5em; margin-bottom: 1.5em;">
                     <p class="big-statement" style="margin-top: 1.2em;">An insulin advisor that sees the <span class="gradient-text">full picture</span></p>
                     <p style="margin-top: 1em;">Dossi considers <strong><span class="number" data-animate-number="40" data-suffix="+">40+</span> factors</strong> and <strong>learns your patterns</strong> over time.</p>
                 </div>
@@ -1387,18 +1379,13 @@
                     <h2>Photo Meal Recognition</h2>
                     <div class="photo-feature-layout">
                         <div class="phone-mockup">
-                            <div class="phone-screen">
-                                <div class="phone-camera-ui">
-                                    <div class="camera-viewfinder"></div>
-                                    <div class="camera-circle"></div>
-                                </div>
-                            </div>
+                            <div class="phone-screen"></div>
                         </div>
                         <div class="photo-steps">
-                            <div class="photo-step"><span class="step-num">1</span><span>Snap a photo of any meal</span></div>
-                            <div class="photo-step"><span class="step-num">2</span><span>AI identifies individual foods</span></div>
-                            <div class="photo-step"><span class="step-num">3</span><span>Estimates carbs, protein, fat</span></div>
-                            <div class="photo-step"><span class="step-num">4</span><span>Adjust if needed, then log</span></div>
+                            <div class="photo-step"><span class="step-num">1.</span><span>Snap a photo of any meal</span></div>
+                            <div class="photo-step"><span class="step-num">2.</span><span>AI identifies individual foods</span></div>
+                            <div class="photo-step"><span class="step-num">3.</span><span>Estimates carbs, protein, fat</span></div>
+                            <div class="photo-step"><span class="step-num">4.</span><span>Adjust if needed, then log</span></div>
                         </div>
                     </div>
                 </div>
