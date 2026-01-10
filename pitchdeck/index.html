@@ -6,78 +6,69 @@
     <title>Dossi — Intelligent Insulin Dosing</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
     <style>
         :root {
-            --accent: #6366f1;
-            --accent-light: #818cf8;
-            --accent-dark: #4f46e5;
-            --bg-dark: #0f172a;
-            --bg-card: rgba(255, 255, 255, 0.05);
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --text-muted: #64748b;
-            --success: #22c55e;
-            --warning: #f59e0b;
-            --gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
+            --accent: #737BF2;
+            --accent-light: rgba(115, 123, 242, 0.1);
+            --accent-dark: #5B5FD4;
+            --text-dark: #1a1a1a;
+            --text-medium: #636366;
+            --text-light: #8E8E93;
+            --bg-white: #ffffff;
+            --bg-gray: #F2F2F7;
+            --gradient: linear-gradient(135deg, #5B5FD4 0%, #A99FFF 100%);
         }
 
         * { box-sizing: border-box; }
 
         .reveal-viewport {
-            background: var(--bg-dark);
-            background-image:
-                radial-gradient(ellipse at top left, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
-                radial-gradient(ellipse at bottom right, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+            background: var(--bg-white);
         }
 
         .reveal {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            color: var(--text-primary);
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-dark);
         }
 
         .reveal h1, .reveal h2, .reveal h3 {
             text-transform: none;
             font-weight: 700;
-            color: var(--text-primary);
+            color: var(--text-dark);
             letter-spacing: -0.02em;
         }
 
         .reveal h1 {
-            font-size: 3.5em;
+            font-size: 3.2em;
             font-weight: 800;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
         .reveal h2 {
-            font-size: 2.2em;
-            margin-bottom: 0.8em;
+            font-size: 2em;
+            margin-bottom: 1em;
         }
 
         .reveal h3 {
-            font-size: 1.1em;
-            color: var(--accent-light);
-            font-weight: 600;
+            font-size: 0.75em;
+            color: var(--accent);
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 1em;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.8em;
         }
 
         .reveal p {
             font-size: 1.1em;
-            line-height: 1.6;
-            color: var(--text-secondary);
+            line-height: 1.7;
+            color: var(--text-medium);
         }
 
         .reveal li {
             font-size: 1em;
-            line-height: 1.6;
+            line-height: 1.7;
             margin-bottom: 0.6em;
-            color: var(--text-secondary);
+            color: var(--text-medium);
         }
 
         .reveal ul, .reveal ol {
@@ -86,17 +77,17 @@
         }
 
         .reveal strong {
-            color: var(--text-primary);
+            color: var(--text-dark);
             font-weight: 600;
         }
 
         .reveal .slides section {
-            padding: 40px;
+            padding: 60px;
         }
 
         /* Accent text */
         .accent {
-            color: var(--accent-light);
+            color: var(--accent);
             font-weight: 600;
         }
 
@@ -109,78 +100,73 @@
 
         /* Subtitle */
         .subtitle {
-            font-size: 1.4em !important;
-            color: var(--text-muted) !important;
-            font-weight: 400;
-            margin-top: 0.5em;
+            font-size: 1.3em !important;
+            color: var(--text-light) !important;
+            font-weight: 500;
+            margin-top: 0.8em;
         }
 
         /* Cards */
         .card {
-            background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 1.5em;
-            backdrop-filter: blur(10px);
+            background: var(--bg-gray);
+            border-radius: 20px;
+            padding: 2em;
         }
 
         /* Tables */
         .reveal table {
-            font-size: 0.85em;
-            margin: 1em auto;
+            font-size: 0.9em;
+            margin: 1.5em auto;
             border-collapse: separate;
             border-spacing: 0;
             width: 100%;
             max-width: 800px;
+            background: var(--bg-gray);
+            border-radius: 16px;
+            overflow: hidden;
         }
 
         .reveal th {
-            background: rgba(99, 102, 241, 0.2);
-            color: var(--text-primary);
+            background: var(--accent-light);
+            color: var(--text-dark);
             padding: 1em 1.5em;
             font-weight: 600;
             text-align: left;
         }
 
-        .reveal th:first-child { border-radius: 12px 0 0 0; }
-        .reveal th:last-child { border-radius: 0 12px 0 0; }
-
         .reveal td {
-            padding: 0.8em 1.5em;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            color: var(--text-secondary);
+            padding: 1em 1.5em;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            color: var(--text-medium);
         }
 
-        .reveal tr:last-child td:first-child { border-radius: 0 0 0 12px; }
-        .reveal tr:last-child td:last-child { border-radius: 0 0 12px 0; }
-
-        .reveal tbody tr {
-            background: rgba(255, 255, 255, 0.02);
+        .reveal tr:last-child td {
+            border-bottom: none;
         }
 
         .reveal tbody tr:hover {
-            background: rgba(99, 102, 241, 0.1);
+            background: rgba(115, 123, 242, 0.05);
         }
 
         /* Two column layout */
         .two-col {
             display: flex;
-            gap: 3em;
+            gap: 2em;
             text-align: left;
-            margin-top: 1em;
+            margin-top: 1.5em;
         }
 
         .two-col > div {
             flex: 1;
-            background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 1.5em 2em;
+            background: var(--bg-gray);
+            border-radius: 20px;
+            padding: 2em;
         }
 
         .two-col h3 {
             margin-top: 0;
-            font-size: 1em;
+            font-size: 0.85em;
+            margin-bottom: 1.2em;
         }
 
         /* Factor grid */
@@ -188,102 +174,101 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1em;
-            font-size: 0.75em;
+            font-size: 0.8em;
             text-align: left;
             max-width: 900px;
             margin: 0 auto;
         }
 
         .factor-grid div {
-            background: var(--bg-card);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 1em 1.2em;
-            border-radius: 12px;
-            color: var(--text-secondary);
+            background: var(--bg-gray);
+            padding: 1.2em 1.5em;
+            border-radius: 16px;
+            color: var(--text-medium);
         }
 
         .factor-grid strong {
-            color: var(--accent-light);
+            color: var(--accent);
             display: block;
-            margin-bottom: 0.3em;
+            margin-bottom: 0.4em;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Numbered badges */
+        .num-badge {
+            width: 36px;
+            height: 36px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9em;
+            color: white;
+            flex-shrink: 0;
         }
 
         /* Safety layers */
         .safety-layers {
             max-width: 700px;
-            margin: 1.5em auto;
+            margin: 2em auto;
         }
 
         .safety-layer {
             display: flex;
             align-items: center;
-            gap: 1em;
-            padding: 0.8em 1.2em;
-            margin: 0.5em 0;
-            border-radius: 10px;
-            font-size: 0.85em;
-            color: var(--text-primary);
+            gap: 1.2em;
+            padding: 1em 1.5em;
+            margin: 0.6em 0;
+            border-radius: 14px;
+            font-size: 0.95em;
+            color: var(--text-dark);
+            background: var(--bg-gray);
         }
-
-        .safety-layer .num {
-            width: 28px;
-            height: 28px;
-            background: var(--accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 0.85em;
-            flex-shrink: 0;
-        }
-
-        .safety-layer:nth-child(1) { background: rgba(99, 102, 241, 0.25); }
-        .safety-layer:nth-child(2) { background: rgba(99, 102, 241, 0.20); }
-        .safety-layer:nth-child(3) { background: rgba(99, 102, 241, 0.15); }
-        .safety-layer:nth-child(4) { background: rgba(99, 102, 241, 0.10); }
-        .safety-layer:nth-child(5) { background: rgba(99, 102, 241, 0.05); }
 
         /* Status indicators */
-        .status-complete { color: var(--success); }
-        .status-progress { color: var(--warning); }
+        .status-complete { color: #34C759; font-weight: 600; }
+        .status-progress { color: #FF9500; font-weight: 600; }
 
         /* Big statement */
         .big-statement {
-            font-size: 1.8em !important;
+            font-size: 1.6em !important;
             font-weight: 600;
-            color: var(--text-primary) !important;
+            color: var(--text-dark) !important;
             max-width: 700px;
             margin: 0 auto;
             line-height: 1.4;
         }
 
-        /* List with icons */
+        /* Icon list */
         .icon-list {
             list-style: none;
             padding: 0;
-            max-width: 600px;
+            max-width: 550px;
             margin: 0 auto;
         }
 
         .icon-list li {
             display: flex;
-            align-items: flex-start;
-            gap: 1em;
-            margin-bottom: 1em;
+            align-items: center;
+            gap: 1.2em;
+            margin-bottom: 1.2em;
             text-align: left;
         }
 
         .icon-list .icon {
-            width: 32px;
-            height: 32px;
-            background: rgba(99, 102, 241, 0.2);
-            border-radius: 8px;
+            width: 48px;
+            height: 48px;
+            background: var(--accent-light);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            font-size: 1em;
+            font-size: 1.3em;
         }
 
         /* Problem list */
@@ -291,13 +276,13 @@
             list-style: none;
             padding: 0;
             max-width: 700px;
-            margin: 1em auto;
+            margin: 1.5em auto;
             text-align: left;
         }
 
         .problem-list li {
-            padding: 0.6em 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 0.8em 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
         }
 
         .problem-list li:last-child {
@@ -310,22 +295,22 @@
             padding: 0;
             counter-reset: item;
             max-width: 600px;
-            margin: 1em auto;
+            margin: 1.5em auto;
         }
 
         .numbered-list li {
             counter-increment: item;
             display: flex;
             align-items: flex-start;
-            gap: 1em;
-            margin-bottom: 1em;
+            gap: 1.2em;
+            margin-bottom: 1.2em;
             text-align: left;
         }
 
         .numbered-list li::before {
             content: counter(item);
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             background: var(--accent);
             border-radius: 50%;
             display: flex;
@@ -334,26 +319,27 @@
             font-weight: 700;
             flex-shrink: 0;
             color: white;
+            font-size: 0.9em;
         }
 
         /* Code style */
         code {
-            background: rgba(99, 102, 241, 0.15);
-            padding: 0.2em 0.6em;
+            background: var(--accent-light);
+            padding: 0.3em 0.6em;
             border-radius: 6px;
             font-family: 'SF Mono', Monaco, monospace;
             font-size: 0.85em;
-            color: var(--accent-light);
+            color: var(--accent-dark);
         }
 
-        /* Link */
+        /* Links */
         .reveal a {
-            color: var(--accent-light);
+            color: var(--accent);
         }
 
         /* Progress bar */
         .reveal .progress {
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--bg-gray);
             height: 4px;
         }
 
@@ -361,12 +347,9 @@
             background: var(--gradient);
         }
 
-        /* Slide numbers */
+        /* Hide slide numbers */
         .reveal .slide-number {
-            background: transparent;
-            color: var(--text-muted);
-            font-size: 14px;
-            font-weight: 500;
+            display: none;
         }
 
         /* Controls */
@@ -374,9 +357,36 @@
             color: var(--accent);
         }
 
-        /* Final slide */
-        .final-slide h1 {
-            font-size: 4em;
+        /* Logo styling */
+        .logo-main {
+            height: 100px;
+            margin-bottom: 1em;
+        }
+
+        .logo-small {
+            height: 64px;
+            margin: 0.5em 0;
+        }
+
+        /* Stat boxes */
+        .stat-box {
+            background: var(--bg-gray);
+            border-radius: 20px;
+            padding: 1.5em 2em;
+            text-align: center;
+        }
+
+        .stat-box .number {
+            font-size: 2.5em;
+            font-weight: 800;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .stat-box .label {
+            font-size: 0.9em;
+            color: var(--text-medium);
+            margin-top: 0.5em;
         }
     </style>
 </head>
@@ -386,7 +396,7 @@
 
             <!-- Title -->
             <section>
-                <img src="dossi-wordmark.png" alt="Dossi" style="height: 120px; filter: invert(1); margin-bottom: 0.5em;">
+                <img src="dossi-wordmark.png" alt="Dossi" class="logo-main">
                 <p class="subtitle">Insulin dosing that actually knows you</p>
             </section>
 
@@ -400,7 +410,7 @@
                     <li><span class="icon">🎗️</span><span>Former Breakthrough T1D Youth Ambassador</span></li>
                     <li><span class="icon">🚀</span><span>Currently in Idea to Prototype (I2P)</span></li>
                 </ul>
-                <p class="big-statement" style="margin-top: 1.5em;">I'm building something I wish existed.</p>
+                <p class="big-statement" style="margin-top: 2em;">I'm building something I wish existed.</p>
             </section>
 
             <!-- The Problem -->
@@ -408,18 +418,18 @@
                 <h3>The Problem</h3>
                 <h2>My "Smart" Pump Isn't Very Smart</h2>
                 <p>I wear a <span class="accent">$6,000+ insulin pump</span> and a continuous glucose monitor.</p>
-                <p style="margin-top: 1.5em; margin-bottom: 1em;"><strong>But it only knows two things about me:</strong></p>
-                <div class="two-col" style="max-width: 600px; margin: 0 auto;">
-                    <div style="text-align: center;">
-                        <p style="font-size: 2em; margin: 0;">📊</p>
-                        <p style="margin: 0.5em 0 0;"><strong>Current glucose</strong></p>
+                <p style="margin-top: 2em; margin-bottom: 1.5em;"><strong>But it only knows two things:</strong></p>
+                <div class="two-col" style="max-width: 500px; margin: 0 auto;">
+                    <div class="stat-box">
+                        <div class="number">📊</div>
+                        <div class="label">Current glucose</div>
                     </div>
-                    <div style="text-align: center;">
-                        <p style="font-size: 2em; margin: 0;">🍞</p>
-                        <p style="margin: 0.5em 0 0;"><strong>Carbs I enter</strong></p>
+                    <div class="stat-box">
+                        <div class="number">🍞</div>
+                        <div class="label">Carbs I enter</div>
                     </div>
                 </div>
-                <p style="margin-top: 1.5em; color: var(--text-muted);">That's it. Nothing else.</p>
+                <p style="margin-top: 2em; color: var(--text-light);">That's it. Nothing else.</p>
             </section>
 
             <!-- What My Pump Doesn't Know -->
@@ -434,15 +444,15 @@
                     <li><strong>My pump site is 3 days old</strong> — Absorption is degrading</li>
                     <li><strong>I'm getting sick</strong> — My needs are about to double</li>
                 </ul>
-                <p style="margin-top: 1em;"><em>I adjust for all of this manually. Every single day.</em></p>
+                <p style="margin-top: 1.5em;"><em>I adjust for all of this manually. Every single day.</em></p>
             </section>
 
             <!-- The Solution -->
             <section>
                 <h3>The Solution</h3>
-                <img src="dossi-wordmark.png" alt="Dossi" style="height: 80px; filter: invert(1); margin: 0.5em 0;">
+                <img src="dossi-wordmark.png" alt="Dossi" class="logo-small">
                 <p class="big-statement">An insulin advisor that sees the <span class="gradient-text">full picture</span></p>
-                <p style="margin-top: 1.5em;">Instead of 2 inputs, Dossi considers <strong>40+ factors</strong>.<br>Then it <strong>learns your patterns</strong> over time.</p>
+                <p style="margin-top: 2em;">Instead of 2 inputs, Dossi considers <strong>40+ factors</strong>.<br>Then it <strong>learns your patterns</strong> over time.</p>
             </section>
 
             <!-- The 40 Factors -->
@@ -466,11 +476,11 @@
                 <h3>How It Works</h3>
                 <h2>Step 1: Context Assembly</h2>
                 <p>Every time I log a meal, Dossi gathers all 40 factors in parallel.</p>
-                <div class="card" style="max-width: 500px; margin: 1.5em auto;">
-                    <p style="font-size: 2.5em; margin: 0;">⚡ &lt; 1 second</p>
-                    <p style="margin: 0.5em 0 0; color: var(--text-muted);">Complete state snapshot</p>
+                <div class="stat-box" style="max-width: 300px; margin: 2em auto;">
+                    <div class="number">⚡</div>
+                    <div class="label">&lt; 1 second for complete snapshot</div>
                 </div>
-                <p>The result is a complete picture of my current state — not just a number.</p>
+                <p>The result is a complete picture — not just a glucose number.</p>
             </section>
 
             <!-- How It Works 2 -->
@@ -478,17 +488,17 @@
                 <h3>How It Works</h3>
                 <h2>Step 2: Effective Parameters</h2>
                 <p>My doctor gives me base settings:</p>
-                <div class="two-col" style="max-width: 600px; margin: 1em auto;">
-                    <div style="text-align: center;">
-                        <p style="margin: 0;"><strong>ISF</strong></p>
-                        <p style="margin: 0.3em 0; font-size: 0.85em; color: var(--text-muted);">1 unit drops 50 mg/dL</p>
+                <div class="two-col" style="max-width: 500px; margin: 1.5em auto;">
+                    <div class="stat-box">
+                        <div class="label" style="margin: 0;"><strong>ISF</strong></div>
+                        <div class="label">1 unit drops 50 mg/dL</div>
                     </div>
-                    <div style="text-align: center;">
-                        <p style="margin: 0;"><strong>ICR</strong></p>
-                        <p style="margin: 0.3em 0; font-size: 0.85em; color: var(--text-muted);">1 unit covers 10g carbs</p>
+                    <div class="stat-box">
+                        <div class="label" style="margin: 0;"><strong>ICR</strong></div>
+                        <div class="label">1 unit covers 10g carbs</div>
                     </div>
                 </div>
-                <p style="margin-top: 1.5em;">But these aren't constant — they change with context.</p>
+                <p style="margin-top: 2em;">But these change with context.</p>
                 <p>Dossi calculates my <span class="accent">effective</span> parameters <em>right now</em>.</p>
             </section>
 
@@ -497,12 +507,12 @@
                 <h3>Key Innovation</h3>
                 <h2>Bayesian Learning</h2>
                 <p>Dossi doesn't use hardcoded rules like <code>exercise = +20%</code></p>
-                <p style="margin-bottom: 1.5em;">It <strong>learns my patterns</strong> from actual glucose outcomes.</p>
+                <p style="margin-bottom: 2em;">It <strong>learns my patterns</strong> from actual glucose outcomes.</p>
                 <div class="card" style="max-width: 550px; margin: 0 auto; text-align: left;">
-                    <p style="margin: 0 0 0.8em; color: var(--text-primary);"><strong>After each meal:</strong></p>
-                    <ol style="margin: 0; padding-left: 1.2em; font-size: 0.9em;">
-                        <li style="margin-bottom: 0.4em;">Observe outcome vs prediction</li>
-                        <li style="margin-bottom: 0.4em;">Update model based on evidence strength</li>
+                    <p style="margin: 0 0 1em; color: var(--text-dark);"><strong>After each meal:</strong></p>
+                    <ol style="margin: 0; padding-left: 1.5em; font-size: 0.95em;">
+                        <li style="margin-bottom: 0.5em;">Observe outcome vs prediction</li>
+                        <li style="margin-bottom: 0.5em;">Update model based on evidence</li>
                         <li style="margin-bottom: 0;">Build personalized modifiers over time</li>
                     </ol>
                 </div>
@@ -512,7 +522,7 @@
             <section>
                 <h3>Personalization</h3>
                 <h2>What Dossi Learns About Me</h2>
-                <p style="margin-bottom: 1em; color: var(--text-muted);"><em>After a few weeks of data:</em></p>
+                <p style="margin-bottom: 1.5em; color: var(--text-light);"><em>After a few weeks of data:</em></p>
                 <table>
                     <thead>
                         <tr><th>Factor</th><th>Learned Effect</th></tr>
@@ -524,20 +534,20 @@
                         <tr><td>High-fat meals</td><td><strong>Extended dosing</strong> over 3-4 hours</td></tr>
                     </tbody>
                 </table>
-                <p style="margin-top: 1em;">These are <strong>my numbers</strong> from <strong>my data</strong> — not generic rules.</p>
+                <p style="margin-top: 1.5em;">These are <strong>my numbers</strong> from <strong>my data</strong>.</p>
             </section>
 
             <!-- Safety -->
             <section>
                 <h3>Safety First</h3>
                 <h2>5 Layers of Validation</h2>
-                <p>Insulin errors can be fatal. Every recommendation passes 5 independent checks:</p>
+                <p>Insulin errors can be fatal. Every recommendation passes 5 checks:</p>
                 <div class="safety-layers">
-                    <div class="safety-layer"><span class="num">1</span><span><strong>Hard Limits</strong> — Never dose if glucose &lt;70 mg/dL</span></div>
-                    <div class="safety-layer"><span class="num">2</span><span><strong>Physiological</strong> — Will this drop me too low?</span></div>
-                    <div class="safety-layer"><span class="num">3</span><span><strong>Predictive</strong> — Hypo risk at 15/30/60/120 min?</span></div>
-                    <div class="safety-layer"><span class="num">4</span><span><strong>Anomaly</strong> — Is this sensor data trustworthy?</span></div>
-                    <div class="safety-layer"><span class="num">5</span><span><strong>Learning</strong> — Have recent outcomes been poor?</span></div>
+                    <div class="safety-layer"><span class="num-badge">1</span><span><strong>Hard Limits</strong> — Never dose if glucose &lt;70 mg/dL</span></div>
+                    <div class="safety-layer"><span class="num-badge">2</span><span><strong>Physiological</strong> — Will this drop me too low?</span></div>
+                    <div class="safety-layer"><span class="num-badge">3</span><span><strong>Predictive</strong> — Hypo risk at 15/30/60/120 min?</span></div>
+                    <div class="safety-layer"><span class="num-badge">4</span><span><strong>Anomaly</strong> — Is this sensor data trustworthy?</span></div>
+                    <div class="safety-layer"><span class="num-badge">5</span><span><strong>Learning</strong> — Have recent outcomes been poor?</span></div>
                 </div>
             </section>
 
@@ -565,8 +575,8 @@
                 <h2>What I've Built</h2>
                 <div class="two-col">
                     <div>
-                        <h3 style="color: var(--accent-light);">📱 Dossi</h3>
-                        <ul style="font-size: 0.9em;">
+                        <h3>Dossi</h3>
+                        <ul style="font-size: 0.95em;">
                             <li>Glucose monitoring + trends</li>
                             <li>Meal entry (photo AI, barcode)</li>
                             <li>Macro-aware recommendations</li>
@@ -574,8 +584,8 @@
                         </ul>
                     </div>
                     <div>
-                        <h3 style="color: var(--accent-light);">👨‍👩‍👧 Dossi Follow</h3>
-                        <ul style="font-size: 0.9em;">
+                        <h3>Dossi Follow</h3>
+                        <ul style="font-size: 0.95em;">
                             <li>Caregiver monitoring</li>
                             <li>Real-time alerts</li>
                             <li>Apple Watch app</li>
@@ -596,7 +606,7 @@
                     <li><span class="icon">🧠</span><span><strong>CoreML</strong> — Glucose predictions</span></li>
                     <li><span class="icon">📈</span><span><strong>Bayesian inference</strong> — Personalized learning</span></li>
                 </ul>
-                <p style="margin-top: 1.5em;"><strong>660+ unit tests</strong> on safety-critical paths</p>
+                <p style="margin-top: 2em;"><strong>660+ unit tests</strong> on safety-critical paths</p>
             </section>
 
             <!-- Status -->
@@ -604,7 +614,7 @@
                 <h3>Progress</h3>
                 <h2>Current Status</h2>
                 <p><strong>Decision support</strong> — Recommends doses, I manually control my pump</p>
-                <table style="margin-top: 1.5em;">
+                <table style="margin-top: 2em;">
                     <tbody>
                         <tr><td>Core algorithm (40 factors)</td><td class="status-complete">✓ Complete</td></tr>
                         <tr><td>5-layer safety validation</td><td class="status-complete">✓ Complete</td></tr>
@@ -622,16 +632,16 @@
                 <h2>What's Next</h2>
                 <div class="two-col">
                     <div>
-                        <h3 style="color: var(--accent-light);">Short Term</h3>
-                        <ul style="font-size: 0.9em;">
+                        <h3>Short Term</h3>
+                        <ul style="font-size: 0.95em;">
                             <li>Finish onboarding</li>
                             <li>Daily self-testing</li>
                             <li>InVenture Prize (Jan '26)</li>
                         </ul>
                     </div>
                     <div>
-                        <h3 style="color: var(--accent-light);">Long Term</h3>
-                        <ul style="font-size: 0.9em;">
+                        <h3>Long Term</h3>
+                        <ul style="font-size: 0.95em;">
                             <li>Pilot with T1D users</li>
                             <li>CREATE-X (Summer '26)</li>
                             <li>FDA 510(k) clearance</li>
@@ -671,20 +681,20 @@
                 <h3>Vision</h3>
                 <h2>Where This Goes</h2>
                 <p class="big-statement"><strong>Short term:</strong> The smartest insulin advisor on your phone.</p>
-                <p class="big-statement" style="margin-top: 1em;"><strong>Long term:</strong> The first insulin system that actually understands the person using it.</p>
+                <p class="big-statement" style="margin-top: 1.2em;"><strong>Long term:</strong> The first insulin system that actually understands the person using it.</p>
             </section>
 
             <!-- Demo -->
             <section>
-                <h1>Demo</h1>
+                <h2>Demo</h2>
                 <p class="subtitle">Let me show you the app...</p>
             </section>
 
             <!-- Questions -->
-            <section class="final-slide">
-                <h1>Questions?</h1>
-                <p style="margin-top: 2em;">Thank you for your time.</p>
-                <p><a href="mailto:casey@hellodossi.com">casey@hellodossi.com</a></p>
+            <section>
+                <h2>Questions?</h2>
+                <p style="margin-top: 2.5em;">Thank you for your time.</p>
+                <p style="margin-top: 1em;"><a href="mailto:casey@hellodossi.com">casey@hellodossi.com</a></p>
             </section>
 
         </div>
@@ -694,7 +704,7 @@
     <script>
         Reveal.initialize({
             hash: true,
-            slideNumber: 'c/t',
+            slideNumber: false,
             transition: 'fade',
             transitionSpeed: 'fast',
             controls: true,
