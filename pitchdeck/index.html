@@ -558,45 +558,27 @@
         }
 
         .circle-1 {
-            width: 600px;
-            height: 600px;
-            top: -200px;
-            left: -150px;
-            background: rgba(255, 255, 255, 0.08);
-            animation: float1 12s ease-in-out infinite;
+            width: 700px;
+            height: 700px;
+            top: -250px;
+            left: -200px;
+            background: rgba(255, 255, 255, 0.1);
         }
 
         .circle-2 {
-            width: 400px;
-            height: 400px;
-            bottom: -150px;
-            right: -100px;
-            background: rgba(255, 255, 255, 0.06);
-            animation: float2 15s ease-in-out infinite;
+            width: 600px;
+            height: 600px;
+            bottom: -300px;
+            right: -200px;
+            background: rgba(0, 0, 0, 0.08);
         }
 
         .circle-3 {
-            width: 250px;
-            height: 250px;
-            top: 60%;
-            left: 60%;
-            background: rgba(255, 255, 255, 0.04);
-            animation: float3 10s ease-in-out infinite;
-        }
-
-        @keyframes float1 {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(20px, 15px); }
-        }
-
-        @keyframes float2 {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(-15px, -20px); }
-        }
-
-        @keyframes float3 {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(-10px, 15px); }
+            width: 350px;
+            height: 350px;
+            top: 50%;
+            right: -100px;
+            background: rgba(255, 255, 255, 0.05);
         }
 
         .hero-wordmark {
@@ -676,6 +658,104 @@
         .feature-item span {
             font-size: 1em;
             color: var(--text-medium);
+        }
+
+        /* Photo feature layout */
+        .photo-feature-layout {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+            margin-top: 1.2em;
+        }
+
+        .phone-mockup {
+            width: 180px;
+            height: 360px;
+            background: #1a1a1a;
+            border-radius: 30px;
+            padding: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            flex-shrink: 0;
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: var(--accent);
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .phone-camera-ui {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .phone-camera-ui i {
+            font-size: 2.5em;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .camera-circle {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .camera-circle::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+        }
+
+        .camera-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .camera-dots span {
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+        }
+
+        .camera-dots span:nth-child(2) {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .photo-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .photo-step {
+            display: flex;
+            align-items: center;
+            gap: 1em;
+            font-size: 1.1em;
+            color: var(--text-medium);
+        }
+
+        .photo-step .step-num {
+            width: 32px;
+            height: 32px;
+            font-size: 0.85em;
         }
 
         /* Thank you */
@@ -1239,7 +1319,7 @@
                 <div class="slide-content">
                     <h3>How It Works</h3>
                     <h2>Step 1: Context Assembly</h2>
-                    <p>Every time I log a meal, Dossi pulls data from multiple sources in parallel:</p>
+                    <p>Every time you log a meal, Dossi pulls data from multiple sources in parallel:</p>
                     <div class="context-sources">
                         <div class="context-source"><i class="ph ph-heart-half"></i><span>HealthKit</span></div>
                         <div class="context-source"><i class="ph ph-chart-line-up"></i><span>CGM</span></div>
@@ -1248,7 +1328,7 @@
                         <div class="context-source"><i class="ph ph-calendar"></i><span>History</span></div>
                         <div class="context-source"><i class="ph ph-clock"></i><span>Time</span></div>
                     </div>
-                    <p style="margin-top: 1.2em;">The result: a <strong>complete snapshot</strong> of my current state in under 1 second.</p>
+                    <p style="margin-top: 1.2em;">The result: a <strong>complete snapshot</strong> of your current state in under 1 second.</p>
                 </div>
             </section>
 
@@ -1257,40 +1337,23 @@
                 <div class="slide-content">
                     <h3>Features</h3>
                     <h2>Photo Meal Recognition</h2>
-                    <p>Snap a photo of your meal — Dossi identifies the food and estimates macros automatically.</p>
-                    <div class="feature-highlights">
-                        <div class="feature-item"><i class="ph ph-camera"></i><span>Take a photo of any meal</span></div>
-                        <div class="feature-item"><i class="ph ph-scan"></i><span>AI identifies individual foods</span></div>
-                        <div class="feature-item"><i class="ph ph-list-numbers"></i><span>Estimates carbs, protein, fat</span></div>
-                        <div class="feature-item"><i class="ph ph-pencil-simple"></i><span>Adjust if needed, then log</span></div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Insulin Footprint -->
-            <section>
-                <div class="slide-content">
-                    <h3>Personalization</h3>
-                    <h2>Your Insulin Footprint</h2>
-                    <p>Dossi learns how <strong>your body</strong> responds to insulin.</p>
-                    <div class="two-col">
-                        <div>
-                            <h4>Your Unique Curve</h4>
-                            <ul>
-                                <li>Onset time (when it kicks in)</li>
-                                <li>Peak timing (max effect)</li>
-                                <li>Duration (how long active)</li>
-                                <li>Tail behavior</li>
-                            </ul>
+                    <div class="photo-feature-layout">
+                        <div class="phone-mockup">
+                            <div class="phone-screen">
+                                <div class="phone-camera-ui">
+                                    <i class="ph ph-camera"></i>
+                                    <div class="camera-circle"></div>
+                                    <div class="camera-dots">
+                                        <span></span><span></span><span></span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <h4>Adapts To</h4>
-                            <ul>
-                                <li>Different injection sites</li>
-                                <li>Site age degradation</li>
-                                <li>Temperature effects</li>
-                                <li>Activity level changes</li>
-                            </ul>
+                        <div class="photo-steps">
+                            <div class="photo-step"><span class="step-num">1</span><span>Snap a photo of any meal</span></div>
+                            <div class="photo-step"><span class="step-num">2</span><span>AI identifies individual foods</span></div>
+                            <div class="photo-step"><span class="step-num">3</span><span>Estimates carbs, protein, fat</span></div>
+                            <div class="photo-step"><span class="step-num">4</span><span>Adjust if needed, then log</span></div>
                         </div>
                     </div>
                 </div>
@@ -1301,7 +1364,7 @@
                 <div class="slide-content">
                     <h3>How It Works</h3>
                     <h2>Step 2: Effective Parameters</h2>
-                    <p>My doctor gives me base settings:</p>
+                    <p>Your doctor gives you base settings:</p>
                     <div class="stat-row" style="max-width: 550px;">
                         <div class="stat-box">
                             <div class="label" style="font-weight: 700; color: var(--text-dark); font-size: 1.1em;">ISF</div>
@@ -1313,7 +1376,7 @@
                         </div>
                     </div>
                     <p style="margin-top: 0.8em;">But these change with context.</p>
-                    <p>Dossi calculates my <span class="accent">effective</span> parameters <em>right now</em>.</p>
+                    <p>Dossi calculates your <span class="accent">effective</span> parameters <em>right now</em>.</p>
                 </div>
             </section>
 
@@ -1323,7 +1386,7 @@
                     <h3>Key Innovation</h3>
                     <h2>Bayesian Learning</h2>
                     <p>Dossi doesn't use hardcoded rules like <code>exercise = +20%</code></p>
-                    <p>It <strong>learns my patterns</strong> from actual glucose outcomes across <strong>all factors</strong>.</p>
+                    <p>It <strong>learns your patterns</strong> from actual glucose outcomes across <strong>all factors</strong>.</p>
                     <div class="card" style="max-width: 650px; margin-top: 1.2em;">
                         <p style="margin: 0 0 0.8em; color: var(--text-dark); font-size: 1.15em;"><strong>Continuously learning from:</strong></p>
                         <ol style="margin: 0; padding-left: 1.5em; font-size: 1.05em; color: var(--text-medium);">
@@ -1380,20 +1443,20 @@
             <section>
                 <div class="slide-content">
                     <h3>Personalization</h3>
-                    <h2>What Dossi Learns About Me</h2>
+                    <h2>What Dossi Learns About You</h2>
                     <p style="color: var(--text-light);"><em>After a few weeks of data:</em></p>
                     <table>
                         <thead>
                             <tr><th>Factor</th><th>Learned Effect</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td>Dawn (6-9 AM)</td><td>I need <strong><span data-animate-number="12" data-suffix="%">12%</span> more</strong> insulin</td></tr>
-                            <tr><td>Post-cardio</td><td>I'm <strong><span data-animate-number="18" data-suffix="%">18%</span> more sensitive</strong> for ~8 hrs</td></tr>
-                            <tr><td>Luteal phase</td><td>I need <strong><span data-animate-number="10" data-suffix="%">10%</span> more</strong> insulin</td></tr>
+                            <tr><td>Dawn (6-9 AM)</td><td>You need <strong><span data-animate-number="12" data-suffix="%">12%</span> more</strong> insulin</td></tr>
+                            <tr><td>Post-cardio</td><td>You're <strong><span data-animate-number="18" data-suffix="%">18%</span> more sensitive</strong> for ~8 hrs</td></tr>
+                            <tr><td>Luteal phase</td><td>You need <strong><span data-animate-number="10" data-suffix="%">10%</span> more</strong> insulin</td></tr>
                             <tr><td>High-fat meals</td><td><strong>Extended dosing</strong> over 3-4 hours</td></tr>
                         </tbody>
                     </table>
-                    <p style="margin-top: 0.8em;">These are <strong>my numbers</strong> from <strong>my data</strong>.</p>
+                    <p style="margin-top: 0.8em;">These are <strong>your numbers</strong> from <strong>your data</strong>.</p>
                 </div>
             </section>
 
