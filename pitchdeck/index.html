@@ -6,7 +6,7 @@
     <title>Dossi — Intelligent Insulin Dosing</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <style>
@@ -83,17 +83,17 @@
         .section-tabs {
             position: absolute;
             right: 0;
-            top: 50px;
+            top: 0;
+            bottom: 0;
             display: flex;
             flex-direction: column;
-            gap: 4px;
             z-index: 100;
         }
 
         .tab {
             width: 28px;
-            height: 70px;
-            border-radius: 0 6px 6px 0;
+            flex: 1;
+            border-radius: 0;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -103,13 +103,22 @@
             font-weight: 600;
             letter-spacing: 0.5px;
             text-transform: uppercase;
-            color: rgba(0, 0, 0, 0.5);
+            color: rgba(0, 0, 0, 0.4);
             cursor: pointer;
-            transition: width 0.2s ease, opacity 0.2s ease;
+            transition: width 0.2s ease, color 0.2s ease;
+        }
+
+        .tab:first-child {
+            border-radius: 0 4px 0 0;
+        }
+
+        .tab:last-child {
+            border-radius: 0 0 4px 0;
         }
 
         .tab:hover {
             width: 34px;
+            color: rgba(0, 0, 0, 0.6);
         }
 
         .tab.active {
@@ -131,7 +140,7 @@
         }
 
         .reveal {
-            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             color: var(--text-dark);
         }
 
@@ -167,7 +176,7 @@
         }
 
         .reveal h3 {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-size: 0.75em;
             color: var(--text-light);
             font-weight: 500;
@@ -590,7 +599,7 @@
         }
 
         .title-subtitle {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Inter', sans-serif;
             font-size: 1.1em;
             color: var(--text-light);
             font-weight: 400;
