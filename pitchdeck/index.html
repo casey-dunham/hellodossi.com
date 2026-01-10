@@ -55,6 +55,7 @@
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
             position: relative;
             overflow: visible;
+            margin-right: 36px;
         }
 
         .binder-page .reveal {
@@ -130,6 +131,31 @@
             margin-left: -4px;
             padding-left: 4px;
             width: 40px;
+        }
+
+        /* Inverted rounded corners for active tab */
+        .tab.active::before,
+        .tab.active::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            width: 12px;
+            height: 12px;
+            background: var(--bg-paper);
+        }
+
+        .tab.active::before {
+            top: -12px;
+            border-bottom-left-radius: 12px;
+            box-shadow: -6px 6px 0 6px var(--bg-paper);
+            clip-path: inset(0 0 0 50%);
+        }
+
+        .tab.active::after {
+            bottom: -12px;
+            border-top-left-radius: 12px;
+            box-shadow: -6px -6px 0 6px var(--bg-paper);
+            clip-path: inset(0 0 0 50%);
         }
 
         .reveal .controls { display: none !important; }
@@ -1472,14 +1498,13 @@
             <section>
                 <div class="slide-content">
                     <h3>Safety First</h3>
-                    <h2><span data-animate-number="5">5</span> Layers of Validation</h2>
-                    <p>Insulin errors can be fatal. Every recommendation passes 5 checks:</p>
+                    <h2><span data-animate-number="4">4</span> Layers of Validation</h2>
+                    <p>Insulin errors can be fatal. Every recommendation passes 4 checks:</p>
                     <div style="margin-top: 0.6em; max-width: 650px;">
-                        <div class="step-item"><span class="step-num">1</span><div class="step-content"><strong>Hard Limits</strong> <span>— Never dose if glucose &lt;70 mg/dL</span></div></div>
-                        <div class="step-item"><span class="step-num">2</span><div class="step-content"><strong>Physiological</strong> <span>— Will this drop me too low?</span></div></div>
-                        <div class="step-item"><span class="step-num">3</span><div class="step-content"><strong>Predictive</strong> <span>— Hypo risk at 15/30/60/120 min?</span></div></div>
-                        <div class="step-item"><span class="step-num">4</span><div class="step-content"><strong>Anomaly</strong> <span>— Is this sensor data trustworthy?</span></div></div>
-                        <div class="step-item"><span class="step-num">5</span><div class="step-content"><strong>Learning</strong> <span>— Have recent outcomes been poor?</span></div></div>
+                        <div class="step-item"><span class="step-num">1</span><div class="step-content"><strong>Hard Limits</strong> <span>— Never dose below user-specified amount</span></div></div>
+                        <div class="step-item"><span class="step-num">2</span><div class="step-content"><strong>Predictive</strong> <span>— Hypo risk at 15/30/60/120 min?</span></div></div>
+                        <div class="step-item"><span class="step-num">3</span><div class="step-content"><strong>Anomaly</strong> <span>— Is this sensor data trustworthy?</span></div></div>
+                        <div class="step-item"><span class="step-num">4</span><div class="step-content"><strong>Learning</strong> <span>— Have recent outcomes been poor?</span></div></div>
                     </div>
                 </div>
             </section>
