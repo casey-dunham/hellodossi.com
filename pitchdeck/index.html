@@ -6,7 +6,7 @@
     <title>Dossi — Intelligent Insulin Dosing</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <style>
@@ -14,11 +14,18 @@
             --accent: #737BF2;
             --accent-light: rgba(115, 123, 242, 0.15);
             --text-dark: #1a1a1a;
-            --text-medium: #636366;
+            --text-medium: #4a4a4a;
             --text-light: #8E8E93;
             --icon-gray: #8E8E93;
-            --bg-white: #ffffff;
-            --bg-card: #f5f5f7;
+            --bg-paper: #FAF9F6;
+            --bg-card: #f0efeb;
+            /* Tab colors */
+            --tab-1: #F5E6D3;
+            --tab-2: #FFF3B8;
+            --tab-3: #E8D4F0;
+            --tab-4: #D4F0D4;
+            --tab-5: #D4E4F0;
+            --tab-6: #F0D4D8;
         }
 
         * { box-sizing: border-box; }
@@ -27,95 +34,104 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            background: #ffffff;
+            background: #e8e6e1;
             overflow: hidden;
         }
 
-        /* Laptop Frame */
-        .laptop-frame {
+        /* Binder Frame */
+        .binder-frame {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(var(--scale, 1));
             display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
-        .laptop-lid {
-            background: #161616;
-            border-radius: 24px 24px 0 0;
-            padding: 12px;
-            box-shadow: 0 0 0 2px #0a0a0a;
-        }
-
-        .laptop-screen {
+        .binder-page {
             width: 1100px;
-            height: 680px;
-            background: #000;
-            border-radius: 14px;
+            height: 700px;
+            background: var(--bg-paper);
+            border-radius: 4px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
+            position: relative;
             overflow: hidden;
-            position: relative;
         }
 
-        .laptop-screen .reveal {
-            width: 100%;
-            height: 100%;
-        }
-
-        .laptop-notch {
+        /* Hole punches */
+        .hole-punches {
             position: absolute;
+            left: 30px;
             top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 180px;
-            height: 24px;
-            background: #161616;
-            border-radius: 0 0 12px 12px;
-            z-index: 1000;
+            bottom: 0;
+            width: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            padding: 60px 0;
+            z-index: 100;
         }
 
-        .laptop-base {
-            width: 1300px;
-            height: 36px;
-            background: linear-gradient(180deg, #3d3d3d 0%, #2a2a2a 40%, #1a1a1a 100%);
-            border-radius: 6px 6px 16px 16px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-            position: relative;
+        .hole {
+            width: 14px;
+            height: 14px;
+            background: #e8e6e1;
+            border-radius: 50%;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
         }
 
-        .laptop-base::before {
-            content: "";
+        /* Section tabs */
+        .section-tabs {
             position: absolute;
-            top: 0;
-            left: 20px;
-            right: 20px;
-            height: 1px;
-            background: rgba(255, 255, 255, 0.08);
+            right: 0;
+            top: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            z-index: 100;
         }
 
-        .laptop-base::after {
-            content: "";
-            position: absolute;
-            top: -1px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 220px;
-            height: 8px;
-            background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
-            border-radius: 0 0 12px 12px;
+        .tab {
+            width: 28px;
+            height: 70px;
+            border-radius: 0 6px 6px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: rgba(0, 0, 0, 0.5);
+            cursor: pointer;
+            transition: width 0.2s ease, opacity 0.2s ease;
         }
 
-        .laptop-hinge { display: none; }
+        .tab:hover {
+            width: 34px;
+        }
+
+        .tab.active {
+            width: 32px;
+            color: rgba(0, 0, 0, 0.7);
+        }
+
+        .tab-1 { background: var(--tab-1); }
+        .tab-2 { background: var(--tab-2); }
+        .tab-3 { background: var(--tab-3); }
+        .tab-4 { background: var(--tab-4); }
+        .tab-5 { background: var(--tab-5); }
+        .tab-6 { background: var(--tab-6); }
 
         .reveal .controls { display: none !important; }
 
         .reveal-viewport {
-            background: var(--bg-white);
+            background: var(--bg-paper);
         }
 
         .reveal {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
             color: var(--text-dark);
         }
 
@@ -124,48 +140,52 @@
         }
 
         .reveal .slides section {
-            padding: 50px 70px;
+            padding: 50px 80px 50px 80px;
             height: 100%;
             width: 100%;
+            background: var(--bg-paper);
         }
 
-        .reveal h1, .reveal h2, .reveal h3 {
+        .reveal h1, .reveal h2 {
+            font-family: 'Playfair Display', Georgia, serif;
             text-transform: none;
-            font-weight: 700;
+            font-weight: 500;
             color: var(--text-dark);
-            letter-spacing: -0.03em;
-            line-height: 1.15;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
         }
 
         .reveal h1 {
-            font-size: 3.5em;
-            font-weight: 800;
+            font-size: 4em;
+            font-weight: 400;
         }
 
         .reveal h2 {
-            font-size: 2.4em;
+            font-size: 2.6em;
             margin-bottom: 0.5em;
+            font-weight: 400;
         }
 
         .reveal h3 {
-            font-size: 0.8em;
-            color: var(--accent);
-            font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75em;
+            color: var(--text-light);
+            font-weight: 500;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-bottom: 0.6em;
+            letter-spacing: 0.2em;
+            margin-bottom: 0.8em;
         }
 
         .reveal p {
-            font-size: 1.25em;
-            line-height: 1.6;
+            font-size: 1.15em;
+            line-height: 1.7;
             color: var(--text-medium);
             margin-bottom: 0.6em;
         }
 
         .reveal li {
-            font-size: 1.15em;
-            line-height: 1.5;
+            font-size: 1.1em;
+            line-height: 1.6;
             margin-bottom: 0.5em;
             color: var(--text-medium);
         }
@@ -185,10 +205,10 @@
             content: "";
             position: absolute;
             left: 0;
-            top: 0.55em;
-            width: 8px;
-            height: 8px;
-            background: var(--accent);
+            top: 0.6em;
+            width: 6px;
+            height: 6px;
+            background: var(--text-dark);
             border-radius: 50%;
         }
 
@@ -199,16 +219,16 @@
 
         .accent {
             color: var(--accent);
-            font-weight: 600;
+            font-weight: 500;
         }
 
         .gradient-text {
             color: var(--accent);
-            font-weight: 600;
+            font-weight: 500;
         }
 
         .subtitle {
-            font-size: 1.5em !important;
+            font-size: 1.4em !important;
             color: var(--text-light) !important;
             font-weight: 400;
         }
@@ -234,8 +254,9 @@
         /* Cards */
         .card {
             background: var(--bg-card);
-            border-radius: 20px;
-            padding: 1.8em;
+            border-radius: 8px;
+            padding: 1.6em;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
         }
 
         /* About Me stack */
@@ -248,13 +269,14 @@
 
         .about-card {
             background: var(--bg-card);
-            border-radius: 16px;
-            padding: 1.4em 1.6em;
+            border-radius: 6px;
+            padding: 1.2em 1.4em;
             display: flex;
             align-items: center;
             gap: 1em;
-            font-size: 1.1em;
+            font-size: 1.05em;
             color: var(--text-medium);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
         }
 
         .about-card i {
@@ -311,11 +333,12 @@
 
         .factor-item-full {
             background: var(--bg-card);
-            padding: 1em 1.2em;
-            border-radius: 14px;
+            padding: 0.9em 1.1em;
+            border-radius: 6px;
             display: flex;
             align-items: flex-start;
             gap: 0.8em;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
         }
 
         .factor-item-full .factor-icon {
@@ -366,23 +389,25 @@
 
         .stat-box {
             background: var(--bg-card);
-            border-radius: 20px;
-            padding: 1.8em 2em;
+            border-radius: 12px;
+            padding: 1.6em 1.8em;
             flex: 1;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
         }
 
         .stat-box .number {
+            font-family: 'Playfair Display', Georgia, serif;
             font-size: 3em;
-            font-weight: 800;
-            color: var(--accent);
+            font-weight: 400;
+            color: var(--text-dark);
             line-height: 1;
             margin-bottom: 0.15em;
         }
 
         .stat-box .label {
-            font-size: 1em;
+            font-size: 0.95em;
             color: var(--text-medium);
-            font-weight: 500;
+            font-weight: 400;
         }
 
         /* Two column */
@@ -395,8 +420,9 @@
         .two-col > div {
             flex: 1;
             background: var(--bg-card);
-            border-radius: 20px;
-            padding: 1.8em;
+            border-radius: 8px;
+            padding: 1.5em;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
         }
 
         .two-col h4 {
@@ -428,11 +454,12 @@
 
         .factor-item {
             background: var(--bg-card);
-            padding: 1.3em 1.5em;
-            border-radius: 16px;
+            padding: 1.1em 1.3em;
+            border-radius: 6px;
             display: flex;
             align-items: flex-start;
-            gap: 1em;
+            gap: 0.9em;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
         }
 
         .factor-item .factor-icon {
@@ -462,26 +489,22 @@
         /* Numbered steps */
         .step-item {
             display: flex;
-            align-items: flex-start;
-            gap: 1.2em;
-            padding: 1.2em 1.5em;
-            margin: 0.6em 0;
-            border-radius: 16px;
+            align-items: center;
+            gap: 1em;
+            padding: 1em 1.3em;
+            margin: 0.5em 0;
+            border-radius: 6px;
             background: var(--bg-card);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
         }
 
         .step-num {
-            width: 40px;
-            height: 40px;
-            background: var(--accent);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1em;
-            color: white;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 400;
+            font-size: 1.4em;
+            color: var(--text-dark);
             flex-shrink: 0;
+            min-width: 1.2em;
         }
 
         .step-content {
@@ -505,20 +528,24 @@
             border-spacing: 0;
             width: 100%;
             background: var(--bg-card);
-            border-radius: 16px;
+            border-radius: 6px;
             overflow: hidden;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
         }
 
         .reveal th {
-            background: var(--accent-light);
+            background: rgba(0, 0, 0, 0.04);
             color: var(--text-dark);
-            padding: 1em 1.2em;
+            padding: 0.9em 1.2em;
             font-weight: 600;
             text-align: left;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         .reveal td {
-            padding: 0.9em 1.2em;
+            padding: 0.85em 1.2em;
             border-bottom: 1px solid rgba(0, 0, 0, 0.04);
             color: var(--text-medium);
         }
@@ -529,63 +556,45 @@
 
         /* Big statement */
         .big-statement {
-            font-size: 1.6em !important;
-            font-weight: 600;
+            font-family: 'Playfair Display', Georgia, serif !important;
+            font-size: 1.5em !important;
+            font-weight: 400;
             color: var(--text-dark) !important;
             line-height: 1.4;
         }
 
-        /* Title slide with circles */
+        /* Title slide */
         .title-slide {
-            background: var(--accent) !important;
+            background: var(--bg-paper) !important;
             position: relative;
             overflow: hidden;
         }
 
-        .circle-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        .circle {
-            position: absolute;
-            border-radius: 50%;
-        }
-
-        .circle-1 {
-            width: 700px;
-            height: 700px;
-            top: -250px;
-            left: -200px;
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .circle-2 {
-            width: 600px;
-            height: 600px;
-            bottom: -300px;
-            right: -200px;
-            background: rgba(0, 0, 0, 0.08);
-        }
-
-        .circle-3 {
-            width: 350px;
-            height: 350px;
-            top: 50%;
-            right: -100px;
-            background: rgba(255, 255, 255, 0.05);
+        .title-slide .slide-content {
+            padding-left: 40px;
         }
 
         .hero-wordmark {
-            height: 100px;
-            filter: brightness(0) invert(1);
-            position: relative;
-            z-index: 10;
+            height: 70px;
+            margin-bottom: 1.5em;
+        }
+
+        .title-tagline {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 3.8em;
+            font-weight: 400;
+            color: var(--text-dark);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.4em;
+        }
+
+        .title-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1em;
+            color: var(--text-light);
+            font-weight: 400;
+            letter-spacing: 0.02em;
         }
 
         /* Logo */
@@ -613,13 +622,14 @@
 
         .context-source {
             background: var(--bg-card);
-            border-radius: 14px;
-            padding: 1.2em 1.5em;
+            border-radius: 6px;
+            padding: 1em 1.3em;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0.6em;
-            min-width: 100px;
+            gap: 0.5em;
+            min-width: 90px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
         }
 
         .context-source i {
@@ -643,11 +653,12 @@
 
         .feature-item {
             background: var(--bg-card);
-            border-radius: 14px;
-            padding: 1.2em 1.4em;
+            border-radius: 6px;
+            padding: 1em 1.2em;
             display: flex;
             align-items: center;
-            gap: 1em;
+            gap: 0.9em;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
         }
 
         .feature-item i {
@@ -669,20 +680,34 @@
         }
 
         .phone-mockup {
-            width: 180px;
-            height: 360px;
-            background: #1a1a1a;
-            border-radius: 30px;
-            padding: 10px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            width: 140px;
+            height: 280px;
+            background: linear-gradient(145deg, #2a2a2a 0%, #1a1a1a 100%);
+            border-radius: 28px;
+            padding: 8px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255,255,255,0.1);
             flex-shrink: 0;
+            position: relative;
+        }
+
+        .phone-mockup::before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 20px;
+            background: #1a1a1a;
+            border-radius: 0 0 12px 12px;
+            z-index: 10;
         }
 
         .phone-screen {
             width: 100%;
             height: 100%;
-            background: var(--accent);
-            border-radius: 22px;
+            background: linear-gradient(180deg, #f8f8f8 0%, #e8e8e8 100%);
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -694,48 +719,56 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 20px;
+            gap: 16px;
         }
 
-        .phone-camera-ui i {
-            font-size: 2.5em;
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .camera-circle {
-            width: 60px;
-            height: 60px;
-            border: 4px solid rgba(255, 255, 255, 0.8);
-            border-radius: 50%;
+        .camera-viewfinder {
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--accent);
+            border-radius: 8px;
             position: relative;
         }
 
-        .camera-circle::after {
+        .camera-viewfinder::before,
+        .camera-viewfinder::after {
             content: "";
             position: absolute;
-            top: 50%;
+            background: var(--accent);
+        }
+
+        .camera-viewfinder::before {
+            width: 12px;
+            height: 2px;
+            top: -6px;
             left: 50%;
-            transform: translate(-50%, -50%);
-            width: 48px;
-            height: 48px;
-            background: rgba(255, 255, 255, 0.2);
+            transform: translateX(-50%);
+        }
+
+        .camera-viewfinder::after {
+            width: 2px;
+            height: 12px;
+            left: -6px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .phone-camera-ui i {
+            font-size: 1.8em;
+            color: var(--accent);
+        }
+
+        .camera-circle {
+            width: 44px;
+            height: 44px;
+            border: 3px solid var(--accent);
             border-radius: 50%;
+            position: relative;
+            background: rgba(115, 123, 242, 0.1);
         }
 
         .camera-dots {
-            display: flex;
-            gap: 8px;
-        }
-
-        .camera-dots span {
-            width: 8px;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-        }
-
-        .camera-dots span:nth-child(2) {
-            background: rgba(255, 255, 255, 0.9);
+            display: none;
         }
 
         .photo-steps {
@@ -747,21 +780,28 @@
         .photo-step {
             display: flex;
             align-items: center;
-            gap: 1em;
-            font-size: 1.1em;
+            gap: 0.8em;
+            font-size: 1.05em;
             color: var(--text-medium);
+            background: var(--bg-card);
+            padding: 0.9em 1.1em;
+            border-radius: 6px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
         }
 
         .photo-step .step-num {
-            width: 32px;
-            height: 32px;
-            font-size: 0.85em;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.2em;
+            font-weight: 400;
+            color: var(--text-dark);
+            min-width: 1.2em;
         }
 
         /* Thank you */
         .thank-you-text {
-            font-size: 4em !important;
-            font-weight: 800 !important;
+            font-family: 'Playfair Display', Georgia, serif !important;
+            font-size: 4.5em !important;
+            font-weight: 400 !important;
         }
 
         .thank-you-slide {
@@ -987,15 +1027,16 @@
 
         /* Animated numbers in headings */
         h2 [data-animate-number] {
-            color: var(--accent);
-            font-weight: 800;
+            color: var(--text-dark);
+            font-weight: 400;
         }
 
         /* Numbers in paragraphs and tables */
         p [data-animate-number],
         td [data-animate-number] {
-            font-weight: 700;
-            color: var(--accent);
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 400;
+            color: var(--text-dark);
         }
 
         /* Slide animations - elements animate when slide becomes active */
@@ -1219,22 +1260,30 @@
     </style>
 </head>
 <body>
-    <div class="laptop-frame">
-        <div class="laptop-lid">
-            <div class="laptop-screen">
-                <div class="laptop-notch"></div>
-                <div class="reveal">
-                    <div class="slides">
+    <div class="binder-frame">
+        <div class="binder-page">
+            <div class="hole-punches">
+                <div class="hole"></div>
+                <div class="hole"></div>
+                <div class="hole"></div>
+            </div>
+            <div class="section-tabs">
+                <div class="tab tab-1 active" data-section="0">Intro</div>
+                <div class="tab tab-2" data-section="3">Problem</div>
+                <div class="tab tab-3" data-section="6">Solution</div>
+                <div class="tab tab-4" data-section="10">Safety</div>
+                <div class="tab tab-5" data-section="14">Product</div>
+                <div class="tab tab-6" data-section="17">Vision</div>
+            </div>
+            <div class="reveal">
+                <div class="slides">
 
             <!-- 1. Title -->
             <section class="title-slide">
-                <div class="circle-bg">
-                    <div class="circle circle-1"></div>
-                    <div class="circle circle-2"></div>
-                    <div class="circle circle-3"></div>
-                </div>
                 <div class="slide-content centered">
                     <img src="dossi-wordmark.png" alt="Dossi" class="hero-wordmark">
+                    <h1 class="title-tagline">Intelligent<br>Insulin Dosing</h1>
+                    <p class="title-subtitle">A look at smarter diabetes management.</p>
                 </div>
             </section>
 
@@ -1341,11 +1390,8 @@
                         <div class="phone-mockup">
                             <div class="phone-screen">
                                 <div class="phone-camera-ui">
-                                    <i class="ph ph-camera"></i>
+                                    <div class="camera-viewfinder"></div>
                                     <div class="camera-circle"></div>
-                                    <div class="camera-dots">
-                                        <span></span><span></span><span></span>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1601,8 +1647,6 @@
                 </div>
             </div>
         </div>
-        <div class="laptop-hinge"></div>
-        <div class="laptop-base"></div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
@@ -1613,20 +1657,20 @@
             transition: 'fade',
             transitionSpeed: 'fast',
             controls: false,
-            progress: true,
+            progress: false,
             center: false,
             width: 1100,
-            height: 680,
+            height: 700,
             margin: 0,
             embedded: true
         });
 
         // Responsive scaling
-        function scaleLaptop() {
-            const frame = document.querySelector('.laptop-frame');
-            const frameWidth = 1300;
-            const frameHeight = 750;
-            const padding = 40;
+        function scaleBinder() {
+            const frame = document.querySelector('.binder-frame');
+            const frameWidth = 1100;
+            const frameHeight = 700;
+            const padding = 60;
 
             const availableWidth = window.innerWidth - padding;
             const availableHeight = window.innerHeight - padding;
@@ -1638,8 +1682,39 @@
             frame.style.setProperty('--scale', scale);
         }
 
-        scaleLaptop();
-        window.addEventListener('resize', scaleLaptop);
+        scaleBinder();
+        window.addEventListener('resize', scaleBinder);
+
+        // Tab navigation
+        const tabs = document.querySelectorAll('.tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const section = parseInt(tab.getAttribute('data-section'));
+                Reveal.slide(section);
+            });
+        });
+
+        // Update active tab on slide change
+        function updateActiveTab() {
+            const currentIndex = Reveal.getIndices().h;
+            tabs.forEach(tab => {
+                const section = parseInt(tab.getAttribute('data-section'));
+                tab.classList.remove('active');
+            });
+
+            // Find the appropriate tab for current slide
+            let activeTab = tabs[0];
+            tabs.forEach(tab => {
+                const section = parseInt(tab.getAttribute('data-section'));
+                if (currentIndex >= section) {
+                    activeTab = tab;
+                }
+            });
+            activeTab.classList.add('active');
+        }
+
+        Reveal.on('slidechanged', updateActiveTab);
+        updateActiveTab();
 
         // Format number with commas
         function formatNumber(num) {
