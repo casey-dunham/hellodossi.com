@@ -19,13 +19,13 @@
             --icon-gray: #8E8E93;
             --bg-paper: #FAF9F6;
             --bg-card: #f0efeb;
-            /* Tab colors - more vibrant */
-            --tab-1: #F5E6D3;
-            --tab-2: #FFF06B;
-            --tab-3: #D4B8E8;
-            --tab-4: #90EE90;
-            --tab-5: #87CEEB;
-            --tab-6: #FFB6C1;
+            /* Tab colors - muted */
+            --tab-1: #E8E0D5;
+            --tab-2: #F0EBD0;
+            --tab-3: #E0D8E8;
+            --tab-4: #D5E8D5;
+            --tab-5: #D5E0E8;
+            --tab-6: #E8D8DC;
         }
 
         * { box-sizing: border-box; }
@@ -98,7 +98,7 @@
         .tab {
             width: 28px;
             flex: 1;
-            border-radius: 0 8px 8px 0;
+            border-radius: 0;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -109,7 +109,7 @@
             font-weight: 600;
             letter-spacing: 0.5px;
             text-transform: uppercase;
-            color: rgba(0, 0, 0, 0.55);
+            color: rgba(0, 0, 0, 0.45);
             cursor: pointer;
             transition: transform 0.2s ease;
             transform: translateX(0);
