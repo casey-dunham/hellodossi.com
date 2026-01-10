@@ -528,6 +528,29 @@
             color: var(--text-medium);
         }
 
+        /* Numbered list */
+        .numbered-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5em;
+        }
+
+        .numbered-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6em;
+            font-size: 1.05em;
+            color: var(--text-medium);
+        }
+
+        .numbered-item .num {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.1em;
+            font-weight: 400;
+            color: var(--text-dark);
+            min-width: 1.2em;
+        }
+
         /* Tables */
         .reveal table {
             font-size: 0.95em;
@@ -841,16 +864,19 @@
         .photo-steps {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 12px;
         }
 
         .photo-step {
             display: flex;
             align-items: center;
             gap: 0.8em;
-            font-size: 1.1em;
+            font-size: 1.05em;
             color: var(--text-medium);
-            padding: 0.6em 0;
+            padding: 0.9em 1.1em;
+            background: var(--bg-card);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         }
 
         .photo-step .step-num {
@@ -1494,11 +1520,11 @@
                     <p>It <strong>learns your patterns</strong> from actual glucose outcomes across <strong>all factors</strong>.</p>
                     <div class="card" style="max-width: 650px; margin-top: 1.2em;">
                         <p style="margin: 0 0 0.8em; color: var(--text-dark); font-size: 1.15em;"><strong>Continuously learning from:</strong></p>
-                        <ol style="margin: 0; padding-left: 1.5em; font-size: 1.05em; color: var(--text-medium);">
-                            <li style="margin-bottom: 0.4em;">Meals, exercise, sleep, stress, time of day</li>
-                            <li style="margin-bottom: 0.4em;">Observe outcomes vs predictions</li>
-                            <li>Build personalized modifiers for each factor</li>
-                        </ol>
+                        <div class="numbered-list">
+                            <div class="numbered-item"><span class="num">1.</span><span>Meals, exercise, sleep, stress, time of day</span></div>
+                            <div class="numbered-item"><span class="num">2.</span><span>Observe outcomes vs predictions</span></div>
+                            <div class="numbered-item"><span class="num">3.</span><span>Build personalized modifiers for each factor</span></div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -1559,9 +1585,9 @@
                 <div class="slide-content">
                     <h3>Differentiation</h3>
                     <h2>Current Pumps vs Dossi</h2>
-                    <table>
+                    <table style="max-width: 600px;">
                         <thead>
-                            <tr><th>Current Pumps</th><th>Dossi</th></tr>
+                            <tr><th style="width: 50%;">Current Pumps</th><th style="width: 50%;">Dossi</th></tr>
                         </thead>
                         <tbody>
                             <tr><td>React to glucose</td><td><strong>Understand context</strong></td></tr>
