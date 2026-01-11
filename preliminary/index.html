@@ -729,6 +729,130 @@
 
         .reveal .slide-number { display: none !important; }
 
+        /* What is Type 1 Diabetes slide */
+        .t1d-explainer {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 2em;
+        }
+
+        .t1d-fact {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .t1d-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .t1d-icon i {
+            font-size: 2.2em;
+            color: white;
+        }
+
+        .t1d-icon.broken {
+            background: linear-gradient(135deg, #F87171, #EF4444);
+        }
+
+        .t1d-icon.inject {
+            background: linear-gradient(135deg, #60A5FA, #3B82F6);
+        }
+
+        .t1d-fact p {
+            font-size: 1.1em;
+            color: var(--text-dark);
+            text-align: center;
+            max-width: 200px;
+        }
+
+        .t1d-arrow {
+            color: var(--text-light);
+            font-size: 1.5em;
+        }
+
+        .t1d-balance {
+            display: flex;
+            align-items: stretch;
+            justify-content: center;
+            gap: 0;
+            background: white;
+            border-radius: 100px;
+            padding: 1em 1.5em;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .balance-side {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0.8em 1.5em;
+            gap: 4px;
+        }
+
+        .balance-side i {
+            font-size: 1.5em;
+        }
+
+        .balance-side span {
+            font-size: 0.85em;
+            color: var(--text-light);
+        }
+
+        .balance-side strong {
+            font-size: 0.95em;
+        }
+
+        .balance-side.danger-low {
+            color: #DC2626;
+        }
+
+        .balance-side.danger-low i,
+        .balance-side.danger-low strong {
+            color: #DC2626;
+        }
+
+        .balance-side.danger-high {
+            color: #F59E0B;
+        }
+
+        .balance-side.danger-high i,
+        .balance-side.danger-high strong {
+            color: #F59E0B;
+        }
+
+        .balance-target {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0.8em 2em;
+            border-left: 2px solid var(--bg-gray);
+            border-right: 2px solid var(--bg-gray);
+            gap: 4px;
+        }
+
+        .balance-target i {
+            font-size: 1.8em;
+            color: #22C55E;
+        }
+
+        .balance-target strong {
+            font-size: 0.95em;
+            color: #22C55E;
+        }
+
         /* Why This Matters - Circular Stats */
         .stats-circles {
             display: flex;
@@ -1063,6 +1187,41 @@
                 <div class="title-phone">
                     <div class="title-phone-glow"></div>
                     <img src="dossi-dashboard.png" alt="Dossi Dashboard">
+                </div>
+            </section>
+
+            <!-- What is Type 1 Diabetes -->
+            <section class="true-center">
+                <div class="slide-content centered">
+                    <h3>What Is Type 1 Diabetes?</h3>
+                    <h2 style="margin-bottom: 1em;">A Constant Balancing Act</h2>
+                    <div class="t1d-explainer">
+                        <div class="t1d-fact">
+                            <div class="t1d-icon broken"><i class="ph ph-prohibit"></i></div>
+                            <p>My pancreas doesn't produce insulin</p>
+                        </div>
+                        <div class="t1d-arrow"><i class="ph ph-arrow-right"></i></div>
+                        <div class="t1d-fact">
+                            <div class="t1d-icon inject"><i class="ph ph-syringe"></i></div>
+                            <p>I deliver insulin externally to survive</p>
+                        </div>
+                    </div>
+                    <div class="t1d-balance">
+                        <div class="balance-side danger-low">
+                            <i class="ph ph-arrow-down"></i>
+                            <span>Too much insulin</span>
+                            <strong>Dangerous low</strong>
+                        </div>
+                        <div class="balance-target">
+                            <i class="ph ph-target"></i>
+                            <strong>Target zone</strong>
+                        </div>
+                        <div class="balance-side danger-high">
+                            <i class="ph ph-arrow-up"></i>
+                            <span>Too little insulin</span>
+                            <strong>Dangerous high</strong>
+                        </div>
+                    </div>
                 </div>
             </section>
 
