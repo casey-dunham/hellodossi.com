@@ -674,6 +674,11 @@
             overflow: hidden !important;
         }
 
+        /* Hide title phone when not on title slide */
+        .title-slide:not(.present) .title-right {
+            display: none !important;
+        }
+
         .title-slide .slide-content {
             flex-direction: row;
             align-items: center;
