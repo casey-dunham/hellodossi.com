@@ -730,127 +730,81 @@
         .reveal .slide-number { display: none !important; }
 
         /* What is Type 1 Diabetes slide */
-        .t1d-explainer {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 2em;
+        .t1d-slide {
+            position: relative;
         }
 
-        .t1d-fact {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .t1d-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .t1d-icon i {
-            font-size: 2.2em;
-            color: white;
-        }
-
-        .t1d-icon.broken {
-            background: linear-gradient(135deg, #F87171, #EF4444);
-        }
-
-        .t1d-icon.inject {
-            background: linear-gradient(135deg, #60A5FA, #3B82F6);
-        }
-
-        .t1d-fact p {
-            font-size: 1.1em;
+        .t1d-intro {
+            font-size: 1.15em;
             color: var(--text-dark);
-            text-align: center;
-            max-width: 200px;
+            max-width: 600px;
+            line-height: 1.6;
+            margin-bottom: 1.5em;
         }
 
-        .t1d-arrow {
-            color: var(--text-light);
-            font-size: 1.5em;
-        }
-
-        .t1d-balance {
+        .t1d-key-facts {
             display: flex;
-            align-items: stretch;
-            justify-content: center;
-            gap: 0;
+            gap: 20px;
+            margin-bottom: 1.5em;
+        }
+
+        .t1d-fact-card {
             background: white;
-            border-radius: 100px;
-            padding: 1em 1.5em;
+            border-radius: 20px;
+            padding: 1.2em 1.5em;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            max-width: 700px;
-            margin: 0 auto;
+            max-width: 280px;
         }
 
-        .balance-side {
-            flex: 1;
+        .fact-number {
+            font-size: 2.2em;
+            font-weight: 800;
+            color: var(--accent);
+            line-height: 1;
+            margin-bottom: 0.2em;
+        }
+
+        .fact-text {
+            font-size: 0.9em;
+            color: var(--text-dark);
+            line-height: 1.4;
+        }
+
+        .t1d-stakes {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            padding: 0.8em 1.5em;
-            gap: 4px;
+            gap: 0.5em;
+            margin-bottom: 1.5em;
         }
 
-        .balance-side i {
-            font-size: 1.5em;
+        .stake-item {
+            font-size: 0.95em;
+            padding: 0.6em 1em;
+            border-radius: 8px;
+            max-width: 500px;
         }
 
-        .balance-side span {
-            font-size: 0.85em;
+        .stake-item.low {
+            background: rgba(220, 38, 38, 0.1);
+            color: #DC2626;
+        }
+
+        .stake-item.high {
+            background: rgba(245, 158, 11, 0.1);
+            color: #B45309;
+        }
+
+        .t1d-tagline {
+            font-size: 1.1em;
+            font-style: italic;
             color: var(--text-light);
         }
 
-        .balance-side strong {
-            font-size: 0.95em;
-        }
-
-        .balance-side.danger-low {
-            color: #DC2626;
-        }
-
-        .balance-side.danger-low i,
-        .balance-side.danger-low strong {
-            color: #DC2626;
-        }
-
-        .balance-side.danger-high {
-            color: #F59E0B;
-        }
-
-        .balance-side.danger-high i,
-        .balance-side.danger-high strong {
-            color: #F59E0B;
-        }
-
-        .balance-target {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 0.8em 2em;
-            border-left: 2px solid var(--bg-gray);
-            border-right: 2px solid var(--bg-gray);
-            gap: 4px;
-        }
-
-        .balance-target i {
-            font-size: 1.8em;
-            color: #22C55E;
-        }
-
-        .balance-target strong {
-            font-size: 0.95em;
-            color: #22C55E;
+        .t1d-illustration {
+            position: absolute;
+            right: 80px;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
         /* Why This Matters - Circular Stats */
@@ -1191,37 +1145,28 @@
             </section>
 
             <!-- What is Type 1 Diabetes -->
-            <section class="true-center">
-                <div class="slide-content centered">
-                    <h3>What Is Type 1 Diabetes?</h3>
-                    <h2 style="margin-bottom: 1em;">A Constant Balancing Act</h2>
-                    <div class="t1d-explainer">
-                        <div class="t1d-fact">
-                            <div class="t1d-icon broken"><i class="ph ph-prohibit"></i></div>
-                            <p>My pancreas doesn't produce insulin</p>
+            <section class="t1d-slide">
+                <div class="slide-content">
+                    <h2>What Is Type 1 Diabetes?</h2>
+                    <p class="t1d-intro">My pancreas doesn't produce insulin — the hormone that lets cells absorb glucose for energy. Without it, I would die.</p>
+                    <div class="t1d-key-facts">
+                        <div class="t1d-fact-card">
+                            <div class="fact-number">24/7</div>
+                            <div class="fact-text">I must deliver insulin externally, every hour of every day</div>
                         </div>
-                        <div class="t1d-arrow"><i class="ph ph-arrow-right"></i></div>
-                        <div class="t1d-fact">
-                            <div class="t1d-icon inject"><i class="ph ph-syringe"></i></div>
-                            <p>I deliver insulin externally to survive</p>
-                        </div>
-                    </div>
-                    <div class="t1d-balance">
-                        <div class="balance-side danger-low">
-                            <i class="ph ph-arrow-down"></i>
-                            <span>Too much insulin</span>
-                            <strong>Dangerous low</strong>
-                        </div>
-                        <div class="balance-target">
-                            <i class="ph ph-target"></i>
-                            <strong>Target zone</strong>
-                        </div>
-                        <div class="balance-side danger-high">
-                            <i class="ph ph-arrow-up"></i>
-                            <span>Too little insulin</span>
-                            <strong>Dangerous high</strong>
+                        <div class="t1d-fact-card">
+                            <div class="fact-number">~180</div>
+                            <div class="fact-text">Extra health decisions I make daily compared to someone without T1D</div>
                         </div>
                     </div>
+                    <div class="t1d-stakes">
+                        <div class="stake-item low"><strong>Too much insulin</strong> → Dangerous low (seizures, coma)</div>
+                        <div class="stake-item high"><strong>Too little insulin</strong> → Dangerous high (organ damage)</div>
+                    </div>
+                    <p class="t1d-tagline">It's a constant balancing act — and the margin for error is small.</p>
+                </div>
+                <div class="t1d-illustration">
+                    <img src="pancreas.png" alt="Pancreas illustration" style="width: 280px; opacity: 0.9;">
                 </div>
             </section>
 
