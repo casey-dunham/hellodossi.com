@@ -46,7 +46,7 @@
             height: 700px;
             background: var(--bg-paper);
             border-radius: 4px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 8px 60px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.08);
             position: relative;
             overflow: visible;
         }
@@ -1036,7 +1036,7 @@
                     <div class="photo-steps" style="margin-top: 1.5em; margin-left: 330px; max-width: 400px;">
                         <div class="photo-step"><span class="step-num">1.</span><span>Snap a photo of any meal</span></div>
                         <div class="photo-step"><span class="step-num">2.</span><span>AI identifies individual foods</span></div>
-                        <div class="photo-step"><span class="step-num">3.</span><span>Estimates carbs, protein, fat</span></div>
+                        <div class="photo-step"><span class="step-num">3.</span><span>Estimates carbs, protein, fat, fiber</span></div>
                         <div class="photo-step"><span class="step-num">4.</span><span>Suggests dosage</span></div>
                     </div>
                 </div>
@@ -1066,7 +1066,8 @@
                 <div class="slide-content" style="max-width: none;">
                     <h3>Business Model</h3>
                     <h2>Path to Market</h2>
-                    <div style="display: flex; align-items: center; gap: 60px; margin-top: 1em;">
+                    <p style="margin-top: 0.5em; margin-bottom: 1.2em;">The global diabetes care market is valued at <strong>$72 billion</strong>, with insulin delivery devices growing 8% annually.</p>
+                    <div style="display: flex; align-items: center; gap: 60px;">
                         <table style="max-width: 550px;">
                             <tbody>
                                 <tr>
@@ -1127,7 +1128,7 @@
             const frame = document.querySelector('.binder-frame');
             const frameWidth = 1100;
             const frameHeight = 700;
-            const padding = 40;
+            const padding = 80;
 
             const availableWidth = window.innerWidth - padding;
             const availableHeight = window.innerHeight - padding;
