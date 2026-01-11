@@ -1278,6 +1278,10 @@
                     document.exitFullscreen();
                 }
             }
+            // Restart presentation - press R to go back to beginning
+            if (e.key === 'r' || e.key === 'R') {
+                Reveal.slide(0);
+            }
         });
     </script>
 </body>
