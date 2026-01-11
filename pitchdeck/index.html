@@ -778,7 +778,7 @@
         .nutrition-phone {
             position: absolute;
             left: 60px;
-            bottom: -60px;
+            bottom: -30px;
             width: 280px;
             z-index: 10;
         }
@@ -1698,7 +1698,7 @@
                 <div class="slide-content" style="max-width: none;">
                     <h3>How It Works</h3>
                     <h2>Step 1: Photo Meal Recognition</h2>
-                    <div class="photo-steps" style="margin-top: 1.5em; margin-left: 330px; max-width: 400px;">
+                    <div class="photo-steps" style="margin-top: 2.5em; margin-left: 330px; max-width: 400px;">
                         <div class="photo-step"><span class="step-num">1.</span><span>Snap a photo of any meal</span></div>
                         <div class="photo-step"><span class="step-num">2.</span><span>AI identifies individual foods</span></div>
                         <div class="photo-step"><span class="step-num">3.</span><span>Estimates carbs, protein, fat, fiber</span></div>
@@ -1764,6 +1764,7 @@
             <!-- Why This Matters -->
             <section class="true-center">
                 <div class="slide-content centered">
+                    <h3>The Impact</h3>
                     <h2>Why This Matters</h2>
                     <div class="stats-circles">
                         <div class="stat-circle">
@@ -1934,14 +1935,14 @@
             const frame = document.querySelector('.binder-frame');
             const frameWidth = 1100;
             const frameHeight = 700;
-            const padding = 60;
+            const padding = 80;
 
             const availableWidth = window.innerWidth - padding;
             const availableHeight = window.innerHeight - padding;
 
             const scaleX = availableWidth / frameWidth;
             const scaleY = availableHeight / frameHeight;
-            const scale = Math.min(scaleX, scaleY, 1);
+            const scale = Math.min(scaleX, scaleY);
 
             frame.style.setProperty('--scale', scale);
         }
