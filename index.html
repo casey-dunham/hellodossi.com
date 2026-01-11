@@ -34,7 +34,7 @@
             --gray-100: #E5E5EA;
 
             /* Backgrounds */
-            --bg-page: #E8E8ED;
+            --bg-page: #F2F2F7;
             --bg-dark: #1C1C1E;
             --bg-dark-elevated: #2C2C2E;
             --bg-paper: #F5F5F8;
@@ -436,57 +436,25 @@
             border-radius: 24px;
             padding: 32px 24px;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 8px 40px rgba(115, 123, 242, 0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
             position: relative;
             overflow: hidden;
-        }
-
-        .problem-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, var(--accent-deep), var(--accent), var(--accent-dark));
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .problem-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-medium);
-        }
-
-        .problem-card:hover::before {
-            opacity: 1;
         }
 
         .problem-icon {
             width: 56px;
             height: 56px;
-            background: var(--accent-light);
+            background: var(--accent);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 20px;
-            transition: all 0.3s;
-        }
-
-        .problem-card:hover .problem-icon {
-            background: var(--accent);
             box-shadow: var(--shadow-accent);
         }
 
         .problem-icon i {
             font-size: 1.5em;
-            color: var(--accent);
-            transition: color 0.3s;
-        }
-
-        .problem-card:hover .problem-icon i {
             color: white;
         }
 
@@ -611,6 +579,125 @@
             font-size: 0.9em;
             color: var(--gray-500);
             line-height: 1.5;
+        }
+
+        /* ========== PHOTO MEAL RECOGNITION ========== */
+        .photo-meal {
+            padding: 100px 40px;
+            background: white;
+        }
+
+        .photo-meal-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .photo-meal-visual {
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .photo-meal-visual img {
+            width: 280px;
+            height: auto;
+            filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.15));
+            animation: phoneFloat 4s ease-in-out infinite;
+        }
+
+        .photo-meal-visual::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 350px;
+            height: 400px;
+            background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(115, 123, 242, 0.15) 0%, transparent 60%);
+            filter: blur(40px);
+            z-index: 0;
+        }
+
+        .photo-meal-content h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75em;
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 16px;
+        }
+
+        .photo-meal-content h2 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2.2em;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--gray-900);
+            margin-bottom: 20px;
+        }
+
+        .photo-meal-content > p {
+            font-size: 1.05em;
+            color: var(--gray-500);
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+
+        .photo-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .photo-step {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 20px;
+            background: var(--bg-page);
+            border-radius: 16px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .photo-step:hover {
+            transform: translateX(8px);
+            box-shadow: 0 4px 20px rgba(115, 123, 242, 0.1);
+        }
+
+        .photo-step-num {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85em;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .photo-step span:last-child {
+            font-size: 0.95em;
+            color: var(--gray-700);
+            font-weight: 500;
+        }
+
+        @media (max-width: 900px) {
+            .photo-meal-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .photo-meal-visual {
+                order: -1;
+            }
         }
 
         /* ========== COMPARISON SECTION ========== */
@@ -800,6 +887,146 @@
         .step-content p {
             font-size: 0.9em;
             color: var(--text-medium);
+        }
+
+        /* ========== BASAL RATE INTELLIGENCE ========== */
+        .basal {
+            padding: 100px 40px;
+            background: white;
+        }
+
+        .basal-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .basal-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .basal-header h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75em;
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 16px;
+        }
+
+        .basal-header h2 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2.4em;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--gray-900);
+            margin-bottom: 16px;
+        }
+
+        .basal-header p {
+            font-size: 1.1em;
+            color: var(--gray-500);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .basal-timeline {
+            display: flex;
+            gap: 16px;
+            align-items: flex-end;
+            padding: 40px 0 20px;
+        }
+
+        .basal-period {
+            flex: 1;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+        }
+
+        .basal-period.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .period-time {
+            font-size: 0.75em;
+            color: var(--gray-400);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .period-bar {
+            width: 100%;
+            border-radius: 12px 12px 0 0;
+            margin-bottom: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .period-bar:hover {
+            transform: scaleY(1.05);
+            transform-origin: bottom;
+        }
+
+        .period-bar.low {
+            height: 70px;
+            background: linear-gradient(180deg, #C7CAFC, #A5ABFA);
+        }
+
+        .period-bar.medium {
+            height: 100px;
+            background: linear-gradient(180deg, #8B92F7, #737BF2);
+        }
+
+        .period-bar.high {
+            height: 140px;
+            background: linear-gradient(180deg, #5B63E0, #4338CA);
+        }
+
+        .period-label {
+            font-size: 0.85em;
+            font-weight: 600;
+            color: var(--gray-800);
+            line-height: 1.4;
+        }
+
+        .period-label span {
+            display: block;
+            font-weight: 400;
+            color: var(--gray-400);
+            font-size: 0.85em;
+            margin-top: 4px;
+        }
+
+        .basal-footer {
+            text-align: center;
+            margin-top: 32px;
+            font-size: 1em;
+            color: var(--gray-500);
+            font-style: italic;
+        }
+
+        .basal-footer strong {
+            color: var(--accent);
+            font-style: normal;
+        }
+
+        @media (max-width: 768px) {
+            .basal-timeline {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .basal-period {
+                flex: 1 1 45%;
+                min-width: 140px;
+            }
+
+            .period-bar.low { height: 50px; }
+            .period-bar.medium { height: 70px; }
+            .period-bar.high { height: 100px; }
         }
 
         /* ========== FEATURES - WITH COLOR DEPTH ========== */
@@ -1163,13 +1390,13 @@
         }
 
         /* Staggered animations for grids */
-        .problem-card, .feature-card, .step-card, .market-stat, .factor-card {
+        .problem-card, .feature-card, .step-card, .market-stat, .factor-card, .photo-step {
             opacity: 0;
             transform: translateY(15px);
             transition: opacity 0.3s ease-out, transform 0.3s ease-out;
         }
 
-        .problem-card.visible, .feature-card.visible, .step-card.visible, .market-stat.visible, .factor-card.visible {
+        .problem-card.visible, .feature-card.visible, .step-card.visible, .market-stat.visible, .factor-card.visible, .photo-step.visible {
             opacity: 1;
             transform: translateY(0);
         }
@@ -1398,6 +1625,42 @@
         </div>
     </section>
 
+    <!-- Photo Meal Recognition -->
+    <section class="photo-meal">
+        <div class="photo-meal-container">
+            <div class="photo-meal-visual animate-on-scroll">
+                <img src="pitchdeck/nutrition-tracker.png" alt="Photo Meal Recognition">
+            </div>
+            <div class="photo-meal-content">
+                <h3 class="animate-on-scroll">AI-Powered</h3>
+                <h2 class="animate-on-scroll">Photo Meal Recognition</h2>
+                <p class="animate-on-scroll">No more guessing carbs. Just snap a photo and let AI do the work.</p>
+                <div class="photo-steps">
+                    <div class="photo-step">
+                        <span class="photo-step-num">1</span>
+                        <span>Snap a photo of any meal</span>
+                    </div>
+                    <div class="photo-step">
+                        <span class="photo-step-num">2</span>
+                        <span>AI identifies individual foods</span>
+                    </div>
+                    <div class="photo-step">
+                        <span class="photo-step-num">3</span>
+                        <span>Estimates carbs, protein, fat, fiber</span>
+                    </div>
+                    <div class="photo-step">
+                        <span class="photo-step-num">4</span>
+                        <span>Models interaction of macros</span>
+                    </div>
+                    <div class="photo-step">
+                        <span class="photo-step-num">5</span>
+                        <span>Suggests personalized dosage</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Comparison -->
     <section class="comparison animate-on-scroll">
         <div class="comparison-container">
@@ -1487,6 +1750,45 @@
                     <p>After every meal, Dossi refines its model based on what actually happened.</p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Basal Rate Intelligence -->
+    <section class="basal">
+        <div class="basal-container">
+            <div class="basal-header animate-on-scroll">
+                <h3>Beyond Meals</h3>
+                <h2>Basal Rate Intelligence</h2>
+                <p>Dossi learns your background insulin needs throughout the day and suggests optimal delivery rates.</p>
+            </div>
+            <div class="basal-timeline">
+                <div class="basal-period">
+                    <div class="period-time">12am – 4am</div>
+                    <div class="period-bar low"></div>
+                    <div class="period-label">Deep Sleep<span>Lower rates during rest</span></div>
+                </div>
+                <div class="basal-period">
+                    <div class="period-time">4am – 8am</div>
+                    <div class="period-bar high"></div>
+                    <div class="period-label">Dawn Phenomenon<span>Hormones spike glucose</span></div>
+                </div>
+                <div class="basal-period">
+                    <div class="period-time">8am – 12pm</div>
+                    <div class="period-bar medium"></div>
+                    <div class="period-label">Morning Active<span>Moderate baseline</span></div>
+                </div>
+                <div class="basal-period">
+                    <div class="period-time">12pm – 6pm</div>
+                    <div class="period-bar medium"></div>
+                    <div class="period-label">Afternoon<span>Activity-adjusted</span></div>
+                </div>
+                <div class="basal-period">
+                    <div class="period-time">6pm – 12am</div>
+                    <div class="period-bar low"></div>
+                    <div class="period-label">Evening<span>Gradual reduction</span></div>
+                </div>
+            </div>
+            <p class="basal-footer animate-on-scroll">Dossi learns <strong>YOUR</strong> unique patterns and suggests basal adjustments automatically.</p>
         </div>
     </section>
 
@@ -1639,16 +1941,19 @@
                     entry.target.classList.add('visible');
                 }
             });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.02, rootMargin: '0px 0px -50px 0px' });
 
         // Observe all animated elements
-        document.querySelectorAll('.animate-on-scroll, .problem-card, .feature-card, .step-card, .market-stat').forEach((el, index) => {
+        document.querySelectorAll('.animate-on-scroll, .problem-card, .feature-card, .step-card, .market-stat, .factor-card, .basal-period, .photo-step').forEach((el, index) => {
             // Add staggered delay for grid items
-            if (el.classList.contains('problem-card') || el.classList.contains('feature-card') || el.classList.contains('market-stat')) {
-                el.style.transitionDelay = `${index * 0.1}s`;
+            if (el.classList.contains('problem-card') || el.classList.contains('feature-card') || el.classList.contains('market-stat') || el.classList.contains('factor-card')) {
+                el.style.transitionDelay = `${index * 0.05}s`;
             }
-            if (el.classList.contains('step-card')) {
-                el.style.transitionDelay = `${index * 0.15}s`;
+            if (el.classList.contains('step-card') || el.classList.contains('photo-step')) {
+                el.style.transitionDelay = `${index * 0.08}s`;
+            }
+            if (el.classList.contains('basal-period')) {
+                el.style.transitionDelay = `${index * 0.1}s`;
             }
             animateObserver.observe(el);
         });
