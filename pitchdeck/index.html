@@ -1093,83 +1093,15 @@
 
         /* ========== ANIMATIONS ========== */
 
-        /* Ensure ALL content is visible by default */
-        .reveal section * {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .reveal section .slide-content,
-        .reveal section .about-stack,
-        .reveal section .stat-row,
-        .reveal section .gap-list {
-            opacity: 1 !important;
-            visibility: visible !important;
-        }
-
-        /* Fade in up animation */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
+        /* Simple fade animation for slide content */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
 
-        @keyframes scaleIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes pulseGlow {
-            0%, 100% {
-                box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4);
-            }
-            50% {
-                box-shadow: 0 0 20px 5px rgba(99, 102, 241, 0.2);
-            }
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* Smooth entrance for current slide */
+        .reveal section.present .slide-content {
+            animation: fadeIn 0.4s ease-out;
         }
 
         /* Animated number counter */
@@ -1190,155 +1122,6 @@
             font-weight: 400;
             color: var(--text-dark);
         }
-
-        /* Slide animations - elements animate when slide becomes active */
-        .reveal section.present h2 {
-            animation: fadeInUp 0.6s ease-out forwards;
-        }
-
-        .reveal section.present h3 {
-            animation: fadeIn 0.4s ease-out forwards;
-        }
-
-        .reveal section.present p {
-            animation: fadeInUp 0.6s ease-out 0.1s forwards;
-        }
-
-        .reveal section.present .stat-box {
-            animation: scaleIn 0.5s ease-out forwards;
-        }
-
-        .reveal section.present .stat-row .stat-box:nth-child(1) {
-            animation-delay: 0.2s;
-        }
-
-        .reveal section.present .stat-row .stat-box:nth-child(2) {
-            animation-delay: 0.35s;
-        }
-
-        .reveal section.present .stat-row .stat-box:nth-child(3) {
-            animation-delay: 0.5s;
-        }
-
-        .reveal section.present .icon-list li {
-            animation: slideInLeft 0.5s ease-out forwards;
-        }
-
-        .reveal section.present .icon-list li:nth-child(1) { animation-delay: 0.15s; }
-        .reveal section.present .icon-list li:nth-child(2) { animation-delay: 0.25s; }
-        .reveal section.present .icon-list li:nth-child(3) { animation-delay: 0.35s; }
-        .reveal section.present .icon-list li:nth-child(4) { animation-delay: 0.45s; }
-        .reveal section.present .icon-list li:nth-child(5) { animation-delay: 0.55s; }
-
-        .reveal section.present .problem-list li {
-            animation: fadeInUp 0.5s ease-out forwards;
-        }
-
-        .reveal section.present .problem-list li:nth-child(1) { animation-delay: 0.1s; }
-        .reveal section.present .problem-list li:nth-child(2) { animation-delay: 0.2s; }
-        .reveal section.present .problem-list li:nth-child(3) { animation-delay: 0.3s; }
-        .reveal section.present .problem-list li:nth-child(4) { animation-delay: 0.4s; }
-
-        .reveal section.present .step-item {
-            animation: slideInLeft 0.5s ease-out forwards;
-        }
-
-        .reveal section.present .step-item:nth-child(1) { animation-delay: 0.15s; }
-        .reveal section.present .step-item:nth-child(2) { animation-delay: 0.25s; }
-        .reveal section.present .step-item:nth-child(3) { animation-delay: 0.35s; }
-        .reveal section.present .step-item:nth-child(4) { animation-delay: 0.45s; }
-        .reveal section.present .step-item:nth-child(5) { animation-delay: 0.55s; }
-
-        .reveal section.present .factor-item {
-            animation: scaleIn 0.4s ease-out forwards;
-        }
-
-        .reveal section.present .factor-grid .factor-item:nth-child(1) { animation-delay: 0.1s; }
-        .reveal section.present .factor-grid .factor-item:nth-child(2) { animation-delay: 0.15s; }
-        .reveal section.present .factor-grid .factor-item:nth-child(3) { animation-delay: 0.2s; }
-        .reveal section.present .factor-grid .factor-item:nth-child(4) { animation-delay: 0.25s; }
-        .reveal section.present .factor-grid .factor-item:nth-child(5) { animation-delay: 0.3s; }
-        .reveal section.present .factor-grid .factor-item:nth-child(6) { animation-delay: 0.35s; }
-
-        .reveal section.present .about-card {
-            animation: scaleIn 0.4s ease-out forwards;
-        }
-
-        .reveal section.present .about-stack .about-card:nth-child(1) { animation-delay: 0.1s; }
-        .reveal section.present .about-stack .about-card:nth-child(2) { animation-delay: 0.14s; }
-        .reveal section.present .about-stack .about-card:nth-child(3) { animation-delay: 0.18s; }
-        .reveal section.present .about-stack .about-card:nth-child(4) { animation-delay: 0.22s; }
-        .reveal section.present .about-stack .about-card:nth-child(5) { animation-delay: 0.26s; }
-
-        .reveal section.present .gap-list li {
-            animation: fadeInUp 0.4s ease-out forwards;
-        }
-
-        .reveal section.present .gap-list li:nth-child(1) { animation-delay: 0.1s; }
-        .reveal section.present .gap-list li:nth-child(2) { animation-delay: 0.15s; }
-        .reveal section.present .gap-list li:nth-child(3) { animation-delay: 0.2s; }
-        .reveal section.present .gap-list li:nth-child(4) { animation-delay: 0.25s; }
-
-        .reveal section.present .factor-item-full {
-            animation: scaleIn 0.4s ease-out forwards;
-        }
-
-        .reveal section.present .factor-grid-full .factor-item-full:nth-child(1) { animation-delay: 0.1s; }
-        .reveal section.present .factor-grid-full .factor-item-full:nth-child(2) { animation-delay: 0.15s; }
-        .reveal section.present .factor-grid-full .factor-item-full:nth-child(3) { animation-delay: 0.2s; }
-        .reveal section.present .factor-grid-full .factor-item-full:nth-child(4) { animation-delay: 0.25s; }
-        .reveal section.present .factor-grid-full .factor-item-full:nth-child(5) { animation-delay: 0.3s; }
-        .reveal section.present .factor-grid-full .factor-item-full:nth-child(6) { animation-delay: 0.35s; }
-
-        .reveal section.present .context-source {
-            animation: scaleIn 0.4s ease-out forwards;
-        }
-
-        .reveal section.present .context-sources .context-source:nth-child(1) { animation-delay: 0.1s; }
-        .reveal section.present .context-sources .context-source:nth-child(2) { animation-delay: 0.15s; }
-        .reveal section.present .context-sources .context-source:nth-child(3) { animation-delay: 0.2s; }
-        .reveal section.present .context-sources .context-source:nth-child(4) { animation-delay: 0.25s; }
-        .reveal section.present .context-sources .context-source:nth-child(5) { animation-delay: 0.3s; }
-        .reveal section.present .context-sources .context-source:nth-child(6) { animation-delay: 0.35s; }
-
-        .reveal section.present .feature-item {
-            animation: scaleIn 0.4s ease-out forwards;
-        }
-
-        .reveal section.present .feature-highlights .feature-item:nth-child(1) { animation-delay: 0.1s; }
-        .reveal section.present .feature-highlights .feature-item:nth-child(2) { animation-delay: 0.15s; }
-        .reveal section.present .feature-highlights .feature-item:nth-child(3) { animation-delay: 0.2s; }
-        .reveal section.present .feature-highlights .feature-item:nth-child(4) { animation-delay: 0.25s; }
-
-        .reveal section.present .two-col > div {
-            animation: fadeInUp 0.5s ease-out forwards;
-        }
-
-        .reveal section.present .two-col > div:nth-child(1) {
-            animation: slideInLeft 0.5s ease-out 0.2s forwards;
-        }
-
-        .reveal section.present .two-col > div:nth-child(2) {
-            animation: slideInRight 0.5s ease-out 0.3s forwards;
-        }
-
-        .reveal section.present table {
-            animation: fadeInUp 0.6s ease-out 0.2s forwards;
-        }
-
-        .reveal section.present .card {
-            animation: scaleIn 0.5s ease-out 0.2s forwards;
-        }
-
-        .reveal section.present .logo-large,
-        .reveal section.present .logo-small {
-            animation: scaleIn 0.6s ease-out forwards;
-        }
-
-        .reveal section.present .big-statement {
-            animation: fadeInUp 0.7s ease-out 0.2s forwards;
-        }
-
         /* Hover effects */
         .stat-box {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -1368,11 +1151,6 @@
         }
 
 
-        /* Pulse effect on numbers */
-        .stat-box .number.counting {
-            animation: pulseGlow 0.8s ease-in-out;
-        }
-
         /* Big percentage numbers */
         .big-percent {
             font-size: 4em;
@@ -1381,18 +1159,6 @@
             line-height: 1;
             display: inline-block;
         }
-
-        /* Table row animations */
-        .reveal section.present table tbody tr {
-            animation: fadeInUp 0.4s ease-out forwards;
-        }
-
-        .reveal section.present table tbody tr:nth-child(1) { animation-delay: 0.15s; }
-        .reveal section.present table tbody tr:nth-child(2) { animation-delay: 0.2s; }
-        .reveal section.present table tbody tr:nth-child(3) { animation-delay: 0.25s; }
-        .reveal section.present table tbody tr:nth-child(4) { animation-delay: 0.3s; }
-        .reveal section.present table tbody tr:nth-child(5) { animation-delay: 0.35s; }
-        .reveal section.present table tbody tr:nth-child(6) { animation-delay: 0.4s; }
     </style>
 </head>
 <body>
