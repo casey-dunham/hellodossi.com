@@ -907,6 +907,66 @@
             100% { transform: rotate(360deg); }
         }
 
+        /* Solution slide - logo zoom animation */
+        .solution-logo {
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        .reveal section.solution-slide.present .solution-logo {
+            animation: logoZoomIn 1.1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.35s forwards;
+        }
+
+        .reveal section.solution-slide.present .logo-glow {
+            animation: glowFadeIn 0.5s ease-out 1.2s forwards;
+        }
+
+        @keyframes logoZoomIn {
+            0% { opacity: 0; transform: scale(0); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes glowFadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Sparks */
+        .sparks-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .spark {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            opacity: 0;
+            top: 50%;
+            left: 50%;
+        }
+
+        .spark.circle { border-radius: 50%; }
+        .spark.square { border-radius: 2px; }
+
+        @keyframes sparkBurst {
+            0% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty)) scale(0.5) rotate(360deg);
+            }
+        }
+
         .reveal section.present .timeline-phase { animation: scaleIn 0.5s ease-out both; }
         .reveal section.present .timeline .timeline-phase:nth-child(1) { animation-delay: 0.1s; }
         .reveal section.present .timeline .timeline-phase:nth-child(3) { animation-delay: 0.3s; }
@@ -1073,12 +1133,13 @@
             </section>
 
             <!-- The Solution -->
-            <section class="true-center">
+            <section class="true-center solution-slide">
                 <div class="slide-content centered">
                     <h3>The Solution</h3>
-                    <div style="position: relative; margin: 1.2em 0;">
-                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px; height: 180px; background: radial-gradient(ellipse, rgba(255, 240, 120, 0.45) 0%, transparent 70%); z-index: 0;"></div>
-                        <img src="dossi-wordmark.png" alt="Dossi" class="logo-hero" style="position: relative; z-index: 1;">
+                    <div class="logo-container" style="position: relative; margin: 1.2em 0;">
+                        <div class="logo-glow" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px; height: 180px; background: radial-gradient(ellipse, rgba(255, 240, 120, 0.45) 0%, transparent 70%); z-index: 0; opacity: 0;"></div>
+                        <img src="dossi-wordmark.png" alt="Dossi" class="logo-hero solution-logo" style="position: relative; z-index: 1;">
+                        <div class="sparks-container"></div>
                     </div>
                     <p class="big-statement">An insulin advisor that sees the <span class="gradient-text">full picture</span></p>
                     <p style="margin-top: 1em;">Dossi considers <strong><span class="number" data-animate-number="40" data-suffix="+">40+</span> factors</strong> and <strong>learns your patterns</strong> over time.</p>
@@ -1088,7 +1149,7 @@
             <!-- How It Works Transition -->
             <section class="true-center">
                 <div class="slide-content centered">
-                    <h2 style="font-size: 3.5em;">How it works</h2>
+                    <h2 class="thank-you-text" style="font-size: 5em !important;">How It Works</h2>
                 </div>
             </section>
 
@@ -1283,6 +1344,55 @@
 
         // Initial trigger for first slide
         setTimeout(triggerNumberAnimations, 500);
+
+        // Sparks animation for solution slide
+        function createSparks() {
+            const container = document.querySelector('.solution-slide.present .sparks-container');
+            if (!container) return;
+
+            // Clear existing sparks
+            container.innerHTML = '';
+
+            // Colorful confetti like thank you page
+            const colors = ['#737BF2', '#A78BFA', '#34D399', '#FBBF24', '#F472B6', '#60A5FA'];
+            const shapes = ['circle', 'square'];
+            const numSparks = 40;
+
+            for (let i = 0; i < numSparks; i++) {
+                const spark = document.createElement('div');
+                spark.className = 'spark ' + shapes[Math.floor(Math.random() * shapes.length)];
+                spark.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+                // Burst effect - radiate outward in all directions
+                const angle = (Math.PI * 2 * i) / numSparks + (Math.random() - 0.5) * 0.5;
+                const distance = 100 + Math.random() * 150;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+
+                spark.style.setProperty('--tx', tx + 'px');
+                spark.style.setProperty('--ty', ty + 'px');
+
+                const size = 4 + Math.random() * 6;
+                spark.style.width = size + 'px';
+                spark.style.height = size + 'px';
+                spark.style.animation = `sparkBurst ${1 + Math.random() * 0.8}s ease-out forwards`;
+                spark.style.animationDelay = (Math.random() * 0.1) + 's';
+
+                container.appendChild(spark);
+            }
+        }
+
+        // Trigger sparks when solution slide animation completes
+        let sparksFired = false;
+        Reveal.on('slidechanged', (event) => {
+            if (event.currentSlide.classList.contains('solution-slide') && !sparksFired) {
+                sparksFired = true;
+                // Trigger sparks after logo animation completes (0.35s delay + 1.1s animation)
+                setTimeout(createSparks, 1450);
+            } else if (!event.currentSlide.classList.contains('solution-slide')) {
+                sparksFired = false;
+            }
+        });
 
         // Confetti animation
         function createConfetti() {
