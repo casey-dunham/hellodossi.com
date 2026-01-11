@@ -3,114 +3,900 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dossi — Intelligent Insulin Dosing</title>
+    <title>Dossi - Intelligent Insulin Dosing</title>
+    <meta name="description" content="Dossi is an AI-powered insulin advisor that considers 40+ contextual factors and learns your unique physiology. Smarter dosing for Type 1 Diabetes.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
         :root {
-            --accent: #737BF2;
-            --accent-light: rgba(115, 123, 242, 0.1);
-            --text-dark: #1a1a1a;
-            --text-medium: #636366;
-            --text-light: #8E8E93;
-            --bg-white: #ffffff;
-            --bg-gray: #F2F2F7;
-            --gradient: linear-gradient(135deg, #5B5FD4 0%, #A99FFF 100%);
+            --accent: #6366F1;
+            --accent-light: rgba(99, 102, 241, 0.1);
+            --text: #0f172a;
+            --text-secondary: #64748b;
+            --text-tertiary: #94a3b8;
+            --bg: #ffffff;
+            --bg-alt: #f8fafc;
+            --border: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
             font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-white);
-            color: var(--text-dark);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 20px 40px;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            justify-self: start;
+        }
+
+        .nav-wordmark {
+            height: 24px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+            justify-self: center;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav-cta {
+            justify-self: end;
+        }
+
+        .nav-cta a {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        /* Hero Section */
+        .hero {
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 3rem 2rem;
+            padding: 100px 24px 80px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .container {
-            text-align: center;
-            max-width: 680px;
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(ellipse 50% 50% at 75% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 60%),
+                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.06) 0%, transparent 60%);
+            pointer-events: none;
         }
 
-        .logo {
-            height: 56px;
-            margin-bottom: 2rem;
+        .hero-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            width: 100%;
+            gap: 60px;
+            z-index: 1;
+            padding-left: 40px;
         }
 
-        .tagline {
-            font-size: clamp(1.5rem, 4vw, 2rem);
+        .hero-content {
+            flex: 1;
+            max-width: 560px;
+        }
+
+        .hero-phone {
+            flex-shrink: 0;
+        }
+
+        .phone-image {
+            width: 320px;
+            height: auto;
+            filter: drop-shadow(0 30px 60px rgba(99, 102, 241, 0.25)) drop-shadow(0 15px 30px rgba(0, 0, 0, 0.15));
+            transition: transform 0.5s cubic-bezier(0.03, 0.98, 0.52, 0.99);
+            transform-style: preserve-3d;
+        }
+
+        .hero-tagline {
+            font-size: 13px;
             font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 1.5rem;
-            line-height: 1.3;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            margin-bottom: 20px;
         }
 
-        .description {
-            font-size: 1.125rem;
-            color: var(--text-medium);
+        .hero-title {
+            font-size: clamp(32px, 5.5vw, 52px);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero-title .highlight {
+            background: linear-gradient(135deg, #6366F1 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 17px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
             line-height: 1.8;
-            margin-bottom: 3rem;
-            font-weight: 400;
+            max-width: 480px;
         }
 
-        .highlight {
-            color: var(--accent);
-            font-weight: 600;
-        }
-
-        .cta {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background: var(--text-dark);
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--text);
             color: white;
+            padding: 16px 32px;
+            border-radius: 14px;
             text-decoration: none;
-            border-radius: 12px;
             font-weight: 600;
-            font-size: 1rem;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            font-size: 15px;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .cta:hover {
+        .hero-cta:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
         }
 
-        .footer {
-            margin-top: 5rem;
-            color: var(--text-light);
-            font-size: 0.875rem;
+        .hero-note {
+            margin-top: 16px;
+            font-size: 13px;
+            color: var(--text-tertiary);
         }
 
-        .footer a {
+        /* Problem Section */
+        .problem {
+            padding: 120px 24px;
+            background: var(--bg-alt);
+        }
+
+        .problem-inner {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .problem-stat {
+            font-size: clamp(56px, 12vw, 100px);
+            font-weight: 800;
             color: var(--accent);
-            text-decoration: none;
-            font-weight: 500;
+            line-height: 1;
+            margin-bottom: 24px;
+            letter-spacing: -0.03em;
         }
 
-        .footer a:hover {
-            text-decoration: underline;
+        .problem-title {
+            font-size: clamp(22px, 3.5vw, 30px);
+            font-weight: 600;
+            margin-bottom: 24px;
+            line-height: 1.4;
+        }
+
+        .problem-text {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            max-width: 600px;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 120px 24px;
+            background: var(--bg);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 72px;
+        }
+
+        .section-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(26px, 4.5vw, 38px);
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .section-subtitle {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .steps {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            gap: 20px;
+        }
+
+        .step {
+            display: grid;
+            grid-template-columns: 72px 1fr;
+            gap: 28px;
+            align-items: start;
+            padding: 36px;
+            background: var(--bg-alt);
+            border-radius: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .step:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .step-number {
+            width: 52px;
+            height: 52px;
+            background: var(--accent);
+            color: white;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .step-content h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .step-content p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Features */
+        .features {
+            padding: 120px 24px;
+            background: var(--bg-alt);
+        }
+
+        .features-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 36px 28px;
+            border-radius: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--accent-light);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .feature-icon svg {
+            width: 24px;
+            height: 24px;
+            color: var(--accent);
+        }
+
+        .feature-card h3 {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Science Section */
+        .science {
+            padding: 120px 24px;
+        }
+
+        .science-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 72px;
+            align-items: center;
+        }
+
+        .science-content h2 {
+            font-size: clamp(26px, 4vw, 34px);
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .science-content p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .science-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .science-pill {
+            background: var(--bg-alt);
+            padding: 18px 22px;
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .science-pill-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--accent-light);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .science-pill-icon svg {
+            width: 18px;
+            height: 18px;
+            color: var(--accent);
+        }
+
+        /* Final CTA */
+        .final-cta {
+            padding: 120px 24px;
+            text-align: center;
+            background: linear-gradient(180deg, var(--bg-alt) 0%, var(--bg) 100%);
+        }
+
+        .final-cta-inner {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .final-cta h2 {
+            font-size: clamp(26px, 4.5vw, 38px);
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .final-cta p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 36px;
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 48px 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .footer-logo img {
+            height: 20px;
+            width: auto;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 28px;
+        }
+
+        .footer-links a {
+            font-size: 13px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--text);
+        }
+
+        .footer-copy {
+            font-size: 13px;
+            color: var(--text-tertiary);
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-inner {
+                flex-direction: column;
+                text-align: center;
+                padding-left: 0;
+            }
+
+            .hero-content {
+                max-width: 640px;
+            }
+
+            .hero-subtitle {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-phone {
+                margin-top: 40px;
+            }
+
+            .phone-image {
+                width: 280px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                padding: 16px 24px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-phone {
+                display: none;
+            }
+
+            .step {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                padding: 28px 24px;
+            }
+
+            .science-inner {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <img src="pitchdeck/dossi-wordmark.png" alt="Dossi" class="logo">
-        <h1 class="tagline">Insulin dosing that actually knows you</h1>
-        <p class="description">
-            An AI-powered insulin advisor that considers <span class="highlight">40+ contextual factors</span> —
-            exercise, sleep, hormones, meal composition, and more —
-            then learns your unique patterns over time.
-        </p>
-        <a href="/pitchdeck" class="cta">View Presentation</a>
-        <div class="footer">
-            <p>Questions? <a href="mailto:casey@hellodossi.com">casey@hellodossi.com</a></p>
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="/" class="nav-logo">
+            <img src="pitchdeck/dossi-wordmark.png" alt="Dossi" class="nav-wordmark">
+        </a>
+        <div class="nav-links">
+            <a href="#how-it-works">How It Works</a>
+            <a href="#features">Features</a>
+            <a href="/overview">Overview</a>
         </div>
-    </div>
+        <div class="nav-cta">
+            <a href="mailto:casey@hellodossi.com">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-background"></div>
+        <div class="hero-inner">
+            <div class="hero-content">
+                <p class="hero-tagline">AI-powered insulin advisor</p>
+                <h1 class="hero-title">
+                    Your pump ignores 40 factors.<br>
+                    <span class="highlight">Dossi doesn't.</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Exercise, sleep, stress, hormones, meal composition—current pumps ignore all of it. Dossi is decision support that learns your unique physiology and adapts in real-time.
+                </p>
+                <a href="/overview" class="hero-cta">
+                    View Project Overview
+                </a>
+                <p class="hero-note">Decision support for Type 1 Diabetes</p>
+            </div>
+
+            <div class="hero-phone">
+                <img src="images/dossi-dashboard.png" alt="Dossi app" class="phone-image" id="phone">
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem -->
+    <section class="problem fade-in">
+        <div class="problem-inner">
+            <p class="problem-stat">40%</p>
+            <h2 class="problem-title">
+                The average person with Type 1 Diabetes spends 40% of their day with glucose levels outside the healthy range. Static pump formulas aren't enough.
+            </h2>
+            <p class="problem-text">
+                Current insulin delivery systems use rigid math that ignores the dozens of factors that actually affect insulin sensitivity. Dossi fills the gap—providing intelligent recommendations that adapt to your life.
+            </p>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works fade-in" id="how-it-works">
+        <div class="section-header">
+            <p class="section-label">How It Works</p>
+            <h2 class="section-title">Dosing that adapts to you</h2>
+            <p class="section-subtitle">Not generic rules. Personalized recommendations based on your data, your patterns, your physiology.</p>
+        </div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Connect your data</h3>
+                    <p>Dossi pulls from Apple Health—CGM readings, exercise, sleep, heart rate variability, and more. Your data stays on your device.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Get context-aware recommendations</h3>
+                    <p>When you're about to eat, Dossi considers everything: your current glucose, recent exercise, time of day, meal macros, and 35+ other factors.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Learn over time</h3>
+                    <p>Bayesian algorithms learn your unique patterns. The more you use Dossi, the better it understands how your body responds.</p>
+                </div>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>Stay safe with 5-layer validation</h3>
+                    <p>Every recommendation passes through five safety layers before you see it. Medical-grade guardrails, always active.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features fade-in" id="features">
+        <div class="section-header">
+            <p class="section-label">Features</p>
+            <h2 class="section-title">Built for real life with T1D</h2>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <h3>40+ Contextual Factors</h3>
+                <p>Exercise, sleep, stress, hormones, meal type, site age, and more—all considered in every recommendation.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 6v6l4 2"/>
+                    </svg>
+                </div>
+                <h3>Real-time Adaptation</h3>
+                <p>Your sensitivity changes throughout the day. Dossi adjusts its recommendations accordingly—no manual tweaking needed.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                        <polyline points="22,4 12,14.01 9,11.01"/>
+                    </svg>
+                </div>
+                <h3>5-Layer Safety</h3>
+                <p>Hard limits, physiological bounds, hypo prediction, anomaly detection, and learning validation—all before any recommendation.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                </div>
+                <h3>Explains Its Reasoning</h3>
+                <p>Dossi tells you why it's recommending what it's recommending. Full transparency, always.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                    </svg>
+                </div>
+                <h3>Caregiver App</h3>
+                <p>Dossi Follow lets parents and caregivers monitor glucose remotely with live activities and smart alerts.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                </div>
+                <h3>Privacy First</h3>
+                <p>Your health data stays on your device. No selling to advertisers. Period.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Science -->
+    <section class="science fade-in">
+        <div class="science-inner">
+            <div class="science-content">
+                <h2>Built on proven diabetes technology</h2>
+                <p>
+                    Dossi's approach is informed by Loop, OpenAPS, and Tidepool—the open-source systems trusted by thousands. We've taken what works and made it accessible.
+                </p>
+                <p>
+                    Our goal: FDA-cleared automated insulin delivery. But that requires years and millions of dollars. Today, Dossi delivers intelligent decision support—no clearance required.
+                </p>
+            </div>
+            <div class="science-visual">
+                <div class="science-pill">
+                    <div class="science-pill-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                        </svg>
+                    </div>
+                    Bayesian Learning Engine
+                </div>
+                <div class="science-pill">
+                    <div class="science-pill-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <circle cx="12" cy="12" r="4"/>
+                            <line x1="4.93" y1="4.93" x2="9.17" y2="9.17"/>
+                            <line x1="14.83" y1="14.83" x2="19.07" y2="19.07"/>
+                        </svg>
+                    </div>
+                    Loop/OpenAPS Informed
+                </div>
+                <div class="science-pill">
+                    <div class="science-pill-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    Multi-layer Safety Validation
+                </div>
+                <div class="science-pill">
+                    <div class="science-pill-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                            <line x1="8" y1="21" x2="16" y2="21"/>
+                            <line x1="12" y1="17" x2="12" y2="21"/>
+                        </svg>
+                    </div>
+                    HealthKit Integration
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta fade-in">
+        <div class="final-cta-inner">
+            <h2>See the full vision</h2>
+            <p>Dossi is being built for the InVenture Prize at Georgia Tech. Check out the project overview to learn more about where we're headed.</p>
+            <a href="/overview" class="hero-cta">
+                View Project Overview
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-logo">
+                <img src="pitchdeck/dossi-wordmark.png" alt="Dossi">
+            </div>
+            <div class="footer-links">
+                <a href="/overview">Overview</a>
+                <a href="/pitchdeck">Pitch Deck</a>
+                <a href="mailto:casey@hellodossi.com">Contact</a>
+            </div>
+            <p class="footer-copy">&copy; 2026 Dossi. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Fade-in on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // 40% Counter animation
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = 40;
+                    let current = 0;
+                    const increment = target / 50;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            counter.textContent = target + '%';
+                            clearInterval(timer);
+                        } else {
+                            counter.textContent = Math.floor(current) + '%';
+                        }
+                    }, 25);
+                    counterObserver.unobserve(counter);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statElement = document.querySelector('.problem-stat');
+        if (statElement) {
+            statElement.textContent = '0%';
+            counterObserver.observe(statElement);
+        }
+
+        // Phone tilt effect
+        const phone = document.getElementById('phone');
+        const heroPhone = document.querySelector('.hero-phone');
+        if (phone && heroPhone) {
+            let targetX = 0, targetY = 0;
+            let currentX = 0, currentY = 0;
+
+            heroPhone.addEventListener('mousemove', (e) => {
+                const rect = heroPhone.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                targetX = (y - centerY) / 25;
+                targetY = (centerX - x) / 25;
+            });
+
+            heroPhone.addEventListener('mouseleave', () => {
+                targetX = 0;
+                targetY = 0;
+            });
+
+            function animateTilt() {
+                currentX += (targetX - currentX) * 0.08;
+                currentY += (targetY - currentY) * 0.08;
+                phone.style.transform = `perspective(1000px) rotateX(${currentX}deg) rotateY(${currentY}deg)`;
+                requestAnimationFrame(animateTilt);
+            }
+            animateTilt();
+        }
+
+        // Parallax on scroll
+        const heroPhoneEl = document.querySelector('.hero-phone');
+        if (heroPhoneEl) {
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const rate = scrolled * 0.3;
+                heroPhoneEl.style.transform = `translateY(${rate}px)`;
+            });
+        }
+    </script>
 </body>
 </html>
