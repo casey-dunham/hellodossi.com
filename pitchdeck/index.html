@@ -745,6 +745,24 @@
             z-index: 1;
         }
 
+        /* Problem slide with pump */
+        .problem-slide {
+            position: relative;
+            overflow: visible !important;
+        }
+
+        .omnipod-img {
+            position: absolute;
+            top: 130px;
+            right: 100px;
+            width: 180px;
+            border-radius: 12px;
+        }
+
+        .reveal section.present .omnipod-img {
+            animation: scaleIn 0.5s ease-out 0.3s both;
+        }
+
         /* Photo Meal slide with phone */
         .photo-meal-slide {
             position: relative;
@@ -1443,8 +1461,8 @@
 
 
             <!-- 3. The Problem -->
-            <section style="position: relative;">
-                <img src="omnipod-photo.png" alt="Omnipod insulin pump" style="position: absolute; top: 100px; right: 100px; width: 180px; border-radius: 12px;">
+            <section class="problem-slide">
+                <img src="omnipod-photo.png" alt="Omnipod insulin pump" class="omnipod-img">
                 <div class="slide-content">
                     <h3>The Problem</h3>
                     <h2>My "Smart" Pump Isn't Very Smart</h2>
