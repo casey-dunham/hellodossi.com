@@ -11,7 +11,7 @@
         :root {
             --accent: #6366F1;
             --accent-light: rgba(99, 102, 241, 0.1);
-            --accent-glow: rgba(99, 102, 241, 0.15);
+            --accent-glow: rgba(99, 102, 241, 0.12);
             --text: #0f172a;
             --text-secondary: #64748b;
             --bg: #ffffff;
@@ -22,42 +22,45 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        html {
-            scroll-behavior: smooth;
-            scroll-snap-type: y mandatory;
-            overflow-y: scroll;
-        }
-
-        body {
+        html, body {
+            height: 100%;
+            overflow: hidden;
             font-family: 'Montserrat', -apple-system, sans-serif;
             color: var(--text);
             background: var(--bg);
-            line-height: 1.6;
         }
 
-        /* Sections */
-        section {
-            min-height: 100vh;
-            scroll-snap-align: start;
+        /* Slideshow Container */
+        .slideshow {
+            display: flex;
+            width: 300vw;
+            height: 100vh;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 80px 60px;
+            padding: 60px 80px;
             position: relative;
         }
 
         .slide-inner {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 100px;
-            max-width: 1200px;
+            justify-content: center;
+            gap: 60px;
+            max-width: 1100px;
             width: 100%;
         }
 
         .content {
             flex: 1;
-            max-width: 540px;
+            max-width: 520px;
         }
 
         .visual {
@@ -66,27 +69,27 @@
 
         /* Typography */
         .eyebrow {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 700;
             color: var(--accent);
             text-transform: uppercase;
             letter-spacing: 3px;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         h1 {
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-size: clamp(2.2rem, 4.5vw, 3.2rem);
             font-weight: 800;
             line-height: 1.1;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
             letter-spacing: -0.03em;
         }
 
         h2 {
-            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-size: clamp(1.8rem, 3.5vw, 2.6rem);
             font-weight: 800;
             line-height: 1.15;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             letter-spacing: -0.02em;
         }
 
@@ -98,28 +101,34 @@
         }
 
         p {
-            font-size: 1.125rem;
+            font-size: 1.05rem;
             color: var(--text-secondary);
-            line-height: 1.8;
-            margin-bottom: 1rem;
+            line-height: 1.75;
+            margin-bottom: 0.9rem;
         }
 
         p:last-of-type { margin-bottom: 0; }
 
-        /* Section 1 - Hero */
-        .section-hero {
+        /* Slide Backgrounds */
+        .slide-1 {
             background:
-                radial-gradient(ellipse 80% 50% at 80% 50%, var(--accent-glow) 0%, transparent 50%),
-                linear-gradient(to bottom, var(--bg) 0%, var(--bg-alt) 100%);
+                radial-gradient(ellipse 70% 60% at 75% 50%, var(--accent-glow) 0%, transparent 50%),
+                var(--bg);
         }
 
+        .slide-2 {
+            background: var(--bg);
+        }
+
+        .slide-3 {
+            background:
+                radial-gradient(ellipse 60% 50% at 25% 50%, var(--accent-glow) 0%, transparent 50%),
+                var(--bg);
+        }
+
+        /* Phone - just the image, no frame */
         .phone {
-            width: 320px;
-            border-radius: 40px;
-            overflow: hidden;
-            box-shadow:
-                0 50px 100px -20px rgba(99, 102, 241, 0.25),
-                0 30px 60px -30px rgba(0, 0, 0, 0.15);
+            width: 280px;
             transform-style: preserve-3d;
             transition: transform 0.5s cubic-bezier(0.03, 0.98, 0.52, 0.99);
         }
@@ -127,41 +136,38 @@
         .phone img {
             width: 100%;
             display: block;
+            border-radius: 36px;
+            box-shadow:
+                0 40px 80px -20px rgba(99, 102, 241, 0.3),
+                0 20px 40px -20px rgba(0, 0, 0, 0.15);
         }
 
+        /* Pills */
         .pills {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-            margin-top: 28px;
+            margin-top: 24px;
         }
 
         .pill {
             background: var(--accent-light);
             color: var(--accent);
-            padding: 10px 18px;
+            padding: 9px 16px;
             border-radius: 100px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
         }
 
-        /* Section 2 - Differentiation */
-        .section-diff {
-            background: var(--bg);
-        }
-
+        /* Stats */
         .stats-row {
             display: flex;
-            gap: 32px;
-            margin-top: 36px;
-        }
-
-        .stat {
-            text-align: left;
+            gap: 28px;
+            margin-top: 32px;
         }
 
         .stat-value {
-            font-size: 3rem;
+            font-size: 2.8rem;
             font-weight: 900;
             color: var(--accent);
             line-height: 1;
@@ -169,70 +175,40 @@
         }
 
         .stat-label {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text-secondary);
             margin-top: 6px;
             font-weight: 500;
         }
 
+        /* Comparison */
         .comparison {
             background: var(--bg-alt);
-            border-radius: 24px;
-            padding: 32px;
-            width: 420px;
+            border-radius: 20px;
+            padding: 28px;
+            width: 380px;
         }
 
         .comparison-title {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 2px;
             color: var(--text-secondary);
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             text-align: center;
         }
-
-        .comparison-row {
-            display: flex;
-            align-items: center;
-            padding: 14px 0;
-            border-bottom: 1px solid rgba(0,0,0,0.06);
-        }
-
-        .comparison-row:last-child {
-            border-bottom: none;
-        }
-
-        .comparison-feature {
-            flex: 1;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .comparison-icons {
-            display: flex;
-            gap: 48px;
-        }
-
-        .comparison-icon {
-            width: 60px;
-            text-align: center;
-            font-size: 18px;
-        }
-
-        .comparison-icon.check { color: var(--success); }
-        .comparison-icon.cross { color: var(--danger); opacity: 0.6; }
 
         .comparison-header {
             display: flex;
             align-items: center;
-            padding-bottom: 12px;
-            margin-bottom: 8px;
-            border-bottom: 2px solid rgba(0,0,0,0.08);
+            padding-bottom: 10px;
+            margin-bottom: 6px;
+            border-bottom: 2px solid rgba(0,0,0,0.06);
         }
 
         .comparison-header span {
-            font-size: 10px;
+            font-size: 9px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -240,66 +216,88 @@
         }
 
         .comparison-header span:first-child { flex: 1; }
-        .comparison-header .comparison-icons span { width: 60px; text-align: center; }
+        .comparison-header .col-icons { display: flex; gap: 36px; }
+        .comparison-header .col-icons span { width: 50px; text-align: center; }
 
-        /* Section 3 - Vision */
-        .section-vision {
-            background:
-                radial-gradient(ellipse 60% 50% at 20% 50%, var(--accent-glow) 0%, transparent 50%),
-                linear-gradient(to top, var(--bg) 0%, var(--bg-alt) 100%);
+        .comparison-row {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.04);
         }
 
+        .comparison-row:last-child { border-bottom: none; }
+
+        .comparison-feature {
+            flex: 1;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .comparison-row .col-icons {
+            display: flex;
+            gap: 36px;
+        }
+
+        .col-icon {
+            width: 50px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .col-icon.check { color: var(--success); }
+        .col-icon.cross { color: var(--danger); opacity: 0.5; }
+
+        /* Timeline */
         .timeline-horizontal {
             display: flex;
-            gap: 24px;
+            gap: 20px;
         }
 
         .timeline-step {
             flex: 1;
             background: white;
-            border-radius: 20px;
-            padding: 28px 24px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            border-radius: 16px;
+            padding: 24px 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
             position: relative;
         }
 
-        .timeline-step::before {
+        .timeline-step::after {
             content: '';
             position: absolute;
             top: 50%;
-            right: -24px;
-            width: 24px;
+            right: -20px;
+            width: 20px;
             height: 2px;
             background: var(--accent);
-            opacity: 0.3;
+            opacity: 0.25;
         }
 
-        .timeline-step:last-child::before {
-            display: none;
-        }
+        .timeline-step:last-child::after { display: none; }
 
         .step-number {
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             background: var(--accent);
-            border-radius: 10px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: 700;
-            font-size: 14px;
-            margin-bottom: 16px;
+            font-size: 13px;
+            margin-bottom: 14px;
         }
 
         .step-title {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
         }
 
         .step-desc {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--text-secondary);
             line-height: 1.5;
             margin: 0;
@@ -308,12 +306,11 @@
         /* Navigation */
         .nav-dots {
             position: fixed;
-            right: 40px;
-            top: 50%;
-            transform: translateY(-50%);
+            bottom: 36px;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
-            flex-direction: column;
-            gap: 14px;
+            gap: 12px;
             z-index: 100;
         }
 
@@ -331,74 +328,90 @@
             transform: scale(1.3);
         }
 
-        .nav-dot:hover {
-            background: var(--accent);
-        }
+        .nav-dot:hover { background: var(--accent); }
 
         .logo {
             position: fixed;
-            top: 32px;
-            left: 40px;
+            top: 28px;
+            left: 36px;
             z-index: 100;
         }
 
-        .logo img {
-            height: 28px;
+        .logo img { height: 26px; }
+
+        /* Fullscreen button */
+        .fullscreen-btn {
+            position: fixed;
+            top: 28px;
+            right: 36px;
+            z-index: 100;
+            background: var(--bg-alt);
+            border: none;
+            padding: 10px 12px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+        }
+
+        .fullscreen-btn:hover {
+            background: var(--accent-light);
+            color: var(--accent);
+        }
+
+        .fullscreen-btn svg {
+            width: 16px;
+            height: 16px;
         }
 
         /* Animations */
+        .slide.active .content > * {
+            animation: fadeUp 0.5s ease-out backwards;
+        }
+
+        .slide.active .content > *:nth-child(1) { animation-delay: 0.1s; }
+        .slide.active .content > *:nth-child(2) { animation-delay: 0.15s; }
+        .slide.active .content > *:nth-child(3) { animation-delay: 0.2s; }
+        .slide.active .content > *:nth-child(4) { animation-delay: 0.25s; }
+        .slide.active .content > *:nth-child(5) { animation-delay: 0.3s; }
+
+        .slide.active .visual {
+            animation: fadeUp 0.6s ease-out 0.2s backwards;
+        }
+
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(40px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        section .content > * {
-            animation: fadeUp 0.6s ease-out backwards;
-        }
-
-        section .content > *:nth-child(1) { animation-delay: 0.1s; }
-        section .content > *:nth-child(2) { animation-delay: 0.2s; }
-        section .content > *:nth-child(3) { animation-delay: 0.3s; }
-        section .content > *:nth-child(4) { animation-delay: 0.4s; }
-        section .content > *:nth-child(5) { animation-delay: 0.5s; }
-
-        section .visual {
-            animation: fadeUp 0.8s ease-out 0.3s backwards;
-        }
-
         /* Responsive */
-        @media (max-width: 1100px) {
+        @media (max-width: 1000px) {
+            .slide { padding: 50px 40px; }
+
             .slide-inner {
                 flex-direction: column;
-                gap: 50px;
+                gap: 40px;
                 text-align: center;
             }
 
-            .content { max-width: 600px; }
-
-            .phone { width: 260px; }
-
+            .content { max-width: 560px; }
+            .phone { width: 220px; }
             .pills { justify-content: center; }
-
             .stats-row { justify-content: center; }
-
-            .comparison { width: 100%; max-width: 400px; }
+            .comparison { width: 100%; max-width: 360px; }
 
             .timeline-horizontal {
                 flex-direction: column;
-                gap: 16px;
+                gap: 12px;
             }
 
-            .timeline-step::before { display: none; }
-
-            .nav-dots {
-                right: auto;
-                left: 50%;
-                top: auto;
-                bottom: 24px;
-                transform: translateX(-50%);
-                flex-direction: row;
-            }
+            .timeline-step::after { display: none; }
         }
     </style>
 </head>
@@ -407,190 +420,211 @@
         <img src="images/dossi-wordmark.png" alt="Dossi">
     </a>
 
+    <button class="fullscreen-btn" onclick="toggleFullscreen()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+        </svg>
+        Fullscreen
+    </button>
+
     <nav class="nav-dots">
-        <div class="nav-dot active" data-section="0"></div>
-        <div class="nav-dot" data-section="1"></div>
-        <div class="nav-dot" data-section="2"></div>
+        <div class="nav-dot active" data-slide="0"></div>
+        <div class="nav-dot" data-slide="1"></div>
+        <div class="nav-dot" data-slide="2"></div>
     </nav>
 
-    <!-- Slide 1: The Problem -->
-    <section class="section-hero" id="section-0">
-        <div class="slide-inner">
-            <div class="content">
-                <p class="eyebrow">The Problem</p>
-                <h1>Insulin dosing is <span class="highlight">broken</span></h1>
-                <p>
-                    Current pumps use static formulas that ignore the 40+ factors that actually affect your insulin sensitivity—exercise, sleep, stress, hormones, meal composition, and more.
-                </p>
-                <p>
-                    <strong>Dossi</strong> is AI-powered decision support that learns your unique physiology and adapts in real-time.
-                </p>
-                <div class="pills">
-                    <span class="pill">Exercise</span>
-                    <span class="pill">Sleep</span>
-                    <span class="pill">Hormones</span>
-                    <span class="pill">Stress</span>
-                    <span class="pill">Macros</span>
-                    <span class="pill">+35 more</span>
+    <div class="slideshow" id="slideshow">
+        <!-- Slide 1 -->
+        <div class="slide slide-1 active" data-index="0">
+            <div class="slide-inner">
+                <div class="content">
+                    <p class="eyebrow">The Problem</p>
+                    <h1>Insulin dosing is <span class="highlight">broken</span></h1>
+                    <p>
+                        Current pumps use static formulas that ignore the 40+ factors that affect insulin sensitivity—exercise, sleep, stress, hormones, meal composition, and more.
+                    </p>
+                    <p>
+                        <strong>Dossi</strong> is AI-powered decision support that learns your unique physiology and adapts in real-time.
+                    </p>
+                    <div class="pills">
+                        <span class="pill">Exercise</span>
+                        <span class="pill">Sleep</span>
+                        <span class="pill">Hormones</span>
+                        <span class="pill">Stress</span>
+                        <span class="pill">Macros</span>
+                        <span class="pill">+35 more</span>
+                    </div>
                 </div>
-            </div>
-            <div class="visual">
-                <div class="phone" id="phone">
-                    <img src="images/dossi-dashboard.png" alt="Dossi App">
+                <div class="visual">
+                    <div class="phone" id="phone">
+                        <img src="images/dossi-dashboard.png" alt="Dossi App">
+                    </div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Slide 2: Differentiation -->
-    <section class="section-diff" id="section-1">
-        <div class="slide-inner">
-            <div class="content">
-                <p class="eyebrow">Why Dossi</p>
-                <h2>The intelligent <span class="highlight">middle ground</span></h2>
-                <p>
-                    Existing apps track glucose passively. Full automation requires FDA clearance and $100M+. Dossi delivers intelligent recommendations today.
-                </p>
-                <div class="stats-row">
-                    <div class="stat">
-                        <div class="stat-value">1.6M</div>
-                        <div class="stat-label">T1D patients in US</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">40%</div>
-                        <div class="stat-label">Time out of range</div>
+        <!-- Slide 2 -->
+        <div class="slide slide-2" data-index="1">
+            <div class="slide-inner">
+                <div class="content">
+                    <p class="eyebrow">Why Dossi</p>
+                    <h2>The intelligent <span class="highlight">middle ground</span></h2>
+                    <p>
+                        Existing apps track glucose passively. Full automation requires FDA + $100M. Dossi delivers intelligent recommendations today.
+                    </p>
+                    <div class="stats-row">
+                        <div class="stat">
+                            <div class="stat-value">1.6M</div>
+                            <div class="stat-label">T1D patients in US</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value">40%</div>
+                            <div class="stat-label">Time out of range</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="visual">
-                <div class="comparison">
-                    <div class="comparison-title">Feature Comparison</div>
-                    <div class="comparison-header">
-                        <span>Capability</span>
-                        <div class="comparison-icons">
-                            <span>Others</span>
-                            <span>Dossi</span>
+                <div class="visual">
+                    <div class="comparison">
+                        <div class="comparison-title">Feature Comparison</div>
+                        <div class="comparison-header">
+                            <span>Capability</span>
+                            <div class="col-icons">
+                                <span>Others</span>
+                                <span>Dossi</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="comparison-row">
-                        <span class="comparison-feature">Context-aware dosing</span>
-                        <div class="comparison-icons">
-                            <span class="comparison-icon cross">&#10005;</span>
-                            <span class="comparison-icon check">&#10003;</span>
+                        <div class="comparison-row">
+                            <span class="comparison-feature">Context-aware dosing</span>
+                            <div class="col-icons">
+                                <span class="col-icon cross">&#10005;</span>
+                                <span class="col-icon check">&#10003;</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="comparison-row">
-                        <span class="comparison-feature">Learns your patterns</span>
-                        <div class="comparison-icons">
-                            <span class="comparison-icon cross">&#10005;</span>
-                            <span class="comparison-icon check">&#10003;</span>
+                        <div class="comparison-row">
+                            <span class="comparison-feature">Learns your patterns</span>
+                            <div class="col-icons">
+                                <span class="col-icon cross">&#10005;</span>
+                                <span class="col-icon check">&#10003;</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="comparison-row">
-                        <span class="comparison-feature">Exercise adjustment</span>
-                        <div class="comparison-icons">
-                            <span class="comparison-icon cross">&#10005;</span>
-                            <span class="comparison-icon check">&#10003;</span>
+                        <div class="comparison-row">
+                            <span class="comparison-feature">Exercise adjustment</span>
+                            <div class="col-icons">
+                                <span class="col-icon cross">&#10005;</span>
+                                <span class="col-icon check">&#10003;</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="comparison-row">
-                        <span class="comparison-feature">Macro-aware bolus</span>
-                        <div class="comparison-icons">
-                            <span class="comparison-icon cross">&#10005;</span>
-                            <span class="comparison-icon check">&#10003;</span>
+                        <div class="comparison-row">
+                            <span class="comparison-feature">Macro-aware bolus</span>
+                            <div class="col-icons">
+                                <span class="col-icon cross">&#10005;</span>
+                                <span class="col-icon check">&#10003;</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="comparison-row">
-                        <span class="comparison-feature">Explains reasoning</span>
-                        <div class="comparison-icons">
-                            <span class="comparison-icon cross">&#10005;</span>
-                            <span class="comparison-icon check">&#10003;</span>
+                        <div class="comparison-row">
+                            <span class="comparison-feature">Explains reasoning</span>
+                            <div class="col-icons">
+                                <span class="col-icon cross">&#10005;</span>
+                                <span class="col-icon check">&#10003;</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Slide 3: Vision -->
-    <section class="section-vision" id="section-2">
-        <div class="slide-inner" style="flex-direction: column; gap: 60px;">
-            <div class="content" style="max-width: 700px; text-align: center;">
-                <p class="eyebrow">The Roadmap</p>
-                <h2>From decision support to <span class="highlight">full automation</span></h2>
-                <p>
-                    Today: AI advisor. Tomorrow: FDA-cleared automated insulin delivery.
-                </p>
-            </div>
-            <div class="visual">
-                <div class="timeline-horizontal">
-                    <div class="timeline-step">
-                        <div class="step-number">1</div>
-                        <div class="step-title">Now: Decision Support</div>
-                        <p class="step-desc">AI recommendations. User controls pump. No FDA required.</p>
-                    </div>
-                    <div class="timeline-step">
-                        <div class="step-number">2</div>
-                        <div class="step-title">2026: Validation</div>
-                        <p class="step-desc">Clinical partnerships. Observational studies. Evidence building.</p>
-                    </div>
-                    <div class="timeline-step">
-                        <div class="step-number">3</div>
-                        <div class="step-title">2027: FDA</div>
-                        <p class="step-desc">De Novo 510(k) for SaMD. Follow Tidepool Loop path.</p>
-                    </div>
-                    <div class="timeline-step">
-                        <div class="step-number">4</div>
-                        <div class="step-title">2028+: Automation</div>
-                        <p class="step-desc">Full closed-loop. Diabetes on autopilot.</p>
+        <!-- Slide 3 -->
+        <div class="slide slide-3" data-index="2">
+            <div class="slide-inner" style="flex-direction: column; gap: 50px;">
+                <div class="content" style="max-width: 650px; text-align: center;">
+                    <p class="eyebrow">The Roadmap</p>
+                    <h2>From decision support to <span class="highlight">full automation</span></h2>
+                    <p>Today: AI advisor. Tomorrow: FDA-cleared automated insulin delivery.</p>
+                </div>
+                <div class="visual">
+                    <div class="timeline-horizontal">
+                        <div class="timeline-step">
+                            <div class="step-number">1</div>
+                            <div class="step-title">Now: Decision Support</div>
+                            <p class="step-desc">AI recommendations. User controls pump. No FDA required.</p>
+                        </div>
+                        <div class="timeline-step">
+                            <div class="step-number">2</div>
+                            <div class="step-title">2026: Validation</div>
+                            <p class="step-desc">Clinical partnerships. Observational studies.</p>
+                        </div>
+                        <div class="timeline-step">
+                            <div class="step-number">3</div>
+                            <div class="step-title">2027: FDA</div>
+                            <p class="step-desc">De Novo 510(k) for SaMD. Tidepool Loop path.</p>
+                        </div>
+                        <div class="timeline-step">
+                            <div class="step-number">4</div>
+                            <div class="step-title">2028+: Automation</div>
+                            <p class="step-desc">Full closed-loop. Diabetes on autopilot.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
     <script>
-        // Nav dots
-        const sections = document.querySelectorAll('section');
+        const slideshow = document.getElementById('slideshow');
+        const slides = document.querySelectorAll('.slide');
         const dots = document.querySelectorAll('.nav-dot');
+        let currentSlide = 0;
 
-        // Update active dot on scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const idx = Array.from(sections).indexOf(entry.target);
-                    dots.forEach((dot, i) => {
-                        dot.classList.toggle('active', i === idx);
-                    });
-                }
-            });
-        }, { threshold: 0.5 });
+        function goToSlide(index) {
+            if (index < 0 || index >= slides.length) return;
+            currentSlide = index;
+            slideshow.style.transform = `translateX(-${index * 100}vw)`;
 
-        sections.forEach(section => observer.observe(section));
+            slides.forEach((s, i) => s.classList.toggle('active', i === index));
+            dots.forEach((d, i) => d.classList.toggle('active', i === index));
+        }
 
-        // Click to navigate
+        // Dot navigation
         dots.forEach(dot => {
             dot.addEventListener('click', () => {
-                const idx = dot.dataset.section;
-                sections[idx].scrollIntoView({ behavior: 'smooth' });
+                goToSlide(parseInt(dot.dataset.slide));
             });
         });
 
-        // Phone tilt effect
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                goToSlide(currentSlide + 1);
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                goToSlide(currentSlide - 1);
+            }
+        });
+
+        // Fullscreen
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        // Phone tilt
         const phone = document.getElementById('phone');
-        let targetX = 0, targetY = 0;
-        let currentX = 0, currentY = 0;
+        let targetX = 0, targetY = 0, currentX = 0, currentY = 0;
 
         document.addEventListener('mousemove', (e) => {
+            if (currentSlide !== 0) return;
             const rect = phone.getBoundingClientRect();
             const centerX = rect.left + rect.width / 2;
             const centerY = rect.top + rect.height / 2;
-
-            // Only apply effect when mouse is reasonably close
             const dist = Math.sqrt(Math.pow(e.clientX - centerX, 2) + Math.pow(e.clientY - centerY, 2));
-            if (dist < 500) {
-                targetX = (e.clientY - centerY) / 25;
-                targetY = (centerX - e.clientX) / 25;
+
+            if (dist < 400) {
+                targetX = (e.clientY - centerY) / 30;
+                targetY = (centerX - e.clientX) / 30;
             } else {
                 targetX = 0;
                 targetY = 0;
