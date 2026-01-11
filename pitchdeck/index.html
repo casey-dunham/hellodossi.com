@@ -670,15 +670,15 @@
         /* Title slide */
         .title-slide {
             background: var(--bg-paper) !important;
-            position: relative;
-            overflow: hidden;
+            position: relative !important;
+            overflow: hidden !important;
         }
 
         .title-slide .slide-content {
             flex-direction: row;
             align-items: center;
-            justify-content: space-between;
-            max-width: none;
+            justify-content: flex-start;
+            max-width: 600px;
         }
 
         .title-left {
@@ -691,23 +691,20 @@
         }
 
         .title-right {
-            position: relative;
-            flex-shrink: 0;
-            width: 380px;
+            position: absolute;
+            right: 60px;
+            bottom: 0;
+            width: 320px;
             height: 100%;
             display: flex;
             align-items: flex-end;
             justify-content: center;
-            overflow: visible;
         }
 
         .title-right img {
-            position: absolute;
-            bottom: -50px;
-            width: 380px;
+            width: 320px;
             height: auto;
-            border-radius: 32px;
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+            margin-bottom: -200px;
         }
 
         .title-tagline {
