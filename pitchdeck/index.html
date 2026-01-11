@@ -697,23 +697,22 @@
             width: 340px;
         }
 
-        .title-right::before {
-            content: "";
+        .title-glow {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
-            width: 280px;
-            height: 400px;
-            background: radial-gradient(ellipse, rgba(115, 123, 242, 0.35) 0%, transparent 70%);
-            filter: blur(40px);
-            z-index: -1;
+            transform: translate(-50%, -40%);
+            width: 350px;
+            height: 500px;
+            background: radial-gradient(ellipse, rgba(115, 123, 242, 0.4) 0%, rgba(115, 123, 242, 0.1) 40%, transparent 70%);
+            filter: blur(50px);
+            pointer-events: none;
         }
 
         .title-right img {
             width: 340px;
             height: auto;
-            background: transparent;
+            position: relative;
         }
 
         .title-tagline {
@@ -1202,11 +1201,11 @@
         }
 
         .reveal section.present p {
-            animation: fadeInUp 0.6s ease-out 0.1s both;
+            animation: fadeInUp 0.6s ease-out 0.1s forwards;
         }
 
         .reveal section.present .stat-box {
-            animation: scaleIn 0.5s ease-out both;
+            animation: scaleIn 0.5s ease-out forwards;
         }
 
         .reveal section.present .stat-row .stat-box:nth-child(1) {
@@ -1222,7 +1221,7 @@
         }
 
         .reveal section.present .icon-list li {
-            animation: slideInLeft 0.5s ease-out both;
+            animation: slideInLeft 0.5s ease-out forwards;
         }
 
         .reveal section.present .icon-list li:nth-child(1) { animation-delay: 0.15s; }
@@ -1232,7 +1231,7 @@
         .reveal section.present .icon-list li:nth-child(5) { animation-delay: 0.55s; }
 
         .reveal section.present .problem-list li {
-            animation: fadeInUp 0.5s ease-out both;
+            animation: fadeInUp 0.5s ease-out forwards;
         }
 
         .reveal section.present .problem-list li:nth-child(1) { animation-delay: 0.1s; }
@@ -1241,7 +1240,7 @@
         .reveal section.present .problem-list li:nth-child(4) { animation-delay: 0.4s; }
 
         .reveal section.present .step-item {
-            animation: slideInLeft 0.5s ease-out both;
+            animation: slideInLeft 0.5s ease-out forwards;
         }
 
         .reveal section.present .step-item:nth-child(1) { animation-delay: 0.15s; }
@@ -1251,7 +1250,7 @@
         .reveal section.present .step-item:nth-child(5) { animation-delay: 0.55s; }
 
         .reveal section.present .factor-item {
-            animation: scaleIn 0.4s ease-out both;
+            animation: scaleIn 0.4s ease-out forwards;
         }
 
         .reveal section.present .factor-grid .factor-item:nth-child(1) { animation-delay: 0.1s; }
@@ -1262,7 +1261,7 @@
         .reveal section.present .factor-grid .factor-item:nth-child(6) { animation-delay: 0.35s; }
 
         .reveal section.present .about-card {
-            animation: scaleIn 0.4s ease-out both;
+            animation: scaleIn 0.4s ease-out forwards;
         }
 
         .reveal section.present .about-stack .about-card:nth-child(1) { animation-delay: 0.1s; }
@@ -1272,7 +1271,7 @@
         .reveal section.present .about-stack .about-card:nth-child(5) { animation-delay: 0.26s; }
 
         .reveal section.present .gap-list li {
-            animation: fadeInUp 0.4s ease-out both;
+            animation: fadeInUp 0.4s ease-out forwards;
         }
 
         .reveal section.present .gap-list li:nth-child(1) { animation-delay: 0.1s; }
@@ -1281,7 +1280,7 @@
         .reveal section.present .gap-list li:nth-child(4) { animation-delay: 0.25s; }
 
         .reveal section.present .factor-item-full {
-            animation: scaleIn 0.4s ease-out both;
+            animation: scaleIn 0.4s ease-out forwards;
         }
 
         .reveal section.present .factor-grid-full .factor-item-full:nth-child(1) { animation-delay: 0.1s; }
@@ -1292,7 +1291,7 @@
         .reveal section.present .factor-grid-full .factor-item-full:nth-child(6) { animation-delay: 0.35s; }
 
         .reveal section.present .context-source {
-            animation: scaleIn 0.4s ease-out both;
+            animation: scaleIn 0.4s ease-out forwards;
         }
 
         .reveal section.present .context-sources .context-source:nth-child(1) { animation-delay: 0.1s; }
@@ -1303,7 +1302,7 @@
         .reveal section.present .context-sources .context-source:nth-child(6) { animation-delay: 0.35s; }
 
         .reveal section.present .feature-item {
-            animation: scaleIn 0.4s ease-out both;
+            animation: scaleIn 0.4s ease-out forwards;
         }
 
         .reveal section.present .feature-highlights .feature-item:nth-child(1) { animation-delay: 0.1s; }
@@ -1312,23 +1311,23 @@
         .reveal section.present .feature-highlights .feature-item:nth-child(4) { animation-delay: 0.25s; }
 
         .reveal section.present .two-col > div {
-            animation: fadeInUp 0.5s ease-out both;
+            animation: fadeInUp 0.5s ease-out forwards;
         }
 
         .reveal section.present .two-col > div:nth-child(1) {
-            animation: slideInLeft 0.5s ease-out 0.2s both;
+            animation: slideInLeft 0.5s ease-out 0.2s forwards;
         }
 
         .reveal section.present .two-col > div:nth-child(2) {
-            animation: slideInRight 0.5s ease-out 0.3s both;
+            animation: slideInRight 0.5s ease-out 0.3s forwards;
         }
 
         .reveal section.present table {
-            animation: fadeInUp 0.6s ease-out 0.2s both;
+            animation: fadeInUp 0.6s ease-out 0.2s forwards;
         }
 
         .reveal section.present .card {
-            animation: scaleIn 0.5s ease-out 0.2s both;
+            animation: scaleIn 0.5s ease-out 0.2s forwards;
         }
 
         .reveal section.present .logo-large,
@@ -1337,7 +1336,7 @@
         }
 
         .reveal section.present .big-statement {
-            animation: fadeInUp 0.7s ease-out 0.2s both;
+            animation: fadeInUp 0.7s ease-out 0.2s forwards;
         }
 
         /* Hover effects */
@@ -1385,7 +1384,7 @@
 
         /* Table row animations */
         .reveal section.present table tbody tr {
-            animation: fadeInUp 0.4s ease-out both;
+            animation: fadeInUp 0.4s ease-out forwards;
         }
 
         .reveal section.present table tbody tr:nth-child(1) { animation-delay: 0.15s; }
@@ -1423,6 +1422,7 @@
                         <p class="title-subtitle">A look at smarter diabetes management.</p>
                     </div>
                     <div class="title-right">
+                        <div class="title-glow"></div>
                         <img src="dossi-dashboard.png" alt="Dossi Dashboard">
                     </div>
                 </div>
