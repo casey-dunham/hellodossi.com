@@ -1269,8 +1269,24 @@
         .reveal section.present .photo-steps .photo-step:nth-child(4) { animation-delay: 0.45s; }
 
         .reveal section.present .nutrition-phone { animation: slideUpFromBottom 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both; }
-        .reveal section.present .learning-loop-slide img { animation: scaleIn 0.5s ease-out 0.3s both; }
+        .reveal section.present .learning-loop-slide img[alt="Learning loop"] {
+            animation: scaleIn 0.5s ease-out 0.3s both, loopSpin 8s linear 1s infinite;
+        }
         .reveal section.present img[alt="FDA logo"] { animation: scaleIn 0.5s ease-out 0.3s both; }
+
+        @keyframes loopSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Timeline phase animations */
+        .reveal section.present .timeline-phase { animation: scaleIn 0.5s ease-out both; }
+        .reveal section.present .timeline .timeline-phase:nth-child(1) { animation-delay: 0.2s; }
+        .reveal section.present .timeline .timeline-phase:nth-child(3) { animation-delay: 0.4s; }
+        .reveal section.present .timeline .timeline-phase:nth-child(5) { animation-delay: 0.6s; }
+        .reveal section.present .timeline-arrow { animation: fadeIn 0.3s ease-out both; }
+        .reveal section.present .timeline .timeline-arrow:nth-child(2) { animation-delay: 0.35s; }
+        .reveal section.present .timeline .timeline-arrow:nth-child(4) { animation-delay: 0.55s; }
 
         /* Animated number counter */
         .animate-number {
