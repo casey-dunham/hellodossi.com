@@ -1016,32 +1016,6 @@
             width: 100%;
         }
 
-        .return-home-btn {
-            display: inline-block;
-            margin-top: 2em;
-            padding: 0.8em 2em;
-            background: var(--accent);
-            color: white;
-            text-decoration: none;
-            border-radius: 100px;
-            font-weight: 600;
-            font-size: 1.1em;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: background 0.2s ease, transform 0.2s ease;
-        }
-
-        .return-home-btn:hover {
-            background: var(--accent-dark);
-            transform: translateY(0) scale(1.05);
-        }
-
-        .return-home-btn.visible {
-            opacity: 1;
-            transform: translateY(0);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
         .thank-you-section {
             position: relative;
             overflow: hidden;
@@ -1931,7 +1905,6 @@
                 <div class="confetti-container"></div>
                 <div class="slide-content centered thank-you-slide">
                     <h2 class="thank-you-text">Thank you!</h2>
-                    <a href="https://hellodossi.com" class="return-home-btn">Return to Home</a>
                 </div>
             </section>
 
@@ -2131,19 +2104,9 @@
         }
 
         // Trigger confetti on thank you slide
-        let returnHomeBtnTimeout = null;
         Reveal.on('slidechanged', (event) => {
-            const returnBtn = document.querySelector('.return-home-btn');
             if (event.currentSlide.querySelector('.thank-you-slide')) {
                 setTimeout(createConfetti, 300);
-                // Show return home button after 10 seconds
-                returnHomeBtnTimeout = setTimeout(() => {
-                    if (returnBtn) returnBtn.classList.add('visible');
-                }, 10000);
-            } else {
-                // Hide button and clear timeout when leaving slide
-                if (returnHomeBtnTimeout) clearTimeout(returnHomeBtnTimeout);
-                if (returnBtn) returnBtn.classList.remove('visible');
             }
         });
 
