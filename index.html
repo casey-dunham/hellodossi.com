@@ -7,17 +7,22 @@
     <meta name="description" content="Dossi is an AI-powered insulin advisor that considers 60+ contextual factors and learns your unique physiology. Smarter dosing for Type 1 Diabetes.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <style>
         :root {
-            --accent: #767BDA;
-            --accent-light: rgba(118, 123, 218, 0.1);
-            --text: #0f172a;
-            --text-secondary: #64748b;
-            --text-tertiary: #94a3b8;
-            --bg: #ffffff;
-            --bg-alt: #f8fafc;
-            --border: #e2e8f0;
+            --accent: #737BF2;
+            --accent-light: rgba(115, 123, 242, 0.15);
+            --accent-glow: rgba(115, 123, 242, 0.4);
+            --text-dark: #1a1a1a;
+            --text-medium: #4a4a4a;
+            --text-light: #8E8E93;
+            --bg-page: #E8E8ED;
+            --bg-paper: #F5F5F8;
+            --bg-card: white;
+            --shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --shadow-accent: 0 4px 12px rgba(115, 123, 242, 0.4);
         }
 
         * {
@@ -31,9 +36,9 @@
         }
 
         body {
-            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg);
-            color: var(--text);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-page);
+            color: var(--text-dark);
             line-height: 1.6;
             overflow-x: hidden;
         }
@@ -44,12 +49,12 @@
             top: 0;
             left: 0;
             right: 0;
-            padding: 20px 40px;
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
             z-index: 100;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(245, 245, 248, 0.85);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
         }
@@ -58,42 +63,49 @@
             display: flex;
             align-items: center;
             text-decoration: none;
-            justify-self: start;
         }
 
         .nav-wordmark {
-            height: 24px;
+            height: 22px;
             width: auto;
         }
 
         .nav-links {
             display: flex;
-            gap: 32px;
+            gap: 8px;
             align-items: center;
-            justify-self: center;
         }
 
         .nav-links a {
             font-size: 14px;
             font-weight: 500;
-            color: var(--text-secondary);
+            color: var(--text-medium);
             text-decoration: none;
-            transition: color 0.2s;
+            padding: 10px 18px;
+            border-radius: 100px;
+            transition: all 0.2s;
         }
 
         .nav-links a:hover {
-            color: var(--text);
-        }
-
-        .nav-cta {
-            justify-self: end;
+            background: var(--bg-card);
+            color: var(--text-dark);
         }
 
         .nav-cta a {
             font-size: 14px;
             font-weight: 600;
-            color: var(--accent);
+            color: white;
+            background: var(--accent);
+            padding: 10px 20px;
+            border-radius: 100px;
             text-decoration: none;
+            box-shadow: var(--shadow-accent);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .nav-cta a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(115, 123, 242, 0.5);
         }
 
         /* Hero Section */
@@ -102,32 +114,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 100px 24px 80px;
+            padding: 120px 40px 80px;
             position: relative;
-            overflow: hidden;
         }
 
-        .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background:
-                radial-gradient(ellipse 50% 50% at 75% 50%, rgba(118, 123, 218, 0.1) 0%, transparent 60%),
-                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(118, 123, 218, 0.06) 0%, transparent 60%);
-            pointer-events: none;
-        }
-
-        .hero-inner {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+        .hero-container {
             max-width: 1200px;
             width: 100%;
-            gap: 60px;
-            z-index: 1;
-            padding-left: 40px;
+            display: flex;
+            align-items: center;
+            gap: 80px;
         }
 
         .hero-content {
@@ -135,339 +131,490 @@
             max-width: 560px;
         }
 
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75em;
+            font-weight: 600;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 24px;
+            background: var(--accent-light);
+            padding: 8px 16px;
+            border-radius: 100px;
+        }
+
+        .hero-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(40px, 5vw, 56px);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+            color: var(--text-dark);
+        }
+
+        .hero-title .highlight {
+            color: var(--accent);
+        }
+
+        .hero-subtitle {
+            font-size: 1.15em;
+            color: var(--text-medium);
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--accent);
+            color: white;
+            padding: 16px 28px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            box-shadow: var(--shadow-accent);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(115, 123, 242, 0.5);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--bg-card);
+            color: var(--text-dark);
+            padding: 16px 28px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
+        }
+
         .hero-phone {
             flex-shrink: 0;
-            margin-right: 10px;
+            position: relative;
+        }
+
+        .hero-phone-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 600px;
+            background: radial-gradient(ellipse, rgba(115, 123, 242, 0.35) 0%, rgba(115, 123, 242, 0.15) 40%, transparent 70%);
+            filter: blur(40px);
+            pointer-events: none;
+            z-index: 0;
         }
 
         .phone-image {
             width: 320px;
             height: auto;
-            filter: drop-shadow(0 30px 60px rgba(118, 123, 218, 0.25)) drop-shadow(0 15px 30px rgba(0, 0, 0, 0.15));
-            transition: transform 0.5s cubic-bezier(0.03, 0.98, 0.52, 0.99);
-            transform-style: preserve-3d;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
         }
 
-        .hero-tagline {
-            font-size: 13px;
+        /* Stats Section */
+        .stats {
+            padding: 40px;
+        }
+
+        .stats-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .stat-pill {
+            background: var(--bg-card);
+            padding: 20px 32px;
+            border-radius: 100px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            box-shadow: var(--shadow-soft);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .stat-pill:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .stat-number {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.8em;
             font-weight: 700;
             color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 2.5px;
-            margin-bottom: 20px;
-        }
-
-        .hero-title {
-            font-size: clamp(32px, 5.5vw, 52px);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 24px;
-            letter-spacing: -0.02em;
-        }
-
-        .hero-title .highlight {
-            background: linear-gradient(135deg, #767BDA 0%, #a78bfa 100%);
+            background: var(--accent);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
-        .hero-subtitle {
-            font-size: 17px;
-            color: var(--text-secondary);
-            margin-bottom: 40px;
-            line-height: 1.8;
-            max-width: 480px;
-        }
-
-        .hero-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: var(--text);
-            color: white;
-            padding: 16px 32px;
-            border-radius: 14px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 15px;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .hero-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
-        }
-
-        .hero-note {
-            margin-top: 16px;
-            font-size: 13px;
-            color: var(--text-tertiary);
+        .stat-label {
+            font-size: 0.95em;
+            color: var(--text-medium);
+            font-weight: 500;
         }
 
         /* Problem Section */
         .problem {
-            padding: 120px 24px;
-            background: var(--bg-alt);
+            padding: 100px 40px;
         }
 
-        .problem-inner {
-            max-width: 800px;
+        .problem-container {
+            max-width: 900px;
             margin: 0 auto;
+            background: var(--bg-card);
+            border-radius: 32px;
+            padding: 60px;
+            box-shadow: var(--shadow-medium);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
         }
 
-        .problem-stat {
-            font-size: clamp(56px, 12vw, 100px);
-            font-weight: 800;
+        .problem-content h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75em;
             color: var(--accent);
-            line-height: 1;
-            margin-bottom: 24px;
-            letter-spacing: -0.03em;
-        }
-
-        .problem-title {
-            font-size: clamp(22px, 3.5vw, 30px);
             font-weight: 600;
-            margin-bottom: 24px;
-            line-height: 1.4;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 16px;
         }
 
-        .problem-text {
-            font-size: 16px;
-            color: var(--text-secondary);
-            line-height: 1.8;
-            max-width: 600px;
+        .problem-content h2 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .problem-content p {
+            font-size: 1em;
+            color: var(--text-medium);
+            line-height: 1.7;
+        }
+
+        .problem-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .problem-item {
+            background: var(--bg-paper);
+            padding: 16px 20px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 0.95em;
+            color: var(--text-medium);
+        }
+
+        .problem-item i {
+            font-size: 1.2em;
+            color: var(--text-light);
+            width: 24px;
+        }
+
+        .problem-item strong {
+            color: var(--text-dark);
         }
 
         /* How It Works */
         .how-it-works {
-            padding: 120px 24px;
-            background: var(--bg);
+            padding: 100px 40px;
         }
 
         .section-header {
             text-align: center;
             max-width: 600px;
-            margin: 0 auto 72px;
+            margin: 0 auto 60px;
         }
 
-        .section-label {
-            font-size: 12px;
-            font-weight: 700;
+        .section-header h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75em;
             color: var(--accent);
+            font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 2.5px;
+            letter-spacing: 0.2em;
             margin-bottom: 16px;
         }
 
-        .section-title {
-            font-size: clamp(26px, 4.5vw, 38px);
+        .section-header h2 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2.4em;
             font-weight: 700;
             margin-bottom: 16px;
-            letter-spacing: -0.02em;
+            line-height: 1.2;
         }
 
-        .section-subtitle {
-            font-size: 16px;
-            color: var(--text-secondary);
+        .section-header p {
+            font-size: 1.1em;
+            color: var(--text-medium);
             line-height: 1.7;
         }
 
-        .steps {
-            max-width: 900px;
+        .steps-container {
+            max-width: 800px;
             margin: 0 auto;
-            display: grid;
-            gap: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
         }
 
-        .step {
-            display: grid;
-            grid-template-columns: 72px 1fr;
-            gap: 28px;
-            align-items: start;
-            padding: 36px;
-            background: var(--bg-alt);
-            border-radius: 20px;
+        .step-card {
+            background: var(--bg-card);
+            padding: 24px 28px;
+            border-radius: 100px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            box-shadow: var(--shadow-soft);
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .step:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        .step-card:hover {
+            transform: translateX(8px);
+            box-shadow: var(--shadow-medium);
         }
 
         .step-number {
-            width: 52px;
-            height: 52px;
+            width: 44px;
+            height: 44px;
             background: var(--accent);
             color: white;
-            border-radius: 14px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.2em;
             font-weight: 700;
+            flex-shrink: 0;
+            box-shadow: var(--shadow-accent);
         }
 
-        .step-content h3 {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 10px;
+        .step-content h4 {
+            font-size: 1em;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 2px;
         }
 
         .step-content p {
-            font-size: 15px;
-            color: var(--text-secondary);
-            line-height: 1.7;
+            font-size: 0.9em;
+            color: var(--text-medium);
         }
 
         /* Features */
         .features {
-            padding: 120px 24px;
-            background: var(--bg-alt);
+            padding: 100px 40px;
         }
 
         .features-grid {
             max-width: 1100px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
         }
 
         .feature-card {
-            background: white;
-            padding: 36px 28px;
-            border-radius: 20px;
+            background: var(--bg-card);
+            padding: 32px;
+            border-radius: 24px;
+            box-shadow: var(--shadow-soft);
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .feature-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-medium);
         }
 
         .feature-icon {
             width: 48px;
             height: 48px;
-            background: var(--accent-light);
-            border-radius: 14px;
+            background: var(--accent);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 20px;
+            box-shadow: var(--shadow-accent);
         }
 
-        .feature-icon svg {
-            width: 24px;
-            height: 24px;
-            color: var(--accent);
+        .feature-icon i {
+            font-size: 1.4em;
+            color: white;
         }
 
         .feature-card h3 {
-            font-size: 17px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.1em;
             font-weight: 700;
             margin-bottom: 10px;
+            color: var(--text-dark);
         }
 
         .feature-card p {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.7;
+            font-size: 0.9em;
+            color: var(--text-medium);
+            line-height: 1.6;
         }
 
-        /* Science Section */
-        .science {
-            padding: 120px 24px;
+        /* Learning Loop */
+        .learning {
+            padding: 100px 40px;
         }
 
-        .science-inner {
-            max-width: 900px;
+        .learning-container {
+            max-width: 1000px;
             margin: 0 auto;
+            background: var(--bg-card);
+            border-radius: 32px;
+            padding: 60px;
+            box-shadow: var(--shadow-medium);
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 72px;
+            gap: 60px;
             align-items: center;
         }
 
-        .science-content h2 {
-            font-size: clamp(26px, 4vw, 34px);
-            font-weight: 700;
-            margin-bottom: 24px;
-            letter-spacing: -0.02em;
-        }
-
-        .science-content p {
-            font-size: 15px;
-            color: var(--text-secondary);
-            line-height: 1.8;
+        .learning-content h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75em;
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
             margin-bottom: 16px;
         }
 
-        .science-visual {
+        .learning-content h2 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .learning-content p {
+            font-size: 1em;
+            color: var(--text-medium);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .learning-steps {
             display: flex;
             flex-direction: column;
-            gap: 14px;
+            gap: 12px;
         }
 
-        .science-pill {
-            background: var(--bg-alt);
-            padding: 18px 22px;
-            border-radius: 14px;
-            font-size: 14px;
-            font-weight: 600;
+        .learning-step {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
+            font-size: 0.95em;
         }
 
-        .science-pill-icon {
-            width: 36px;
-            height: 36px;
-            background: var(--accent-light);
-            border-radius: 10px;
+        .learning-step-num {
+            width: 28px;
+            height: 28px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 0.8em;
+            font-weight: 700;
             flex-shrink: 0;
         }
 
-        .science-pill-icon svg {
-            width: 18px;
-            height: 18px;
+        .learning-step strong {
             color: var(--accent);
         }
 
-        /* Final CTA */
-        .final-cta {
-            padding: 120px 24px;
-            text-align: center;
-            background: linear-gradient(180deg, var(--bg-alt) 0%, var(--bg) 100%);
+        .learning-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .final-cta-inner {
+        .learning-visual img {
+            width: 280px;
+            height: auto;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 100px 40px;
+            text-align: center;
+        }
+
+        .cta-container {
             max-width: 600px;
             margin: 0 auto;
+            background: var(--bg-card);
+            border-radius: 32px;
+            padding: 60px;
+            box-shadow: var(--shadow-medium);
         }
 
-        .final-cta h2 {
-            font-size: clamp(26px, 4.5vw, 38px);
+        .cta-container h2 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2em;
             font-weight: 700;
             margin-bottom: 16px;
-            letter-spacing: -0.02em;
         }
 
-        .final-cta p {
-            font-size: 16px;
-            color: var(--text-secondary);
-            margin-bottom: 36px;
+        .cta-container p {
+            font-size: 1.05em;
+            color: var(--text-medium);
+            margin-bottom: 32px;
             line-height: 1.7;
         }
 
         /* Footer */
         .footer {
-            padding: 48px 24px;
-            border-top: 1px solid var(--border);
+            padding: 40px;
+            text-align: center;
         }
 
         .footer-inner {
@@ -483,34 +630,40 @@
         .footer-logo img {
             height: 20px;
             width: auto;
+            opacity: 0.6;
         }
 
         .footer-links {
             display: flex;
-            gap: 28px;
+            gap: 24px;
         }
 
         .footer-links a {
-            font-size: 13px;
-            color: var(--text-secondary);
+            font-size: 14px;
+            color: var(--text-light);
             text-decoration: none;
             transition: color 0.2s;
         }
 
         .footer-links a:hover {
-            color: var(--text);
+            color: var(--text-dark);
         }
 
         .footer-copy {
             font-size: 13px;
-            color: var(--text-tertiary);
+            color: var(--text-light);
         }
 
-        /* Scroll Animations */
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .fade-in {
             opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
 
         .fade-in.visible {
@@ -520,27 +673,28 @@
 
         /* Responsive */
         @media (max-width: 1024px) {
-            .hero-inner {
+            .hero-container {
                 flex-direction: column;
                 text-align: center;
-                padding-left: 0;
+                gap: 60px;
             }
 
             .hero-content {
                 max-width: 640px;
             }
 
-            .hero-subtitle {
-                margin-left: auto;
-                margin-right: auto;
+            .hero-buttons {
+                justify-content: center;
             }
 
-            .hero-phone {
-                margin-top: 40px;
+            .problem-container,
+            .learning-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
             }
 
-            .phone-image {
-                width: 280px;
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -553,24 +707,43 @@
                 display: none;
             }
 
+            .hero {
+                padding: 100px 24px 60px;
+            }
+
             .hero-phone {
                 display: none;
             }
 
-            .step {
-                grid-template-columns: 1fr;
-                gap: 16px;
-                padding: 28px 24px;
+            .stats-container {
+                flex-direction: column;
+                align-items: center;
             }
 
-            .science-inner {
+            .stat-pill {
+                width: 100%;
+                max-width: 320px;
+                justify-content: center;
+            }
+
+            .problem-container,
+            .learning-container,
+            .cta-container {
+                padding: 40px 28px;
+                border-radius: 24px;
+            }
+
+            .features-grid {
                 grid-template-columns: 1fr;
-                gap: 48px;
+            }
+
+            .step-card {
+                border-radius: 20px;
+                padding: 20px;
             }
 
             .footer-inner {
                 flex-direction: column;
-                text-align: center;
             }
         }
     </style>
@@ -584,85 +757,128 @@
         <div class="nav-links">
             <a href="#how-it-works">How It Works</a>
             <a href="#features">Features</a>
-            <a href="/pitchdeck">Overview</a>
+            <a href="/pitchdeck">Pitch Deck</a>
         </div>
         <div class="nav-cta">
-            <a href="mailto:team@hellodossi.com">Contact</a>
+            <a href="mailto:team@hellodossi.com">Get In Touch</a>
         </div>
     </nav>
 
     <!-- Hero -->
     <section class="hero">
-        <div class="hero-background"></div>
-        <div class="hero-inner">
+        <div class="hero-container">
             <div class="hero-content">
-                <p class="hero-tagline">AI-powered insulin advisor</p>
+                <p class="hero-eyebrow">
+                    <i class="ph-fill ph-sparkle"></i>
+                    AI-Powered Insulin Advisor
+                </p>
                 <h1 class="hero-title">
-                    Your pump ignores 40 factors.<br>
-                    <span class="highlight">Dossi doesn't.</span>
+                    Where insulin dosing meets <span class="highlight">predictive intelligence</span>
                 </h1>
                 <p class="hero-subtitle">
-                    Exercise, sleep, stress, hormones, meal composition—current pumps ignore all of it. Dossi is intelligent insulin dosing that learns your unique physiology and adapts in real-time.
+                    Current pumps only know your glucose and carbs. Dossi considers 60+ factors—exercise, sleep, stress, meal composition—and learns your unique patterns over time.
                 </p>
-                <a href="/pitchdeck" class="hero-cta">
-                    View Project Overview
-                </a>
-                <p class="hero-note">Intelligent insulin dosing for Type 1 Diabetes</p>
+                <div class="hero-buttons">
+                    <a href="/pitchdeck" class="btn-primary">
+                        <i class="ph-bold ph-play"></i>
+                        View Pitch Deck
+                    </a>
+                    <a href="#how-it-works" class="btn-secondary">
+                        <i class="ph-bold ph-arrow-down"></i>
+                        Learn More
+                    </a>
+                </div>
             </div>
-
             <div class="hero-phone">
-                <img src="images/dossi-dashboard.png" alt="Dossi app" class="phone-image" id="phone">
+                <div class="hero-phone-glow"></div>
+                <img src="images/dossi-dashboard.png" alt="Dossi Dashboard" class="phone-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats fade-in">
+        <div class="stats-container">
+            <div class="stat-pill">
+                <span class="stat-number">60+</span>
+                <span class="stat-label">Contextual Factors</span>
+            </div>
+            <div class="stat-pill">
+                <span class="stat-number">5</span>
+                <span class="stat-label">Safety Layers</span>
+            </div>
+            <div class="stat-pill">
+                <span class="stat-number">1.7M</span>
+                <span class="stat-label">Americans with T1D</span>
             </div>
         </div>
     </section>
 
     <!-- Problem -->
     <section class="problem fade-in">
-        <div class="problem-inner">
-            <p class="problem-stat">47%</p>
-            <h2 class="problem-title">
-                The average person with Type 1 Diabetes spends 47% of their day with glucose levels outside the healthy range. Static pump formulas aren't enough.
-            </h2>
-            <p class="problem-text">
-                Current insulin delivery systems use rigid math that ignores the dozens of factors that actually affect insulin sensitivity. Dossi fills the gap—providing intelligent recommendations that adapt to your life.
-            </p>
+        <div class="problem-container">
+            <div class="problem-content">
+                <h3>The Problem</h3>
+                <h2>Your "smart" pump isn't very smart</h2>
+                <p>
+                    Current insulin pumps use rigid formulas that ignore the dozens of factors that actually affect your insulin needs. You're left making manual adjustments all day, every day.
+                </p>
+            </div>
+            <div class="problem-visual">
+                <div class="problem-item">
+                    <i class="ph ph-person-simple-run"></i>
+                    <span><strong>Ran this morning?</strong> Pump doesn't know.</span>
+                </div>
+                <div class="problem-item">
+                    <i class="ph ph-moon"></i>
+                    <span><strong>Slept 4 hours?</strong> Pump doesn't know.</span>
+                </div>
+                <div class="problem-item">
+                    <i class="ph ph-pizza"></i>
+                    <span><strong>Eating pizza?</strong> Pump doesn't know.</span>
+                </div>
+                <div class="problem-item">
+                    <i class="ph ph-thermometer"></i>
+                    <span><strong>Getting sick?</strong> Pump doesn't know.</span>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- How It Works -->
     <section class="how-it-works fade-in" id="how-it-works">
         <div class="section-header">
-            <p class="section-label">How It Works</p>
-            <h2 class="section-title">Dosing that adapts to you</h2>
-            <p class="section-subtitle">Not generic rules. Personalized recommendations based on your data, your patterns, your physiology.</p>
+            <h3>How It Works</h3>
+            <h2>Dosing that adapts to you</h2>
+            <p>Personalized recommendations based on your data, your patterns, your physiology.</p>
         </div>
-        <div class="steps">
-            <div class="step">
+        <div class="steps-container">
+            <div class="step-card">
                 <div class="step-number">1</div>
                 <div class="step-content">
-                    <h3>Connect your data</h3>
-                    <p>Dossi pulls from Apple Health—CGM readings, exercise, sleep, heart rate variability, and more. Your data stays on your device.</p>
+                    <h4>Snap a photo of your meal</h4>
+                    <p>AI identifies foods and estimates carbs, protein, fat, and fiber automatically.</p>
                 </div>
             </div>
-            <div class="step">
+            <div class="step-card">
                 <div class="step-number">2</div>
                 <div class="step-content">
-                    <h3>Get context-aware recommendations</h3>
-                    <p>When you're about to eat, Dossi considers everything: your current glucose, recent exercise, time of day, meal macros, and 35+ other factors.</p>
+                    <h4>Context is assembled in real-time</h4>
+                    <p>CGM data, recent exercise, sleep quality, time of day—all considered instantly.</p>
                 </div>
             </div>
-            <div class="step">
+            <div class="step-card">
                 <div class="step-number">3</div>
                 <div class="step-content">
-                    <h3>Learn over time</h3>
-                    <p>Bayesian algorithms learn your unique patterns. The more you use Dossi, the better it understands how your body responds.</p>
+                    <h4>Get a personalized recommendation</h4>
+                    <p>Dossi suggests an insulin dose tailored to your current state and history.</p>
                 </div>
             </div>
-            <div class="step">
+            <div class="step-card">
                 <div class="step-number">4</div>
                 <div class="step-content">
-                    <h3>Stay safe with 5-layer validation</h3>
-                    <p>Every recommendation passes through five safety layers before you see it. Medical-grade guardrails, always active.</p>
+                    <h4>The algorithm learns from outcomes</h4>
+                    <p>After every meal, Dossi refines its model based on what actually happened.</p>
                 </div>
             </div>
         </div>
@@ -671,134 +887,95 @@
     <!-- Features -->
     <section class="features fade-in" id="features">
         <div class="section-header">
-            <p class="section-label">Features</p>
-            <h2 class="section-title">Built for real life with T1D</h2>
+            <h3>Features</h3>
+            <h2>Built for real life with T1D</h2>
         </div>
         <div class="features-grid">
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                        <path d="M2 17l10 5 10-5"/>
-                        <path d="M2 12l10 5 10-5"/>
-                    </svg>
+                    <i class="ph-fill ph-stack"></i>
                 </div>
                 <h3>60+ Contextual Factors</h3>
                 <p>Exercise, sleep, stress, hormones, meal type, site age, and more—all considered in every recommendation.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="10"/>
-                        <path d="M12 6v6l4 2"/>
-                    </svg>
+                    <i class="ph-fill ph-brain"></i>
                 </div>
-                <h3>Real-time Adaptation</h3>
-                <p>Your sensitivity changes throughout the day. Dossi adjusts its recommendations accordingly—no manual tweaking needed.</p>
+                <h3>Bayesian Learning</h3>
+                <p>No hardcoded rules. Dossi learns YOUR patterns through probabilistic inference that improves over time.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                        <polyline points="22,4 12,14.01 9,11.01"/>
-                    </svg>
+                    <i class="ph-fill ph-shield-check"></i>
                 </div>
                 <h3>5-Layer Safety</h3>
-                <p>Hard limits, physiological bounds, hypo prediction, anomaly detection, and learning validation—all before any recommendation.</p>
+                <p>Hard limits, physiological bounds, hypo prediction, anomaly detection—all before any recommendation.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                    </svg>
+                    <i class="ph-fill ph-camera"></i>
                 </div>
-                <h3>Explains Its Reasoning</h3>
-                <p>Dossi tells you why it's recommending what it's recommending. Full transparency, always.</p>
+                <h3>Photo Meal Recognition</h3>
+                <p>Snap a photo. AI identifies foods and estimates macros. No more guessing carb counts.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-                    </svg>
+                    <i class="ph-fill ph-users-three"></i>
                 </div>
                 <h3>Caregiver App</h3>
                 <p>Dossi Follow lets parents and caregivers monitor glucose remotely with live activities and smart alerts.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                    </svg>
+                    <i class="ph-fill ph-lock"></i>
                 </div>
                 <h3>Privacy First</h3>
-                <p>Your health data stays on your device. No selling to advertisers. Period.</p>
+                <p>Your health data stays on your device. No selling to advertisers. Ever.</p>
             </div>
         </div>
     </section>
 
-    <!-- Science -->
-    <section class="science fade-in">
-        <div class="science-inner">
-            <div class="science-content">
-                <h2>Built on proven diabetes technology</h2>
-                <p>
-                    Dossi's approach is informed by Loop, OpenAPS, and Tidepool—the open-source systems trusted by thousands. We've taken what works and made it accessible.
-                </p>
-                <p>
-                    Our goal: FDA-cleared automated insulin delivery. But that requires years and millions of dollars. Today, Dossi delivers intelligent insulin dosing recommendations—no clearance required.
-                </p>
+    <!-- Learning Loop -->
+    <section class="learning fade-in">
+        <div class="learning-container">
+            <div class="learning-content">
+                <h3>Continuous Learning</h3>
+                <h2>Gets smarter with every meal</h2>
+                <p>After every meal, Dossi tracks what actually happened and refines its understanding of your unique physiology.</p>
+                <div class="learning-steps">
+                    <div class="learning-step">
+                        <span class="learning-step-num">1</span>
+                        <span><strong>Predict</strong> — Expected glucose outcome</span>
+                    </div>
+                    <div class="learning-step">
+                        <span class="learning-step-num">2</span>
+                        <span><strong>Observe</strong> — What actually happened</span>
+                    </div>
+                    <div class="learning-step">
+                        <span class="learning-step-num">3</span>
+                        <span><strong>Attribute</strong> — Which factors were active</span>
+                    </div>
+                    <div class="learning-step">
+                        <span class="learning-step-num">4</span>
+                        <span><strong>Update</strong> — Refine personal model</span>
+                    </div>
+                </div>
             </div>
-            <div class="science-visual">
-                <div class="science-pill">
-                    <div class="science-pill-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
-                        </svg>
-                    </div>
-                    Bayesian Learning Engine
-                </div>
-                <div class="science-pill">
-                    <div class="science-pill-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"/>
-                            <circle cx="12" cy="12" r="4"/>
-                            <line x1="4.93" y1="4.93" x2="9.17" y2="9.17"/>
-                            <line x1="14.83" y1="14.83" x2="19.07" y2="19.07"/>
-                        </svg>
-                    </div>
-                    Loop/OpenAPS Informed
-                </div>
-                <div class="science-pill">
-                    <div class="science-pill-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                        </svg>
-                    </div>
-                    Multi-layer Safety Validation
-                </div>
-                <div class="science-pill">
-                    <div class="science-pill-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-                            <line x1="8" y1="21" x2="16" y2="21"/>
-                            <line x1="12" y1="17" x2="12" y2="21"/>
-                        </svg>
-                    </div>
-                    HealthKit Integration
-                </div>
+            <div class="learning-visual">
+                <img src="pitchdeck/loop.png" alt="Learning Loop">
             </div>
         </div>
     </section>
 
-    <!-- Final CTA -->
-    <section class="final-cta fade-in">
-        <div class="final-cta-inner">
+    <!-- CTA -->
+    <section class="cta fade-in">
+        <div class="cta-container">
             <h2>See the full vision</h2>
-            <p>Dossi is being built for the InVenture Prize at Georgia Tech. Check out the project overview to learn more about where we're headed.</p>
-            <a href="/pitchdeck" class="hero-cta">
-                View Project Overview
+            <p>Dossi is being built for the InVenture Prize at Georgia Tech. Check out the pitch deck to learn more about where we're headed.</p>
+            <a href="/pitchdeck" class="btn-primary">
+                <i class="ph-bold ph-presentation-chart"></i>
+                View Pitch Deck
             </a>
         </div>
     </section>
@@ -810,8 +987,8 @@
                 <img src="pitchdeck/dossi-wordmark.png" alt="Dossi">
             </div>
             <div class="footer-links">
-                <a href="/pitchdeck">Overview</a>
                 <a href="/pitchdeck">Pitch Deck</a>
+                <a href="/preliminary">Preliminary</a>
                 <a href="mailto:team@hellodossi.com">Contact</a>
             </div>
             <p class="footer-copy">&copy; 2026 Dossi. All rights reserved.</p>
@@ -830,72 +1007,20 @@
 
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-        // 47% Counter animation
-        const counterObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const counter = entry.target;
-                    const target = 47;
-                    let current = 0;
-                    const increment = target / 50;
-                    const timer = setInterval(() => {
-                        current += increment;
-                        if (current >= target) {
-                            counter.textContent = target + '%';
-                            clearInterval(timer);
-                        } else {
-                            counter.textContent = Math.floor(current) + '%';
-                        }
-                    }, 25);
-                    counterObserver.unobserve(counter);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        const statElement = document.querySelector('.problem-stat');
-        if (statElement) {
-            statElement.textContent = '0%';
-            counterObserver.observe(statElement);
-        }
-
-        // Phone tilt effect
-        const phone = document.getElementById('phone');
+        // Smooth hover on phone
+        const phone = document.querySelector('.phone-image');
         const heroPhone = document.querySelector('.hero-phone');
-        if (phone && heroPhone) {
-            let targetX = 0, targetY = 0;
-            let currentX = 0, currentY = 0;
 
+        if (phone && heroPhone) {
             heroPhone.addEventListener('mousemove', (e) => {
                 const rect = heroPhone.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                targetX = (y - centerY) / 25;
-                targetY = (centerX - x) / 25;
+                const x = (e.clientX - rect.left) / rect.width - 0.5;
+                const y = (e.clientY - rect.top) / rect.height - 0.5;
+                phone.style.transform = `perspective(1000px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg)`;
             });
 
             heroPhone.addEventListener('mouseleave', () => {
-                targetX = 0;
-                targetY = 0;
-            });
-
-            function animateTilt() {
-                currentX += (targetX - currentX) * 0.08;
-                currentY += (targetY - currentY) * 0.08;
-                phone.style.transform = `perspective(1000px) rotateX(${currentX}deg) rotateY(${currentY}deg)`;
-                requestAnimationFrame(animateTilt);
-            }
-            animateTilt();
-        }
-
-        // Parallax on scroll
-        const heroPhoneEl = document.querySelector('.hero-phone');
-        if (heroPhoneEl) {
-            window.addEventListener('scroll', () => {
-                const scrolled = window.pageYOffset;
-                const rate = scrolled * 0.3;
-                heroPhoneEl.style.transform = `translateY(${rate}px)`;
+                phone.style.transform = 'perspective(1000px) rotateY(0) rotateX(0)';
             });
         }
     </script>
