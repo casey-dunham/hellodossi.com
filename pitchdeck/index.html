@@ -885,6 +885,11 @@
             position: relative;
         }
 
+        .business-model-slide {
+            position: relative;
+            overflow: visible !important;
+        }
+
         .omnipod-img {
             position: absolute;
             top: 130px;
@@ -1980,23 +1985,7 @@
 
             <!-- Step 3: The Learning Loop -->
             <section class="learning-loop-slide">
-                <div class="loop-circle">
-                    <svg viewBox="0 0 200 200" class="loop-arrows">
-                        <path d="M 100 20 A 80 80 0 0 1 180 100" fill="none" stroke="var(--accent)" stroke-width="4" marker-end="url(#arrowhead)"/>
-                        <path d="M 180 100 A 80 80 0 0 1 100 180" fill="none" stroke="var(--accent)" stroke-width="4" marker-end="url(#arrowhead)"/>
-                        <path d="M 100 180 A 80 80 0 0 1 20 100" fill="none" stroke="var(--accent)" stroke-width="4" marker-end="url(#arrowhead)"/>
-                        <path d="M 20 100 A 80 80 0 0 1 100 20" fill="none" stroke="var(--accent)" stroke-width="4" marker-end="url(#arrowhead)"/>
-                        <defs>
-                            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                                <polygon points="0 0, 10 3.5, 0 7" fill="var(--accent)"/>
-                            </marker>
-                        </defs>
-                    </svg>
-                    <div class="loop-label loop-top">Predict</div>
-                    <div class="loop-label loop-right">Observe</div>
-                    <div class="loop-label loop-bottom">Attribute</div>
-                    <div class="loop-label loop-left">Update</div>
-                </div>
+                <img src="loop.png" alt="Learning loop" class="loop-circle" style="width: 220px; height: auto;">
                 <div class="slide-content">
                     <h3>How It Works</h3>
                     <h2>Step 3: The Learning Loop</h2>
@@ -2098,8 +2087,8 @@
             </section>
 
             <!-- Business Model -->
-            <section style="position: relative;">
-                <div class="logo-stack" style="position: absolute; top: 180px; right: 80px; margin: 0; gap: 0.5em;">
+            <section class="business-model-slide">
+                <div class="logo-stack" style="position: absolute; top: 180px; right: 60px; margin: 0; gap: 0.6em;">
                     <img src="fda-logo.png" alt="FDA logo">
                     <img src="tidepool-logo.png" alt="Tidepool logo">
                     <img src="bigfoot-logo.webp" alt="Bigfoot Biomedical logo">
