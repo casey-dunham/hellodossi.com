@@ -756,19 +756,19 @@
         .insulin-type-card {
             flex: 1;
             background: white;
-            border-radius: 100px;
-            padding: 1.5em 2em;
+            border-radius: 32px;
+            padding: 1.8em 2em;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         }
 
         .insulin-icon {
             width: 50px;
             height: 50px;
-            border-radius: 50%;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 0.8em;
+            margin-bottom: 1em;
         }
 
         .insulin-icon i {
@@ -787,14 +787,14 @@
         .insulin-type-card h4 {
             font-size: 1.3em;
             font-weight: 700;
-            margin-bottom: 0.2em;
+            margin-bottom: 0.3em;
             color: var(--text-dark);
         }
 
         .insulin-desc {
             color: var(--text-light);
             font-size: 0.95em;
-            margin-bottom: 0.8em;
+            margin-bottom: 1em;
         }
 
         .insulin-details {
@@ -804,19 +804,20 @@
         }
 
         .insulin-details li {
-            padding: 0.3em 0;
-            padding-left: 1.2em;
-            position: relative;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6em;
+            padding: 0.35em 0;
             font-size: 0.9em;
             color: var(--text-dark);
         }
 
         .insulin-details li::before {
             content: "•";
-            position: absolute;
-            left: 0;
             color: var(--accent);
             font-weight: bold;
+            font-size: 1.2em;
+            line-height: 1;
         }
 
         /* Basal Rate Intelligence slide */
@@ -848,17 +849,17 @@
 
         .period-bar.low {
             height: 60px;
-            background: linear-gradient(180deg, #93C5FD, #60A5FA);
+            background: #60A5FA;
         }
 
         .period-bar.medium {
             height: 90px;
-            background: linear-gradient(180deg, #A78BFA, #8B5CF6);
+            background: #8B5CF6;
         }
 
         .period-bar.high {
             height: 130px;
-            background: linear-gradient(180deg, #F472B6, #EC4899);
+            background: #EC4899;
         }
 
         .period-label {
@@ -1750,7 +1751,7 @@
                     <p style="margin-bottom: 1.5em;">Managing Type 1 diabetes requires balancing two distinct insulin strategies:</p>
                     <div style="display: flex; gap: 40px; margin-top: 1em;">
                         <div class="insulin-type-card">
-                            <div class="insulin-icon basal"><i class="ph ph-waves"></i></div>
+                            <div class="insulin-icon basal"><i class="ph-fill ph-clock-clockwise"></i></div>
                             <h4>Basal Insulin</h4>
                             <p class="insulin-desc">Continuous background delivery</p>
                             <ul class="insulin-details">
@@ -1760,7 +1761,7 @@
                             </ul>
                         </div>
                         <div class="insulin-type-card">
-                            <div class="insulin-icon bolus"><i class="ph ph-lightning"></i></div>
+                            <div class="insulin-icon bolus"><i class="ph-fill ph-lightning"></i></div>
                             <h4>Bolus Insulin</h4>
                             <p class="insulin-desc">On-demand meal-time doses</p>
                             <ul class="insulin-details">
