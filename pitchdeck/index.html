@@ -697,9 +697,23 @@
             width: 340px;
         }
 
+        .title-right::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 280px;
+            height: 400px;
+            background: radial-gradient(ellipse, rgba(115, 123, 242, 0.35) 0%, transparent 70%);
+            filter: blur(40px);
+            z-index: -1;
+        }
+
         .title-right img {
             width: 340px;
             height: auto;
+            background: transparent;
         }
 
         .title-tagline {
@@ -1080,19 +1094,18 @@
 
         /* ========== ANIMATIONS ========== */
 
-        /* Ensure content is visible by default */
-        .reveal section h2,
-        .reveal section h3,
-        .reveal section p,
-        .reveal section .stat-box,
-        .reveal section .about-card,
-        .reveal section .gap-list li,
-        .reveal section .factor-item,
-        .reveal section .step-item,
-        .reveal section .card,
-        .reveal section table {
+        /* Ensure ALL content is visible by default */
+        .reveal section * {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .reveal section .slide-content,
+        .reveal section .about-stack,
+        .reveal section .stat-row,
+        .reveal section .gap-list {
             opacity: 1 !important;
-            transform: none !important;
+            visibility: visible !important;
         }
 
         /* Fade in up animation */
