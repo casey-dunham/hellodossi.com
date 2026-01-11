@@ -670,55 +670,44 @@
         /* Title slide */
         .title-slide {
             background: var(--bg-paper) !important;
-            position: relative !important;
-            overflow: hidden !important;
-        }
-
-        /* Hide title phone when not on title slide */
-        .title-slide:not(.present) .title-right {
-            display: none !important;
+            position: relative;
+            overflow: hidden;
         }
 
         .title-slide .slide-content {
-            flex-direction: row;
-            align-items: center;
-            justify-content: flex-start;
-            max-width: 600px;
-        }
-
-        .title-left {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
             align-items: flex-start;
-            justify-content: center;
-            padding-right: 40px;
+            max-width: 550px;
         }
 
-        .title-right {
+        .title-slide .title-tagline,
+        .title-slide .title-subtitle {
+            text-align: left;
+        }
+
+        .title-phone {
             position: absolute;
-            right: 120px;
-            bottom: -140px;
-            width: 340px;
+            right: 80px;
+            bottom: -120px;
+            width: 320px;
+            z-index: 10;
         }
 
-        .title-glow {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 450px;
-            height: 600px;
-            background: radial-gradient(ellipse at center, rgba(115, 123, 242, 0.5) 0%, rgba(115, 123, 242, 0.25) 30%, rgba(115, 123, 242, 0.1) 50%, transparent 70%);
-            filter: blur(30px);
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .title-right img {
-            width: 340px;
+        .title-phone img {
+            width: 100%;
             height: auto;
-            position: relative;
+            display: block;
+        }
+
+        .title-phone-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 550px;
+            background: radial-gradient(ellipse, rgba(115, 123, 242, 0.45) 0%, rgba(115, 123, 242, 0.2) 35%, transparent 65%);
+            filter: blur(25px);
+            z-index: -1;
         }
 
         .title-tagline {
@@ -1423,14 +1412,12 @@
             <!-- 1. Title -->
             <section class="title-slide">
                 <div class="slide-content">
-                    <div class="title-left">
-                        <h1 class="title-tagline">Intelligent<br>Insulin Dosing</h1>
-                        <p class="title-subtitle">A look at smarter diabetes management.</p>
-                    </div>
-                    <div class="title-right">
-                        <div class="title-glow"></div>
-                        <img src="dossi-dashboard.png" alt="Dossi Dashboard">
-                    </div>
+                    <h1 class="title-tagline">Intelligent<br>Insulin Dosing</h1>
+                    <p class="title-subtitle">A look at smarter diabetes management.</p>
+                </div>
+                <div class="title-phone">
+                    <div class="title-phone-glow"></div>
+                    <img src="dossi-dashboard.png" alt="Dossi Dashboard">
                 </div>
             </section>
 
