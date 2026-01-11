@@ -700,14 +700,19 @@
 
         .title-phone-glow {
             position: absolute;
-            top: 50%;
+            top: 40%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 400px;
-            height: 550px;
-            background: radial-gradient(ellipse, rgba(115, 123, 242, 0.45) 0%, rgba(115, 123, 242, 0.2) 35%, transparent 65%);
-            filter: blur(25px);
-            z-index: -1;
+            width: 500px;
+            height: 650px;
+            background: radial-gradient(ellipse, rgba(115, 123, 242, 0.6) 0%, rgba(115, 123, 242, 0.3) 30%, rgba(115, 123, 242, 0.1) 50%, transparent 70%);
+            filter: blur(40px);
+            pointer-events: none;
+        }
+
+        .title-phone img {
+            position: relative;
+            z-index: 1;
         }
 
         .title-tagline {
