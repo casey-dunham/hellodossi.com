@@ -17,6 +17,7 @@
             --text-medium: #4a4a4a;
             --text-light: #8E8E93;
             --icon-gray: #8E8E93;
+            --icon-accent: var(--accent);
             --bg-paper: #FAF9F6;
             --bg-card: #f0efeb;
             /* Tab colors - muted */
@@ -155,9 +156,9 @@
         }
 
         .reveal h1, .reveal h2 {
-            font-family: 'Plus Jakarta Sans', Georgia, serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             text-transform: none;
-            font-weight: 500;
+            font-weight: 700;
             color: var(--text-dark);
             letter-spacing: -0.02em;
             line-height: 1.1;
@@ -165,20 +166,20 @@
 
         .reveal h1 {
             font-size: 4em;
-            font-weight: 400;
+            font-weight: 700;
         }
 
         .reveal h2 {
             font-size: 2.6em;
             margin-bottom: 0.5em;
-            font-weight: 400;
+            font-weight: 700;
         }
 
         .reveal h3 {
             font-family: 'Inter', sans-serif;
             font-size: 0.75em;
-            color: var(--text-light);
-            font-weight: 500;
+            color: var(--accent);
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.2em;
             margin-bottom: 0.8em;
@@ -221,18 +222,18 @@
         }
 
         .reveal strong {
-            color: var(--text-dark);
+            color: var(--accent);
             font-weight: 600;
         }
 
         .accent {
             color: var(--accent);
-            font-weight: 500;
+            font-weight: 600;
         }
 
         .gradient-text {
             color: var(--accent);
-            font-weight: 500;
+            font-weight: 600;
         }
 
         .subtitle {
@@ -289,7 +290,7 @@
 
         .about-card i {
             font-size: 1.4em;
-            color: var(--icon-gray);
+            color: var(--accent);
         }
 
         .about-card strong {
@@ -323,7 +324,7 @@
 
         .gap-list i {
             font-size: 1.3em;
-            color: var(--icon-gray);
+            color: var(--accent);
             width: 28px;
         }
 
@@ -351,7 +352,7 @@
 
         .factor-item-full .factor-icon {
             font-size: 1.3em;
-            color: var(--icon-gray);
+            color: var(--accent);
             flex-shrink: 0;
             width: 24px;
             margin-top: 0.1em;
@@ -401,21 +402,30 @@
             padding: 1.6em 1.8em;
             flex: 1;
             box-shadow: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .stat-box .number {
-            font-family: 'Plus Jakarta Sans', Georgia, serif;
-            font-size: 3em;
-            font-weight: 400;
-            color: var(--text-dark);
-            line-height: 1;
-            margin-bottom: 0.15em;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2em;
+            font-weight: 700;
+            color: white;
+            background: var(--accent);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            margin-bottom: 0.5em;
         }
 
         .stat-box .label {
             font-size: 0.95em;
             color: var(--text-medium);
-            font-weight: 400;
+            font-weight: 500;
         }
 
         /* Two column */
@@ -472,7 +482,7 @@
 
         .factor-item .factor-icon {
             font-size: 1.6em;
-            color: var(--icon-gray);
+            color: var(--accent);
             flex-shrink: 0;
             width: 32px;
             display: flex;
@@ -716,9 +726,9 @@
         }
 
         .title-tagline {
-            font-family: 'Plus Jakarta Sans', Georgia, serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 4.2em;
-            font-weight: 400;
+            font-weight: 800;
             color: var(--text-dark);
             line-height: 1.1;
             letter-spacing: -0.02em;
