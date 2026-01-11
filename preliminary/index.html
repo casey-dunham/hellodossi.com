@@ -1149,14 +1149,14 @@
             const frame = document.querySelector('.binder-frame');
             const frameWidth = 1100;
             const frameHeight = 700;
-            const padding = 60;
+            const padding = 40;
 
             const availableWidth = window.innerWidth - padding;
             const availableHeight = window.innerHeight - padding;
 
             const scaleX = availableWidth / frameWidth;
             const scaleY = availableHeight / frameHeight;
-            const scale = Math.min(scaleX, scaleY, 1);
+            const scale = Math.min(scaleX, scaleY);
 
             frame.style.setProperty('--scale', scale);
         }
