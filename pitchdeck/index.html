@@ -18,8 +18,8 @@
             --text-light: #8E8E93;
             --icon-gray: #8E8E93;
             --icon-accent: var(--accent);
-            --bg-paper: #FAF9F6;
-            --bg-card: #f0efeb;
+            --bg-paper: #F5F5F8;
+            --bg-card: #EDEDF0;
             /* Tab colors - muted */
             --tab-1: #E8E0D5;
             --tab-2: #F0EBD0;
@@ -35,7 +35,7 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            background: #e8e6e1;
+            background: #E8E8ED;
             overflow: hidden;
         }
 
@@ -52,15 +52,15 @@
             width: 1100px;
             height: 700px;
             background: var(--bg-paper);
-            border-radius: 4px;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
+            border-radius: 24px;
+            box-shadow: 0 8px 60px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.08);
             position: relative;
             overflow: visible;
         }
 
         .binder-page .reveal {
             overflow: hidden;
-            border-radius: 4px;
+            border-radius: 24px;
         }
 
         /* Hole punches */
@@ -80,7 +80,7 @@
         .hole {
             width: 14px;
             height: 14px;
-            background: #e8e6e1;
+            background: #E8E8ED;
             border-radius: 50%;
             box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
         }
@@ -273,10 +273,10 @@
 
         /* Cards */
         .card {
-            background: var(--bg-card);
-            border-radius: 8px;
+            background: white;
+            border-radius: 100px;
             padding: 1.6em;
-            box-shadow: none;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
         }
 
         /* About Me stack */
@@ -288,15 +288,15 @@
         }
 
         .about-card {
-            background: var(--bg-card);
-            border-radius: 12px;
+            background: white;
+            border-radius: 100px;
             padding: 1.2em 1.4em;
             display: flex;
             align-items: center;
             gap: 1em;
             font-size: 1.05em;
             color: var(--text-medium);
-            box-shadow: none;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
         }
 
         .about-card i {
@@ -352,13 +352,13 @@
         }
 
         .factor-item-full {
-            background: var(--bg-card);
+            background: white;
             padding: 0.9em 1.1em;
-            border-radius: 12px;
+            border-radius: 100px;
             display: flex;
             align-items: flex-start;
             gap: 0.8em;
-            box-shadow: none;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
         }
 
         .factor-item-full .factor-icon {
@@ -371,7 +371,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 6px;
+            border-radius: 50%;
         }
 
         .factor-item-full .factor-content {
@@ -413,11 +413,11 @@
         }
 
         .stat-box {
-            background: var(--bg-card);
-            border-radius: 12px;
-            padding: 1.2em 1.4em;
+            background: white;
+            border-radius: 100px;
+            padding: 1.2em 1.6em;
             flex: 1;
-            box-shadow: none;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -430,12 +430,12 @@
             font-weight: 700;
             color: white;
             background: var(--accent);
-            width: 42px;
-            height: 42px;
+            width: 44px;
+            height: 44px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 10px;
+            border-radius: 50%;
             flex-shrink: 0;
         }
 
@@ -454,10 +454,10 @@
 
         .two-col > div {
             flex: 1;
-            background: var(--bg-card);
-            border-radius: 8px;
+            background: white;
+            border-radius: 20px;
             padding: 1.5em;
-            box-shadow: none;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
         }
 
         .two-col h4 {
@@ -488,13 +488,13 @@
         }
 
         .factor-item {
-            background: var(--bg-card);
+            background: white;
             padding: 1.1em 1.3em;
-            border-radius: 12px;
+            border-radius: 100px;
             display: flex;
             align-items: flex-start;
             gap: 0.9em;
-            box-shadow: none;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
         }
 
         .factor-item .factor-icon {
@@ -529,11 +529,11 @@
             display: flex;
             align-items: center;
             gap: 1em;
-            padding: 1em 1.3em;
+            padding: 1em 1.5em;
             margin: 0.8em 0;
-            border-radius: 12px;
-            background: var(--bg-card);
-            box-shadow: none;
+            border-radius: 100px;
+            background: white;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
         }
 
         .step-num {
@@ -589,16 +589,16 @@
             border-collapse: separate;
             border-spacing: 0;
             width: 100%;
-            background: var(--bg-card);
-            border-radius: 12px;
+            background: white;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: none;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
         }
 
         .reveal th {
             background: rgba(0, 0, 0, 0.04);
             color: var(--text-dark);
-            padding: 0.9em 1.2em;
+            padding: 1em 1.6em;
             font-weight: 600;
             text-align: left;
             font-size: 0.9em;
@@ -607,7 +607,7 @@
         }
 
         .reveal td {
-            padding: 0.85em 1.2em;
+            padding: 1em 1.6em;
             border-bottom: 1px solid rgba(0, 0, 0, 0.04);
             color: var(--text-medium);
         }
@@ -626,10 +626,10 @@
 
         .timeline-phase {
             flex: 1;
-            background: var(--bg-card);
-            border-radius: 16px;
+            background: white;
+            border-radius: 20px;
             padding: 1.4em;
-            box-shadow: none;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
             min-height: 200px;
             display: flex;
             flex-direction: column;
@@ -833,8 +833,8 @@
         }
 
         .context-source {
-            background: var(--bg-card);
-            border-radius: 12px;
+            background: white;
+            border-radius: 100px;
             padding: 1em 1.3em;
             display: flex;
             flex-direction: column;
@@ -843,7 +843,7 @@
             gap: 0.5em;
             width: 100px;
             height: 90px;
-            box-shadow: none;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
         }
 
         .context-source i {
@@ -866,13 +866,13 @@
         }
 
         .feature-item {
-            background: var(--bg-card);
-            border-radius: 12px;
+            background: white;
+            border-radius: 100px;
             padding: 1em 1.2em;
             display: flex;
             align-items: center;
             gap: 0.9em;
-            box-shadow: none;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
         }
 
         .feature-item i {
@@ -994,9 +994,9 @@
             font-size: 1.05em;
             color: var(--text-medium);
             padding: 1.1em 1.5em;
-            background: var(--bg-card);
-            border-radius: 12px;
-            box-shadow: none;
+            background: white;
+            border-radius: 100px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
         }
 
         .photo-step .step-num {
@@ -1025,10 +1025,10 @@
 
         .confetti-container {
             position: absolute;
-            top: -50px;
+            top: -200px;
             left: 0;
             width: 100%;
-            height: calc(100% + 50px);
+            height: calc(100% + 200px);
             pointer-events: none;
             overflow: hidden;
         }
@@ -1422,6 +1422,33 @@
             line-height: 1.4;
             min-height: 2.8em;
         }
+
+        /* Fullscreen mode - no rounded corners, fill screen */
+        :fullscreen .binder-frame {
+            transform: translate(-50%, -50%) scale(1) !important;
+        }
+
+        :fullscreen .binder-page {
+            border-radius: 0 !important;
+        }
+
+        :fullscreen .binder-page .reveal {
+            border-radius: 0 !important;
+        }
+
+        /* Webkit fullscreen support */
+        :-webkit-full-screen .binder-frame {
+            transform: translate(-50%, -50%) scale(1) !important;
+        }
+
+        :-webkit-full-screen .binder-page {
+            border-radius: 0 !important;
+        }
+
+        :-webkit-full-screen .binder-page .reveal {
+            border-radius: 0 !important;
+        }
+
     </style>
 </head>
 <body>
@@ -1650,14 +1677,14 @@
             <section>
                 <div class="slide-content">
                     <h3>Safety First</h3>
-                    <h2>5 Layers of Validation</h2>
+                    <h2><i class="ph-fill ph-lock" style="color: var(--text-dark); margin-right: 0.2em;"></i>5 Layers of Validation</h2>
                     <p>Insulin errors can be dangerous. Every recommendation passes through graduated safety checks.</p>
                     <div style="margin-top: 0.6em; max-width: 700px;">
-                        <div class="step-item"><span class="step-num" style="background: var(--accent); color: white; font-weight: 700; width: 24px; height: 24px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85em;">1</span><div class="step-content"><strong>Hard Limits</strong> <span>— Max 25U bolus, min 70 mg/dL glucose, max fall rate</span></div></div>
-                        <div class="step-item"><span class="step-num" style="background: var(--accent); color: white; font-weight: 700; width: 24px; height: 24px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85em;">2</span><div class="step-content"><strong>Physiological</strong> <span>— Prevents insulin stacking and unrealistic doses</span></div></div>
-                        <div class="step-item"><span class="step-num" style="background: var(--accent); color: white; font-weight: 700; width: 24px; height: 24px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85em;">3</span><div class="step-content"><strong>Predictive</strong> <span>— Calculates hypo risk at 15/30/60/120 min horizons</span></div></div>
-                        <div class="step-item"><span class="step-num" style="background: var(--accent); color: white; font-weight: 700; width: 24px; height: 24px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85em;">4</span><div class="step-content"><strong>Anomaly Detection</strong> <span>— Validates sensor data quality and flags issues</span></div></div>
-                        <div class="step-item"><span class="step-num" style="background: var(--accent); color: white; font-weight: 700; width: 24px; height: 24px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85em;">5</span><div class="step-content"><strong>Learning Validation</strong> <span>— Checks recent outcomes for algorithm drift</span></div></div>
+                        <div class="step-item"><span class="step-num" style="background: var(--accent); color: white; font-weight: 700; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85em;">1</span><div class="step-content"><strong>Hard Limits</strong> <span>— Max 25U bolus, min 70 mg/dL glucose, max fall rate</span></div></div>
+                        <div class="step-item"><span class="step-num" style="background: var(--accent); color: white; font-weight: 700; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85em;">2</span><div class="step-content"><strong>Physiological</strong> <span>— Prevents insulin stacking and unrealistic doses</span></div></div>
+                        <div class="step-item"><span class="step-num" style="background: var(--accent); color: white; font-weight: 700; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85em;">3</span><div class="step-content"><strong>Predictive</strong> <span>— Calculates hypo risk at 15/30/60/120 min horizons</span></div></div>
+                        <div class="step-item"><span class="step-num" style="background: var(--accent); color: white; font-weight: 700; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85em;">4</span><div class="step-content"><strong>Anomaly Detection</strong> <span>— Validates sensor data quality and flags issues</span></div></div>
+                        <div class="step-item"><span class="step-num" style="background: var(--accent); color: white; font-weight: 700; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85em;">5</span><div class="step-content"><strong>Learning Validation</strong> <span>— Checks recent outcomes for algorithm drift</span></div></div>
                     </div>
                 </div>
             </section>
@@ -1853,7 +1880,7 @@
         }
 
         // Animated number counter
-        function animateNumber(element, start, end, duration, suffix = '', prefix = '') {
+        function animateNumber(element, start, end, duration, suffix = '', prefix = '', onComplete = null) {
             const startTime = performance.now();
             const isDecimal = String(end).includes('.');
             const needsCommas = end >= 1000;
@@ -1885,6 +1912,7 @@
                     requestAnimationFrame(update);
                 } else {
                     element.classList.remove('counting');
+                    if (onComplete) onComplete();
                 }
             }
 
