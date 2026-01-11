@@ -752,6 +752,128 @@
             overflow: visible !important;
         }
 
+        /* Two Types of Insulin slide */
+        .insulin-type-card {
+            flex: 1;
+            background: white;
+            border-radius: 100px;
+            padding: 1.5em 2em;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .insulin-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.8em;
+        }
+
+        .insulin-icon i {
+            font-size: 1.5em;
+            color: white;
+        }
+
+        .insulin-icon.basal {
+            background: linear-gradient(135deg, #60A5FA, #3B82F6);
+        }
+
+        .insulin-icon.bolus {
+            background: linear-gradient(135deg, #F472B6, #EC4899);
+        }
+
+        .insulin-type-card h4 {
+            font-size: 1.3em;
+            font-weight: 700;
+            margin-bottom: 0.2em;
+            color: var(--text-dark);
+        }
+
+        .insulin-desc {
+            color: var(--text-light);
+            font-size: 0.95em;
+            margin-bottom: 0.8em;
+        }
+
+        .insulin-details {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .insulin-details li {
+            padding: 0.3em 0;
+            padding-left: 1.2em;
+            position: relative;
+            font-size: 0.9em;
+            color: var(--text-dark);
+        }
+
+        .insulin-details li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Basal Rate Intelligence slide */
+        .basal-timeline {
+            display: flex;
+            gap: 12px;
+            margin-top: 1.5em;
+            align-items: flex-end;
+        }
+
+        .basal-period {
+            flex: 1;
+            text-align: center;
+        }
+
+        .period-time {
+            font-size: 0.75em;
+            color: var(--text-light);
+            margin-bottom: 0.5em;
+            font-weight: 600;
+        }
+
+        .period-bar {
+            width: 100%;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 0.5em;
+            transition: height 0.3s ease;
+        }
+
+        .period-bar.low {
+            height: 60px;
+            background: linear-gradient(180deg, #93C5FD, #60A5FA);
+        }
+
+        .period-bar.medium {
+            height: 90px;
+            background: linear-gradient(180deg, #A78BFA, #8B5CF6);
+        }
+
+        .period-bar.high {
+            height: 130px;
+            background: linear-gradient(180deg, #F472B6, #EC4899);
+        }
+
+        .period-label {
+            font-size: 0.8em;
+            font-weight: 600;
+            color: var(--text-dark);
+            line-height: 1.3;
+        }
+
+        .period-label span {
+            font-weight: 400;
+            color: var(--text-light);
+            font-size: 0.9em;
+        }
+
         /* Learning Loop slide */
         .learning-loop-slide {
             position: relative;
@@ -1620,6 +1742,38 @@
                 </div>
             </section>
 
+            <!-- Two Types of Insulin -->
+            <section>
+                <div class="slide-content">
+                    <h3>Background</h3>
+                    <h2>Two Types of Insulin Delivery</h2>
+                    <p style="margin-bottom: 1.5em;">Managing Type 1 diabetes requires balancing two distinct insulin strategies:</p>
+                    <div style="display: flex; gap: 40px; margin-top: 1em;">
+                        <div class="insulin-type-card">
+                            <div class="insulin-icon basal"><i class="ph ph-waves"></i></div>
+                            <h4>Basal Insulin</h4>
+                            <p class="insulin-desc">Continuous background delivery</p>
+                            <ul class="insulin-details">
+                                <li>Runs 24/7 at varying rates</li>
+                                <li>Keeps glucose stable between meals</li>
+                                <li>Adjusts for sleep, activity, time of day</li>
+                            </ul>
+                        </div>
+                        <div class="insulin-type-card">
+                            <div class="insulin-icon bolus"><i class="ph ph-lightning"></i></div>
+                            <h4>Bolus Insulin</h4>
+                            <p class="insulin-desc">On-demand meal-time doses</p>
+                            <ul class="insulin-details">
+                                <li>Covers carbs you're about to eat</li>
+                                <li>Corrects high glucose readings</li>
+                                <li>Varies based on food type and timing</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <p style="margin-top: 1.5em; color: var(--text-light); font-style: italic;">Current pumps handle both — but only with basic rules. Dossi makes both smarter.</p>
+                </div>
+            </section>
+
             <!-- 4. What My Pump Doesn't Know -->
             <section>
                 <div class="slide-content">
@@ -1742,6 +1896,43 @@
                         <div class="step-item"><span class="step-num" style="color: var(--accent); font-weight: 700;">3.</span><div class="step-content"><strong>Attribute</strong> <span>— Which factors were active?</span></div></div>
                         <div class="step-item"><span class="step-num" style="color: var(--accent); font-weight: 700;">4.</span><div class="step-content"><strong>Update</strong> <span>— Adjust personal sensitivity model for that factor</span></div></div>
                     </div>
+                </div>
+            </section>
+
+            <!-- Basal Rate Intelligence -->
+            <section>
+                <div class="slide-content">
+                    <h3>Beyond Meals</h3>
+                    <h2>Basal Rate Intelligence</h2>
+                    <p>Dossi doesn't just optimize meal-time doses — it learns your background insulin needs throughout the day.</p>
+                    <div class="basal-timeline">
+                        <div class="basal-period">
+                            <div class="period-time">12am – 4am</div>
+                            <div class="period-bar low"></div>
+                            <div class="period-label">Deep Sleep<br><span>Lower rates during rest</span></div>
+                        </div>
+                        <div class="basal-period">
+                            <div class="period-time">4am – 8am</div>
+                            <div class="period-bar high"></div>
+                            <div class="period-label">Dawn Phenomenon<br><span>Hormones spike glucose</span></div>
+                        </div>
+                        <div class="basal-period">
+                            <div class="period-time">8am – 12pm</div>
+                            <div class="period-bar medium"></div>
+                            <div class="period-label">Morning Active<br><span>Moderate baseline</span></div>
+                        </div>
+                        <div class="basal-period">
+                            <div class="period-time">12pm – 6pm</div>
+                            <div class="period-bar medium"></div>
+                            <div class="period-label">Afternoon<br><span>Activity-adjusted</span></div>
+                        </div>
+                        <div class="basal-period">
+                            <div class="period-time">6pm – 12am</div>
+                            <div class="period-bar low"></div>
+                            <div class="period-label">Evening Wind-down<br><span>Gradual reduction</span></div>
+                        </div>
+                    </div>
+                    <p style="margin-top: 1em; font-style: italic; color: var(--text-light);">Dossi learns YOUR unique patterns and suggests basal adjustments automatically.</p>
                 </div>
             </section>
 
