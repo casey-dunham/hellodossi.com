@@ -751,15 +751,15 @@
             overflow: visible !important;
         }
 
-        .nutrition-phone-left {
+        .nutrition-phone {
             position: absolute;
-            left: 120px;
+            right: 80px;
             bottom: -100px;
-            width: 240px;
+            width: 280px;
             z-index: 10;
         }
 
-        .nutrition-phone-left img {
+        .nutrition-phone img {
             width: 100%;
             height: auto;
             display: block;
@@ -1300,8 +1300,6 @@
         }
 
         .stat-circle .circle {
-            width: 180px;
-            height: 180px;
             border-radius: 50%;
             background: white;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -1310,11 +1308,37 @@
             justify-content: center;
         }
 
+        .stat-circle .circle.large {
+            width: 200px;
+            height: 200px;
+        }
+
+        .stat-circle .circle.medium {
+            width: 170px;
+            height: 170px;
+        }
+
+        .stat-circle .circle.small {
+            width: 140px;
+            height: 140px;
+        }
+
         .stat-circle .circle-number {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 2.8em;
             font-weight: 600;
             color: var(--accent);
+        }
+
+        .stat-circle .circle.large .circle-number {
+            font-size: 3em;
+        }
+
+        .stat-circle .circle.medium .circle-number {
+            font-size: 2.5em;
+        }
+
+        .stat-circle .circle.small .circle-number {
+            font-size: 2em;
         }
 
         .stat-circle .circle-label {
@@ -1372,32 +1396,6 @@
                 </div>
             </section>
 
-            <!-- Why This Matters -->
-            <section class="true-center">
-                <div class="slide-content centered">
-                    <h2>Why This Matters</h2>
-                    <div class="stats-circles">
-                        <div class="stat-circle">
-                            <div class="circle">
-                                <span class="circle-number" data-animate-number="1.7" data-suffix="M">1.7M</span>
-                            </div>
-                            <span class="circle-label">Americans live with Type 1 diabetes.</span>
-                        </div>
-                        <div class="stat-circle">
-                            <div class="circle">
-                                <span class="circle-number" data-animate-number="21" data-suffix="%">21%</span>
-                            </div>
-                            <span class="circle-label">Only 21% of adults with T1D meet glucose targets.</span>
-                        </div>
-                        <div class="stat-circle">
-                            <div class="circle">
-                                <span class="circle-number" data-animate-number="180">180</span>
-                            </div>
-                            <span class="circle-label">Extra decisions made per day by people with T1D</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
             <!-- 3. The Problem -->
             <section>
@@ -1493,7 +1491,7 @@
 
             <!-- Step 1: Photo Meal Recognition -->
             <section class="photo-meal-slide">
-                <div class="slide-content" style="margin-left: auto; max-width: 550px;">
+                <div class="slide-content" style="max-width: 500px;">
                     <h3>How It Works</h3>
                     <h2>Step 1: Photo Meal Recognition</h2>
                     <div class="photo-steps" style="margin-top: 1.2em;">
@@ -1503,7 +1501,7 @@
                         <div class="photo-step"><span class="step-num">4.</span><span>Suggests dosage</span></div>
                     </div>
                 </div>
-                <div class="nutrition-phone-left">
+                <div class="nutrition-phone">
                     <img src="nutrition-tracker.png" alt="Nutrition Tracker">
                 </div>
             </section>
@@ -1597,7 +1595,34 @@
                 </div>
             </section>
 
-            <!-- 15. Product Today -->
+            <!-- Why This Matters -->
+            <section class="true-center">
+                <div class="slide-content centered">
+                    <h2>Why This Matters</h2>
+                    <div class="stats-circles">
+                        <div class="stat-circle">
+                            <div class="circle large">
+                                <span class="circle-number" data-animate-number="1.7" data-suffix="M">1.7M</span>
+                            </div>
+                            <span class="circle-label">Americans live with Type 1 diabetes.</span>
+                        </div>
+                        <div class="stat-circle">
+                            <div class="circle medium">
+                                <span class="circle-number" data-animate-number="21" data-suffix="%">21%</span>
+                            </div>
+                            <span class="circle-label">Only 21% of adults with T1D meet glucose targets.</span>
+                        </div>
+                        <div class="stat-circle">
+                            <div class="circle small">
+                                <span class="circle-number" data-animate-number="180">180</span>
+                            </div>
+                            <span class="circle-label">Extra decisions made per day by people with T1D</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Product Today -->
             <section>
                 <div class="slide-content">
                     <h3>Product</h3>
