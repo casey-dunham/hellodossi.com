@@ -1022,7 +1022,7 @@
         }
 
         .phone-mockup {
-            width: 170px;
+            width: 140px;
             height: 340px;
             background: linear-gradient(145deg, #2a2a2a 0%, #1a1a1a 100%);
             border-radius: 32px;
@@ -1404,41 +1404,29 @@
         }
         .reveal section.present img[alt="FDA logo"] { animation: scaleIn 0.5s ease-out 0.3s both; }
 
-        /* Proven logos section */
-        .proven-logos {
+        /* Logo triangle layout */
+        .logo-triangle {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 1em;
-            padding: 1.5em 2em;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            gap: 1.5em;
         }
 
-        .proven-label {
-            font-size: 0.85em;
-            font-weight: 600;
-            color: var(--text-light);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
+        .logo-triangle .logo-top {
+            width: 190px;
+            opacity: 0.7;
         }
 
-        .logo-row {
+        .logo-bottom-row {
             display: flex;
             align-items: center;
             gap: 2em;
         }
 
-        .logo-row img {
-            height: 45px;
+        .logo-bottom-row img {
+            height: 40px;
             width: auto;
-            opacity: 0.75;
-            transition: opacity 0.3s ease;
-        }
-
-        .logo-row img:hover {
-            opacity: 1;
+            opacity: 0.7;
         }
 
         /* Two Types of Insulin Delivery animations */
@@ -1606,7 +1594,7 @@
         }
 
         .stat-circle .circle.medium {
-            width: 170px;
+            width: 140px;
             height: 170px;
         }
 
@@ -1951,7 +1939,7 @@
 
             <!-- Step 3: The Learning Loop -->
             <section class="learning-loop-slide">
-                <img src="loop-arrow.png" alt="Learning loop" style="position: absolute; top: 160px; right: 350px; width: 170px;">
+                <img src="loop-arrow.png" alt="Learning loop" style="position: absolute; top: 160px; right: 350px; width: 140px;">
                 <div class="slide-content">
                     <h3>How It Works</h3>
                     <h2>Step 3: The Learning Loop</h2>
@@ -2058,8 +2046,8 @@
                     <h3>Business Model</h3>
                     <h2>Path to Market</h2>
                     <p style="margin-top: 0.5em; margin-bottom: 1.2em;">The global diabetes care market is valued at <strong>$72 billion</strong>.<br>Insulin delivery devices are growing 8% annually.</p>
-                    <div style="display: flex; align-items: flex-start; gap: 50px;">
-                        <table style="max-width: 500px;">
+                    <div style="display: flex; align-items: center; gap: 60px;">
+                        <table style="max-width: 550px;">
                             <tbody>
                                 <tr>
                                     <td style="width: 140px;"><strong>Regulatory</strong></td>
@@ -2079,15 +2067,15 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="proven-logos">
-                            <span class="proven-label">Proven by</span>
-                            <div class="logo-row">
-                                <img src="fda-logo.png" alt="FDA logo">
+                        <div class="logo-triangle">
+                            <img src="fda-logo.png" alt="FDA logo" class="logo-top">
+                            <div class="logo-bottom-row">
                                 <img src="tidepool-logo.png" alt="Tidepool logo">
                                 <img src="bigfoot-logo.webp" alt="Bigfoot Biomedical logo">
                             </div>
                         </div>
                     </div>
+                    <p style="margin-top: 1.2em; font-style: italic; color: var(--text-light);">Tidepool and Bigfoot have proven this regulatory and reimbursement model.</p>
                 </div>
             </section>
 
