@@ -672,21 +672,26 @@
             width: 100%;
         }
 
-        .thank-you-slide {
+        .thank-you-section {
             position: relative;
             overflow: hidden;
+        }
+
+        .thank-you-slide {
+            position: relative;
             align-items: center !important;
             justify-content: center !important;
         }
 
         .confetti-container {
             position: absolute;
-            top: -200px;
+            top: 0;
             left: 0;
             width: 100%;
-            height: calc(100% + 200px);
+            height: 100%;
             pointer-events: none;
             overflow: hidden;
+            z-index: 10;
         }
 
         .confetti {
@@ -1141,10 +1146,10 @@
             </section>
 
             <!-- Thank You -->
-            <section class="true-center">
+            <section class="true-center thank-you-section">
+                <div class="confetti-container"></div>
                 <div class="slide-content centered thank-you-slide">
                     <h2 class="thank-you-text">Thank you!</h2>
-                    <div class="confetti-container"></div>
                 </div>
             </section>
 

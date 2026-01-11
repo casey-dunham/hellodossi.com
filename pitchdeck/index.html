@@ -1016,21 +1016,26 @@
             width: 100%;
         }
 
-        .thank-you-slide {
+        .thank-you-section {
             position: relative;
             overflow: hidden;
+        }
+
+        .thank-you-slide {
+            position: relative;
             align-items: center !important;
             justify-content: center !important;
         }
 
         .confetti-container {
             position: absolute;
-            top: -200px;
+            top: 0;
             left: 0;
             width: 100%;
-            height: calc(100% + 200px);
+            height: 100%;
             pointer-events: none;
             overflow: hidden;
+            z-index: 10;
         }
 
         .confetti {
@@ -1498,27 +1503,29 @@
 
         .spark {
             position: absolute;
-            width: 8px;
-            height: 12px;
-            border-radius: 2px;
+            width: 6px;
+            height: 6px;
             background: var(--accent);
             opacity: 0;
             top: 50%;
             left: 50%;
         }
 
+        .spark.circle { border-radius: 50%; }
+        .spark.square { border-radius: 2px; }
+
         @keyframes sparkFirework {
             0% {
                 opacity: 1;
-                transform: translate(-50%, -50%) scale(1);
+                transform: translate(-50%, -50%) rotate(0deg);
             }
-            30% {
+            20% {
                 opacity: 1;
-                transform: translate(var(--tx), var(--ty-up)) scale(1.2);
+                transform: translate(var(--tx), var(--ty-up)) rotate(180deg);
             }
             100% {
                 opacity: 0;
-                transform: translate(var(--tx), var(--ty-down)) scale(0.3);
+                transform: translate(var(--tx-end), var(--ty-down)) rotate(720deg);
             }
         }
 
@@ -1869,10 +1876,10 @@
             </section>
 
             <!-- Thank You -->
-            <section class="true-center">
+            <section class="true-center thank-you-section">
+                <div class="confetti-container"></div>
                 <div class="slide-content centered thank-you-slide">
                     <h2 class="thank-you-text">Thank you!</h2>
-                    <div class="confetti-container"></div>
                 </div>
             </section>
 
@@ -2040,25 +2047,30 @@
 
             // Pure yellow colors
             const colors = ['#FFD700', '#FFEB3B', '#FFF176', '#FFEE58', '#FFE800'];
-            const numSparks = 35;
+            const shapes = ['circle', 'square'];
+            const numSparks = 40;
 
             for (let i = 0; i < numSparks; i++) {
                 const spark = document.createElement('div');
-                spark.className = 'spark';
+                spark.className = 'spark ' + shapes[Math.floor(Math.random() * shapes.length)];
                 spark.style.background = colors[Math.floor(Math.random() * colors.length)];
 
-                // Firework effect - spread horizontally, burst up then fall down
-                const spreadX = (Math.random() - 0.5) * 300;
-                const riseHeight = -80 - Math.random() * 120; // Go up
-                const fallHeight = 150 + Math.random() * 200; // Then fall down
+                // Firework effect - burst outward then gently fall
+                const startX = (Math.random() - 0.5) * 200;
+                const riseHeight = -60 - Math.random() * 80;
+                const driftX = startX + (Math.random() - 0.5) * 100;
+                const fallHeight = 180 + Math.random() * 150;
 
-                spark.style.setProperty('--tx', spreadX + 'px');
+                spark.style.setProperty('--tx', startX + 'px');
                 spark.style.setProperty('--ty-up', riseHeight + 'px');
+                spark.style.setProperty('--tx-end', driftX + 'px');
                 spark.style.setProperty('--ty-down', fallHeight + 'px');
-                spark.style.width = (5 + Math.random() * 8) + 'px';
-                spark.style.height = (10 + Math.random() * 15) + 'px';
-                spark.style.animation = `sparkFirework ${1.2 + Math.random() * 0.8}s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards`;
-                spark.style.animationDelay = (Math.random() * 0.15) + 's';
+
+                const size = 4 + Math.random() * 6;
+                spark.style.width = size + 'px';
+                spark.style.height = size + 'px';
+                spark.style.animation = `sparkFirework ${2.5 + Math.random() * 1.5}s ease-out forwards`;
+                spark.style.animationDelay = (Math.random() * 0.2) + 's';
 
                 container.appendChild(spark);
             }
