@@ -618,9 +618,9 @@
     <!-- Problem -->
     <section class="problem fade-in">
         <div class="problem-inner">
-            <p class="problem-stat">40%</p>
+            <p class="problem-stat">47%</p>
             <h2 class="problem-title">
-                The average person with Type 1 Diabetes spends 40% of their day with glucose levels outside the healthy range. Static pump formulas aren't enough.
+                The average person with Type 1 Diabetes spends 47% of their day with glucose levels outside the healthy range. Static pump formulas aren't enough.
             </h2>
             <p class="problem-text">
                 Current insulin delivery systems use rigid math that ignores the dozens of factors that actually affect insulin sensitivity. Dossi fills the gap—providing intelligent recommendations that adapt to your life.
@@ -829,12 +829,12 @@
 
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-        // 40% Counter animation
+        // 47% Counter animation
         const counterObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const counter = entry.target;
-                    const target = 40;
+                    const target = 47;
                     let current = 0;
                     const increment = target / 50;
                     const timer = setInterval(() => {
