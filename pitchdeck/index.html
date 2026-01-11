@@ -1404,6 +1404,43 @@
         }
         .reveal section.present img[alt="FDA logo"] { animation: scaleIn 0.5s ease-out 0.3s both; }
 
+        /* Proven logos section */
+        .proven-logos {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1em;
+            padding: 1.5em 2em;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .proven-label {
+            font-size: 0.85em;
+            font-weight: 600;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .logo-row {
+            display: flex;
+            align-items: center;
+            gap: 2em;
+        }
+
+        .logo-row img {
+            height: 45px;
+            width: auto;
+            opacity: 0.75;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo-row img:hover {
+            opacity: 1;
+        }
+
         /* Two Types of Insulin Delivery animations */
         .reveal section.present .insulin-type-card { animation: scaleIn 0.5s ease-out both; }
         .reveal section.present .insulin-type-card:nth-child(1) { animation-delay: 0.15s; }
@@ -2021,8 +2058,8 @@
                     <h3>Business Model</h3>
                     <h2>Path to Market</h2>
                     <p style="margin-top: 0.5em; margin-bottom: 1.2em;">The global diabetes care market is valued at <strong>$72 billion</strong>.<br>Insulin delivery devices are growing 8% annually.</p>
-                    <div style="display: flex; align-items: center; gap: 60px;">
-                        <table style="max-width: 550px;">
+                    <div style="display: flex; align-items: flex-start; gap: 50px;">
+                        <table style="max-width: 500px;">
                             <tbody>
                                 <tr>
                                     <td style="width: 140px;"><strong>Regulatory</strong></td>
@@ -2042,9 +2079,15 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <img src="fda-logo.png" alt="FDA logo" style="width: 190px; opacity: 0.7; margin-left: 40px;">
+                        <div class="proven-logos">
+                            <span class="proven-label">Proven by</span>
+                            <div class="logo-row">
+                                <img src="fda-logo.png" alt="FDA logo">
+                                <img src="tidepool-logo.png" alt="Tidepool logo">
+                                <img src="bigfoot-logo.webp" alt="Bigfoot Biomedical logo">
+                            </div>
+                        </div>
                     </div>
-                    <p style="margin-top: 1.2em; font-style: italic; color: var(--text-light);">Tidepool and Bigfoot have proven this regulatory and reimbursement model.</p>
                 </div>
             </section>
 
