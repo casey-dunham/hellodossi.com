@@ -674,6 +674,42 @@
             overflow: hidden;
         }
 
+        .title-slide .slide-content {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            max-width: none;
+        }
+
+        .title-left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            padding-right: 40px;
+        }
+
+        .title-right {
+            position: relative;
+            flex-shrink: 0;
+            width: 380px;
+            height: 100%;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            overflow: visible;
+        }
+
+        .title-right img {
+            position: absolute;
+            bottom: -50px;
+            width: 380px;
+            height: auto;
+            border-radius: 32px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+        }
+
         .title-tagline {
             font-family: 'Playfair Display', Georgia, serif;
             font-size: 4.2em;
@@ -682,7 +718,7 @@
             line-height: 1.1;
             letter-spacing: -0.02em;
             margin-bottom: 0.3em;
-            text-align: center;
+            text-align: left;
         }
 
         .title-subtitle {
@@ -691,7 +727,7 @@
             color: var(--text-light);
             font-weight: 400;
             letter-spacing: 0.02em;
-            text-align: center;
+            text-align: left;
         }
 
         /* Logo */
@@ -898,6 +934,7 @@
             font-size: 4.5em !important;
             font-weight: 400 !important;
             text-align: center !important;
+            width: 100%;
         }
 
         .thank-you-slide {
@@ -1360,9 +1397,14 @@
 
             <!-- 1. Title -->
             <section class="title-slide">
-                <div class="slide-content centered">
-                    <h1 class="title-tagline">Intelligent<br>Insulin Dosing</h1>
-                    <p class="title-subtitle">A look at smarter diabetes management.</p>
+                <div class="slide-content">
+                    <div class="title-left">
+                        <h1 class="title-tagline">Intelligent<br>Insulin Dosing</h1>
+                        <p class="title-subtitle">A look at smarter diabetes management.</p>
+                    </div>
+                    <div class="title-right">
+                        <img src="dossi-dashboard.png" alt="Dossi Dashboard">
+                    </div>
                 </div>
             </section>
 
