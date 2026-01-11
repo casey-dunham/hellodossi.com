@@ -298,6 +298,7 @@
             justify-content: center;
             border-radius: 50%;
             flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(115, 123, 242, 0.4);
         }
 
         .stat-box .label {
@@ -334,7 +335,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 8px;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(115, 123, 242, 0.4);
         }
 
         .factor-item .factor-content strong {
@@ -399,7 +401,7 @@
         }
 
         .reveal th {
-            background: var(--accent);
+            background: rgba(115, 123, 242, 0.65);
             color: white;
             padding: 1em 1.6em;
             font-weight: 600;
@@ -737,90 +739,100 @@
         .t1d-intro {
             font-size: 1.15em;
             color: var(--text-dark);
-            max-width: 550px;
-            line-height: 1.6;
-            margin-bottom: 1.2em;
+            max-width: 850px;
+            line-height: 1.7;
+            margin-bottom: 1.8em;
         }
 
-        .t1d-insulin-types {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 1.2em;
+        .t1d-challenge-section {
+            margin-bottom: 1.8em;
         }
 
-        .insulin-box {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            width: 260px;
-        }
-
-        .insulin-box-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 0.8em 1.2em;
-            color: white;
-        }
-
-        .insulin-box-header i {
-            font-size: 1.2em;
-        }
-
-        .insulin-box-header.basal {
-            background: var(--accent);
-        }
-
-        .insulin-box-header.bolus {
-            background: #8B5CF6;
-        }
-
-        .insulin-box-content {
-            padding: 1em 1.2em;
-        }
-
-        .insulin-box-content p {
-            font-size: 0.95em;
+        .t1d-challenge-title {
+            font-size: 1.1em;
+            font-weight: 600;
             color: var(--text-dark);
-            margin-bottom: 0.3em;
-        }
-
-        .insulin-detail {
-            font-size: 0.85em;
-            color: var(--text-light);
-        }
-
-        .t1d-stakes {
-            display: flex;
-            gap: 15px;
             margin-bottom: 1em;
         }
 
-        .stake-card {
-            background: var(--bg-gray);
-            padding: 0.8em 1.2em;
-            border-radius: 12px;
-            font-size: 0.9em;
-            color: var(--text-dark);
+        .t1d-challenge-title i {
+            color: var(--accent);
+            font-size: 1.2em;
         }
 
-        .t1d-tagline {
+        .t1d-challenge-grid {
+            display: flex;
+            gap: 20px;
+        }
+
+        .t1d-challenge-card {
+            flex: 1;
+            background: white;
+            border-radius: 20px;
+            padding: 1.4em 1.6em;
+            display: flex;
+            align-items: center;
+            gap: 1em;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .challenge-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(115, 123, 242, 0.4);
+        }
+
+        .challenge-icon i {
+            color: white;
+            font-size: 1.1em;
+        }
+
+        .challenge-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3em;
+        }
+
+        .challenge-text strong {
+            color: var(--text-dark);
+            font-size: 1em;
+            font-weight: 600;
+        }
+
+        .challenge-text span {
+            color: var(--text-medium);
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        .t1d-stakes-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4em;
+        }
+
+        .t1d-stakes-text p {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+            font-size: 1em;
+            color: var(--text-medium);
+            margin: 0;
+        }
+
+        .t1d-stakes-text i {
             font-size: 1em;
             color: var(--text-light);
-            max-width: 500px;
         }
 
-        .t1d-illustration {
-            position: absolute;
-            right: 60px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        .t1d-illustration img {
-            width: 260px;
-            opacity: 0.85;
+        .t1d-stakes-text strong {
+            color: var(--text-dark);
         }
 
         /* Why This Matters - Circular Stats */
@@ -895,6 +907,60 @@
             max-width: 200px;
             line-height: 1.4;
             min-height: 2.8em;
+        }
+
+        /* Basal Rate Intelligence slide */
+        .basal-timeline {
+            display: flex;
+            gap: 12px;
+            margin-top: 1.5em;
+            align-items: flex-end;
+        }
+
+        .basal-period {
+            flex: 1;
+            text-align: center;
+        }
+
+        .period-time {
+            font-size: 0.75em;
+            color: var(--text-light);
+            margin-bottom: 0.5em;
+            font-weight: 600;
+        }
+
+        .period-bar {
+            width: 100%;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 0.5em;
+        }
+
+        .period-bar.low {
+            height: 60px;
+            background: linear-gradient(180deg, #C7CAFC, #A5ABFA);
+        }
+
+        .period-bar.medium {
+            height: 90px;
+            background: linear-gradient(180deg, #8B92F7, #737BF2);
+        }
+
+        .period-bar.high {
+            height: 130px;
+            background: linear-gradient(180deg, #5B63E0, #4338CA);
+        }
+
+        .period-label {
+            font-size: 0.8em;
+            font-weight: 600;
+            color: var(--text-dark);
+            line-height: 1.3;
+        }
+
+        .period-label span {
+            font-weight: 400;
+            color: var(--text-light);
+            font-size: 0.9em;
         }
 
         /* ========== ANIMATIONS ========== */
@@ -995,6 +1061,23 @@
             animation: scaleIn 0.5s ease-out 0.3s both, loopSpin 6s ease-in-out 1s infinite;
         }
         .reveal section.present img[alt="FDA logo"] { animation: scaleIn 0.5s ease-out 0.3s both; }
+
+        /* Basal Rate Intelligence animations */
+        .reveal section.present .basal-period { animation: slideUpFromBottom 0.5s ease-out both; }
+        .reveal section.present .basal-timeline .basal-period:nth-child(1) { animation-delay: 0.15s; }
+        .reveal section.present .basal-timeline .basal-period:nth-child(2) { animation-delay: 0.25s; }
+        .reveal section.present .basal-timeline .basal-period:nth-child(3) { animation-delay: 0.35s; }
+        .reveal section.present .basal-timeline .basal-period:nth-child(4) { animation-delay: 0.45s; }
+        .reveal section.present .basal-timeline .basal-period:nth-child(5) { animation-delay: 0.55s; }
+
+        /* T1D slide animations */
+        .reveal section.present .t1d-challenge-title { animation: fadeInUp 0.5s ease-out 0.2s both; }
+        .reveal section.present .t1d-challenge-card { animation: slideInLeft 0.5s ease-out both; }
+        .reveal section.present .t1d-challenge-grid .t1d-challenge-card:nth-child(1) { animation-delay: 0.3s; }
+        .reveal section.present .t1d-challenge-grid .t1d-challenge-card:nth-child(2) { animation-delay: 0.45s; }
+        .reveal section.present .stake-item { animation: fadeInUp 0.4s ease-out both; }
+        .reveal section.present .t1d-stakes-row .stake-item:nth-child(1) { animation-delay: 0.6s; }
+        .reveal section.present .t1d-stakes-row .stake-item:nth-child(2) { animation-delay: 0.7s; }
 
         @keyframes loopSpin {
             0% { transform: rotate(0deg); }
@@ -1165,37 +1248,32 @@
                 <div class="slide-content">
                     <h3>Introduction</h3>
                     <h2>What Is Type 1 Diabetes?</h2>
-                    <p class="t1d-intro">My pancreas doesn't make insulin. I have to deliver it myself — constantly — to stay alive.</p>
-                    <div class="t1d-insulin-types">
-                        <div class="insulin-box">
-                            <div class="insulin-box-header basal">
-                                <i class="ph-fill ph-clock"></i>
-                                <strong>Basal Insulin</strong>
+                    <p class="t1d-intro">Type 1 diabetes is a condition where the body does not produce insulin.<br>So people with Type 1 diabetes must <strong>deliver insulin themselves</strong> through injections and insulin pumps.</p>
+
+                    <div class="t1d-challenge-section">
+                        <h4 class="t1d-challenge-title">What Makes It Hard</h4>
+                        <div class="t1d-challenge-grid">
+                            <div class="t1d-challenge-card">
+                                <div class="challenge-icon"><i class="ph-fill ph-target"></i></div>
+                                <div class="challenge-text">
+                                    <strong>Precise delivery required</strong>
+                                    <span>Continuously, in exact doses, to cover food and correct highs</span>
+                                </div>
                             </div>
-                            <div class="insulin-box-content">
-                                <p>Background drip that runs <strong>24/7</strong></p>
-                                <span class="insulin-detail">Keeps glucose stable between meals and overnight</span>
-                            </div>
-                        </div>
-                        <div class="insulin-box">
-                            <div class="insulin-box-header bolus">
-                                <i class="ph-fill ph-fork-knife"></i>
-                                <strong>Bolus Insulin</strong>
-                            </div>
-                            <div class="insulin-box-content">
-                                <p>Dose I take <strong>every time I eat</strong></p>
-                                <span class="insulin-detail">Covers carbs and corrects high glucose</span>
+                            <div class="t1d-challenge-card">
+                                <div class="challenge-icon"><i class="ph-fill ph-arrows-clockwise"></i></div>
+                                <div class="challenge-text">
+                                    <strong>Needs change constantly</strong>
+                                    <span>Food, activity, stress, sleep, illness all affect insulin needs</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="t1d-stakes">
-                        <div class="stake-card">Too much insulin → seizures, coma</div>
-                        <div class="stake-card">Too little insulin → organ damage</div>
+
+                    <div class="t1d-stakes-text">
+                        <p><i class="ph-fill ph-arrow-down"></i> Too much insulin → <strong>dangerous lows</strong></p>
+                        <p><i class="ph-fill ph-arrow-up"></i> Too little insulin → <strong>long-term damage</strong></p>
                     </div>
-                    <p class="t1d-tagline">The margin for error is small.</p>
-                </div>
-                <div class="t1d-illustration">
-                    <img src="pancreas.png" alt="Pancreas illustration">
                 </div>
             </section>
 
@@ -1264,6 +1342,43 @@
                 </div>
                 <div class="nutrition-phone">
                     <img src="nutrition-tracker.png" alt="Nutrition Tracker">
+                </div>
+            </section>
+
+            <!-- Basal Rate Intelligence -->
+            <section>
+                <div class="slide-content">
+                    <h3>Beyond Meals</h3>
+                    <h2>Basal Rate Intelligence</h2>
+                    <p>Dossi learns your background insulin needs throughout the day and automatically adjusts delivery.</p>
+                    <div class="basal-timeline">
+                        <div class="basal-period">
+                            <div class="period-time">12am – 4am</div>
+                            <div class="period-bar low"></div>
+                            <div class="period-label">Deep Sleep<br><span>Lower rates during rest</span></div>
+                        </div>
+                        <div class="basal-period">
+                            <div class="period-time">4am – 8am</div>
+                            <div class="period-bar high"></div>
+                            <div class="period-label">Dawn Phenomenon<br><span>Hormones spike glucose</span></div>
+                        </div>
+                        <div class="basal-period">
+                            <div class="period-time">8am – 12pm</div>
+                            <div class="period-bar medium"></div>
+                            <div class="period-label">Morning Active<br><span>Moderate baseline</span></div>
+                        </div>
+                        <div class="basal-period">
+                            <div class="period-time">12pm – 6pm</div>
+                            <div class="period-bar medium"></div>
+                            <div class="period-label">Afternoon<br><span>Activity-adjusted</span></div>
+                        </div>
+                        <div class="basal-period">
+                            <div class="period-time">6pm – 12am</div>
+                            <div class="period-bar low"></div>
+                            <div class="period-label">Evening Wind-down<br><span>Gradual reduction</span></div>
+                        </div>
+                    </div>
+                    <p style="margin-top: 1em; font-style: italic; color: var(--text-light);">Dossi learns YOUR unique patterns and suggests basal adjustments automatically.</p>
                 </div>
             </section>
 

@@ -372,6 +372,7 @@
             align-items: center;
             justify-content: center;
             border-radius: 50%;
+            box-shadow: 0 3px 10px rgba(115, 123, 242, 0.4);
         }
 
         .factor-item-full .factor-content {
@@ -437,6 +438,7 @@
             justify-content: center;
             border-radius: 50%;
             flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(115, 123, 242, 0.4);
         }
 
         .stat-box .label {
@@ -508,6 +510,7 @@
             align-items: center;
             justify-content: center;
             border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(115, 123, 242, 0.4);
         }
 
         .factor-item .factor-content strong {
@@ -596,7 +599,7 @@
         }
 
         .reveal th {
-            background: var(--accent);
+            background: rgba(115, 123, 242, 0.65);
             color: white;
             padding: 1em 1.6em;
             font-weight: 600;
@@ -764,7 +767,7 @@
         .insulin-icon {
             width: 50px;
             height: 50px;
-            border-radius: 16px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -777,11 +780,13 @@
         }
 
         .insulin-icon.basal {
-            background: linear-gradient(135deg, #60A5FA, #3B82F6);
+            background: #737BF2;
+            box-shadow: 0 4px 16px rgba(115, 123, 242, 0.4);
         }
 
         .insulin-icon.bolus {
-            background: linear-gradient(135deg, #F472B6, #EC4899);
+            background: #737BF2;
+            box-shadow: 0 4px 16px rgba(115, 123, 242, 0.4);
         }
 
         .insulin-type-card h4 {
@@ -849,17 +854,17 @@
 
         .period-bar.low {
             height: 60px;
-            background: linear-gradient(180deg, #9CA3F9, #737BF2);
+            background: linear-gradient(180deg, #C7CAFC, #A5ABFA);
         }
 
         .period-bar.medium {
             height: 90px;
-            background: linear-gradient(180deg, #737BF2, #5B63E0);
+            background: linear-gradient(180deg, #8B92F7, #737BF2);
         }
 
         .period-bar.high {
             height: 130px;
-            background: linear-gradient(180deg, #5B63E0, #4F46E5);
+            background: linear-gradient(180deg, #5B63E0, #4338CA);
         }
 
         .period-label {
@@ -1399,6 +1404,29 @@
         }
         .reveal section.present img[alt="FDA logo"] { animation: scaleIn 0.5s ease-out 0.3s both; }
 
+        /* Two Types of Insulin Delivery animations */
+        .reveal section.present .insulin-type-card { animation: scaleIn 0.5s ease-out both; }
+        .reveal section.present .insulin-type-card:nth-child(1) { animation-delay: 0.15s; }
+        .reveal section.present .insulin-type-card:nth-child(2) { animation-delay: 0.3s; }
+        .reveal section.present .insulin-type-card .insulin-icon { animation: scaleIn 0.4s ease-out both; }
+        .reveal section.present .insulin-type-card:nth-child(1) .insulin-icon { animation-delay: 0.3s; }
+        .reveal section.present .insulin-type-card:nth-child(2) .insulin-icon { animation-delay: 0.45s; }
+        .reveal section.present .insulin-details li { animation: fadeInUp 0.4s ease-out both; }
+        .reveal section.present .insulin-type-card:nth-child(1) .insulin-details li:nth-child(1) { animation-delay: 0.4s; }
+        .reveal section.present .insulin-type-card:nth-child(1) .insulin-details li:nth-child(2) { animation-delay: 0.5s; }
+        .reveal section.present .insulin-type-card:nth-child(1) .insulin-details li:nth-child(3) { animation-delay: 0.6s; }
+        .reveal section.present .insulin-type-card:nth-child(2) .insulin-details li:nth-child(1) { animation-delay: 0.55s; }
+        .reveal section.present .insulin-type-card:nth-child(2) .insulin-details li:nth-child(2) { animation-delay: 0.65s; }
+        .reveal section.present .insulin-type-card:nth-child(2) .insulin-details li:nth-child(3) { animation-delay: 0.75s; }
+
+        /* Basal Rate Intelligence animations */
+        .reveal section.present .basal-period { animation: slideUpFromBottom 0.5s ease-out both; }
+        .reveal section.present .basal-timeline .basal-period:nth-child(1) { animation-delay: 0.15s; }
+        .reveal section.present .basal-timeline .basal-period:nth-child(2) { animation-delay: 0.25s; }
+        .reveal section.present .basal-timeline .basal-period:nth-child(3) { animation-delay: 0.35s; }
+        .reveal section.present .basal-timeline .basal-period:nth-child(4) { animation-delay: 0.45s; }
+        .reveal section.present .basal-timeline .basal-period:nth-child(5) { animation-delay: 0.55s; }
+
         @keyframes loopSpin {
             0% { transform: rotate(0deg); }
             16.67% { transform: rotate(0deg); }
@@ -1905,7 +1933,7 @@
                 <div class="slide-content">
                     <h3>Beyond Meals</h3>
                     <h2>Basal Rate Intelligence</h2>
-                    <p>Dossi doesn't just optimize meal-time doses — it learns your background insulin needs throughout the day.</p>
+                    <p>Dossi learns your background insulin needs throughout the day and automatically adjusts delivery.</p>
                     <div class="basal-timeline">
                         <div class="basal-period">
                             <div class="period-time">12am – 4am</div>
