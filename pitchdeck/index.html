@@ -757,13 +757,16 @@
 
         .nutrition-phone-left {
             flex-shrink: 0;
-            width: 200px;
+            width: 260px;
+            position: relative;
         }
 
         .nutrition-phone-left img {
             width: 100%;
             height: auto;
             display: block;
+            mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
         }
 
         .title-tagline {
