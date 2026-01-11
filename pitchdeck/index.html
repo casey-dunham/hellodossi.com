@@ -1288,6 +1288,7 @@
         .stats-circles {
             display: flex;
             justify-content: center;
+            align-items: center;
             gap: 50px;
             margin-top: 2em;
         }
@@ -1299,10 +1300,17 @@
             gap: 1.2em;
         }
 
+        .stat-circle .circle-wrapper {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         .stat-circle .circle {
             border-radius: 50%;
             background: white;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 8px 40px rgba(115, 123, 242, 0.25);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1347,6 +1355,7 @@
             text-align: center;
             max-width: 200px;
             line-height: 1.4;
+            min-height: 2.8em;
         }
     </style>
 </head>
@@ -1616,50 +1625,28 @@
                     <h2>Why This Matters</h2>
                     <div class="stats-circles">
                         <div class="stat-circle">
-                            <div class="circle large">
-                                <span class="circle-number" data-animate-number="1.7" data-suffix="M">1.7M</span>
+                            <div class="circle-wrapper">
+                                <div class="circle large">
+                                    <span class="circle-number" data-animate-number="1.7" data-suffix="M">1.7M</span>
+                                </div>
                             </div>
                             <span class="circle-label">Americans live with Type 1 diabetes.</span>
                         </div>
                         <div class="stat-circle">
-                            <div class="circle medium">
-                                <span class="circle-number" data-animate-number="21" data-suffix="%">21%</span>
+                            <div class="circle-wrapper">
+                                <div class="circle medium">
+                                    <span class="circle-number" data-animate-number="21" data-suffix="%">21%</span>
+                                </div>
                             </div>
                             <span class="circle-label">Only 21% of adults with T1D meet glucose targets.</span>
                         </div>
                         <div class="stat-circle">
-                            <div class="circle small">
-                                <span class="circle-number" data-animate-number="180">180</span>
+                            <div class="circle-wrapper">
+                                <div class="circle small">
+                                    <span class="circle-number" data-animate-number="180">180</span>
+                                </div>
                             </div>
                             <span class="circle-label">Extra decisions made per day by people with T1D</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Product Today -->
-            <section>
-                <div class="slide-content">
-                    <h3>Product</h3>
-                    <h2>What I'm Building</h2>
-                    <div class="two-col">
-                        <div>
-                            <h4>Dossi</h4>
-                            <ul>
-                                <li>Glucose monitoring + trends</li>
-                                <li>Meal entry (photo AI, barcode)</li>
-                                <li>Macro-aware recommendations</li>
-                                <li>Full explanation of "why"</li>
-                            </ul>
-                        </div>
-                        <div>
-                            <h4>Dossi Follow</h4>
-                            <ul>
-                                <li>Real-time monitoring</li>
-                                <li>Customizable alerts</li>
-                                <li>Apple Watch app</li>
-                                <li>Home screen widgets</li>
-                            </ul>
                         </div>
                     </div>
                 </div>
