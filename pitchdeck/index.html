@@ -733,16 +733,17 @@
             top: 40%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 500px;
-            height: 650px;
-            background: radial-gradient(ellipse, rgba(115, 123, 242, 0.5) 0%, rgba(115, 123, 242, 0.25) 30%, rgba(115, 123, 242, 0.1) 50%, transparent 70%);
+            width: 600px;
+            height: 750px;
+            background: radial-gradient(ellipse, rgba(115, 123, 242, 0.6) 0%, rgba(115, 123, 242, 0.35) 30%, rgba(115, 123, 242, 0.15) 50%, transparent 70%);
             filter: blur(40px);
             pointer-events: none;
+            z-index: 1;
         }
 
         .title-phone img {
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
 
         /* Problem slide with pump */
@@ -1447,7 +1448,7 @@
                 <div class="slide-content" style="margin-top: 120px;">
                     <div style="display: flex; align-items: center; gap: 35px;">
                         <img src="dossi-wordmark.png" alt="Dossi" style="width: 380px;">
-                        <div style="width: 60px; height: 60px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 20px;">
+                        <div style="width: 60px; height: 60px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 20px; box-shadow: 0 8px 24px rgba(115, 123, 242, 0.4);">
                             <i class="ph-bold ph-arrow-right" style="color: white; font-size: 1.6em;"></i>
                         </div>
                     </div>
