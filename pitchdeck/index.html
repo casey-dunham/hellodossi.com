@@ -744,32 +744,15 @@
             max-width: 500px;
         }
 
-        .nutrition-phone {
-            position: absolute;
-            right: 80px;
-            bottom: -120px;
-            width: 300px;
-            z-index: 10;
+        .nutrition-phone-left {
+            flex-shrink: 0;
+            width: 200px;
         }
 
-        .nutrition-phone img {
+        .nutrition-phone-left img {
             width: 100%;
             height: auto;
             display: block;
-            position: relative;
-            z-index: 1;
-        }
-
-        .nutrition-phone-glow {
-            position: absolute;
-            top: 40%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 400px;
-            height: 500px;
-            background: radial-gradient(ellipse, rgba(115, 123, 242, 0.5) 0%, rgba(115, 123, 242, 0.25) 30%, rgba(115, 123, 242, 0.1) 50%, transparent 70%);
-            filter: blur(40px);
-            pointer-events: none;
         }
 
         .title-tagline {
@@ -995,15 +978,15 @@
             font-family: 'Plus Jakarta Sans', sans-serif !important;
             font-size: 4.5em !important;
             font-weight: 800 !important;
-            text-align: left !important;
+            text-align: center !important;
             width: 100%;
-            margin-top: -1em;
         }
 
         .thank-you-slide {
             position: relative;
             overflow: hidden;
-            align-items: flex-start !important;
+            align-items: center !important;
+            justify-content: center !important;
         }
 
         .confetti-container {
@@ -1370,11 +1353,11 @@
 
             <!-- 5. The Solution -->
             <section>
-                <div class="slide-content centered" style="text-align: center; align-items: center;">
-                    <h3 style="text-align: center; width: 100%;">The Solution</h3>
+                <div class="slide-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; max-width: none;">
+                    <h3>The Solution</h3>
                     <img src="dossi-wordmark.png" alt="Dossi" class="logo-hero" style="margin-top: 0.5em; margin-bottom: 1.5em;">
-                    <p class="big-statement" style="margin-top: 1.2em; text-align: center;">An insulin advisor that sees the <span class="gradient-text">full picture</span></p>
-                    <p style="margin-top: 1em; text-align: center;">Dossi considers <strong><span class="number" data-animate-number="40" data-suffix="+">40+</span> factors</strong> and <strong>learns your patterns</strong> over time.</p>
+                    <p class="big-statement" style="margin-top: 1.2em;">An insulin advisor that sees the <span class="gradient-text">full picture</span></p>
+                    <p style="margin-top: 1em;">Dossi considers <strong><span class="number" data-animate-number="40" data-suffix="+">40+</span> factors</strong> and <strong>learns your patterns</strong> over time.</p>
                 </div>
             </section>
 
@@ -1413,20 +1396,21 @@
             </section>
 
             <!-- Photo Recognition -->
-            <section class="photo-meal-slide">
+            <section>
                 <div class="slide-content">
                     <h3>Features</h3>
                     <h2>Photo Meal Recognition</h2>
-                    <div class="photo-steps" style="max-width: 500px;">
-                        <div class="photo-step"><span class="step-num">1.</span><span>Snap a photo of any meal</span></div>
-                        <div class="photo-step"><span class="step-num">2.</span><span>AI identifies individual foods</span></div>
-                        <div class="photo-step"><span class="step-num">3.</span><span>Estimates carbs, protein, fat</span></div>
-                        <div class="photo-step"><span class="step-num">4.</span><span>Suggests dosage</span></div>
+                    <div class="photo-feature-layout">
+                        <div class="nutrition-phone-left">
+                            <img src="nutrition-tracker.png" alt="Nutrition Tracker">
+                        </div>
+                        <div class="photo-steps">
+                            <div class="photo-step"><span class="step-num">1.</span><span>Snap a photo of any meal</span></div>
+                            <div class="photo-step"><span class="step-num">2.</span><span>AI identifies individual foods</span></div>
+                            <div class="photo-step"><span class="step-num">3.</span><span>Estimates carbs, protein, fat</span></div>
+                            <div class="photo-step"><span class="step-num">4.</span><span>Suggests dosage</span></div>
+                        </div>
                     </div>
-                </div>
-                <div class="nutrition-phone">
-                    <div class="nutrition-phone-glow"></div>
-                    <img src="nutrition-tracker.png" alt="Nutrition Tracker">
                 </div>
             </section>
 
@@ -1436,18 +1420,17 @@
                     <h3>How It Works</h3>
                     <h2>Step 2: Effective Parameters</h2>
                     <p style="margin-top: 0.8em;">Your doctor gives you base settings:</p>
-                    <div class="stat-row" style="max-width: 650px;">
-                        <div class="stat-box">
-                            <div class="label" style="font-weight: 700; color: var(--text-dark); font-size: 1em; margin-bottom: 0.4em;">Insulin Sensitivity Factor</div>
+                    <div style="display: flex; flex-direction: column; gap: 12px; max-width: 400px; margin-top: 1em;">
+                        <div class="stat-box" style="flex-direction: column; align-items: flex-start; gap: 0.3em;">
+                            <div class="label" style="font-weight: 700; color: var(--text-dark); font-size: 1em;">Insulin Sensitivity Factor</div>
                             <div class="label">1 unit drops 50 mg/dL</div>
                         </div>
-                        <div class="stat-box">
-                            <div class="label" style="font-weight: 700; color: var(--text-dark); font-size: 1em; margin-bottom: 0.4em;">Insulin to Carb Ratio</div>
+                        <div class="stat-box" style="flex-direction: column; align-items: flex-start; gap: 0.3em;">
+                            <div class="label" style="font-weight: 700; color: var(--text-dark); font-size: 1em;">Insulin to Carb Ratio</div>
                             <div class="label">1 unit covers 10g carbs</div>
                         </div>
                     </div>
-                    <p style="margin-top: 0.8em;">But these change with context.</p>
-                    <p>Dossi calculates your <strong>effective</strong> parameters <em>right now</em>.</p>
+                    <p style="margin-top: 1em;">But these change with context. Dossi calculates your <strong>effective</strong> parameters <em>right now</em>.</p>
                 </div>
             </section>
 
@@ -1459,7 +1442,7 @@
                     <p>Dossi doesn't use hardcoded rules like <code>exercise = +20%</code></p>
                     <p>It <strong>learns your patterns</strong> from actual glucose outcomes across <strong>all factors</strong>.</p>
                     <div class="card" style="max-width: 650px; margin-top: 1.2em;">
-                        <p style="margin: 0 0 0.8em; color: var(--text-dark); font-size: 1.15em;"><strong>Continuously learning from:</strong></p>
+                        <p style="margin: 0 0 0.8em; color: var(--text-dark); font-size: 1.15em;"><span style="font-weight: 600; color: var(--text-dark);">Continuously learning from:</span></p>
                         <div class="numbered-list">
                             <div class="numbered-item"><span class="num">1.</span><span>Meals, exercise, sleep, stress, time of day</span></div>
                             <div class="numbered-item"><span class="num">2.</span><span>Observe outcomes vs predictions</span></div>
