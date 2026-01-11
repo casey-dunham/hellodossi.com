@@ -1062,27 +1062,16 @@
         }
         .reveal section.present img[alt="FDA logo"] { animation: scaleIn 0.5s ease-out 0.3s both; }
 
-        /* Logo triangle layout */
-        .logo-triangle {
+        /* Logo stack layout */
+        .logo-stack {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 1.5em;
         }
 
-        .logo-triangle .logo-top {
-            width: 190px;
-            opacity: 0.7;
-        }
-
-        .logo-bottom-row {
-            display: flex;
-            align-items: center;
-            gap: 2em;
-        }
-
-        .logo-bottom-row img {
-            height: 40px;
+        .logo-stack img {
+            height: 45px;
             width: auto;
             opacity: 0.7;
         }
@@ -1409,7 +1398,7 @@
 
             <!-- The Learning Loop -->
             <section class="learning-loop-slide">
-                <img src="loop-arrow.png" alt="Learning loop" style="position: absolute; top: 160px; right: 350px; width: 140px;">
+                <img src="loop-arrow.png" alt="Learning loop" style="position: absolute; top: 190px; right: 350px; width: 120px;">
                 <div class="slide-content">
                     <h3>How It Works</h3>
                     <h2>The Learning Loop</h2>
@@ -1484,12 +1473,10 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <div class="logo-triangle">
-                            <img src="fda-logo.png" alt="FDA logo" class="logo-top">
-                            <div class="logo-bottom-row">
-                                <img src="tidepool-logo.png" alt="Tidepool logo">
-                                <img src="bigfoot-logo.webp" alt="Bigfoot Biomedical logo">
-                            </div>
+                        <div class="logo-stack">
+                            <img src="fda-logo.png" alt="FDA logo">
+                            <img src="tidepool-logo.png" alt="Tidepool logo">
+                            <img src="bigfoot-logo.webp" alt="Bigfoot Biomedical logo">
                         </div>
                     </div>
                     <p style="margin-top: 1.2em; font-style: italic; color: var(--text-light);">Tidepool and Bigfoot have proven this regulatory and reimbursement model.</p>
