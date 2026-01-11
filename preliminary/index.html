@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dossi — InVenture Prize Preliminary</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        :root {
+            --accent: #737BF2;
+            --accent-light: rgba(115, 123, 242, 0.15);
+            --text-dark: #1a1a1a;
+            --text-medium: #4a4a4a;
+            --text-light: #8E8E93;
+            --icon-gray: #8E8E93;
+            --bg-paper: #FAF9F6;
+            --bg-card: #f0efeb;
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: #e8e6e1;
+            overflow: hidden;
+        }
+
+        .binder-frame {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(var(--scale, 1));
+            display: flex;
+        }
+
+        .binder-page {
+            width: 1100px;
+            height: 700px;
+            background: var(--bg-paper);
+            border-radius: 4px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: visible;
+        }
+
+        .binder-page .reveal {
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .hole-punches {
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            padding: 60px 0;
+            z-index: 100;
+        }
+
+        .hole {
+            width: 14px;
+            height: 14px;
+            background: #e8e6e1;
+            border-radius: 50%;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .reveal .controls { display: none !important; }
+
+        .reveal-viewport {
+            background: var(--bg-paper);
+        }
+
+        .reveal {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-dark);
+        }
+
+        .reveal .slides {
+            text-align: left;
+        }
+
+        .reveal .slides section {
+            padding: 50px 60px 50px 120px;
+            height: 100%;
+            width: 100%;
+            background: var(--bg-paper);
+        }
+
+        .reveal h1, .reveal h2 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            text-transform: none;
+            font-weight: 700;
+            color: var(--text-dark);
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .reveal h2 {
+            font-size: 2.6em;
+            margin-bottom: 0.5em;
+        }
+
+        .reveal h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75em;
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 0.8em;
+        }
+
+        .reveal p {
+            font-size: 1.15em;
+            line-height: 1.7;
+            color: var(--text-medium);
+            margin-bottom: 0.6em;
+        }
+
+        .reveal li {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 0.5em;
+            color: var(--text-medium);
+        }
+
+        .reveal ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .reveal ul li {
+            position: relative;
+            padding-left: 1.5em;
+        }
+
+        .reveal ul li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.6em;
+            width: 6px;
+            height: 6px;
+            background: var(--text-dark);
+            border-radius: 50%;
+        }
+
+        .reveal strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .gradient-text {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .slide-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+            max-width: 950px;
+        }
+
+        .centered {
+            text-align: center;
+            max-width: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .reveal .slides section.true-center {
+            padding-left: 60px;
+            padding-right: 60px;
+        }
+
+        .reveal .slides section.true-center .slide-content {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            padding: 1.6em;
+        }
+
+        .about-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 1em;
+        }
+
+        .about-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.2em 1.4em;
+            display: flex;
+            align-items: center;
+            gap: 1em;
+            font-size: 1.05em;
+            color: var(--text-medium);
+        }
+
+        .about-card i {
+            font-size: 1.4em;
+            color: var(--text-medium);
+        }
+
+        .about-card strong {
+            color: var(--text-dark);
+        }
+
+        .gap-list {
+            list-style: none;
+            padding: 0;
+            margin: 1.6em 0;
+        }
+
+        .gap-list li {
+            display: flex;
+            align-items: center;
+            gap: 1em;
+            padding: 1.1em 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            font-size: 1.1em;
+            color: var(--text-medium);
+        }
+
+        .gap-list li::before {
+            display: none;
+        }
+
+        .gap-list li:last-child {
+            border-bottom: none;
+        }
+
+        .gap-list i {
+            font-size: 1.3em;
+            color: var(--text-medium);
+            width: 28px;
+        }
+
+        .gap-list strong {
+            color: var(--text-dark);
+        }
+
+        .stat-row {
+            display: flex;
+            gap: 24px;
+            margin: 1.2em 0;
+        }
+
+        .stat-box {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.2em 1.4em;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 1em;
+        }
+
+        .stat-box .number {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.3em;
+            font-weight: 700;
+            color: white;
+            background: var(--accent);
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+        }
+
+        .stat-box .label {
+            font-size: 1.1em;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 1em;
+            padding: 1em 1.3em;
+            margin: 0.8em 0;
+            border-radius: 12px;
+            background: var(--bg-card);
+        }
+
+        .step-num {
+            font-family: 'Plus Jakarta Sans', Georgia, serif;
+            font-weight: 400;
+            font-size: 1.4em;
+            color: var(--text-dark);
+            min-width: 1.2em;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-content strong {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .step-content span {
+            color: var(--text-medium);
+        }
+
+        .reveal table {
+            font-size: 0.95em;
+            margin: 1em 0;
+            border-collapse: separate;
+            border-spacing: 0;
+            width: 100%;
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .reveal th {
+            background: rgba(0, 0, 0, 0.04);
+            color: var(--text-dark);
+            padding: 0.9em 1.2em;
+            font-weight: 600;
+            text-align: left;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .reveal td {
+            padding: 0.85em 1.2em;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            color: var(--text-medium);
+        }
+
+        .reveal tr:last-child td {
+            border-bottom: none;
+        }
+
+        .timeline {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-top: 1.5em;
+        }
+
+        .timeline-phase {
+            flex: 1;
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 1.4em;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6em;
+            margin-bottom: 1em;
+            padding-bottom: 0.8em;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .phase-header i {
+            font-size: 1.4em;
+            color: var(--accent);
+        }
+
+        .phase-header span {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .phase-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5em;
+        }
+
+        .phase-item {
+            font-size: 0.95em;
+            color: var(--text-medium);
+            padding: 0.4em 0;
+            padding-left: 1em;
+            position: relative;
+        }
+
+        .phase-item::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.7em;
+            width: 5px;
+            height: 5px;
+            background: var(--icon-gray);
+            border-radius: 50%;
+        }
+
+        .timeline-arrow {
+            display: flex;
+            align-items: center;
+            align-self: center;
+            color: var(--accent);
+            font-size: 1.8em;
+        }
+
+        .big-statement {
+            font-family: 'Plus Jakarta Sans', Georgia, serif !important;
+            font-size: 1.5em !important;
+            font-weight: 400;
+            color: var(--text-dark) !important;
+            line-height: 1.4;
+        }
+
+        .title-slide {
+            background: var(--bg-paper) !important;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .title-slide .slide-content {
+            align-items: flex-start;
+            max-width: 550px;
+        }
+
+        .title-phone {
+            position: absolute;
+            right: 110px;
+            bottom: -120px;
+            width: 320px;
+            z-index: 10;
+        }
+
+        .title-phone img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .title-phone-glow {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            height: 650px;
+            background: radial-gradient(ellipse, rgba(115, 123, 242, 0.5) 0%, rgba(115, 123, 242, 0.25) 30%, rgba(115, 123, 242, 0.1) 50%, transparent 70%);
+            filter: blur(40px);
+            pointer-events: none;
+        }
+
+        .problem-slide {
+            position: relative;
+            overflow: visible !important;
+        }
+
+        .omnipod-img {
+            position: absolute;
+            top: 130px;
+            right: 100px;
+            width: 180px;
+            border-radius: 12px;
+        }
+
+        .photo-meal-slide {
+            position: relative;
+            overflow: visible !important;
+        }
+
+        .nutrition-phone {
+            position: absolute;
+            left: 120px;
+            bottom: -60px;
+            width: 280px;
+            z-index: 10;
+        }
+
+        .nutrition-phone img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .title-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.15em;
+            color: var(--text-light);
+            font-weight: 400;
+            letter-spacing: 0.02em;
+        }
+
+        .logo-hero {
+            height: 80px;
+        }
+
+        .photo-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            min-width: 500px;
+        }
+
+        .photo-step {
+            display: flex;
+            align-items: center;
+            gap: 0.8em;
+            font-size: 1.05em;
+            color: var(--text-medium);
+            padding: 1.1em 1.5em;
+            background: var(--bg-card);
+            border-radius: 12px;
+        }
+
+        /* Stats circles */
+        .stats-circles {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 2em;
+        }
+
+        .stat-circle {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 200px;
+        }
+
+        .circle-wrapper {
+            margin-bottom: 1em;
+        }
+
+        .circle {
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .circle.large {
+            width: 140px;
+            height: 140px;
+        }
+
+        .circle.medium {
+            width: 110px;
+            height: 110px;
+        }
+
+        .circle.small {
+            width: 90px;
+            height: 90px;
+        }
+
+        .circle-number {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            color: white;
+            font-size: 1.8em;
+        }
+
+        .circle.medium .circle-number {
+            font-size: 1.5em;
+        }
+
+        .circle.small .circle-number {
+            font-size: 1.3em;
+        }
+
+        .circle-label {
+            color: var(--text-medium);
+            font-size: 0.95em;
+            line-height: 1.4;
+        }
+
+        .thank-you-text {
+            font-size: 4em !important;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        /* Animations */
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .reveal section.present h2 { animation: fadeInUp 0.6s ease-out forwards; }
+        .reveal section.present h3 { animation: fadeIn 0.4s ease-out forwards; }
+        .reveal section.present p { animation: fadeInUp 0.6s ease-out 0.1s both; }
+
+        .reveal section.present .stat-box { animation: scaleIn 0.5s ease-out both; }
+        .reveal section.present .stat-row .stat-box:nth-child(1) { animation-delay: 0.2s; }
+        .reveal section.present .stat-row .stat-box:nth-child(2) { animation-delay: 0.35s; }
+
+        .reveal section.present .about-card { animation: scaleIn 0.4s ease-out both; }
+        .reveal section.present .about-stack .about-card:nth-child(1) { animation-delay: 0.1s; }
+        .reveal section.present .about-stack .about-card:nth-child(2) { animation-delay: 0.2s; }
+        .reveal section.present .about-stack .about-card:nth-child(3) { animation-delay: 0.3s; }
+        .reveal section.present .about-stack .about-card:nth-child(4) { animation-delay: 0.4s; }
+        .reveal section.present .about-stack .about-card:nth-child(5) { animation-delay: 0.5s; }
+
+        .reveal section.present .gap-list li { animation: fadeInUp 0.4s ease-out both; }
+        .reveal section.present .gap-list li:nth-child(1) { animation-delay: 0.1s; }
+        .reveal section.present .gap-list li:nth-child(2) { animation-delay: 0.2s; }
+        .reveal section.present .gap-list li:nth-child(3) { animation-delay: 0.3s; }
+        .reveal section.present .gap-list li:nth-child(4) { animation-delay: 0.4s; }
+
+        .reveal section.present .stat-circle { animation: scaleIn 0.5s ease-out both; }
+        .reveal section.present .stats-circles .stat-circle:nth-child(1) { animation-delay: 0.2s; }
+        .reveal section.present .stats-circles .stat-circle:nth-child(2) { animation-delay: 0.35s; }
+        .reveal section.present .stats-circles .stat-circle:nth-child(3) { animation-delay: 0.5s; }
+
+        .reveal section.present table { animation: fadeInUp 0.6s ease-out 0.2s both; }
+
+        .reveal section.present .step-item { animation: scaleIn 0.4s ease-out both; }
+        .reveal section.present .step-item:nth-child(1) { animation-delay: 0.1s; }
+        .reveal section.present .step-item:nth-child(2) { animation-delay: 0.2s; }
+        .reveal section.present .step-item:nth-child(3) { animation-delay: 0.3s; }
+        .reveal section.present .step-item:nth-child(4) { animation-delay: 0.4s; }
+        .reveal section.present .step-item:nth-child(5) { animation-delay: 0.5s; }
+
+        .reveal section.present .photo-step { animation: scaleIn 0.4s ease-out both; }
+        .reveal section.present .photo-steps .photo-step:nth-child(1) { animation-delay: 0.15s; }
+        .reveal section.present .photo-steps .photo-step:nth-child(2) { animation-delay: 0.25s; }
+        .reveal section.present .photo-steps .photo-step:nth-child(3) { animation-delay: 0.35s; }
+        .reveal section.present .photo-steps .photo-step:nth-child(4) { animation-delay: 0.45s; }
+
+        .reveal section.present .nutrition-phone { animation: scaleIn 0.6s ease-out 0.2s both; }
+        .reveal section.present .omnipod-img { animation: scaleIn 0.5s ease-out 0.3s both; }
+        .reveal section.present img[alt="FDA logo"] { animation: scaleIn 0.5s ease-out 0.3s both; }
+
+        .reveal section.present .timeline-phase { animation: scaleIn 0.5s ease-out both; }
+        .reveal section.present .timeline .timeline-phase:nth-child(1) { animation-delay: 0.1s; }
+        .reveal section.present .timeline .timeline-phase:nth-child(3) { animation-delay: 0.3s; }
+        .reveal section.present .timeline .timeline-phase:nth-child(5) { animation-delay: 0.5s; }
+
+        /* Slide number */
+        .slide-number {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8em;
+            color: var(--text-light);
+        }
+    </style>
+</head>
+<body>
+    <div class="binder-frame">
+        <div class="binder-page">
+            <div class="hole-punches">
+                <div class="hole"></div>
+                <div class="hole"></div>
+                <div class="hole"></div>
+            </div>
+            <div class="reveal">
+                <div class="slides">
+
+            <!-- 1. Title -->
+            <section class="title-slide">
+                <div class="slide-content" style="margin-top: 120px;">
+                    <div style="display: flex; align-items: center; gap: 35px;">
+                        <img src="dossi-wordmark.png" alt="Dossi" style="width: 380px;">
+                        <div style="width: 60px; height: 60px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 20px;">
+                            <i class="ph-bold ph-arrow-right" style="color: white; font-size: 1.6em;"></i>
+                        </div>
+                    </div>
+                    <p class="title-subtitle" style="margin-top: 1em;">AI-guided insulin dosing for Type 1 Diabetes.</p>
+                </div>
+                <div class="title-phone">
+                    <div class="title-phone-glow"></div>
+                    <img src="dossi-dashboard.png" alt="Dossi Dashboard">
+                </div>
+            </section>
+
+            <!-- 2. About Me -->
+            <section>
+                <div class="slide-content">
+                    <h3>About Me</h3>
+                    <h2>Hi, I'm Casey</h2>
+                    <div class="about-stack">
+                        <div class="about-card"><i class="ph ph-graduation-cap"></i><span>Georgia Tech, Industrial Design</span></div>
+                        <div class="about-card"><i class="ph ph-heart"></i><span>I have <strong>Type 1 Diabetes</strong></span></div>
+                        <div class="about-card"><i class="ph ph-users"></i><span>Former Breakthrough T1D Youth Ambassador</span></div>
+                        <div class="about-card"><i class="ph ph-lightbulb"></i><span>Currently in Idea to Prototype (I2P)</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. The Problem -->
+            <section class="problem-slide">
+                <img src="omnipod-photo.png" alt="Omnipod insulin pump" class="omnipod-img">
+                <div class="slide-content">
+                    <h3>The Problem</h3>
+                    <h2>My "Smart" Pump Isn't Very Smart</h2>
+                    <p>I wear an insulin pump and a continuous glucose monitor.</p>
+                    <p style="margin-top: 0.8em;">But it really only knows two things:</p>
+                    <div class="stat-row">
+                        <div class="stat-box">
+                            <div class="number">1</div>
+                            <div class="label">My current glucose</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="number">2</div>
+                            <div class="label">Carbs I'm about to eat</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. The Gap -->
+            <section>
+                <div class="slide-content">
+                    <h3>The Gap</h3>
+                    <h2>What My Pump Doesn't Know</h2>
+                    <ul class="gap-list">
+                        <li><i class="ph ph-person-simple-run"></i><span><strong>I ran 2 miles this morning</strong> — I'm more sensitive</span></li>
+                        <li><i class="ph ph-moon"></i><span><strong>I slept 4 hours last night</strong> — My glucose will run higher</span></li>
+                        <li><i class="ph ph-pizza"></i><span><strong>I'm eating pizza, not salad</strong> — Fat causes delayed spike</span></li>
+                        <li><i class="ph ph-thermometer"></i><span><strong>I'm getting sick</strong> — My needs are about to double</span></li>
+                    </ul>
+                    <p style="margin-top: 1em; color: var(--text-light);"><em>I adjust for all of this manually. Every day.</em></p>
+                </div>
+            </section>
+
+            <!-- 5. Why This Matters -->
+            <section class="true-center">
+                <div class="slide-content centered">
+                    <h2>Why This Matters</h2>
+                    <div class="stats-circles">
+                        <div class="stat-circle">
+                            <div class="circle-wrapper">
+                                <div class="circle large">
+                                    <span class="circle-number">1.7M</span>
+                                </div>
+                            </div>
+                            <span class="circle-label">Americans live with Type 1 diabetes.</span>
+                        </div>
+                        <div class="stat-circle">
+                            <div class="circle-wrapper">
+                                <div class="circle medium">
+                                    <span class="circle-number">21%</span>
+                                </div>
+                            </div>
+                            <span class="circle-label">Only 21% of adults with T1D meet glucose targets.</span>
+                        </div>
+                        <div class="stat-circle">
+                            <div class="circle-wrapper">
+                                <div class="circle small">
+                                    <span class="circle-number">180</span>
+                                </div>
+                            </div>
+                            <span class="circle-label">Extra decisions made per day by people with T1D</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. The Solution -->
+            <section class="true-center">
+                <div class="slide-content centered">
+                    <h3>The Solution</h3>
+                    <div style="position: relative; margin: 1.2em 0;">
+                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px; height: 180px; background: radial-gradient(ellipse, rgba(255, 240, 120, 0.45) 0%, transparent 70%); z-index: 0;"></div>
+                        <img src="dossi-wordmark.png" alt="Dossi" class="logo-hero" style="position: relative; z-index: 1;">
+                    </div>
+                    <p class="big-statement">An insulin advisor that sees the <span class="gradient-text">full picture</span></p>
+                    <p style="margin-top: 1em;">Dossi considers <strong>40+ factors</strong> and <strong>learns your patterns</strong> over time.</p>
+                </div>
+            </section>
+
+            <!-- 7. How It Works -->
+            <section class="photo-meal-slide">
+                <div class="slide-content" style="max-width: none;">
+                    <h3>How It Works</h3>
+                    <h2>Photo Meal Recognition</h2>
+                    <div class="photo-steps" style="margin-top: 1.5em; margin-left: 330px; max-width: 400px;">
+                        <div class="photo-step"><span class="step-num">1.</span><span>Snap a photo of any meal</span></div>
+                        <div class="photo-step"><span class="step-num">2.</span><span>AI identifies individual foods</span></div>
+                        <div class="photo-step"><span class="step-num">3.</span><span>Estimates carbs, protein, fat</span></div>
+                        <div class="photo-step"><span class="step-num">4.</span><span>Suggests personalized dosage</span></div>
+                    </div>
+                </div>
+                <div class="nutrition-phone">
+                    <img src="nutrition-tracker.png" alt="Nutrition Tracker">
+                </div>
+            </section>
+
+            <!-- 8. Safety -->
+            <section>
+                <div class="slide-content">
+                    <h3>Safety First</h3>
+                    <h2>5 Layers of Validation</h2>
+                    <p>Insulin errors can be dangerous. Every recommendation passes through graduated safety checks.</p>
+                    <div style="margin-top: 0.6em; max-width: 700px;">
+                        <div class="step-item"><span class="step-num" style="background: var(--accent); color: white; font-weight: 700; width: 24px; height: 24px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85em;">1</span><div class="step-content"><strong>Hard Limits</strong> <span>— Max bolus, min glucose, max fall rate</span></div></div>
+                        <div class="step-item"><span class="step-num" style="background: var(--accent); color: white; font-weight: 700; width: 24px; height: 24px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85em;">2</span><div class="step-content"><strong>Physiological</strong> <span>— Prevents insulin stacking</span></div></div>
+                        <div class="step-item"><span class="step-num" style="background: var(--accent); color: white; font-weight: 700; width: 24px; height: 24px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85em;">3</span><div class="step-content"><strong>Predictive</strong> <span>— Calculates hypo risk at multiple horizons</span></div></div>
+                        <div class="step-item"><span class="step-num" style="background: var(--accent); color: white; font-weight: 700; width: 24px; height: 24px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85em;">4</span><div class="step-content"><strong>Anomaly Detection</strong> <span>— Validates sensor data quality</span></div></div>
+                        <div class="step-item"><span class="step-num" style="background: var(--accent); color: white; font-weight: 700; width: 24px; height: 24px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85em;">5</span><div class="step-content"><strong>Learning Validation</strong> <span>— Checks for algorithm drift</span></div></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 9. Business Model -->
+            <section>
+                <div class="slide-content" style="max-width: none;">
+                    <h3>Business Model</h3>
+                    <h2>Path to Market</h2>
+                    <div style="display: flex; align-items: center; gap: 60px; margin-top: 1em;">
+                        <table style="max-width: 550px;">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 140px;"><strong>Regulatory</strong></td>
+                                    <td>FDA 510(k) clearance as Class II medical device</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Distribution</strong></td>
+                                    <td>Prescription app sold through healthcare providers</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Coverage</strong></td>
+                                    <td>Insurance reimbursement under diabetes management codes</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Pricing</strong></td>
+                                    <td>$30-50/month subscription or annual plans</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <img src="fda-logo.png" alt="FDA logo" style="width: 190px; opacity: 0.7; margin-left: 40px;">
+                    </div>
+                    <p style="margin-top: 1.2em; font-style: italic; color: var(--text-light);">Tidepool and Bigfoot have proven this regulatory and reimbursement model.</p>
+                </div>
+            </section>
+
+            <!-- 10. What's Next -->
+            <section>
+                <div class="slide-content">
+                    <h3>Roadmap</h3>
+                    <h2>What's Next</h2>
+                    <div class="timeline">
+                        <div class="timeline-phase">
+                            <div class="phase-header">
+                                <i class="ph ph-flag-pennant"></i>
+                                <span>Now</span>
+                            </div>
+                            <div class="phase-items">
+                                <div class="phase-item">Finish build</div>
+                                <div class="phase-item">Self-testing</div>
+                                <div class="phase-item">Validate algorithm</div>
+                            </div>
+                        </div>
+                        <div class="timeline-arrow"><i class="ph-bold ph-arrow-right"></i></div>
+                        <div class="timeline-phase">
+                            <div class="phase-header">
+                                <i class="ph ph-sun"></i>
+                                <span>Summer</span>
+                            </div>
+                            <div class="phase-items">
+                                <div class="phase-item">CREATE-X</div>
+                                <div class="phase-item">Pilot with T1D users</div>
+                                <div class="phase-item">Conduct research</div>
+                            </div>
+                        </div>
+                        <div class="timeline-arrow"><i class="ph-bold ph-arrow-right"></i></div>
+                        <div class="timeline-phase">
+                            <div class="phase-header">
+                                <i class="ph ph-rocket-launch"></i>
+                                <span>Future</span>
+                            </div>
+                            <div class="phase-items">
+                                <div class="phase-item">FDA clearance</div>
+                                <div class="phase-item">Direct pump control</div>
+                                <div class="phase-item">Push mainstream</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 11. Where I'd Love Guidance -->
+            <section>
+                <div class="slide-content">
+                    <h3>Mentorship</h3>
+                    <h2>Where I'd Love Guidance</h2>
+                    <div style="margin-top: 0.8em; max-width: 650px;">
+                        <div class="step-item"><span class="step-num">1.</span><div class="step-content">Navigating medical design</div></div>
+                        <div class="step-item"><span class="step-num">2.</span><div class="step-content">Feedback on my work and suggest improvements</div></div>
+                        <div class="step-item"><span class="step-num">3.</span><div class="step-content">Out of the idea realm</div></div>
+                        <div class="step-item"><span class="step-num">4.</span><div class="step-content">Possible connections to others who could help me</div></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 12. Thank You -->
+            <section class="true-center">
+                <div class="slide-content centered">
+                    <h2 class="thank-you-text">Thank you!</h2>
+                </div>
+            </section>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            transition: 'fade',
+            transitionSpeed: 'fast',
+            controls: true,
+            progress: true,
+            center: false,
+            width: 1100,
+            height: 700,
+            margin: 0,
+            embedded: true
+        });
+
+        // Responsive scaling
+        function scaleBinder() {
+            const frame = document.querySelector('.binder-frame');
+            const frameWidth = 1100;
+            const frameHeight = 700;
+            const padding = 60;
+
+            const availableWidth = window.innerWidth - padding;
+            const availableHeight = window.innerHeight - padding;
+
+            const scaleX = availableWidth / frameWidth;
+            const scaleY = availableHeight / frameHeight;
+            const scale = Math.min(scaleX, scaleY, 1);
+
+            frame.style.setProperty('--scale', scale);
+        }
+
+        scaleBinder();
+        window.addEventListener('resize', scaleBinder);
+    </script>
+</body>
+</html>
