@@ -1499,22 +1499,26 @@
         .spark {
             position: absolute;
             width: 8px;
-            height: 8px;
-            border-radius: 50%;
+            height: 12px;
+            border-radius: 2px;
             background: var(--accent);
             opacity: 0;
             top: 50%;
             left: 50%;
         }
 
-        @keyframes sparkFly {
+        @keyframes sparkFirework {
             0% {
                 opacity: 1;
                 transform: translate(-50%, -50%) scale(1);
             }
+            30% {
+                opacity: 1;
+                transform: translate(var(--tx), var(--ty-up)) scale(1.2);
+            }
             100% {
                 opacity: 0;
-                transform: translate(var(--tx), var(--ty)) scale(0);
+                transform: translate(var(--tx), var(--ty-down)) scale(0.3);
             }
         }
 
@@ -2034,26 +2038,27 @@
             // Clear existing sparks
             container.innerHTML = '';
 
-            // Golden confetti colors
-            const colors = ['#FFD700', '#FFC107', '#FFEB3B', '#FFE082', '#F9A825', '#FF8F00'];
-            const numSparks = 30;
+            // Pure yellow colors
+            const colors = ['#FFD700', '#FFEB3B', '#FFF176', '#FFEE58', '#FFE800'];
+            const numSparks = 35;
 
             for (let i = 0; i < numSparks; i++) {
                 const spark = document.createElement('div');
                 spark.className = 'spark';
                 spark.style.background = colors[Math.floor(Math.random() * colors.length)];
 
-                // Random direction
-                const angle = (Math.PI * 2 * i) / numSparks + (Math.random() - 0.5) * 0.5;
-                const distance = 120 + Math.random() * 180;
-                const tx = Math.cos(angle) * distance + 'px';
-                const ty = Math.sin(angle) * distance + 'px';
+                // Firework effect - spread horizontally, burst up then fall down
+                const spreadX = (Math.random() - 0.5) * 300;
+                const riseHeight = -80 - Math.random() * 120; // Go up
+                const fallHeight = 150 + Math.random() * 200; // Then fall down
 
-                spark.style.setProperty('--tx', tx);
-                spark.style.setProperty('--ty', ty);
-                spark.style.width = (8 + Math.random() * 12) + 'px';
-                spark.style.height = spark.style.width;
-                spark.style.animation = `sparkFly ${0.8 + Math.random() * 0.6}s ease-out forwards`;
+                spark.style.setProperty('--tx', spreadX + 'px');
+                spark.style.setProperty('--ty-up', riseHeight + 'px');
+                spark.style.setProperty('--ty-down', fallHeight + 'px');
+                spark.style.width = (5 + Math.random() * 8) + 'px';
+                spark.style.height = (10 + Math.random() * 15) + 'px';
+                spark.style.animation = `sparkFirework ${1.2 + Math.random() * 0.8}s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards`;
+                spark.style.animationDelay = (Math.random() * 0.15) + 's';
 
                 container.appendChild(spark);
             }
