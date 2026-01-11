@@ -260,6 +260,17 @@
             justify-content: center;
         }
 
+        /* Truly centered slides - compensate for asymmetric padding */
+        .reveal .slides section.true-center {
+            padding-left: 60px;
+            padding-right: 60px;
+        }
+
+        .reveal .slides section.true-center .slide-content {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
         /* Cards */
         .card {
             background: var(--bg-card);
@@ -1363,7 +1374,7 @@
             </section>
 
             <!-- Why This Matters -->
-            <section>
+            <section class="true-center">
                 <div class="slide-content centered">
                     <h2>Why This Matters</h2>
                     <div class="stats-circles">
@@ -1425,8 +1436,8 @@
             </section>
 
             <!-- 5. The Solution -->
-            <section>
-                <div class="slide-content" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; max-width: none;">
+            <section class="true-center">
+                <div class="slide-content centered">
                     <h3>The Solution</h3>
                     <img src="dossi-wordmark.png" alt="Dossi" class="logo-hero" style="margin-top: 0.5em; margin-bottom: 1.5em;">
                     <p class="big-statement" style="margin-top: 1.2em;">An insulin advisor that sees the <span class="gradient-text">full picture</span></p>
@@ -1696,7 +1707,7 @@
             </section>
 
             <!-- 21. Vision -->
-            <section>
+            <section class="true-center">
                 <div class="slide-content centered">
                     <h3>Vision</h3>
                     <h2>Where This Goes</h2>
@@ -1708,7 +1719,7 @@
             </section>
 
             <!-- Thank You -->
-            <section>
+            <section class="true-center">
                 <div class="slide-content centered thank-you-slide">
                     <h2 class="thank-you-text">Thank you!</h2>
                     <div class="confetti-container"></div>
