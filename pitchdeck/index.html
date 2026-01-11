@@ -1412,6 +1412,7 @@
             <!-- 1. Title -->
             <section class="title-slide">
                 <div class="slide-content">
+                    <img src="dossi-wordmark.png" alt="Dossi" class="logo-large" style="margin-bottom: 1em;">
                     <h1 class="title-tagline">Intelligent<br>Insulin Dosing</h1>
                     <p class="title-subtitle">A look at smarter diabetes management.</p>
                 </div>
@@ -1524,7 +1525,7 @@
                 <div class="slide-content" style="max-width: none;">
                     <h3>How It Works</h3>
                     <h2>Step 1: Photo Meal Recognition</h2>
-                    <div class="photo-steps" style="margin-top: 1.2em; margin-left: 300px; max-width: 400px;">
+                    <div class="photo-steps" style="margin-top: 1.5em; margin-left: 330px; max-width: 400px;">
                         <div class="photo-step"><span class="step-num">1.</span><span>Snap a photo of any meal</span></div>
                         <div class="photo-step"><span class="step-num">2.</span><span>AI identifies individual foods</span></div>
                         <div class="photo-step"><span class="step-num">3.</span><span>Estimates carbs, protein, fat</span></div>
@@ -1569,59 +1570,19 @@
                 </div>
             </section>
 
-            <!-- What It Learns -->
-            <section>
-                <div class="slide-content">
-                    <h3>Personalization</h3>
-                    <h2>What Dossi Learns About You</h2>
-                    <p style="color: var(--text-light);"><em>After a few weeks of data:</em></p>
-                    <table style="max-width: 650px;">
-                        <thead>
-                            <tr><th>Factor</th><th>Learned Effect</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>Dawn (6-9 AM)</td><td>You need <strong><span data-animate-number="12" data-suffix="%">12%</span> more</strong> insulin</td></tr>
-                            <tr><td>Post-cardio</td><td>You're <strong><span data-animate-number="18" data-suffix="%">18%</span> more sensitive</strong> for ~8 hrs</td></tr>
-                            <tr><td>Luteal phase</td><td>You need <strong><span data-animate-number="10" data-suffix="%">10%</span> more</strong> insulin</td></tr>
-                            <tr><td>High-fat meals</td><td><strong>Extended dosing</strong> over 3-4 hours</td></tr>
-                        </tbody>
-                    </table>
-                    <p style="margin-top: 0.8em;">These are <strong>your numbers</strong> from <strong>your data</strong>.</p>
-                </div>
-            </section>
-
-            <!-- 13. Safety -->
+            <!-- Safety -->
             <section>
                 <div class="slide-content">
                     <h3>Safety First</h3>
-                    <h2><span data-animate-number="4">4</span> Layers of Validation</h2>
-                    <p>Insulin errors can be fatal. Every recommendation passes 4 checks:</p>
-                    <div style="margin-top: 0.6em; max-width: 650px;">
-                        <div class="step-item"><span class="step-num">1.</span><div class="step-content"><strong>Hard Limits</strong> <span>— Never dose below user-specified amount</span></div></div>
-                        <div class="step-item"><span class="step-num">2.</span><div class="step-content"><strong>Predictive</strong> <span>— Hypo risk at 15/30/60/120 min?</span></div></div>
-                        <div class="step-item"><span class="step-num">3.</span><div class="step-content"><strong>Anomaly</strong> <span>— Is this sensor data trustworthy?</span></div></div>
-                        <div class="step-item"><span class="step-num">4.</span><div class="step-content"><strong>Learning</strong> <span>— Have recent outcomes been poor?</span></div></div>
+                    <h2>5 Layers of Validation</h2>
+                    <p>Insulin errors can be fatal. Every recommendation passes through graduated safety checks.</p>
+                    <div style="margin-top: 0.6em; max-width: 700px;">
+                        <div class="step-item"><span class="step-num" style="color: var(--accent); font-weight: 700;">1.</span><div class="step-content"><strong>Hard Limits</strong> <span>— Max 25U bolus, min 70 mg/dL glucose, max fall rate</span></div></div>
+                        <div class="step-item"><span class="step-num" style="color: var(--accent); font-weight: 700;">2.</span><div class="step-content"><strong>Physiological</strong> <span>— Prevents insulin stacking and unrealistic doses</span></div></div>
+                        <div class="step-item"><span class="step-num" style="color: var(--accent); font-weight: 700;">3.</span><div class="step-content"><strong>Predictive</strong> <span>— Calculates hypo risk at 15/30/60/120 min horizons</span></div></div>
+                        <div class="step-item"><span class="step-num" style="color: var(--accent); font-weight: 700;">4.</span><div class="step-content"><strong>Anomaly Detection</strong> <span>— Validates sensor data quality and flags issues</span></div></div>
+                        <div class="step-item"><span class="step-num" style="color: var(--accent); font-weight: 700;">5.</span><div class="step-content"><strong>Learning Validation</strong> <span>— Checks recent outcomes for algorithm drift</span></div></div>
                     </div>
-                </div>
-            </section>
-
-            <!-- 14. Comparison -->
-            <section>
-                <div class="slide-content">
-                    <h3>Differentiation</h3>
-                    <h2>Current Pumps vs Dossi</h2>
-                    <table style="max-width: 600px;">
-                        <thead>
-                            <tr><th style="width: 50%;">Current Pumps</th><th style="width: 50%;">Dossi</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>React to glucose</td><td><strong>Understand context</strong></td></tr>
-                            <tr><td>Same settings every day</td><td><strong>Adapts to your life</strong></td></tr>
-                            <tr><td>You do the mental math</td><td><strong>Learns your patterns</strong></td></tr>
-                            <tr><td>Generic algorithms</td><td><strong>Personalized to you</strong></td></tr>
-                            <tr><td>Black box decisions</td><td><strong>Transparent reasoning</strong></td></tr>
-                        </tbody>
-                    </table>
                 </div>
             </section>
 
@@ -1720,23 +1681,11 @@
                 <div class="slide-content">
                     <h3>Mentorship</h3>
                     <h2>Where I'd Love Guidance</h2>
-                    <div style="margin-top: 0.8em; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 700px;">
-                        <div class="stat-box">
-                            <div class="number">1</div>
-                            <div class="label"><strong>Thinking through safety features</strong></div>
-                        </div>
-                        <div class="stat-box">
-                            <div class="number">2</div>
-                            <div class="label"><strong>Navigating medical design</strong></div>
-                        </div>
-                        <div class="stat-box">
-                            <div class="number">3</div>
-                            <div class="label"><strong>Feedback on design, functions, and features</strong></div>
-                        </div>
-                        <div class="stat-box">
-                            <div class="number">4</div>
-                            <div class="label"><strong>Validation before use</strong></div>
-                        </div>
+                    <div style="margin-top: 0.8em; max-width: 650px;">
+                        <div class="step-item"><span class="step-num">1.</span><div class="step-content">Thinking through safety features</div></div>
+                        <div class="step-item"><span class="step-num">2.</span><div class="step-content">Navigating medical design</div></div>
+                        <div class="step-item"><span class="step-num">3.</span><div class="step-content">Feedback on design, functions, and features</div></div>
+                        <div class="step-item"><span class="step-num">4.</span><div class="step-content">Validation before use</div></div>
                     </div>
                 </div>
             </section>
