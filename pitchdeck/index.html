@@ -992,30 +992,33 @@
 
         /* Thank you */
         .thank-you-text {
-            font-family: 'Plus Jakarta Sans', Georgia, serif !important;
+            font-family: 'Plus Jakarta Sans', sans-serif !important;
             font-size: 4.5em !important;
-            font-weight: 400 !important;
-            text-align: center !important;
+            font-weight: 800 !important;
+            text-align: left !important;
             width: 100%;
+            margin-top: -1em;
         }
 
         .thank-you-slide {
             position: relative;
             overflow: hidden;
+            align-items: flex-start !important;
         }
 
         .confetti-container {
             position: absolute;
-            top: 0;
+            top: -50px;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: calc(100% + 50px);
             pointer-events: none;
             overflow: hidden;
         }
 
         .confetti {
             position: absolute;
+            top: 0;
             width: 10px;
             height: 10px;
             background: var(--accent);
@@ -1028,11 +1031,11 @@
         @keyframes confetti-fall {
             0% {
                 opacity: 1;
-                transform: translateY(-20px) rotate(0deg);
+                transform: translateY(-50px) rotate(0deg);
             }
             100% {
                 opacity: 0;
-                transform: translateY(600px) rotate(720deg);
+                transform: translateY(700px) rotate(720deg);
             }
         }
 
