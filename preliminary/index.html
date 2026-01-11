@@ -17,6 +17,7 @@
             --text-medium: #4a4a4a;
             --text-light: #8E8E93;
             --icon-gray: #8E8E93;
+            --icon-accent: var(--accent);
             --bg-paper: #FAF9F6;
             --bg-card: #f0efeb;
         }
@@ -31,6 +32,7 @@
             overflow: hidden;
         }
 
+        /* Binder Frame - centered without tab offset */
         .binder-frame {
             position: fixed;
             top: 50%;
@@ -54,27 +56,6 @@
             border-radius: 4px;
         }
 
-        .hole-punches {
-            position: absolute;
-            left: 30px;
-            top: 0;
-            bottom: 0;
-            width: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-evenly;
-            padding: 60px 0;
-            z-index: 100;
-        }
-
-        .hole {
-            width: 14px;
-            height: 14px;
-            background: #e8e6e1;
-            border-radius: 50%;
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
-        }
-
         .reveal .controls { display: none !important; }
 
         .reveal-viewport {
@@ -91,7 +72,7 @@
         }
 
         .reveal .slides section {
-            padding: 50px 60px 50px 120px;
+            padding: 50px 60px 50px 60px;
             height: 100%;
             width: 100%;
             background: var(--bg-paper);
@@ -106,9 +87,15 @@
             line-height: 1.1;
         }
 
+        .reveal h1 {
+            font-size: 4em;
+            font-weight: 700;
+        }
+
         .reveal h2 {
             font-size: 2.6em;
             margin-bottom: 0.5em;
+            font-weight: 700;
         }
 
         .reveal h3 {
@@ -162,11 +149,23 @@
             font-weight: 600;
         }
 
+        .accent {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
         .gradient-text {
             color: var(--accent);
             font-weight: 600;
         }
 
+        .subtitle {
+            font-size: 1.4em !important;
+            color: var(--text-light) !important;
+            font-weight: 400;
+        }
+
+        /* Slide layouts */
         .slide-content {
             display: flex;
             flex-direction: column;
@@ -184,6 +183,7 @@
             justify-content: center;
         }
 
+        /* Truly centered slides */
         .reveal .slides section.true-center {
             padding-left: 60px;
             padding-right: 60px;
@@ -194,12 +194,15 @@
             margin-right: auto;
         }
 
+        /* Cards */
         .card {
             background: var(--bg-card);
             border-radius: 8px;
             padding: 1.6em;
+            box-shadow: none;
         }
 
+        /* About Me stack */
         .about-stack {
             display: flex;
             flex-direction: column;
@@ -216,6 +219,7 @@
             gap: 1em;
             font-size: 1.05em;
             color: var(--text-medium);
+            box-shadow: none;
         }
 
         .about-card i {
@@ -227,6 +231,7 @@
             color: var(--text-dark);
         }
 
+        /* Gap list */
         .gap-list {
             list-style: none;
             padding: 0;
@@ -261,6 +266,7 @@
             color: var(--text-dark);
         }
 
+        /* Stat boxes */
         .stat-row {
             display: flex;
             gap: 24px;
@@ -272,7 +278,9 @@
             border-radius: 12px;
             padding: 1.2em 1.4em;
             flex: 1;
+            box-shadow: none;
             display: flex;
+            flex-direction: row;
             align-items: center;
             gap: 1em;
         }
@@ -289,6 +297,7 @@
             align-items: center;
             justify-content: center;
             border-radius: 10px;
+            flex-shrink: 0;
         }
 
         .stat-box .label {
@@ -297,6 +306,52 @@
             font-weight: 500;
         }
 
+        /* Factor grid */
+        .factor-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 1em;
+        }
+
+        .factor-item {
+            background: var(--bg-card);
+            padding: 1.1em 1.3em;
+            border-radius: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.9em;
+            box-shadow: none;
+        }
+
+        .factor-item .factor-icon {
+            font-size: 1em;
+            color: white;
+            background: var(--accent);
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        .factor-item .factor-content strong {
+            color: var(--text-dark);
+            display: block;
+            font-size: 0.95em;
+            font-weight: 600;
+            margin-bottom: 0.2em;
+        }
+
+        .factor-item .factor-content span {
+            color: var(--text-medium);
+            font-size: 0.85em;
+            line-height: 1.4;
+        }
+
+        /* Numbered steps */
         .step-item {
             display: flex;
             align-items: center;
@@ -305,6 +360,7 @@
             margin: 0.8em 0;
             border-radius: 12px;
             background: var(--bg-card);
+            box-shadow: none;
         }
 
         .step-num {
@@ -312,6 +368,7 @@
             font-weight: 400;
             font-size: 1.4em;
             color: var(--text-dark);
+            flex-shrink: 0;
             min-width: 1.2em;
         }
 
@@ -328,6 +385,7 @@
             color: var(--text-medium);
         }
 
+        /* Tables */
         .reveal table {
             font-size: 0.95em;
             margin: 1em 0;
@@ -337,6 +395,7 @@
             background: var(--bg-card);
             border-radius: 12px;
             overflow: hidden;
+            box-shadow: none;
         }
 
         .reveal th {
@@ -360,6 +419,7 @@
             border-bottom: none;
         }
 
+        /* Timeline */
         .timeline {
             display: flex;
             align-items: flex-start;
@@ -372,6 +432,7 @@
             background: var(--bg-card);
             border-radius: 16px;
             padding: 1.4em;
+            box-shadow: none;
             min-height: 200px;
             display: flex;
             flex-direction: column;
@@ -430,6 +491,7 @@
             font-size: 1.8em;
         }
 
+        /* Big statement */
         .big-statement {
             font-family: 'Plus Jakarta Sans', Georgia, serif !important;
             font-size: 1.5em !important;
@@ -438,6 +500,7 @@
             line-height: 1.4;
         }
 
+        /* Title slide */
         .title-slide {
             background: var(--bg-paper) !important;
             position: relative;
@@ -447,6 +510,11 @@
         .title-slide .slide-content {
             align-items: flex-start;
             max-width: 550px;
+        }
+
+        .title-slide .title-tagline,
+        .title-slide .title-subtitle {
+            text-align: left;
         }
 
         .title-phone {
@@ -461,6 +529,8 @@
             width: 100%;
             height: auto;
             display: block;
+            position: relative;
+            z-index: 2;
         }
 
         .title-phone-glow {
@@ -473,11 +543,18 @@
             background: radial-gradient(ellipse, rgba(115, 123, 242, 0.5) 0%, rgba(115, 123, 242, 0.25) 30%, rgba(115, 123, 242, 0.1) 50%, transparent 70%);
             filter: blur(40px);
             pointer-events: none;
+            z-index: 1;
         }
 
+        /* Problem slide with pump */
         .problem-slide {
             position: relative;
             overflow: visible !important;
+        }
+
+        /* Learning Loop slide */
+        .learning-loop-slide {
+            position: relative;
         }
 
         .omnipod-img {
@@ -488,6 +565,11 @@
             border-radius: 12px;
         }
 
+        .reveal section.present .omnipod-img {
+            animation: scaleIn 0.5s ease-out 0.3s both;
+        }
+
+        /* Photo Meal slide with phone */
         .photo-meal-slide {
             position: relative;
             overflow: visible !important;
@@ -495,7 +577,7 @@
 
         .nutrition-phone {
             position: absolute;
-            left: 120px;
+            left: 60px;
             bottom: -60px;
             width: 280px;
             z-index: 10;
@@ -513,10 +595,45 @@
             color: var(--text-light);
             font-weight: 400;
             letter-spacing: 0.02em;
+            text-align: left;
         }
 
+        /* Logo */
         .logo-hero {
             height: 80px;
+        }
+
+        /* Context sources */
+        .context-sources {
+            display: flex;
+            gap: 16px;
+            margin-top: 1.2em;
+            flex-wrap: wrap;
+        }
+
+        .context-source {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1em 1.3em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5em;
+            width: 100px;
+            height: 90px;
+            box-shadow: none;
+        }
+
+        .context-source i {
+            font-size: 1.8em;
+            color: var(--icon-gray);
+        }
+
+        .context-source span {
+            font-size: 0.9em;
+            font-weight: 500;
+            color: var(--text-medium);
         }
 
         .photo-steps {
@@ -535,14 +652,84 @@
             padding: 1.1em 1.5em;
             background: var(--bg-card);
             border-radius: 12px;
+            box-shadow: none;
         }
 
-        /* Stats circles */
+        .photo-step .step-num {
+            font-family: 'Plus Jakarta Sans', Georgia, serif;
+            font-size: 1.3em;
+            font-weight: 400;
+            color: var(--text-dark);
+            min-width: 1.5em;
+        }
+
+        /* Thank you */
+        .thank-you-text {
+            font-family: 'Plus Jakarta Sans', sans-serif !important;
+            font-size: 6.5em !important;
+            font-weight: 800 !important;
+            text-align: center !important;
+            width: 100%;
+        }
+
+        .thank-you-slide {
+            position: relative;
+            overflow: hidden;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
+        .confetti-container {
+            position: absolute;
+            top: -50px;
+            left: 0;
+            width: 100%;
+            height: calc(100% + 50px);
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .confetti {
+            position: absolute;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            opacity: 0;
+        }
+
+        .confetti.circle { border-radius: 50%; }
+        .confetti.square { border-radius: 2px; }
+
+        @keyframes confetti-fall {
+            0% {
+                opacity: 1;
+                transform: translateY(-50px) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(700px) rotate(720deg);
+            }
+        }
+
+        /* Progress bar - purple ombre */
+        .reveal .progress {
+            background: white;
+            height: 4px;
+        }
+
+        .reveal .progress span {
+            background: linear-gradient(90deg, #737BF2 0%, #A78BFA 50%, #C4B5FD 100%);
+        }
+
+        .reveal .slide-number { display: none !important; }
+
+        /* Why This Matters - Circular Stats */
         .stats-circles {
             display: flex;
-            align-items: flex-start;
             justify-content: center;
-            gap: 60px;
+            align-items: center;
+            gap: 50px;
             margin-top: 2em;
         }
 
@@ -550,69 +737,68 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-align: center;
-            max-width: 200px;
+            gap: 1.2em;
         }
 
-        .circle-wrapper {
-            margin-bottom: 1em;
-        }
-
-        .circle {
-            border-radius: 50%;
-            background: var(--accent);
+        .stat-circle .circle-wrapper {
+            height: 200px;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .circle.large {
+        .stat-circle .circle {
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 8px 40px rgba(115, 123, 242, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stat-circle .circle.large {
+            width: 200px;
+            height: 200px;
+        }
+
+        .stat-circle .circle.medium {
+            width: 170px;
+            height: 170px;
+        }
+
+        .stat-circle .circle.small {
             width: 140px;
             height: 140px;
         }
 
-        .circle.medium {
-            width: 110px;
-            height: 110px;
-        }
-
-        .circle.small {
-            width: 90px;
-            height: 90px;
-        }
-
-        .circle-number {
+        .stat-circle .circle-number {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-weight: 700;
-            color: white;
-            font-size: 1.8em;
+            font-weight: 600;
+            color: var(--accent);
         }
 
-        .circle.medium .circle-number {
-            font-size: 1.5em;
+        .stat-circle .circle.large .circle-number {
+            font-size: 3em;
         }
 
-        .circle.small .circle-number {
-            font-size: 1.3em;
+        .stat-circle .circle.medium .circle-number {
+            font-size: 2.5em;
         }
 
-        .circle-label {
+        .stat-circle .circle.small .circle-number {
+            font-size: 2em;
+        }
+
+        .stat-circle .circle-label {
+            font-size: 1em;
             color: var(--text-medium);
-            font-size: 0.95em;
+            text-align: center;
+            max-width: 200px;
             line-height: 1.4;
+            min-height: 2.8em;
         }
 
-        .thank-you-text {
-            font-size: 4em !important;
-            font-weight: 700;
-            color: var(--text-dark);
-        }
-
-        /* Animations */
-        @keyframes scaleIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
+        /* ========== ANIMATIONS ========== */
 
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(30px); }
@@ -624,6 +810,22 @@
             to { opacity: 1; }
         }
 
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Slide animations */
         .reveal section.present h2 { animation: fadeInUp 0.6s ease-out forwards; }
         .reveal section.present h3 { animation: fadeIn 0.4s ease-out forwards; }
         .reveal section.present p { animation: fadeInUp 0.6s ease-out 0.1s both; }
@@ -631,19 +833,43 @@
         .reveal section.present .stat-box { animation: scaleIn 0.5s ease-out both; }
         .reveal section.present .stat-row .stat-box:nth-child(1) { animation-delay: 0.2s; }
         .reveal section.present .stat-row .stat-box:nth-child(2) { animation-delay: 0.35s; }
+        .reveal section.present .stat-row .stat-box:nth-child(3) { animation-delay: 0.5s; }
 
         .reveal section.present .about-card { animation: scaleIn 0.4s ease-out both; }
         .reveal section.present .about-stack .about-card:nth-child(1) { animation-delay: 0.1s; }
-        .reveal section.present .about-stack .about-card:nth-child(2) { animation-delay: 0.2s; }
-        .reveal section.present .about-stack .about-card:nth-child(3) { animation-delay: 0.3s; }
-        .reveal section.present .about-stack .about-card:nth-child(4) { animation-delay: 0.4s; }
-        .reveal section.present .about-stack .about-card:nth-child(5) { animation-delay: 0.5s; }
+        .reveal section.present .about-stack .about-card:nth-child(2) { animation-delay: 0.14s; }
+        .reveal section.present .about-stack .about-card:nth-child(3) { animation-delay: 0.18s; }
+        .reveal section.present .about-stack .about-card:nth-child(4) { animation-delay: 0.22s; }
+        .reveal section.present .about-stack .about-card:nth-child(5) { animation-delay: 0.26s; }
 
         .reveal section.present .gap-list li { animation: fadeInUp 0.4s ease-out both; }
         .reveal section.present .gap-list li:nth-child(1) { animation-delay: 0.1s; }
-        .reveal section.present .gap-list li:nth-child(2) { animation-delay: 0.2s; }
-        .reveal section.present .gap-list li:nth-child(3) { animation-delay: 0.3s; }
-        .reveal section.present .gap-list li:nth-child(4) { animation-delay: 0.4s; }
+        .reveal section.present .gap-list li:nth-child(2) { animation-delay: 0.15s; }
+        .reveal section.present .gap-list li:nth-child(3) { animation-delay: 0.2s; }
+        .reveal section.present .gap-list li:nth-child(4) { animation-delay: 0.25s; }
+
+        .reveal section.present .step-item { animation: slideInLeft 0.5s ease-out both; }
+        .reveal section.present .step-item:nth-child(1) { animation-delay: 0.15s; }
+        .reveal section.present .step-item:nth-child(2) { animation-delay: 0.25s; }
+        .reveal section.present .step-item:nth-child(3) { animation-delay: 0.35s; }
+        .reveal section.present .step-item:nth-child(4) { animation-delay: 0.45s; }
+        .reveal section.present .step-item:nth-child(5) { animation-delay: 0.55s; }
+
+        .reveal section.present .factor-item { animation: scaleIn 0.4s ease-out both; }
+        .reveal section.present .factor-grid .factor-item:nth-child(1) { animation-delay: 0.1s; }
+        .reveal section.present .factor-grid .factor-item:nth-child(2) { animation-delay: 0.15s; }
+        .reveal section.present .factor-grid .factor-item:nth-child(3) { animation-delay: 0.2s; }
+        .reveal section.present .factor-grid .factor-item:nth-child(4) { animation-delay: 0.25s; }
+        .reveal section.present .factor-grid .factor-item:nth-child(5) { animation-delay: 0.3s; }
+        .reveal section.present .factor-grid .factor-item:nth-child(6) { animation-delay: 0.35s; }
+
+        .reveal section.present .context-source { animation: scaleIn 0.4s ease-out both; }
+        .reveal section.present .context-sources .context-source:nth-child(1) { animation-delay: 0.1s; }
+        .reveal section.present .context-sources .context-source:nth-child(2) { animation-delay: 0.15s; }
+        .reveal section.present .context-sources .context-source:nth-child(3) { animation-delay: 0.2s; }
+        .reveal section.present .context-sources .context-source:nth-child(4) { animation-delay: 0.25s; }
+        .reveal section.present .context-sources .context-source:nth-child(5) { animation-delay: 0.3s; }
+        .reveal section.present .context-sources .context-source:nth-child(6) { animation-delay: 0.35s; }
 
         .reveal section.present .stat-circle { animation: scaleIn 0.5s ease-out both; }
         .reveal section.present .stats-circles .stat-circle:nth-child(1) { animation-delay: 0.2s; }
@@ -651,22 +877,16 @@
         .reveal section.present .stats-circles .stat-circle:nth-child(3) { animation-delay: 0.5s; }
 
         .reveal section.present table { animation: fadeInUp 0.6s ease-out 0.2s both; }
+        .reveal section.present .card { animation: scaleIn 0.5s ease-out 0.2s both; }
 
-        .reveal section.present .step-item { animation: scaleIn 0.4s ease-out both; }
-        .reveal section.present .step-item:nth-child(1) { animation-delay: 0.1s; }
-        .reveal section.present .step-item:nth-child(2) { animation-delay: 0.2s; }
-        .reveal section.present .step-item:nth-child(3) { animation-delay: 0.3s; }
-        .reveal section.present .step-item:nth-child(4) { animation-delay: 0.4s; }
-        .reveal section.present .step-item:nth-child(5) { animation-delay: 0.5s; }
-
-        .reveal section.present .photo-step { animation: scaleIn 0.4s ease-out both; }
+        .reveal section.present .photo-step { animation: slideInLeft 0.5s ease-out both; }
         .reveal section.present .photo-steps .photo-step:nth-child(1) { animation-delay: 0.15s; }
         .reveal section.present .photo-steps .photo-step:nth-child(2) { animation-delay: 0.25s; }
         .reveal section.present .photo-steps .photo-step:nth-child(3) { animation-delay: 0.35s; }
         .reveal section.present .photo-steps .photo-step:nth-child(4) { animation-delay: 0.45s; }
 
         .reveal section.present .nutrition-phone { animation: scaleIn 0.6s ease-out 0.2s both; }
-        .reveal section.present .omnipod-img { animation: scaleIn 0.5s ease-out 0.3s both; }
+        .reveal section.present .learning-loop-slide img { animation: scaleIn 0.5s ease-out 0.3s both; }
         .reveal section.present img[alt="FDA logo"] { animation: scaleIn 0.5s ease-out 0.3s both; }
 
         .reveal section.present .timeline-phase { animation: scaleIn 0.5s ease-out both; }
@@ -674,25 +894,38 @@
         .reveal section.present .timeline .timeline-phase:nth-child(3) { animation-delay: 0.3s; }
         .reveal section.present .timeline .timeline-phase:nth-child(5) { animation-delay: 0.5s; }
 
-        /* Slide number */
-        .slide-number {
-            position: absolute;
-            bottom: 20px;
-            right: 30px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.8em;
-            color: var(--text-light);
+        /* Hover effects */
+        .stat-box {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(99, 102, 241, 0.15);
+        }
+
+        .factor-item {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .factor-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.12);
+        }
+
+        .step-item {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .step-item:hover {
+            transform: translateX(4px);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.1);
         }
     </style>
 </head>
 <body>
     <div class="binder-frame">
         <div class="binder-page">
-            <div class="hole-punches">
-                <div class="hole"></div>
-                <div class="hole"></div>
-                <div class="hole"></div>
-            </div>
             <div class="reveal">
                 <div class="slides">
 
@@ -720,9 +953,10 @@
                     <h2>Hi, I'm Casey</h2>
                     <div class="about-stack">
                         <div class="about-card"><i class="ph ph-graduation-cap"></i><span>Georgia Tech, Industrial Design</span></div>
+                        <div class="about-card"><i class="ph ph-rocket-launch"></i><span>I want to be an <strong>entrepreneur</strong></span></div>
+                        <div class="about-card"><i class="ph ph-lightbulb"></i><span>Currently in Idea to Prototype (I2P)</span></div>
                         <div class="about-card"><i class="ph ph-heart"></i><span>I have <strong>Type 1 Diabetes</strong></span></div>
                         <div class="about-card"><i class="ph ph-users"></i><span>Former Breakthrough T1D Youth Ambassador</span></div>
-                        <div class="about-card"><i class="ph ph-lightbulb"></i><span>Currently in Idea to Prototype (I2P)</span></div>
                     </div>
                 </div>
             </section>
@@ -748,22 +982,22 @@
                 </div>
             </section>
 
-            <!-- 4. The Gap -->
+            <!-- 4. What My Pump Doesn't Know -->
             <section>
                 <div class="slide-content">
                     <h3>The Gap</h3>
                     <h2>What My Pump Doesn't Know</h2>
                     <ul class="gap-list">
-                        <li><i class="ph ph-person-simple-run"></i><span><strong>I ran 2 miles this morning</strong> — I'm more sensitive</span></li>
+                        <li><i class="ph ph-person-simple-run"></i><span><strong>I ran 2 miles this morning</strong> — I'm more sensitive for the morning</span></li>
                         <li><i class="ph ph-moon"></i><span><strong>I slept 4 hours last night</strong> — My glucose will run higher</span></li>
-                        <li><i class="ph ph-pizza"></i><span><strong>I'm eating pizza, not salad</strong> — Fat causes delayed spike</span></li>
+                        <li><i class="ph ph-pizza"></i><span><strong>I'm eating pizza, not salad</strong> — Fat causes delayed spike 4 hours later</span></li>
                         <li><i class="ph ph-thermometer"></i><span><strong>I'm getting sick</strong> — My needs are about to double</span></li>
                     </ul>
                     <p style="margin-top: 1em; color: var(--text-light);"><em>I adjust for all of this manually. Every day.</em></p>
                 </div>
             </section>
 
-            <!-- 5. Why This Matters -->
+            <!-- Why This Matters -->
             <section class="true-center">
                 <div class="slide-content centered">
                     <h2>Why This Matters</h2>
@@ -771,7 +1005,7 @@
                         <div class="stat-circle">
                             <div class="circle-wrapper">
                                 <div class="circle large">
-                                    <span class="circle-number">1.7M</span>
+                                    <span class="circle-number" data-animate-number="1.7" data-suffix="M">1.7M</span>
                                 </div>
                             </div>
                             <span class="circle-label">Americans live with Type 1 diabetes.</span>
@@ -779,7 +1013,7 @@
                         <div class="stat-circle">
                             <div class="circle-wrapper">
                                 <div class="circle medium">
-                                    <span class="circle-number">21%</span>
+                                    <span class="circle-number" data-animate-number="21" data-suffix="%">21%</span>
                                 </div>
                             </div>
                             <span class="circle-label">Only 21% of adults with T1D meet glucose targets.</span>
@@ -787,7 +1021,7 @@
                         <div class="stat-circle">
                             <div class="circle-wrapper">
                                 <div class="circle small">
-                                    <span class="circle-number">180</span>
+                                    <span class="circle-number" data-animate-number="180">180</span>
                                 </div>
                             </div>
                             <span class="circle-label">Extra decisions made per day by people with T1D</span>
@@ -796,7 +1030,7 @@
                 </div>
             </section>
 
-            <!-- 6. The Solution -->
+            <!-- The Solution -->
             <section class="true-center">
                 <div class="slide-content centered">
                     <h3>The Solution</h3>
@@ -805,20 +1039,20 @@
                         <img src="dossi-wordmark.png" alt="Dossi" class="logo-hero" style="position: relative; z-index: 1;">
                     </div>
                     <p class="big-statement">An insulin advisor that sees the <span class="gradient-text">full picture</span></p>
-                    <p style="margin-top: 1em;">Dossi considers <strong>40+ factors</strong> and <strong>learns your patterns</strong> over time.</p>
+                    <p style="margin-top: 1em;">Dossi considers <strong><span class="number" data-animate-number="40" data-suffix="+">40+</span> factors</strong> and <strong>learns your patterns</strong> over time.</p>
                 </div>
             </section>
 
-            <!-- 7. How It Works -->
+            <!-- Step 1: Photo Meal Recognition -->
             <section class="photo-meal-slide">
                 <div class="slide-content" style="max-width: none;">
                     <h3>How It Works</h3>
-                    <h2>Photo Meal Recognition</h2>
+                    <h2>Step 1: Photo Meal Recognition</h2>
                     <div class="photo-steps" style="margin-top: 1.5em; margin-left: 330px; max-width: 400px;">
                         <div class="photo-step"><span class="step-num">1.</span><span>Snap a photo of any meal</span></div>
                         <div class="photo-step"><span class="step-num">2.</span><span>AI identifies individual foods</span></div>
                         <div class="photo-step"><span class="step-num">3.</span><span>Estimates carbs, protein, fat</span></div>
-                        <div class="photo-step"><span class="step-num">4.</span><span>Suggests personalized dosage</span></div>
+                        <div class="photo-step"><span class="step-num">4.</span><span>Suggests dosage</span></div>
                     </div>
                 </div>
                 <div class="nutrition-phone">
@@ -826,23 +1060,23 @@
                 </div>
             </section>
 
-            <!-- 8. Safety -->
+            <!-- Safety -->
             <section>
                 <div class="slide-content">
                     <h3>Safety First</h3>
                     <h2>5 Layers of Validation</h2>
                     <p>Insulin errors can be dangerous. Every recommendation passes through graduated safety checks.</p>
                     <div style="margin-top: 0.6em; max-width: 700px;">
-                        <div class="step-item"><span class="step-num" style="background: var(--accent); color: white; font-weight: 700; width: 24px; height: 24px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85em;">1</span><div class="step-content"><strong>Hard Limits</strong> <span>— Max bolus, min glucose, max fall rate</span></div></div>
-                        <div class="step-item"><span class="step-num" style="background: var(--accent); color: white; font-weight: 700; width: 24px; height: 24px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85em;">2</span><div class="step-content"><strong>Physiological</strong> <span>— Prevents insulin stacking</span></div></div>
-                        <div class="step-item"><span class="step-num" style="background: var(--accent); color: white; font-weight: 700; width: 24px; height: 24px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85em;">3</span><div class="step-content"><strong>Predictive</strong> <span>— Calculates hypo risk at multiple horizons</span></div></div>
-                        <div class="step-item"><span class="step-num" style="background: var(--accent); color: white; font-weight: 700; width: 24px; height: 24px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85em;">4</span><div class="step-content"><strong>Anomaly Detection</strong> <span>— Validates sensor data quality</span></div></div>
-                        <div class="step-item"><span class="step-num" style="background: var(--accent); color: white; font-weight: 700; width: 24px; height: 24px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85em;">5</span><div class="step-content"><strong>Learning Validation</strong> <span>— Checks for algorithm drift</span></div></div>
+                        <div class="step-item"><span class="step-num" style="background: var(--accent); color: white; font-weight: 700; width: 24px; height: 24px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85em;">1</span><div class="step-content"><strong>Hard Limits</strong> <span>— Max 25U bolus, min 70 mg/dL glucose, max fall rate</span></div></div>
+                        <div class="step-item"><span class="step-num" style="background: var(--accent); color: white; font-weight: 700; width: 24px; height: 24px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85em;">2</span><div class="step-content"><strong>Physiological</strong> <span>— Prevents insulin stacking and unrealistic doses</span></div></div>
+                        <div class="step-item"><span class="step-num" style="background: var(--accent); color: white; font-weight: 700; width: 24px; height: 24px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85em;">3</span><div class="step-content"><strong>Predictive</strong> <span>— Calculates hypo risk at 15/30/60/120 min horizons</span></div></div>
+                        <div class="step-item"><span class="step-num" style="background: var(--accent); color: white; font-weight: 700; width: 24px; height: 24px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85em;">4</span><div class="step-content"><strong>Anomaly Detection</strong> <span>— Validates sensor data quality and flags issues</span></div></div>
+                        <div class="step-item"><span class="step-num" style="background: var(--accent); color: white; font-weight: 700; width: 24px; height: 24px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85em;">5</span><div class="step-content"><strong>Learning Validation</strong> <span>— Checks recent outcomes for algorithm drift</span></div></div>
                     </div>
                 </div>
             </section>
 
-            <!-- 9. Business Model -->
+            <!-- Business Model -->
             <section>
                 <div class="slide-content" style="max-width: none;">
                     <h3>Business Model</h3>
@@ -874,7 +1108,7 @@
                 </div>
             </section>
 
-            <!-- 10. What's Next -->
+            <!-- What's Next -->
             <section>
                 <div class="slide-content">
                     <h3>Roadmap</h3>
@@ -919,7 +1153,7 @@
                 </div>
             </section>
 
-            <!-- 11. Where I'd Love Guidance -->
+            <!-- Where I'd Love Guidance -->
             <section>
                 <div class="slide-content">
                     <h3>Mentorship</h3>
@@ -933,10 +1167,11 @@
                 </div>
             </section>
 
-            <!-- 12. Thank You -->
+            <!-- Thank You -->
             <section class="true-center">
-                <div class="slide-content centered">
+                <div class="slide-content centered thank-you-slide">
                     <h2 class="thank-you-text">Thank you!</h2>
+                    <div class="confetti-container"></div>
                 </div>
             </section>
 
@@ -949,7 +1184,7 @@
     <script>
         Reveal.initialize({
             hash: true,
-            slideNumber: 'c/t',
+            slideNumber: false,
             transition: 'fade',
             transitionSpeed: 'fast',
             controls: true,
@@ -980,6 +1215,122 @@
 
         scaleBinder();
         window.addEventListener('resize', scaleBinder);
+
+        // Format number with commas
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        // Animated number counter
+        function animateNumber(element, start, end, duration, suffix = '', prefix = '') {
+            const startTime = performance.now();
+            const isDecimal = String(end).includes('.');
+            const needsCommas = end >= 1000;
+
+            element.classList.add('counting');
+
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+
+                // Easing function (ease-out cubic)
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+
+                const current = start + (end - start) * easeOut;
+
+                let displayValue;
+                if (isDecimal) {
+                    displayValue = current.toFixed(1);
+                } else {
+                    displayValue = Math.round(current);
+                    if (needsCommas) {
+                        displayValue = formatNumber(displayValue);
+                    }
+                }
+
+                element.textContent = prefix + displayValue + suffix;
+
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                } else {
+                    element.classList.remove('counting');
+                }
+            }
+
+            requestAnimationFrame(update);
+        }
+
+        // Find all animated numbers and trigger them on slide change
+        function triggerNumberAnimations() {
+            const currentSlide = Reveal.getCurrentSlide();
+            const animatedNumbers = currentSlide.querySelectorAll('[data-animate-number]');
+
+            animatedNumbers.forEach((el, index) => {
+                const value = el.getAttribute('data-animate-number');
+                const suffix = el.getAttribute('data-suffix') || '';
+                const prefix = el.getAttribute('data-prefix') || '';
+                const duration = parseInt(el.getAttribute('data-duration')) || 1200;
+                const delay = index * 150; // Stagger animations
+
+                // Reset to 0 first
+                el.textContent = prefix + '0' + suffix;
+
+                setTimeout(() => {
+                    if (value.includes('.')) {
+                        animateNumber(el, 0, parseFloat(value), duration, suffix, prefix);
+                    } else {
+                        animateNumber(el, 0, parseInt(value), duration, suffix, prefix);
+                    }
+                }, delay + 300); // Delay for slide transition
+            });
+        }
+
+        // Trigger on slide change
+        Reveal.on('slidechanged', triggerNumberAnimations);
+
+        // Initial trigger for first slide
+        setTimeout(triggerNumberAnimations, 500);
+
+        // Confetti animation
+        function createConfetti() {
+            const container = document.querySelector('.confetti-container');
+            if (!container) return;
+
+            // Clear existing confetti
+            container.innerHTML = '';
+
+            const colors = ['#737BF2', '#A78BFA', '#34D399', '#FBBF24', '#F472B6', '#60A5FA'];
+            const shapes = ['circle', 'square'];
+
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = `confetti ${shapes[Math.floor(Math.random() * shapes.length)]}`;
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = (Math.random() * 8 + 6) + 'px';
+                confetti.style.height = confetti.style.width;
+                confetti.style.animation = `confetti-fall ${Math.random() * 2 + 2}s ease-out ${Math.random() * 0.5}s forwards`;
+                container.appendChild(confetti);
+            }
+        }
+
+        // Trigger confetti on thank you slide
+        Reveal.on('slidechanged', (event) => {
+            if (event.currentSlide.querySelector('.thank-you-slide')) {
+                setTimeout(createConfetti, 300);
+            }
+        });
+
+        // Fullscreen mode - press F to toggle
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'f' || e.key === 'F') {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen();
+                } else {
+                    document.exitFullscreen();
+                }
+            }
+        });
     </script>
 </body>
 </html>
