@@ -1080,6 +1080,21 @@
 
         /* ========== ANIMATIONS ========== */
 
+        /* Ensure content is visible by default */
+        .reveal section h2,
+        .reveal section h3,
+        .reveal section p,
+        .reveal section .stat-box,
+        .reveal section .about-card,
+        .reveal section .gap-list li,
+        .reveal section .factor-item,
+        .reveal section .step-item,
+        .reveal section .card,
+        .reveal section table {
+            opacity: 1 !important;
+            transform: none !important;
+        }
+
         /* Fade in up animation */
         @keyframes fadeInUp {
             from {
