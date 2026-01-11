@@ -4,824 +4,627 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dossi — Project Overview</title>
-    <meta name="description" content="Dossi: AI-powered insulin dosing that learns your unique physiology. A decision support system for Type 1 Diabetes.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
     <style>
         :root {
             --accent: #737BF2;
             --accent-dark: #5B5FD4;
-            --accent-light: rgba(115, 123, 242, 0.1);
-            --accent-glow: rgba(115, 123, 242, 0.35);
+            --accent-light: rgba(115, 123, 242, 0.12);
             --text-dark: #1a1a1a;
             --text-medium: #636366;
             --text-light: #8E8E93;
-            --bg-white: #ffffff;
-            --bg-gray: #F2F2F7;
-            --border: #E5E5EA;
-            --gradient: linear-gradient(135deg, #5B5FD4 0%, #A99FFF 100%);
+            --bg: #ffffff;
+            --bg-alt: #F8F8FA;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-white);
-            color: var(--text-dark);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Navigation */
-        .nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-        }
-
-        .nav-logo img {
-            height: 24px;
-            width: auto;
-        }
-
-        .nav-dots {
-            display: flex;
-            gap: 12px;
-        }
-
-        .nav-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--border);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .nav-dot.active {
-            background: var(--accent);
-            transform: scale(1.2);
-        }
-
-        .nav-dot:hover {
-            background: var(--accent-dark);
-        }
-
-        /* Hero Slide */
-        .slide {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 100px 40px 60px;
-            position: relative;
+        html, body {
+            height: 100%;
+            background: var(--bg);
             overflow: hidden;
         }
 
-        .slide-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            pointer-events: none;
+        .reveal-viewport {
+            background: var(--bg);
         }
 
-        .slide-1 .slide-bg {
-            background:
-                radial-gradient(ellipse 60% 50% at 70% 50%, rgba(115, 123, 242, 0.1) 0%, transparent 60%),
-                radial-gradient(ellipse 80% 60% at 50% -10%, rgba(115, 123, 242, 0.06) 0%, transparent 60%);
+        .reveal {
+            font-family: 'Montserrat', -apple-system, sans-serif;
+            color: var(--text-dark);
         }
 
-        .slide-2 {
-            background: var(--bg-gray);
+        .reveal .slides {
+            text-align: left;
         }
 
-        .slide-3 .slide-bg {
-            background:
-                radial-gradient(ellipse 50% 50% at 30% 50%, rgba(115, 123, 242, 0.08) 0%, transparent 60%),
-                radial-gradient(ellipse 60% 40% at 70% 80%, rgba(115, 123, 242, 0.06) 0%, transparent 60%);
-        }
-
-        .slide-inner {
-            max-width: 1200px;
-            width: 100%;
+        .reveal .slides section {
+            padding: 60px 80px;
+            height: 100%;
             display: flex;
             align-items: center;
-            gap: 80px;
-            z-index: 1;
+            justify-content: center;
         }
 
-        .slide-inner.reverse {
-            flex-direction: row-reverse;
+        /* Slide Layout */
+        .slide-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 80px;
+            max-width: 1200px;
+            width: 100%;
         }
 
         .slide-content {
             flex: 1;
-            max-width: 500px;
+            max-width: 520px;
         }
 
         .slide-visual {
-            flex: 1;
-            display: flex;
-            justify-content: center;
+            flex-shrink: 0;
         }
 
         /* Typography */
         .label {
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
             color: var(--accent);
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 16px;
+            letter-spacing: 2.5px;
+            margin-bottom: 20px;
         }
 
-        .title {
-            font-size: clamp(32px, 5vw, 48px);
+        .reveal h1, .reveal h2 {
+            font-family: 'Montserrat', sans-serif;
             font-weight: 700;
             line-height: 1.15;
             margin-bottom: 24px;
+            text-transform: none;
+            letter-spacing: -0.02em;
         }
 
-        .title .highlight {
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .reveal h1 {
+            font-size: 2.8em;
         }
 
-        .subtitle {
-            font-size: 17px;
+        .reveal h2 {
+            font-size: 2.4em;
+        }
+
+        .highlight {
+            color: var(--accent);
+        }
+
+        .reveal p {
+            font-size: 1.1em;
+            line-height: 1.75;
             color: var(--text-medium);
-            line-height: 1.8;
-            margin-bottom: 32px;
+            margin-bottom: 1em;
         }
 
-        /* Laptop Frame */
-        .laptop {
-            position: relative;
-            width: 100%;
-            max-width: 560px;
+        .reveal p:last-child {
+            margin-bottom: 0;
         }
 
-        .laptop-frame {
+        /* Phone Frame */
+        .phone-container {
+            perspective: 1000px;
+        }
+
+        .phone-frame {
             background: #1a1a1a;
-            border-radius: 16px 16px 0 0;
-            padding: 12px 12px 0 12px;
-            position: relative;
+            border-radius: 44px;
+            padding: 12px;
+            box-shadow: 0 30px 80px rgba(115, 123, 242, 0.25), 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: transform 0.4s cubic-bezier(0.03, 0.98, 0.52, 0.99);
+            transform-style: preserve-3d;
         }
 
-        .laptop-camera {
-            width: 8px;
-            height: 8px;
-            background: #3a3a3a;
-            border-radius: 50%;
-            margin: 0 auto 10px;
-        }
-
-        .laptop-screen {
-            background: #1a1a1a;
-            border-radius: 8px;
+        .phone-screen {
+            width: 280px;
+            height: 560px;
+            border-radius: 36px;
             overflow: hidden;
-            aspect-ratio: 16/10;
+            background: #000;
         }
 
-        .laptop-screen img {
+        .phone-screen img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: block;
         }
 
-        .laptop-base {
-            background: linear-gradient(to bottom, #2a2a2a 0%, #1a1a1a 100%);
-            height: 16px;
-            border-radius: 0 0 4px 4px;
-            position: relative;
-        }
-
-        .laptop-base::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            bottom: 4px;
-            width: 80px;
-            height: 4px;
-            background: #3a3a3a;
-            border-radius: 2px;
-        }
-
-        .laptop-shadow {
-            position: absolute;
-            bottom: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            height: 30px;
-            background: radial-gradient(ellipse at center, rgba(115, 123, 242, 0.2) 0%, transparent 70%);
-            filter: blur(10px);
-        }
-
-        /* Stats Grid */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-            margin-top: 32px;
-        }
-
-        .stat {
-            background: var(--bg-white);
-            padding: 20px;
-            border-radius: 16px;
-            border: 1px solid var(--border);
-        }
-
-        .stat-value {
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--accent);
-            margin-bottom: 4px;
-        }
-
-        .stat-label {
-            font-size: 13px;
-            color: var(--text-medium);
-            font-weight: 500;
-        }
-
-        /* Feature Pills */
+        /* Pills */
         .pills {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
             margin-top: 24px;
         }
 
         .pill {
             background: var(--accent-light);
             color: var(--accent-dark);
-            padding: 10px 18px;
+            padding: 8px 14px;
             border-radius: 100px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
         }
 
-        /* Cards for Slide 2 */
-        .cards {
+        /* Stats */
+        .stats-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            max-width: 520px;
+            gap: 16px;
+            margin-top: 28px;
         }
 
-        .card {
-            background: var(--bg-white);
-            padding: 28px 24px;
-            border-radius: 20px;
-            transition: transform 0.3s, box-shadow 0.3s;
+        .stat {
+            background: var(--bg-alt);
+            padding: 20px;
+            border-radius: 16px;
         }
 
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-        }
-
-        .card-icon {
-            width: 44px;
-            height: 44px;
-            background: var(--accent-light);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 16px;
-        }
-
-        .card-icon svg {
-            width: 22px;
-            height: 22px;
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
             color: var(--accent);
+            line-height: 1;
+            margin-bottom: 6px;
         }
 
-        .card h3 {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .card p {
-            font-size: 13px;
+        .stat-label {
+            font-size: 12px;
             color: var(--text-medium);
-            line-height: 1.6;
+            font-weight: 500;
         }
 
-        /* Timeline for Slide 3 */
+        /* Comparison Table */
+        .comparison {
+            width: 100%;
+            max-width: 440px;
+        }
+
+        .comparison-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 12px;
+            padding: 0 12px;
+        }
+
+        .comparison-header span {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .comparison-header span:first-child {
+            text-align: left;
+        }
+
+        .comparison-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+            padding: 14px 12px;
+            background: var(--bg-alt);
+            border-radius: 12px;
+            margin-bottom: 8px;
+            align-items: center;
+        }
+
+        .comparison-row .feature {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .comparison-row .check,
+        .comparison-row .cross {
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .comparison-row .check {
+            color: #10b981;
+        }
+
+        .comparison-row .cross {
+            color: #ef4444;
+        }
+
+        /* Timeline */
         .timeline {
             display: flex;
             flex-direction: column;
-            gap: 24px;
-            max-width: 480px;
+            gap: 20px;
         }
 
         .timeline-item {
             display: flex;
-            gap: 20px;
+            gap: 16px;
             align-items: flex-start;
         }
 
         .timeline-marker {
-            width: 48px;
-            height: 48px;
+            width: 40px;
+            height: 40px;
             background: var(--accent);
-            border-radius: 14px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
             color: white;
             font-weight: 700;
-            font-size: 18px;
+            font-size: 16px;
+            flex-shrink: 0;
         }
 
         .timeline-content h4 {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 6px;
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 4px;
         }
 
         .timeline-content p {
-            font-size: 14px;
-            color: var(--text-medium);
-            line-height: 1.6;
-        }
-
-        /* Team Section */
-        .team-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: var(--bg-gray);
-            padding: 12px 20px;
-            border-radius: 100px;
-            margin-top: 24px;
-        }
-
-        .team-badge-avatar {
-            width: 36px;
-            height: 36px;
-            background: var(--gradient);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 14px;
-        }
-
-        .team-badge-info {
-            text-align: left;
-        }
-
-        .team-badge-name {
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .team-badge-role {
-            font-size: 12px;
-            color: var(--text-medium);
-        }
-
-        /* CTA Button */
-        .cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--text-dark);
-            color: white;
-            padding: 16px 28px;
-            border-radius: 14px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 15px;
-            transition: transform 0.2s, box-shadow 0.2s;
-            margin-top: 8px;
-        }
-
-        .cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
-        }
-
-        .cta svg {
-            width: 18px;
-            height: 18px;
-        }
-
-        /* Footer */
-        .footer {
-            padding: 40px;
-            text-align: center;
-            border-top: 1px solid var(--border);
-        }
-
-        .footer p {
             font-size: 13px;
-            color: var(--text-light);
+            color: var(--text-medium);
+            line-height: 1.5;
+            margin: 0;
         }
 
-        .footer a {
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Scroll Indicator */
-        .scroll-indicator {
-            position: absolute;
+        /* Navigation Dots */
+        .nav-dots {
+            position: fixed;
             bottom: 40px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            flex-direction: column;
+            gap: 12px;
+            z-index: 100;
+        }
+
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .nav-dot.active {
+            background: var(--accent);
+            transform: scale(1.3);
+        }
+
+        .nav-dot:hover {
+            background: var(--accent-dark);
+        }
+
+        /* Logo */
+        .logo {
+            position: fixed;
+            top: 32px;
+            left: 40px;
+            z-index: 100;
+        }
+
+        .logo img {
+            height: 28px;
+        }
+
+        /* Arrow keys hint */
+        .nav-hint {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            display: flex;
             align-items: center;
             gap: 8px;
             color: var(--text-light);
             font-size: 12px;
-            font-weight: 500;
-            animation: bounce 2s infinite;
+            z-index: 100;
         }
 
-        .scroll-indicator svg {
-            width: 20px;
-            height: 20px;
+        .nav-hint kbd {
+            background: var(--bg-alt);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-family: inherit;
+            font-weight: 600;
         }
 
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-8px); }
-            60% { transform: translateX(-50%) translateY(-4px); }
-        }
+        /* Reveal overrides */
+        .reveal .controls { display: none !important; }
+        .reveal .progress { display: none !important; }
 
         /* Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
+
+        .reveal section.present .label { animation: fadeInUp 0.5s ease-out both; }
+        .reveal section.present h1,
+        .reveal section.present h2 { animation: fadeInUp 0.6s ease-out 0.1s both; }
+        .reveal section.present p { animation: fadeInUp 0.6s ease-out 0.2s both; }
+        .reveal section.present .pills { animation: fadeInUp 0.6s ease-out 0.3s both; }
+        .reveal section.present .phone-frame { animation: scaleIn 0.7s ease-out 0.2s both; }
+        .reveal section.present .stats-grid { animation: fadeInUp 0.6s ease-out 0.3s both; }
+        .reveal section.present .comparison { animation: fadeInUp 0.6s ease-out 0.2s both; }
+        .reveal section.present .timeline { animation: fadeInUp 0.6s ease-out 0.3s both; }
 
         /* Responsive */
-        @media (max-width: 1024px) {
-            .slide-inner {
-                flex-direction: column !important;
-                gap: 48px;
+        @media (max-width: 1100px) {
+            .slide-container {
+                flex-direction: column;
                 text-align: center;
+                gap: 40px;
             }
-
             .slide-content {
                 max-width: 600px;
             }
-
-            .laptop {
-                max-width: 480px;
+            .phone-screen {
+                width: 220px;
+                height: 440px;
             }
-
-            .cards {
-                margin: 0 auto;
+            .pills {
+                justify-content: center;
             }
-
-            .timeline {
-                margin: 0 auto;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .nav {
-                padding: 16px 24px;
-            }
-
-            .slide {
-                padding: 80px 24px 48px;
-            }
-
-            .cards {
-                grid-template-columns: 1fr;
-            }
-
-            .stats {
-                grid-template-columns: 1fr;
-            }
-
-            .scroll-indicator {
-                display: none;
+            .comparison-header span:first-child {
+                text-align: center;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="nav">
-        <a href="/" class="nav-logo">
-            <img src="images/dossi-wordmark.png" alt="Dossi">
-        </a>
-        <div class="nav-dots">
-            <div class="nav-dot active" data-slide="1"></div>
-            <div class="nav-dot" data-slide="2"></div>
-            <div class="nav-dot" data-slide="3"></div>
-        </div>
-    </nav>
+    <a href="/" class="logo">
+        <img src="images/dossi-wordmark.png" alt="Dossi">
+    </a>
 
-    <!-- Slide 1: The Problem & Solution -->
-    <section class="slide slide-1" id="slide-1">
-        <div class="slide-bg"></div>
-        <div class="slide-inner">
-            <div class="slide-content fade-in">
-                <p class="label">The Problem</p>
-                <h1 class="title">
-                    Insulin dosing is <span class="highlight">dangerously imprecise</span>
-                </h1>
-                <p class="subtitle">
-                    37 million Americans have diabetes. Current insulin pumps use rigid formulas that ignore exercise, sleep, stress, hormones, and dozens of other factors that affect insulin sensitivity. The result? Dangerous highs and lows, every single day.
-                </p>
-                <p class="subtitle" style="margin-bottom: 0;">
-                    <strong>Dossi</strong> is an AI-powered decision support system that considers <strong style="color: var(--accent);">40+ contextual factors</strong> and learns your unique physiology to recommend safer, smarter insulin doses.
-                </p>
-                <div class="pills">
-                    <span class="pill">Exercise</span>
-                    <span class="pill">Sleep</span>
-                    <span class="pill">Hormones</span>
-                    <span class="pill">Stress</span>
-                    <span class="pill">Meal Type</span>
-                    <span class="pill">+35 more</span>
-                </div>
-            </div>
-            <div class="slide-visual">
-                <div class="laptop">
-                    <div class="laptop-frame">
-                        <div class="laptop-camera"></div>
-                        <div class="laptop-screen">
-                            <img src="images/dossi-dashboard.png" alt="Dossi Dashboard">
-                        </div>
-                    </div>
-                    <div class="laptop-base"></div>
-                    <div class="laptop-shadow"></div>
-                </div>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <span>Scroll</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 5v14M19 12l-7 7-7-7"/>
-            </svg>
-        </div>
-    </section>
+    <div class="nav-dots">
+        <div class="nav-dot active" data-slide="0"></div>
+        <div class="nav-dot" data-slide="1"></div>
+        <div class="nav-dot" data-slide="2"></div>
+    </div>
 
-    <!-- Slide 2: Market & Differentiation -->
-    <section class="slide slide-2" id="slide-2">
-        <div class="slide-inner reverse">
-            <div class="slide-content fade-in">
-                <p class="label">Market Opportunity</p>
-                <h2 class="title">
-                    A <span class="highlight">$16B market</span> ready for disruption
-                </h2>
-                <p class="subtitle">
-                    Existing solutions are either fully automated (requiring FDA clearance and $100M+ to build) or completely manual. Dossi occupies the untapped middle: <strong>intelligent decision support</strong> that ships faster and helps immediately.
-                </p>
-                <div class="stats">
-                    <div class="stat">
-                        <div class="stat-value">1.6M</div>
-                        <div class="stat-label">Type 1 diabetics in US</div>
+    <div class="nav-hint">
+        <kbd>&larr;</kbd><kbd>&rarr;</kbd> to navigate
+    </div>
+
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Slide 1: Problem & Solution -->
+            <section>
+                <div class="slide-container">
+                    <div class="slide-content">
+                        <p class="label">The Problem</p>
+                        <h1>Insulin dosing is <span class="highlight">dangerously imprecise</span></h1>
+                        <p>
+                            Current insulin pumps use rigid formulas that ignore exercise, sleep, stress, hormones, and dozens of factors that affect insulin sensitivity.
+                        </p>
+                        <p>
+                            <strong>Dossi</strong> is an AI-powered decision support app that considers <strong style="color: var(--accent);">40+ contextual factors</strong> and learns your unique physiology.
+                        </p>
+                        <div class="pills">
+                            <span class="pill">Exercise</span>
+                            <span class="pill">Sleep</span>
+                            <span class="pill">Hormones</span>
+                            <span class="pill">Stress</span>
+                            <span class="pill">Meal Type</span>
+                            <span class="pill">+35 more</span>
+                        </div>
                     </div>
-                    <div class="stat">
-                        <div class="stat-value">$16B</div>
-                        <div class="stat-label">Insulin delivery market</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">40%</div>
-                        <div class="stat-label">Time out of range (avg)</div>
-                    </div>
-                    <div class="stat">
-                        <div class="stat-value">6x</div>
-                        <div class="stat-label">Hypo risk reduction</div>
+                    <div class="slide-visual">
+                        <div class="phone-container">
+                            <div class="phone-frame">
+                                <div class="phone-screen">
+                                    <img src="images/dossi-dashboard.png" alt="Dossi Dashboard">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="slide-visual fade-in">
-                <div class="cards">
-                    <div class="card">
-                        <div class="card-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <path d="M12 6v6l4 2"/>
-                            </svg>
+            </section>
+
+            <!-- Slide 2: Market & Differentiation -->
+            <section>
+                <div class="slide-container">
+                    <div class="slide-content">
+                        <p class="label">Market & Differentiation</p>
+                        <h2>What makes Dossi <span class="highlight">different</span></h2>
+                        <p>
+                            Existing apps either track glucose passively or require full FDA clearance for automation. Dossi is the intelligent middle ground.
+                        </p>
+                        <div class="stats-grid">
+                            <div class="stat">
+                                <div class="stat-value">1.6M</div>
+                                <div class="stat-label">T1D patients in US</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">40%</div>
+                                <div class="stat-label">Average time out of range</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">40+</div>
+                                <div class="stat-label">Contextual factors analyzed</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value">5-Layer</div>
+                                <div class="stat-label">Safety validation system</div>
+                            </div>
                         </div>
-                        <h3>Real-time Context</h3>
-                        <p>Pulls from Apple Health, learns patterns, adapts to your day</p>
                     </div>
-                    <div class="card">
-                        <div class="card-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
-                                <path d="M2 17l10 5 10-5"/>
-                                <path d="M2 12l10 5 10-5"/>
-                            </svg>
+                    <div class="slide-visual">
+                        <div class="comparison">
+                            <div class="comparison-header">
+                                <span>Feature</span>
+                                <span>Others</span>
+                                <span>Dossi</span>
+                            </div>
+                            <div class="comparison-row">
+                                <span class="feature">Context-aware dosing</span>
+                                <span class="cross">&#10005;</span>
+                                <span class="check">&#10003;</span>
+                            </div>
+                            <div class="comparison-row">
+                                <span class="feature">Learns your patterns</span>
+                                <span class="cross">&#10005;</span>
+                                <span class="check">&#10003;</span>
+                            </div>
+                            <div class="comparison-row">
+                                <span class="feature">Exercise adjustment</span>
+                                <span class="cross">&#10005;</span>
+                                <span class="check">&#10003;</span>
+                            </div>
+                            <div class="comparison-row">
+                                <span class="feature">Macro-aware bolus</span>
+                                <span class="cross">&#10005;</span>
+                                <span class="check">&#10003;</span>
+                            </div>
+                            <div class="comparison-row">
+                                <span class="feature">Explains its reasoning</span>
+                                <span class="cross">&#10005;</span>
+                                <span class="check">&#10003;</span>
+                            </div>
+                            <div class="comparison-row">
+                                <span class="feature">Ships without FDA</span>
+                                <span class="cross">&#10005;</span>
+                                <span class="check">&#10003;</span>
+                            </div>
                         </div>
-                        <h3>5-Layer Safety</h3>
-                        <p>Medical-grade validation before every recommendation</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                                <polyline points="22,4 12,14.01 9,11.01"/>
-                            </svg>
-                        </div>
-                        <h3>Learns You</h3>
-                        <p>Bayesian algorithms adapt to your unique physiology</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                            </svg>
-                        </div>
-                        <h3>Ships Faster</h3>
-                        <p>Decision support = faster path to market than AID</p>
                     </div>
                 </div>
-            </div>
+            </section>
+
+            <!-- Slide 3: Vision & Roadmap -->
+            <section>
+                <div class="slide-container">
+                    <div class="slide-content">
+                        <p class="label">Vision & Roadmap</p>
+                        <h2>From decision support to <span class="highlight">full automation</span></h2>
+                        <p>
+                            Today: AI advisor that makes insulin decisions easier and safer.
+                        </p>
+                        <p>
+                            Tomorrow: FDA-cleared automated insulin delivery system.
+                        </p>
+                    </div>
+                    <div class="slide-visual">
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-marker">1</div>
+                                <div class="timeline-content">
+                                    <h4>Now: Decision Support</h4>
+                                    <p>AI-powered recommendations. User controls pump. No FDA required for launch.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker">2</div>
+                                <div class="timeline-content">
+                                    <h4>2026: Clinical Validation</h4>
+                                    <p>Partner with endocrinologists. Observational studies. Build evidence.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker">3</div>
+                                <div class="timeline-content">
+                                    <h4>2027: FDA Pathway</h4>
+                                    <p>De Novo 510(k) for SaMD. Follow Tidepool Loop precedent.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-marker">4</div>
+                                <div class="timeline-content">
+                                    <h4>2028+: Automated Delivery</h4>
+                                    <p>Full closed-loop insulin automation. Diabetes on autopilot.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
         </div>
-    </section>
+    </div>
 
-    <!-- Slide 3: Team & Vision -->
-    <section class="slide slide-3" id="slide-3">
-        <div class="slide-bg"></div>
-        <div class="slide-inner">
-            <div class="slide-content fade-in">
-                <p class="label">Vision & Roadmap</p>
-                <h2 class="title">
-                    From decision support to <span class="highlight">full automation</span>
-                </h2>
-                <p class="subtitle">
-                    Today: AI advisor that makes insulin decisions easier.
-                    Tomorrow: FDA-cleared automated insulin delivery that makes them unnecessary.
-                </p>
-                <div class="team-badge">
-                    <div class="team-badge-avatar">CD</div>
-                    <div class="team-badge-info">
-                        <div class="team-badge-name">Casey Dunham</div>
-                        <div class="team-badge-role">Georgia Tech ID + T1D (17 years)</div>
-                    </div>
-                </div>
-                <a href="mailto:casey@hellodossi.com" class="cta">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                        <polyline points="22,6 12,13 2,6"/>
-                    </svg>
-                    Get in Touch
-                </a>
-            </div>
-            <div class="slide-visual fade-in">
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-marker">1</div>
-                        <div class="timeline-content">
-                            <h4>Now: Decision Support</h4>
-                            <p>AI-powered recommendations. User controls their pump. No FDA clearance required for initial launch.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-marker">2</div>
-                        <div class="timeline-content">
-                            <h4>2026: Clinical Validation</h4>
-                            <p>Partner with endocrinologists. Run observational studies. Build safety evidence for FDA submission.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-marker">3</div>
-                        <div class="timeline-content">
-                            <h4>2027: FDA Pathway</h4>
-                            <p>De Novo 510(k) submission for Software as Medical Device (SaMD). Follow Tidepool Loop precedent.</p>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-marker">4</div>
-                        <div class="timeline-content">
-                            <h4>2028+: Automated Delivery</h4>
-                            <p>Full closed-loop insulin automation. The holy grail: diabetes management on autopilot.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <p>Questions? <a href="mailto:casey@hellodossi.com">casey@hellodossi.com</a></p>
-    </footer>
-
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
     <script>
-        // Scroll animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.15 });
+        Reveal.initialize({
+            hash: true,
+            transition: 'fade',
+            transitionSpeed: 'default',
+            controls: false,
+            progress: false,
+            center: true,
+            width: '100%',
+            height: '100%'
+        });
 
-        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-        // Nav dot updates
-        const slides = document.querySelectorAll('.slide');
+        // Nav dots
         const dots = document.querySelectorAll('.nav-dot');
 
-        const slideObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const slideNum = entry.target.id.split('-')[1];
-                    dots.forEach(dot => dot.classList.remove('active'));
-                    document.querySelector(`[data-slide="${slideNum}"]`).classList.add('active');
-                }
+        function updateDots() {
+            const idx = Reveal.getIndices().h;
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === idx);
             });
-        }, { threshold: 0.5 });
+        }
 
-        slides.forEach(slide => slideObserver.observe(slide));
-
-        // Click to navigate
         dots.forEach(dot => {
             dot.addEventListener('click', () => {
-                const slideNum = dot.dataset.slide;
-                document.getElementById(`slide-${slideNum}`).scrollIntoView({ behavior: 'smooth' });
+                Reveal.slide(parseInt(dot.dataset.slide));
             });
         });
 
-        // Stat counter animation
-        const statObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const stats = entry.target.querySelectorAll('.stat-value');
-                    stats.forEach(stat => {
-                        const text = stat.textContent;
-                        const match = text.match(/^([\d.]+)(.*)$/);
-                        if (match) {
-                            const target = parseFloat(match[1]);
-                            const suffix = match[2];
-                            let current = 0;
-                            const increment = target / 40;
-                            const timer = setInterval(() => {
-                                current += increment;
-                                if (current >= target) {
-                                    stat.textContent = text;
-                                    clearInterval(timer);
-                                } else {
-                                    stat.textContent = (target >= 10 ? Math.floor(current) : current.toFixed(1)) + suffix;
-                                }
-                            }, 30);
-                        }
-                    });
-                    statObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
+        Reveal.on('slidechanged', updateDots);
 
-        const statsSection = document.querySelector('.stats');
-        if (statsSection) {
-            statObserver.observe(statsSection);
-        }
+        // 3D Tilt effect on phone
+        const phoneContainers = document.querySelectorAll('.phone-container');
+
+        phoneContainers.forEach(container => {
+            const frame = container.querySelector('.phone-frame');
+            let targetRotateX = 0, targetRotateY = 0;
+            let currentRotateX = 0, currentRotateY = 0;
+
+            container.addEventListener('mousemove', (e) => {
+                const rect = container.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                targetRotateX = (y - centerY) / 20;
+                targetRotateY = (centerX - x) / 20;
+            });
+
+            container.addEventListener('mouseleave', () => {
+                targetRotateX = 0;
+                targetRotateY = 0;
+            });
+
+            function animateTilt() {
+                currentRotateX += (targetRotateX - currentRotateX) * 0.08;
+                currentRotateY += (targetRotateY - currentRotateY) * 0.08;
+                frame.style.transform = `perspective(1000px) rotateX(${currentRotateX}deg) rotateY(${currentRotateY}deg)`;
+                requestAnimationFrame(animateTilt);
+            }
+            animateTilt();
+        });
     </script>
 </body>
 </html>
