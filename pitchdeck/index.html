@@ -290,7 +290,7 @@
 
         .about-card i {
             font-size: 1.4em;
-            color: var(--accent);
+            color: var(--text-medium);
         }
 
         .about-card strong {
@@ -324,7 +324,7 @@
 
         .gap-list i {
             font-size: 1.3em;
-            color: var(--accent);
+            color: var(--text-medium);
             width: 28px;
         }
 
@@ -351,11 +351,16 @@
         }
 
         .factor-item-full .factor-icon {
-            font-size: 1.3em;
-            color: var(--accent);
+            font-size: 0.9em;
+            color: white;
+            background: var(--accent);
             flex-shrink: 0;
-            width: 24px;
-            margin-top: 0.1em;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
         }
 
         .factor-item-full .factor-content {
@@ -399,32 +404,33 @@
         .stat-box {
             background: var(--bg-card);
             border-radius: 12px;
-            padding: 1.6em 1.8em;
+            padding: 1.2em 1.4em;
             flex: 1;
             box-shadow: none;
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             align-items: center;
+            gap: 1em;
         }
 
         .stat-box .number {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 2em;
+            font-size: 1.3em;
             font-weight: 700;
             color: white;
             background: var(--accent);
-            width: 60px;
-            height: 60px;
+            width: 42px;
+            height: 42px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 12px;
-            margin-bottom: 0.5em;
+            border-radius: 10px;
+            flex-shrink: 0;
         }
 
         .stat-box .label {
-            font-size: 0.95em;
-            color: var(--text-medium);
+            font-size: 1.1em;
+            color: var(--text-dark);
             font-weight: 500;
         }
 
@@ -481,13 +487,16 @@
         }
 
         .factor-item .factor-icon {
-            font-size: 1.6em;
-            color: var(--accent);
+            font-size: 1em;
+            color: white;
+            background: var(--accent);
             flex-shrink: 0;
             width: 32px;
+            height: 32px;
             display: flex;
             align-items: center;
             justify-content: center;
+            border-radius: 8px;
         }
 
         .factor-item .factor-content strong {
@@ -1289,13 +1298,13 @@
                     <h3>The Problem</h3>
                     <h2>My "Smart" Pump Isn't Very Smart</h2>
                     <p>I wear an insulin pump and a continuous glucose monitor.</p>
-                    <p style="margin-top: 0.8em;"><strong>But it only knows two things:</strong></p>
+                    <p style="margin-top: 0.8em;">But it really only knows two things:</p>
                     <div class="stat-row">
-                        <div class="stat-box" style="text-align: center;">
+                        <div class="stat-box">
                             <div class="number">1</div>
                             <div class="label">My current glucose</div>
                         </div>
-                        <div class="stat-box" style="text-align: center;">
+                        <div class="stat-box">
                             <div class="number">2</div>
                             <div class="label">Carbs I'm about to eat</div>
                         </div>
@@ -1309,9 +1318,9 @@
                     <h3>The Gap</h3>
                     <h2>What My Pump Doesn't Know</h2>
                     <ul class="gap-list">
-                        <li><i class="ph ph-person-simple-run"></i><span><strong>I ran 5 miles this morning</strong> — I'm more sensitive for hours</span></li>
+                        <li><i class="ph ph-person-simple-run"></i><span><strong>I ran 2 miles this morning</strong> — I'm more sensitive for the morning</span></li>
                         <li><i class="ph ph-moon"></i><span><strong>I slept 4 hours last night</strong> — My glucose will run higher</span></li>
-                        <li><i class="ph ph-pizza"></i><span><strong>I'm eating pizza, not salad</strong> — Fat spikes me 4 hours later</span></li>
+                        <li><i class="ph ph-pizza"></i><span><strong>I'm eating pizza, not salad</strong> — Fat causes delayed spike 4 hours later</span></li>
                         <li><i class="ph ph-thermometer"></i><span><strong>I'm getting sick</strong> — My needs are about to double</span></li>
                     </ul>
                     <p style="margin-top: 1em; color: var(--text-light);"><em>I adjust for all of this manually. Every day.</em></p>
