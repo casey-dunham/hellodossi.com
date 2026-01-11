@@ -347,7 +347,7 @@
 
         .hero-stat-label {
             font-size: 0.85em;
-            color: var(--gray-500);
+            color: var(--gray-400);
             margin-top: 2px;
         }
 
@@ -355,6 +355,7 @@
             flex-shrink: 0;
             position: relative;
             animation: phoneFloat 4s ease-in-out infinite;
+            margin-right: -40px;
         }
 
         @keyframes phoneFloat {
@@ -468,7 +469,7 @@
         .problem-icon {
             width: 56px;
             height: 56px;
-            background: var(--gray-100);
+            background: var(--accent-light);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -478,13 +479,13 @@
         }
 
         .problem-card:hover .problem-icon {
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            background: var(--accent);
             box-shadow: var(--shadow-accent);
         }
 
         .problem-icon i {
             font-size: 1.5em;
-            color: var(--gray-500);
+            color: var(--accent);
             transition: color 0.3s;
         }
 
@@ -520,6 +521,99 @@
         .problem-bottom strong {
             color: var(--accent);
             font-weight: 600;
+        }
+
+        /* ========== FACTORS SECTION ========== */
+        .factors {
+            padding: 100px 40px;
+            background: var(--bg-page);
+        }
+
+        .factors-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .factors-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .factors-header h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75em;
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 16px;
+        }
+
+        .factors-header h2 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2.4em;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--gray-900);
+        }
+
+        .factors-header h2 span {
+            background: linear-gradient(135deg, var(--accent-deep) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .factors-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .factor-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .factor-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(115, 123, 242, 0.12);
+        }
+
+        .factor-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--accent-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .factor-icon i {
+            font-size: 1.3em;
+            color: var(--accent);
+        }
+
+        .factor-content h4 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.05em;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 4px;
+        }
+
+        .factor-content p {
+            font-size: 0.9em;
+            color: var(--gray-500);
+            line-height: 1.5;
         }
 
         /* ========== COMPARISON SECTION ========== */
@@ -566,30 +660,34 @@
         .comparison-items {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 14px;
         }
 
         .comparison-item {
             background: var(--gray-100);
-            padding: 14px 20px;
-            border-radius: 12px;
+            padding: 16px 24px;
+            border-radius: 100px;
             font-size: 0.95em;
             display: flex;
             align-items: center;
-            gap: 10px;
-            color: var(--gray-700);
+            gap: 12px;
+            color: var(--gray-600);
+            font-weight: 500;
         }
 
         .comparison-side.old .comparison-item i {
-            color: #DC2626;
+            color: #EF4444;
+            font-size: 1.1em;
         }
 
         .comparison-side.new .comparison-item {
-            background: linear-gradient(135deg, rgba(115, 123, 242, 0.1) 0%, rgba(91, 99, 224, 0.15) 100%);
+            background: var(--accent-light);
+            color: var(--gray-800);
         }
 
         .comparison-side.new .comparison-item i {
-            color: var(--accent-dark);
+            color: var(--accent);
+            font-size: 1.1em;
         }
 
         .comparison-divider {
@@ -693,10 +791,7 @@
             box-shadow: var(--shadow-accent);
         }
 
-        .step-card:nth-child(1) .step-number { background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%); }
-        .step-card:nth-child(2) .step-number { background: linear-gradient(135deg, var(--accent-dark) 0%, var(--accent-deeper) 100%); }
-        .step-card:nth-child(3) .step-number { background: linear-gradient(135deg, var(--accent-deeper) 0%, var(--accent-deep) 100%); }
-        .step-card:nth-child(4) .step-number { background: linear-gradient(135deg, var(--accent-deep) 0%, var(--gray-700) 100%); }
+        .step-number { background: var(--accent); }
 
         .step-content h4 {
             font-size: 1em;
@@ -747,12 +842,7 @@
             margin-bottom: 20px;
         }
 
-        .feature-card:nth-child(1) .feature-icon { background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%); }
-        .feature-card:nth-child(2) .feature-icon { background: linear-gradient(135deg, var(--accent-dark) 0%, var(--accent-deeper) 100%); }
-        .feature-card:nth-child(3) .feature-icon { background: linear-gradient(135deg, var(--accent-deeper) 0%, var(--accent-deep) 100%); }
-        .feature-card:nth-child(4) .feature-icon { background: linear-gradient(135deg, var(--gray-600) 0%, var(--gray-700) 100%); }
-        .feature-card:nth-child(5) .feature-icon { background: linear-gradient(135deg, var(--accent-deep) 0%, var(--gray-800) 100%); }
-        .feature-card:nth-child(6) .feature-icon { background: linear-gradient(135deg, var(--gray-700) 0%, var(--gray-900) 100%); }
+        .feature-icon { background: var(--accent); box-shadow: var(--shadow-accent); }
 
         .feature-icon i {
             font-size: 1.4em;
@@ -876,7 +966,8 @@
         .market-stats {
             display: flex;
             justify-content: center;
-            gap: 60px;
+            align-items: center;
+            gap: 40px;
             margin-top: 50px;
         }
 
@@ -885,44 +976,53 @@
         }
 
         .market-stat-circle {
-            width: 180px;
-            height: 180px;
             background: white;
             border-radius: 50%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 8px 40px rgba(115, 123, 242, 0.15);
+            box-shadow: 0 8px 40px rgba(115, 123, 242, 0.12);
             transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        /* Different sizes for each circle */
+        .market-stat:nth-child(1) .market-stat-circle {
+            width: 200px;
+            height: 200px;
+        }
+        .market-stat:nth-child(2) .market-stat-circle {
+            width: 220px;
+            height: 220px;
+        }
+        .market-stat:nth-child(3) .market-stat-circle {
+            width: 180px;
+            height: 180px;
         }
 
         .market-stat:hover .market-stat-circle {
             transform: scale(1.05);
-            box-shadow: 0 12px 50px rgba(115, 123, 242, 0.25);
+            box-shadow: 0 12px 50px rgba(115, 123, 242, 0.2);
         }
 
         .market-stat-number {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 2.5em;
+            font-size: 2.8em;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--accent-deep) 0%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--accent);
         }
 
         .market-stat-unit {
-            font-size: 0.9em;
-            color: var(--gray-500);
+            font-size: 0.85em;
+            color: var(--gray-400);
             font-weight: 500;
         }
 
         .market-stat-label {
             margin-top: 16px;
-            font-size: 0.95em;
-            color: var(--gray-600);
-            max-width: 180px;
+            font-size: 0.9em;
+            color: var(--gray-400);
+            max-width: 200px;
         }
 
         /* ========== CTA SECTION ========== */
@@ -1049,8 +1149,8 @@
 
         .animate-on-scroll {
             opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+            transform: translateY(20px);
+            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
         }
 
         .animate-on-scroll.visible {
@@ -1058,19 +1158,14 @@
             transform: translateY(0);
         }
 
-        .animate-on-scroll.delay-1 { transition-delay: 0.1s; }
-        .animate-on-scroll.delay-2 { transition-delay: 0.2s; }
-        .animate-on-scroll.delay-3 { transition-delay: 0.3s; }
-        .animate-on-scroll.delay-4 { transition-delay: 0.4s; }
-
         /* Staggered animations for grids */
-        .problem-card, .feature-card, .step-card, .market-stat {
+        .problem-card, .feature-card, .step-card, .market-stat, .factor-card {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+            transform: translateY(15px);
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
         }
 
-        .problem-card.visible, .feature-card.visible, .step-card.visible, .market-stat.visible {
+        .problem-card.visible, .feature-card.visible, .step-card.visible, .market-stat.visible, .factor-card.visible {
             opacity: 1;
             transform: translateY(0);
         }
