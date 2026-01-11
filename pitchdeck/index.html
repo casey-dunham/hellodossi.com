@@ -748,25 +748,21 @@
         /* Photo Meal slide with phone */
         .photo-meal-slide {
             position: relative;
-            overflow: hidden;
-        }
-
-        .photo-meal-slide .slide-content {
-            max-width: 500px;
+            overflow: visible !important;
         }
 
         .nutrition-phone-left {
-            flex-shrink: 0;
-            width: 260px;
-            position: relative;
+            position: absolute;
+            left: 120px;
+            bottom: -100px;
+            width: 240px;
+            z-index: 10;
         }
 
         .nutrition-phone-left img {
             width: 100%;
             height: auto;
             display: block;
-            mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
         }
 
         .title-tagline {
@@ -1465,21 +1461,19 @@
             </section>
 
             <!-- Step 1: Photo Meal Recognition -->
-            <section>
-                <div class="slide-content">
+            <section class="photo-meal-slide">
+                <div class="slide-content" style="margin-left: auto; max-width: 550px;">
                     <h3>How It Works</h3>
                     <h2>Step 1: Photo Meal Recognition</h2>
-                    <div class="photo-feature-layout">
-                        <div class="nutrition-phone-left">
-                            <img src="nutrition-tracker.png" alt="Nutrition Tracker">
-                        </div>
-                        <div class="photo-steps">
-                            <div class="photo-step"><span class="step-num">1.</span><span>Snap a photo of any meal</span></div>
-                            <div class="photo-step"><span class="step-num">2.</span><span>AI identifies individual foods</span></div>
-                            <div class="photo-step"><span class="step-num">3.</span><span>Estimates carbs, protein, fat</span></div>
-                            <div class="photo-step"><span class="step-num">4.</span><span>Suggests dosage</span></div>
-                        </div>
+                    <div class="photo-steps" style="margin-top: 1.2em;">
+                        <div class="photo-step"><span class="step-num">1.</span><span>Snap a photo of any meal</span></div>
+                        <div class="photo-step"><span class="step-num">2.</span><span>AI identifies individual foods</span></div>
+                        <div class="photo-step"><span class="step-num">3.</span><span>Estimates carbs, protein, fat</span></div>
+                        <div class="photo-step"><span class="step-num">4.</span><span>Suggests dosage</span></div>
                     </div>
+                </div>
+                <div class="nutrition-phone-left">
+                    <img src="nutrition-tracker.png" alt="Nutrition Tracker">
                 </div>
             </section>
 
