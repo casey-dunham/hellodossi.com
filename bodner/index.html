@@ -1527,9 +1527,11 @@
         .reveal section.present .timeline .timeline-phase:nth-child(1) { animation-delay: 0.2s; }
         .reveal section.present .timeline .timeline-phase:nth-child(3) { animation-delay: 0.4s; }
         .reveal section.present .timeline .timeline-phase:nth-child(5) { animation-delay: 0.6s; }
+        .reveal section.present .timeline .timeline-phase:nth-child(7) { animation-delay: 0.8s; }
         .reveal section.present .timeline-arrow { animation: fadeIn 0.3s ease-out both; }
         .reveal section.present .timeline .timeline-arrow:nth-child(2) { animation-delay: 0.35s; }
         .reveal section.present .timeline .timeline-arrow:nth-child(4) { animation-delay: 0.55s; }
+        .reveal section.present .timeline .timeline-arrow:nth-child(6) { animation-delay: 0.75s; }
 
         /* Animated number counter */
         .animate-number {
@@ -1797,71 +1799,6 @@
             }
         }
 
-        /* How It Works Cards */
-        .how-it-works-cards {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            margin-top: 1.2em;
-            max-width: 700px;
-        }
-
-        .how-card {
-            display: flex;
-            align-items: center;
-            gap: 1.2em;
-            background: white;
-            border-radius: 100px;
-            padding: 1.1em 1.6em;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .how-card:hover {
-            transform: translateX(6px);
-            box-shadow: 0 8px 30px rgba(115, 123, 242, 0.12);
-        }
-
-        .how-card-icon {
-            width: 44px;
-            height: 44px;
-            background: var(--accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            box-shadow: 0 4px 12px rgba(115, 123, 242, 0.4);
-        }
-
-        .how-card-icon i {
-            font-size: 1.3em;
-            color: white;
-        }
-
-        .how-card-content h4 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.1em;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin: 0 0 0.2em 0;
-        }
-
-        .how-card-content p {
-            font-size: 0.95em;
-            color: var(--text-medium);
-            margin: 0;
-            line-height: 1.4;
-        }
-
-        /* How It Works card animations */
-        .reveal section.present .how-card {
-            animation: slideInLeft 0.5s ease-out both;
-        }
-        .reveal section.present .how-it-works-cards .how-card:nth-child(1) { animation-delay: 0.1s; }
-        .reveal section.present .how-it-works-cards .how-card:nth-child(2) { animation-delay: 0.2s; }
-        .reveal section.present .how-it-works-cards .how-card:nth-child(3) { animation-delay: 0.3s; }
-        .reveal section.present .how-it-works-cards .how-card:nth-child(4) { animation-delay: 0.4s; }
 
     </style>
 </head>
@@ -1961,36 +1898,59 @@
 
             <!-- How It Works Overview -->
             <section>
-                <div class="slide-content">
+                <div class="slide-content" style="max-width: none;">
                     <h3>Overview</h3>
                     <h2>How It Works</h2>
-                    <div class="how-it-works-cards">
-                        <div class="how-card">
-                            <div class="how-card-icon"><i class="ph ph-database"></i></div>
-                            <div class="how-card-content">
-                                <h4>Collect Data</h4>
-                                <p>Glucose, insulin, activity, meals</p>
+                    <div class="timeline" style="margin-top: 1.2em;">
+                        <div class="timeline-phase">
+                            <div class="phase-header">
+                                <i class="ph ph-database"></i>
+                                <span>Collect Data</span>
+                            </div>
+                            <div class="phase-items">
+                                <div class="phase-item">Glucose readings</div>
+                                <div class="phase-item">Insulin deliveries</div>
+                                <div class="phase-item">Activity & sleep</div>
+                                <div class="phase-item">Meal logging</div>
                             </div>
                         </div>
-                        <div class="how-card">
-                            <div class="how-card-icon"><i class="ph ph-chart-line-up"></i></div>
-                            <div class="how-card-content">
-                                <h4>Detect Patterns</h4>
-                                <p>Sensitivity shifts, meal effects</p>
+                        <div class="timeline-arrow"><i class="ph-bold ph-arrow-right"></i></div>
+                        <div class="timeline-phase">
+                            <div class="phase-header">
+                                <i class="ph ph-chart-line-up"></i>
+                                <span>Detect Patterns</span>
+                            </div>
+                            <div class="phase-items">
+                                <div class="phase-item">Sensitivity shifts</div>
+                                <div class="phase-item">Dawn phenomenon</div>
+                                <div class="phase-item">Meal responses</div>
+                                <div class="phase-item">Exercise effects</div>
                             </div>
                         </div>
-                        <div class="how-card">
-                            <div class="how-card-icon"><i class="ph ph-trend-up"></i></div>
-                            <div class="how-card-content">
-                                <h4>Predict</h4>
-                                <p>Glucose trajectory, insulin impact</p>
+                        <div class="timeline-arrow"><i class="ph-bold ph-arrow-right"></i></div>
+                        <div class="timeline-phase">
+                            <div class="phase-header">
+                                <i class="ph ph-trend-up"></i>
+                                <span>Predict</span>
+                            </div>
+                            <div class="phase-items">
+                                <div class="phase-item">Glucose trajectory</div>
+                                <div class="phase-item">Insulin impact</div>
+                                <div class="phase-item">Carb absorption</div>
+                                <div class="phase-item">Risk assessment</div>
                             </div>
                         </div>
-                        <div class="how-card">
-                            <div class="how-card-icon"><i class="ph ph-lightning"></i></div>
-                            <div class="how-card-content">
-                                <h4>Act</h4>
-                                <p>Dosing advice, basal adjustments</p>
+                        <div class="timeline-arrow"><i class="ph-bold ph-arrow-right"></i></div>
+                        <div class="timeline-phase">
+                            <div class="phase-header">
+                                <i class="ph ph-lightning"></i>
+                                <span>Act</span>
+                            </div>
+                            <div class="phase-items">
+                                <div class="phase-item">Dosing advice</div>
+                                <div class="phase-item">Basal adjustments</div>
+                                <div class="phase-item">Safety warnings</div>
+                                <div class="phase-item">Smart alerts</div>
                             </div>
                         </div>
                     </div>
