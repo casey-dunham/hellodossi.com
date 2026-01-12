@@ -11,15 +11,11 @@
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <style>
         :root {
-            /* Purple spectrum - from light to dark */
             --accent: #737BF2;
             --accent-dark: #5B63E0;
             --accent-deeper: #4A51CC;
-            --accent-deep: #3D44A8;
             --accent-light: rgba(115, 123, 242, 0.15);
             --accent-glow: rgba(115, 123, 242, 0.4);
-
-            /* Gray spectrum - more variation */
             --text-dark: #1a1a1a;
             --text-medium: #4a4a4a;
             --text-light: #8E8E93;
@@ -32,32 +28,15 @@
             --gray-300: #AEAEB2;
             --gray-200: #C7C7CC;
             --gray-100: #E5E5EA;
-
-            /* Backgrounds */
             --bg-page: #F5F5F8;
-            --bg-dark: #1C1C1E;
-            --bg-dark-elevated: #2C2C2E;
-            --bg-paper: #F5F5F8;
             --bg-card: white;
-
-            /* Shadows */
             --shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.08);
             --shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.1);
             --shadow-accent: 0 4px 12px rgba(115, 123, 242, 0.4);
-            --shadow-purple-glow: 0 0 60px rgba(115, 123, 242, 0.3);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 80px;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg-page);
@@ -126,7 +105,7 @@
             color: var(--accent-dark);
         }
 
-        /* ========== HERO SECTION ========== */
+        /* Hero */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -134,35 +113,13 @@
             justify-content: center;
             padding: 120px 40px 80px;
             position: relative;
-            overflow: visible;
             background: var(--bg-page);
         }
 
-        /* Subtle purple glow behind phone */
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: radial-gradient(ellipse 50% 50% at 75% 50%, rgba(115, 123, 242, 0.12) 0%, transparent 60%);
-            pointer-events: none;
-        }
-
         .hero-container {
-            max-width: 1200px;
+            max-width: 800px;
             width: 100%;
-            display: flex;
-            align-items: center;
-            gap: 40px;
-            position: relative;
-            z-index: 1;
-            padding-left: 20px;
-        }
-
-        .hero-content {
-            flex: 1;
-            max-width: 580px;
+            text-align: center;
         }
 
         .hero-badge {
@@ -188,16 +145,8 @@
             box-shadow: var(--shadow-accent);
         }
 
-        .hero-badge-icon i {
-            color: white;
-            font-size: 1em;
-        }
-
-        .hero-badge span {
-            font-size: 0.85em;
-            font-weight: 600;
-            color: var(--gray-900);
-        }
+        .hero-badge-icon i { color: white; font-size: 1em; }
+        .hero-badge span { font-size: 0.85em; font-weight: 600; color: var(--gray-900); }
 
         .hero-title {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -211,7 +160,7 @@
         }
 
         .hero-title .highlight {
-            background: linear-gradient(135deg, var(--accent-deep) 0%, var(--accent) 50%, var(--accent-dark) 100%);
+            background: linear-gradient(135deg, var(--accent-deeper) 0%, var(--accent) 50%, var(--accent-dark) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -222,13 +171,16 @@
             color: var(--gray-600);
             margin-bottom: 36px;
             line-height: 1.7;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
             animation: slideUp 0.7s ease-out 0.2s both;
         }
 
         .hero-buttons {
             display: flex;
             gap: 16px;
-            flex-wrap: wrap;
+            justify-content: center;
             animation: slideUp 0.7s ease-out 0.3s both;
         }
 
@@ -252,505 +204,34 @@
             box-shadow: 0 8px 30px rgba(115, 123, 242, 0.5);
         }
 
-        .btn-secondary {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: white;
-            color: var(--gray-900);
-            padding: 18px 32px;
-            border-radius: 100px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 15px;
-            box-shadow: var(--shadow-soft);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .btn-secondary:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-medium);
-        }
-
         .hero-stats {
             display: flex;
-            gap: 32px;
-            margin-top: 48px;
+            gap: 48px;
+            justify-content: center;
+            margin-top: 60px;
             animation: slideUp 0.7s ease-out 0.4s both;
         }
 
-        .hero-stat {
-            text-align: left;
-        }
+        .hero-stat { text-align: center; }
 
         .hero-stat-number {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 2em;
+            font-size: 2.2em;
             font-weight: 700;
             color: var(--accent);
         }
 
         .hero-stat-label {
-            font-size: 0.85em;
+            font-size: 0.9em;
             color: var(--gray-400);
-            margin-top: 2px;
+            margin-top: 4px;
         }
 
-        .hero-phone {
-            flex-shrink: 0;
-            position: absolute;
-            right: -200px;
-            top: 50%;
-            transform: translateY(-50%);
-            animation: phoneFloat 4s ease-in-out infinite;
-        }
-
-        @keyframes phoneFloat {
-            0%, 100% { transform: translateY(-50%); }
-            50% { transform: translateY(calc(-50% - 15px)); }
-        }
-
-        .hero-phone-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 450px;
-            height: 550px;
-            background:
-                radial-gradient(ellipse 60% 60% at 50% 50%, rgba(115, 123, 242, 0.3) 0%, transparent 50%),
-                radial-gradient(ellipse 80% 40% at 30% 70%, rgba(91, 99, 224, 0.2) 0%, transparent 50%),
-                radial-gradient(ellipse 60% 50% at 80% 30%, rgba(74, 81, 204, 0.15) 0%, transparent 50%);
-            filter: blur(50px);
-            pointer-events: none;
-            z-index: 0;
-            animation: glowPulse 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes glowPulse {
-            0% { opacity: 0.7; transform: translate(-50%, -50%) scale(0.95); }
-            100% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
-        }
-
-        .phone-image {
-            width: 300px;
-            height: auto;
-            position: relative;
-            z-index: 1;
-            filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.2));
-            transition: transform 0.3s ease;
-        }
-
-        /* ========== PROBLEM SECTION ========== */
-        .problem {
-            padding: 100px 40px;
-            background: var(--bg-page);
-        }
-
-        .problem-container {
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .problem-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .problem-header h3 {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.75em;
-            color: var(--accent);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            margin-bottom: 16px;
-        }
-
-        .problem-header h2 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 2.4em;
-            font-weight: 700;
-            line-height: 1.2;
-            color: var(--gray-900);
-        }
-
-        .problem-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-        }
-
-        .problem-card {
-            background: white;
-            border-radius: 24px;
-            padding: 32px 24px;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .problem-icon {
-            width: 56px;
-            height: 56px;
-            background: var(--accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            box-shadow: var(--shadow-accent);
-        }
-
-        .problem-icon i {
-            font-size: 1.5em;
-            color: white;
-        }
-
-        .problem-card h4 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.05em;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: var(--gray-900);
-        }
-
-        .problem-card p {
-            font-size: 0.9em;
-            color: var(--gray-500);
-            font-weight: 500;
-        }
-
-        .problem-bottom {
-            text-align: center;
-            margin-top: 40px;
-        }
-
-        .problem-bottom p {
-            font-size: 1.1em;
-            color: var(--gray-600);
-            font-style: italic;
-        }
-
-        .problem-bottom strong {
-            color: var(--accent);
-            font-weight: 600;
-        }
-
-        /* ========== FACTORS SECTION ========== */
-        .factors {
-            padding: 100px 40px;
-            background: var(--bg-page);
-        }
-
-        .factors-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .factors-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .factors-header h3 {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.75em;
-            color: var(--accent);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            margin-bottom: 16px;
-        }
-
-        .factors-header h2 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 2.4em;
-            font-weight: 700;
-            line-height: 1.2;
-            color: var(--gray-900);
-        }
-
-        .factors-header h2 span {
-            background: linear-gradient(135deg, var(--accent-deep) 0%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .factors-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-        }
-
-        .factor-card {
-            background: white;
-            border-radius: 16px;
-            padding: 24px;
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .factor-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 30px rgba(115, 123, 242, 0.12);
-        }
-
-        .factor-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--accent-light);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .factor-icon i {
-            font-size: 1.3em;
-            color: var(--accent);
-        }
-
-        .factor-content h4 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.05em;
-            font-weight: 700;
-            color: var(--gray-900);
-            margin-bottom: 4px;
-        }
-
-        .factor-content p {
-            font-size: 0.9em;
-            color: var(--gray-500);
-            line-height: 1.5;
-        }
-
-        /* ========== PHOTO MEAL RECOGNITION ========== */
-        .photo-meal {
-            padding: 100px 40px;
-            background: var(--bg-page);
-        }
-
-        .photo-meal-card {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: var(--bg-page);
-            border-radius: 32px;
-            padding: 50px 60px 50px;
-            position: relative;
-            overflow: hidden;
-            min-height: 480px;
-        }
-
-        .photo-meal-header h3 {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.75em;
-            color: var(--accent);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            margin-bottom: 16px;
-        }
-
-        .photo-meal-header h2 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 2.4em;
-            font-weight: 700;
-            line-height: 1.15;
-            color: var(--gray-900);
-            margin-bottom: 32px;
-        }
-
-        .photo-meal-content {
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 60px;
-        }
-
-        .photo-meal-visual {
-            position: relative;
-            height: 100%;
-        }
-
-        .photo-meal-visual img {
-            position: absolute;
-            bottom: -50px;
-            left: 0;
-            width: 260px;
-            height: auto;
-            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
-            z-index: 2;
-        }
-
-
-        .photo-steps {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-            padding-bottom: 50px;
-        }
-
-        .photo-step {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 18px 24px;
-            background: white;
-            border-radius: 100px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-            transition: transform 0.2s;
-        }
-
-        .photo-step:hover {
-            transform: translateX(6px);
-        }
-
-        .photo-step-num {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.2em;
-            font-weight: 700;
-            color: var(--accent);
-            flex-shrink: 0;
-            min-width: 24px;
-        }
-
-        .photo-step span:last-child {
-            font-size: 1em;
-            color: var(--gray-700);
-            font-weight: 500;
-        }
-
-        @media (max-width: 900px) {
-            .photo-meal-card {
-                padding: 40px 30px 0;
-            }
-
-            .photo-meal-content {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .photo-meal-visual {
-                display: none;
-            }
-        }
-
-        /* ========== COMPARISON SECTION ========== */
-        .comparison {
-            padding: 100px 40px;
-            background: var(--bg-page);
-        }
-
-        .comparison-container {
-            max-width: 900px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 32px;
-            padding: 50px;
-            box-shadow: var(--shadow-medium);
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .comparison-side {
-            text-align: center;
-        }
-
-        .comparison-side h4 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.3em;
-            font-weight: 700;
-            margin-bottom: 24px;
-        }
-
-        .comparison-side.old h4 {
-            color: var(--gray-500);
-        }
-
-        .comparison-side.new h4 {
-            background: linear-gradient(135deg, var(--accent-deep) 0%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .comparison-items {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-
-        .comparison-item {
-            background: #EBEBF0;
-            padding: 16px 24px;
-            border-radius: 100px;
-            font-size: 0.95em;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            color: var(--gray-700);
-            font-weight: 500;
-        }
-
-        .comparison-side.old .comparison-item i {
-            color: #EF4444;
-            font-size: 1.1em;
-        }
-
-        .comparison-side.new .comparison-item {
-            background: var(--accent-light);
-            color: var(--gray-800);
-        }
-
-        .comparison-side.new .comparison-item i {
-            color: var(--accent);
-            font-size: 1.1em;
-        }
-
-        .comparison-divider {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 16px;
-        }
-
-        .comparison-divider-line {
-            width: 2px;
-            height: 80px;
-            background: linear-gradient(180deg, transparent, var(--accent), transparent);
-        }
-
-        .comparison-vs {
-            width: 48px;
-            height: 48px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            color: white;
-            font-size: 0.9em;
-            box-shadow: var(--shadow-accent);
-        }
-
-        /* ========== HOW IT WORKS - KEPT ========== */
-        .how-it-works {
-            padding: 100px 40px;
-        }
-
+        /* Section Styles */
         .section-header {
             text-align: center;
             max-width: 600px;
-            margin: 0 auto 60px;
+            margin: 0 auto 50px;
         }
 
         .section-header h3 {
@@ -769,6 +250,7 @@
             font-weight: 700;
             margin-bottom: 16px;
             line-height: 1.2;
+            color: var(--gray-900);
         }
 
         .section-header p {
@@ -777,299 +259,161 @@
             line-height: 1.7;
         }
 
-        .steps-container {
-            max-width: 800px;
+        /* Problem Section */
+        .problem {
+            padding: 100px 40px;
+            background: var(--bg-page);
+        }
+
+        .problem-container {
+            max-width: 1000px;
             margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
         }
 
-        .step-card {
-            background: var(--bg-card);
-            padding: 24px 28px;
-            border-radius: 100px;
-            display: flex;
-            align-items: center;
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
-            box-shadow: var(--shadow-soft);
-            transition: transform 0.3s, box-shadow 0.3s;
         }
 
-        .step-card:hover {
-            transform: translateX(8px);
-            box-shadow: var(--shadow-medium);
+        .problem-card {
+            background: white;
+            border-radius: 24px;
+            padding: 32px 24px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
         }
 
-        .step-number {
-            width: 44px;
-            height: 44px;
-            color: white;
+        .problem-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--accent);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.2em;
-            font-weight: 700;
-            flex-shrink: 0;
+            margin: 0 auto 20px;
             box-shadow: var(--shadow-accent);
         }
 
-        .step-number { background: var(--accent); }
+        .problem-icon i { font-size: 1.5em; color: white; }
 
-        .step-content h4 {
-            font-size: 1em;
-            font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 2px;
-        }
-
-        .step-content p {
-            font-size: 0.9em;
-            color: var(--text-medium);
-        }
-
-        /* ========== SAFETY SECTION ========== */
-        .safety {
-            padding: 100px 40px;
-            background: var(--bg-page);
-        }
-
-        .safety-card {
-            max-width: 900px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 32px;
-            padding: 50px 60px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .safety-header h3 {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.75em;
-            color: var(--accent);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            margin-bottom: 16px;
-        }
-
-        .safety-header h2 {
+        .problem-card h4 {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 2.4em;
-            font-weight: 700;
-            line-height: 1.15;
-            color: var(--gray-900);
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .safety-header h2 i {
-            font-size: 0.8em;
-            color: var(--gray-900);
-        }
-
-        .safety-header > p {
             font-size: 1.05em;
-            color: var(--gray-500);
-            margin-bottom: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--gray-900);
         }
 
-        .safety-steps {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+        .problem-card p { font-size: 0.9em; color: var(--gray-500); font-weight: 500; }
+
+        .problem-bottom {
+            text-align: center;
+            margin-top: 40px;
         }
 
-        .safety-step {
+        .problem-bottom p {
+            font-size: 1.1em;
+            color: var(--gray-600);
+            font-style: italic;
+        }
+
+        .problem-bottom strong { color: var(--accent); font-weight: 600; }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 100px 40px;
+            background: white;
+        }
+
+        .how-it-works-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .how-it-works-grid {
             display: flex;
             align-items: center;
             gap: 16px;
-            padding: 16px 24px;
-            background: var(--bg-page);
-            border-radius: 100px;
+            justify-content: center;
         }
 
-        .safety-step-num {
-            width: 28px;
-            height: 28px;
+        .hiw-card {
+            background: var(--bg-page);
+            border-radius: 20px;
+            padding: 28px 20px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            width: 200px;
+            height: 240px;
+            flex-shrink: 0;
+        }
+
+        .hiw-number {
+            width: 40px;
+            height: 40px;
             background: var(--accent);
-            color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 0.85em;
             font-weight: 700;
-            flex-shrink: 0;
-            box-shadow: 0 4px 12px rgba(115, 123, 242, 0.4);
-        }
-
-        .safety-step-content {
-            font-size: 0.95em;
-            color: var(--gray-600);
-        }
-
-        .safety-step-content strong {
-            color: var(--gray-900);
-            font-weight: 600;
-        }
-
-        .safety-bottom-bar {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-dark) 100%);
-        }
-
-        /* ========== BASAL RATE INTELLIGENCE ========== */
-        .basal {
-            padding: 100px 40px;
-            background: white;
-        }
-
-        .basal-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .basal-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .basal-header h3 {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.75em;
-            color: var(--accent);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            margin-bottom: 16px;
-        }
-
-        .basal-header h2 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 2.4em;
-            font-weight: 700;
-            line-height: 1.2;
-            color: var(--gray-900);
-            margin-bottom: 16px;
-        }
-
-        .basal-header p {
             font-size: 1.1em;
-            color: var(--gray-500);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .basal-timeline {
-            display: flex;
-            gap: 16px;
-            align-items: flex-end;
-            padding: 40px 0 20px;
-        }
-
-        .basal-period {
-            flex: 1;
-            text-align: center;
-        }
-
-        .period-time {
-            font-size: 0.75em;
-            color: var(--gray-400);
-            margin-bottom: 12px;
-            font-weight: 600;
-        }
-
-        .period-bar {
-            width: 100%;
-            border-radius: 12px 12px 0 0;
+            color: white;
             margin-bottom: 16px;
-            transition: transform 0.3s ease;
+            box-shadow: var(--shadow-accent);
         }
 
-        .period-bar:hover {
-            transform: scaleY(1.05);
-            transform-origin: bottom;
+        .hiw-card h4 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.05em;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 14px;
         }
 
-        .period-bar.low {
-            height: 70px;
-            background: linear-gradient(180deg, #C7CAFC, #A5ABFA);
+        .hiw-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
-        .period-bar.medium {
-            height: 100px;
-            background: linear-gradient(180deg, #8B92F7, #737BF2);
-        }
-
-        .period-bar.high {
-            height: 140px;
-            background: linear-gradient(180deg, #5B63E0, #4338CA);
-        }
-
-        .period-label {
-            font-size: 0.85em;
-            font-weight: 600;
-            color: var(--gray-800);
+        .hiw-list li {
+            font-size: 0.82em;
+            color: var(--gray-600);
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding-left: 0;
             line-height: 1.4;
         }
 
-        .period-label span {
-            display: block;
-            font-weight: 400;
-            color: var(--gray-400);
-            font-size: 0.85em;
-            margin-top: 4px;
-        }
-
-        .basal-footer {
-            text-align: center;
-            margin-top: 32px;
-            font-size: 1em;
-            color: var(--gray-500);
-            font-style: italic;
-        }
-
-        .basal-footer strong {
+        .hiw-list li::before {
+            content: "›";
             color: var(--accent);
-            font-style: normal;
+            font-weight: 600;
+            font-size: 1.1em;
+            flex-shrink: 0;
         }
 
-        @media (max-width: 768px) {
-            .basal-timeline {
-                flex-wrap: wrap;
-                gap: 12px;
-            }
-
-            .basal-period {
-                flex: 1 1 45%;
-                min-width: 140px;
-            }
-
-            .period-bar.low { height: 50px; }
-            .period-bar.medium { height: 70px; }
-            .period-bar.high { height: 100px; }
+        .hiw-arrow {
+            color: var(--accent);
+            font-size: 1.4em;
+            flex-shrink: 0;
         }
 
-        /* ========== FEATURES - WITH COLOR DEPTH ========== */
+        /* Features */
         .features {
             padding: 100px 40px;
-            background: linear-gradient(180deg, var(--bg-page) 0%, var(--gray-100) 100%);
+            background: var(--bg-page);
         }
 
         .features-grid {
-            max-width: 1100px;
+            max-width: 1000px;
             margin: 0 auto;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -1077,10 +421,10 @@
         }
 
         .feature-card {
-            background: var(--bg-card);
+            background: white;
             padding: 32px;
             border-radius: 24px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08), 0 8px 40px rgba(115, 123, 242, 0.06);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
             transition: transform 0.3s, box-shadow 0.3s;
         }
 
@@ -1092,19 +436,16 @@
         .feature-icon {
             width: 48px;
             height: 48px;
+            background: var(--accent);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 20px;
+            box-shadow: var(--shadow-accent);
         }
 
-        .feature-icon { background: var(--accent); box-shadow: var(--shadow-accent); }
-
-        .feature-icon i {
-            font-size: 1.4em;
-            color: white;
-        }
+        .feature-icon i { font-size: 1.4em; color: white; }
 
         .feature-card h3 {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -1114,25 +455,20 @@
             color: var(--gray-900);
         }
 
-        .feature-card p {
-            font-size: 0.9em;
-            color: var(--gray-500);
-            line-height: 1.6;
-        }
+        .feature-card p { font-size: 0.9em; color: var(--gray-500); line-height: 1.6; }
 
-        /* ========== LEARNING LOOP ========== */
+        /* Learning Loop */
         .learning {
             padding: 100px 40px;
-            background: var(--bg-page);
+            background: white;
         }
 
         .learning-container {
             max-width: 1000px;
             margin: 0 auto;
-            background: white;
+            background: var(--bg-page);
             border-radius: 32px;
             padding: 60px;
-            box-shadow: var(--shadow-medium);
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 60px;
@@ -1168,7 +504,7 @@
         .learning-steps {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 16px;
         }
 
         .learning-step {
@@ -1182,7 +518,7 @@
         .learning-step-num {
             width: 28px;
             height: 28px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            background: var(--accent);
             color: white;
             border-radius: 50%;
             display: flex;
@@ -1191,12 +527,10 @@
             font-size: 0.8em;
             font-weight: 700;
             flex-shrink: 0;
-            box-shadow: 0 4px 12px rgba(115, 123, 242, 0.4);
+            box-shadow: var(--shadow-accent);
         }
 
-        .learning-step strong {
-            color: var(--accent-dark);
-        }
+        .learning-step strong { color: var(--accent-dark); }
 
         .learning-visual {
             display: flex;
@@ -1204,12 +538,9 @@
             justify-content: center;
         }
 
-        .learning-visual img {
-            width: 280px;
-            height: auto;
-        }
+        .learning-visual img { width: 280px; height: auto; }
 
-        /* ========== MARKET SECTION ========== */
+        /* Market / Why This Matters */
         .market {
             padding: 100px 40px;
             background: var(--bg-page);
@@ -1243,37 +574,18 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 8px 40px rgba(115, 123, 242, 0.25);
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s;
         }
 
-        /* Different sizes for each circle - matching pitch deck */
-        .market-stat:nth-child(1) .market-stat-circle {
-            width: 200px;
-            height: 200px;
-        }
-        .market-stat:nth-child(1) .market-stat-number {
-            font-size: 3em;
-        }
-
-        .market-stat:nth-child(2) .market-stat-circle {
-            width: 170px;
-            height: 170px;
-        }
-        .market-stat:nth-child(2) .market-stat-number {
-            font-size: 2.5em;
-        }
-
-        .market-stat:nth-child(3) .market-stat-circle {
-            width: 140px;
-            height: 140px;
-        }
-        .market-stat:nth-child(3) .market-stat-number {
-            font-size: 2em;
-        }
+        .market-stat:nth-child(1) .market-stat-circle { width: 200px; height: 200px; }
+        .market-stat:nth-child(1) .market-stat-number { font-size: 3em; }
+        .market-stat:nth-child(2) .market-stat-circle { width: 170px; height: 170px; }
+        .market-stat:nth-child(2) .market-stat-number { font-size: 2.5em; }
+        .market-stat:nth-child(3) .market-stat-circle { width: 140px; height: 140px; }
+        .market-stat:nth-child(3) .market-stat-number { font-size: 2em; }
 
         .market-stat:hover .market-stat-circle {
             transform: scale(1.05);
-            box-shadow: 0 12px 50px rgba(115, 123, 242, 0.3);
         }
 
         .market-stat-number {
@@ -1287,14 +599,13 @@
             color: var(--gray-500);
             max-width: 200px;
             line-height: 1.4;
-            text-align: center;
         }
 
-        /* ========== CTA SECTION ========== */
+        /* CTA */
         .cta {
             padding: 100px 40px;
             text-align: center;
-            background: var(--bg-page);
+            background: white;
         }
 
         .cta-container {
@@ -1341,7 +652,7 @@
             align-items: center;
             gap: 10px;
             background: white;
-            color: var(--accent-deep);
+            color: var(--accent-deeper);
             padding: 18px 32px;
             border-radius: 100px;
             text-decoration: none;
@@ -1357,7 +668,7 @@
             box-shadow: 0 8px 30px rgba(0,0,0,0.2);
         }
 
-        /* ========== FOOTER ========== */
+        /* Footer */
         .footer {
             padding: 40px;
             text-align: center;
@@ -1365,7 +676,7 @@
         }
 
         .footer-inner {
-            max-width: 1100px;
+            max-width: 1000px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
@@ -1374,16 +685,9 @@
             gap: 24px;
         }
 
-        .footer-logo img {
-            height: 20px;
-            width: auto;
-            opacity: 0.6;
-        }
+        .footer-logo img { height: 20px; width: auto; opacity: 0.6; }
 
-        .footer-links {
-            display: flex;
-            gap: 24px;
-        }
+        .footer-links { display: flex; gap: 24px; }
 
         .footer-links a {
             font-size: 14px;
@@ -1392,16 +696,11 @@
             transition: color 0.2s;
         }
 
-        .footer-links a:hover {
-            color: var(--gray-900);
-        }
+        .footer-links a:hover { color: var(--gray-900); }
 
-        .footer-copy {
-            font-size: 13px;
-            color: var(--gray-500);
-        }
+        .footer-copy { font-size: 13px; color: var(--gray-500); }
 
-        /* ========== ANIMATIONS ========== */
+        /* Animations */
         @keyframes slideUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -1415,7 +714,7 @@
         .animate-on-scroll {
             opacity: 0;
             transform: translateY(30px);
-            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
 
         .animate-on-scroll.visible {
@@ -1423,118 +722,32 @@
             transform: translateY(0);
         }
 
-        /* Scale in animation */
-        .animate-scale {
-            opacity: 0;
-            transform: scale(0.9);
-            transition: opacity 0.5s ease-out, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .animate-scale.visible {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        /* Slide from left */
-        .animate-left {
-            opacity: 0;
-            transform: translateX(-40px);
-            transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .animate-left.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        /* Slide from right */
-        .animate-right {
-            opacity: 0;
-            transform: translateX(40px);
-            transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .animate-right.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        /* Staggered animations for grids */
-        .problem-card, .feature-card, .step-card, .market-stat, .factor-card, .photo-step, .basal-period, .safety-step, .learning-step, .comparison-item {
+        .problem-card, .feature-card, .hiw-card, .market-stat, .learning-step {
             opacity: 0;
             transform: translateY(25px);
-            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
         }
 
-        .problem-card.visible, .feature-card.visible, .step-card.visible, .market-stat.visible, .factor-card.visible, .photo-step.visible, .basal-period.visible, .safety-step.visible, .learning-step.visible, .comparison-item.visible {
+        .problem-card.visible, .feature-card.visible, .hiw-card.visible, .market-stat.visible, .learning-step.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Market circles pop animation */
-        .market-stat-circle {
-            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-
-        .market-stat.visible .market-stat-circle {
-            animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-        }
-
-        @keyframes popIn {
-            0% { transform: scale(0); }
-            100% { transform: scale(1); }
-        }
-
-        /* Learning loop image spin */
-        .learning-visual img {
-            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease-out;
-        }
-
-        .learning-container.visible .learning-visual img {
-            animation: spinIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        @keyframes spinIn {
-            0% { transform: rotate(-180deg) scale(0.5); opacity: 0; }
-            100% { transform: rotate(0deg) scale(1); opacity: 1; }
-        }
-
-        /* ========== RESPONSIVE ========== */
+        /* Responsive */
         @media (max-width: 1024px) {
-            .hero-container {
-                flex-direction: column;
-                text-align: center;
-                gap: 50px;
+            .how-it-works-grid {
+                flex-wrap: wrap;
+                gap: 20px;
             }
 
-            .hero-content {
-                max-width: 640px;
+            .hiw-arrow { display: none; }
+
+            .hiw-card {
+                width: calc(50% - 10px);
             }
 
-            .hero-buttons {
-                justify-content: center;
-            }
-
-            .hero-stats {
-                justify-content: center;
-            }
-
-            .problem-grid {
+            .features-grid {
                 grid-template-columns: repeat(2, 1fr);
-            }
-
-            .comparison-container {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .comparison-divider {
-                flex-direction: row;
-            }
-
-            .comparison-divider-line {
-                width: 80px;
-                height: 2px;
             }
 
             .learning-container {
@@ -1542,41 +755,25 @@
                 gap: 40px;
             }
 
-            .features-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .market-stats {
-                flex-wrap: wrap;
-            }
+            .market-stats { flex-wrap: wrap; }
         }
 
         @media (max-width: 768px) {
-            .nav {
-                padding: 16px 24px;
-            }
+            .nav { padding: 16px 24px; }
+            .nav-links { display: none; }
 
-            .nav-links {
-                display: none;
-            }
-
-            .hero {
-                padding: 100px 24px 60px;
-            }
-
-            .hero-phone {
-                display: none;
-            }
+            .hero { padding: 100px 24px 60px; }
 
             .hero-stats {
                 flex-direction: column;
-                gap: 16px;
-                align-items: center;
+                gap: 20px;
             }
 
             .problem-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
             }
+
+            .hiw-card { width: 100%; }
 
             .features-grid {
                 grid-template-columns: 1fr;
@@ -1584,24 +781,14 @@
 
             .market-stats {
                 flex-direction: column;
-                align-items: center;
                 gap: 40px;
             }
 
-            .step-card {
-                border-radius: 20px;
-                padding: 20px;
-            }
-
-            .learning-container,
-            .cta-container {
+            .learning-container, .cta-container {
                 padding: 40px 28px;
-                border-radius: 24px;
             }
 
-            .footer-inner {
-                flex-direction: column;
-            }
+            .footer-inner { flex-direction: column; }
         }
     </style>
 </head>
@@ -1613,8 +800,7 @@
         </a>
         <div class="nav-links">
             <a href="#how-it-works">How It Works</a>
-            <a href="#features">Features</a>
-            <a href="/pitchdeck">Pitch Deck</a>
+            <a href="/features">Features</a>
         </div>
         <div class="nav-cta">
             <a href="mailto:team@hellodossi.com">Get In Touch</a>
@@ -1623,45 +809,38 @@
 
     <!-- Hero -->
     <section class="hero">
-        <div class="hero-bg"></div>
         <div class="hero-container">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <div class="hero-badge-icon">
-                        <i class="ph-fill ph-sparkle"></i>
-                    </div>
-                    <span>AI-Powered Decision Support</span>
+            <div class="hero-badge">
+                <div class="hero-badge-icon">
+                    <i class="ph-fill ph-sparkle"></i>
                 </div>
-                <h1 class="hero-title">
-                    Where insulin dosing meets <span class="highlight">predictive intelligence</span>
-                </h1>
-                <p class="hero-subtitle">
-                    Current pumps only know glucose and carbs. Dossi considers 60+ factors and learns your unique patterns over time.
-                </p>
-                <div class="hero-buttons">
-                    <a href="#how-it-works" class="btn-primary">
-                        <i class="ph-bold ph-arrow-down"></i>
-                        Learn More
-                    </a>
-                </div>
-                <div class="hero-stats">
-                    <div class="hero-stat">
-                        <div class="hero-stat-number">60+</div>
-                        <div class="hero-stat-label">Contextual Factors</div>
-                    </div>
-                    <div class="hero-stat">
-                        <div class="hero-stat-number">5</div>
-                        <div class="hero-stat-label">Safety Layers</div>
-                    </div>
-                    <div class="hero-stat">
-                        <div class="hero-stat-number">24/7</div>
-                        <div class="hero-stat-label">Learning</div>
-                    </div>
-                </div>
+                <span>AI-Powered Decision Support</span>
             </div>
-            <div class="hero-phone">
-                <div class="hero-phone-glow"></div>
-                <img src="images/dossi-dashboard.png" alt="Dossi Dashboard" class="phone-image">
+            <h1 class="hero-title">
+                Where insulin dosing meets <span class="highlight">predictive intelligence</span>
+            </h1>
+            <p class="hero-subtitle">
+                Current pumps only know glucose and carbs. Dossi considers 60+ factors and learns your unique patterns over time.
+            </p>
+            <div class="hero-buttons">
+                <a href="#how-it-works" class="btn-primary">
+                    <i class="ph-bold ph-arrow-down"></i>
+                    Learn More
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-number">60+</div>
+                    <div class="hero-stat-label">Contextual Factors</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number">5</div>
+                    <div class="hero-stat-label">Safety Layers</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-number">24/7</div>
+                    <div class="hero-stat-label">Learning</div>
+                </div>
             </div>
         </div>
     </section>
@@ -1669,7 +848,7 @@
     <!-- Problem -->
     <section class="problem">
         <div class="problem-container">
-            <div class="problem-header animate-on-scroll">
+            <div class="section-header animate-on-scroll">
                 <h3>The Problem</h3>
                 <h2>Your "smart" pump isn't very smart</h2>
             </div>
@@ -1709,171 +888,55 @@
         </div>
     </section>
 
-    <!-- Comparison -->
-    <section class="comparison animate-on-scroll">
-        <div class="comparison-container">
-            <div class="comparison-side old">
-                <h4>Traditional Pumps</h4>
-                <div class="comparison-items">
-                    <div class="comparison-item">
-                        <i class="ph-fill ph-x-circle"></i>
-                        <span>Only glucose + carbs</span>
-                    </div>
-                    <div class="comparison-item">
-                        <i class="ph-fill ph-x-circle"></i>
-                        <span>Static formulas</span>
-                    </div>
-                    <div class="comparison-item">
-                        <i class="ph-fill ph-x-circle"></i>
-                        <span>No personalization</span>
-                    </div>
-                    <div class="comparison-item">
-                        <i class="ph-fill ph-x-circle"></i>
-                        <span>Manual adjustments</span>
-                    </div>
-                </div>
-            </div>
-            <div class="comparison-divider">
-                <div class="comparison-divider-line"></div>
-                <div class="comparison-vs">VS</div>
-                <div class="comparison-divider-line"></div>
-            </div>
-            <div class="comparison-side new">
-                <h4>Dossi</h4>
-                <div class="comparison-items">
-                    <div class="comparison-item">
-                        <i class="ph-fill ph-check-circle"></i>
-                        <span>60+ contextual factors</span>
-                    </div>
-                    <div class="comparison-item">
-                        <i class="ph-fill ph-check-circle"></i>
-                        <span>Bayesian learning</span>
-                    </div>
-                    <div class="comparison-item">
-                        <i class="ph-fill ph-check-circle"></i>
-                        <span>Learns YOUR patterns</span>
-                    </div>
-                    <div class="comparison-item">
-                        <i class="ph-fill ph-check-circle"></i>
-                        <span>Automatic adaptation</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- How It Works -->
     <section class="how-it-works" id="how-it-works">
-        <div class="section-header animate-on-scroll">
-            <h3>How It Works</h3>
-            <h2>Dosing that adapts to you</h2>
-            <p>Personalized recommendations based on your data, your patterns, your physiology.</p>
-        </div>
-        <div class="steps-container">
-            <div class="step-card">
-                <div class="step-number">1</div>
-                <div class="step-content">
-                    <h4>Snap a photo of your meal</h4>
-                    <p>AI identifies foods and estimates carbs, protein, fat, and fiber automatically.</p>
-                </div>
-            </div>
-            <div class="step-card">
-                <div class="step-number">2</div>
-                <div class="step-content">
-                    <h4>Context is assembled in real-time</h4>
-                    <p>CGM data, recent exercise, sleep quality, time of day—all considered instantly.</p>
-                </div>
-            </div>
-            <div class="step-card">
-                <div class="step-number">3</div>
-                <div class="step-content">
-                    <h4>Get a personalized recommendation</h4>
-                    <p>Dossi suggests an insulin dose tailored to your current state and history.</p>
-                </div>
-            </div>
-            <div class="step-card">
-                <div class="step-number">4</div>
-                <div class="step-content">
-                    <h4>The algorithm learns from outcomes</h4>
-                    <p>After every meal, Dossi refines its model based on what actually happened.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Photo Meal Recognition -->
-    <section class="photo-meal">
-        <div class="photo-meal-card animate-on-scroll">
-            <div class="photo-meal-header">
+        <div class="how-it-works-container">
+            <div class="section-header animate-on-scroll">
                 <h3>How It Works</h3>
-                <h2>Photo Meal Recognition</h2>
+                <h2>Dosing that adapts to you</h2>
+                <p>Personalized recommendations based on your data, your patterns, your physiology.</p>
             </div>
-            <div class="photo-meal-content">
-                <div class="photo-meal-visual">
-                    <img src="pitchdeck/nutrition-tracker.png" alt="Photo Meal Recognition">
+            <div class="how-it-works-grid">
+                <div class="hiw-card">
+                    <div class="hiw-number">1</div>
+                    <h4>Data Ingestion</h4>
+                    <ul class="hiw-list">
+                        <li>Glucose & insulin data</li>
+                        <li>Activity, sleep, heart rate</li>
+                        <li>Meals & time of day</li>
+                    </ul>
                 </div>
-                <div class="photo-steps">
-                    <div class="photo-step">
-                        <span class="photo-step-num">1.</span>
-                        <span>Snap a photo of any meal</span>
-                    </div>
-                    <div class="photo-step">
-                        <span class="photo-step-num">2.</span>
-                        <span>AI identifies individual foods</span>
-                    </div>
-                    <div class="photo-step">
-                        <span class="photo-step-num">3.</span>
-                        <span>Estimates carbs, protein, fat, fiber</span>
-                    </div>
-                    <div class="photo-step">
-                        <span class="photo-step-num">4.</span>
-                        <span>Models interaction of different macros</span>
-                    </div>
-                    <div class="photo-step">
-                        <span class="photo-step-num">5.</span>
-                        <span>Suggests dosage</span>
-                    </div>
+                <div class="hiw-arrow"><i class="ph-bold ph-arrow-right"></i></div>
+                <div class="hiw-card">
+                    <div class="hiw-number">2</div>
+                    <h4>Pattern Detection</h4>
+                    <ul class="hiw-list">
+                        <li>Glucose response patterns</li>
+                        <li>Sensitivity changes</li>
+                        <li>Exercise & meal effects</li>
+                    </ul>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Basal Rate Intelligence -->
-    <section class="basal">
-        <div class="basal-container">
-            <div class="basal-header animate-on-scroll">
-                <h3>Beyond Meals</h3>
-                <h2>Basal Rate Intelligence</h2>
-                <p>Dossi learns your background insulin needs throughout the day and suggests optimal delivery rates.</p>
-            </div>
-            <div class="basal-timeline">
-                <div class="basal-period">
-                    <div class="period-time">12am – 4am</div>
-                    <div class="period-bar low"></div>
-                    <div class="period-label">Deep Sleep<span>Lower rates during rest</span></div>
+                <div class="hiw-arrow"><i class="ph-bold ph-arrow-right"></i></div>
+                <div class="hiw-card">
+                    <div class="hiw-number">3</div>
+                    <h4>Prediction</h4>
+                    <ul class="hiw-list">
+                        <li>Forecast glucose trajectories</li>
+                        <li>Estimate insulin impact</li>
+                        <li>Quantify uncertainty</li>
+                    </ul>
                 </div>
-                <div class="basal-period">
-                    <div class="period-time">4am – 8am</div>
-                    <div class="period-bar high"></div>
-                    <div class="period-label">Dawn Phenomenon<span>Hormones spike glucose</span></div>
-                </div>
-                <div class="basal-period">
-                    <div class="period-time">8am – 12pm</div>
-                    <div class="period-bar medium"></div>
-                    <div class="period-label">Morning Active<span>Moderate baseline</span></div>
-                </div>
-                <div class="basal-period">
-                    <div class="period-time">12pm – 6pm</div>
-                    <div class="period-bar medium"></div>
-                    <div class="period-label">Afternoon<span>Activity-adjusted</span></div>
-                </div>
-                <div class="basal-period">
-                    <div class="period-time">6pm – 12am</div>
-                    <div class="period-bar low"></div>
-                    <div class="period-label">Evening<span>Gradual reduction</span></div>
+                <div class="hiw-arrow"><i class="ph-bold ph-arrow-right"></i></div>
+                <div class="hiw-card">
+                    <div class="hiw-number">4</div>
+                    <h4>Action</h4>
+                    <ul class="hiw-list">
+                        <li>Personalized dosing</li>
+                        <li>Basal recommendations</li>
+                        <li>Safety-bounded</li>
+                    </ul>
                 </div>
             </div>
-            <p class="basal-footer animate-on-scroll">Dossi learns <strong>YOUR</strong> unique patterns and suggests basal adjustments automatically.</p>
         </div>
     </section>
 
@@ -1961,41 +1024,7 @@
         </div>
     </section>
 
-    <!-- Safety -->
-    <section class="safety">
-        <div class="safety-card animate-on-scroll">
-            <div class="safety-header">
-                <h3>Safety First</h3>
-                <h2>5 Layers of Validation <i class="ph-fill ph-lock"></i></h2>
-                <p>Insulin errors can be dangerous. Every recommendation passes through graduated safety checks.</p>
-            </div>
-            <div class="safety-steps">
-                <div class="safety-step">
-                    <span class="safety-step-num">1</span>
-                    <span class="safety-step-content"><strong>Hard Limits</strong> — Max 25U bolus, min 70 mg/dL glucose, max fall rate</span>
-                </div>
-                <div class="safety-step">
-                    <span class="safety-step-num">2</span>
-                    <span class="safety-step-content"><strong>User Confirmation</strong> — Users must confirm boluses and ML personalization</span>
-                </div>
-                <div class="safety-step">
-                    <span class="safety-step-num">3</span>
-                    <span class="safety-step-content"><strong>Predictive</strong> — Calculates hypo risk at 15/30/60/120 min horizons</span>
-                </div>
-                <div class="safety-step">
-                    <span class="safety-step-num">4</span>
-                    <span class="safety-step-content"><strong>Anomaly Detection</strong> — Validates sensor data quality and flags issues</span>
-                </div>
-                <div class="safety-step">
-                    <span class="safety-step-num">5</span>
-                    <span class="safety-step-content"><strong>Learning Validation</strong> — Checks recent outcomes for algorithm drift</span>
-                </div>
-            </div>
-            <div class="safety-bottom-bar"></div>
-        </div>
-    </section>
-
-    <!-- Market -->
+    <!-- Why This Matters -->
     <section class="market">
         <div class="market-container">
             <div class="section-header animate-on-scroll">
@@ -2028,11 +1057,11 @@
     <!-- CTA -->
     <section class="cta">
         <div class="cta-container animate-on-scroll">
-            <h2>See the full vision</h2>
-            <p>Dossi is being built for the InVenture Prize at Georgia Tech. Check out the pitch deck to learn more about where we're headed.</p>
-            <a href="/pitchdeck" class="btn-white">
-                <i class="ph-bold ph-presentation-chart"></i>
-                View Pitch Deck
+            <h2>Ready to learn more?</h2>
+            <p>Dossi is being built for the InVenture Prize at Georgia Tech. Get in touch to follow our journey.</p>
+            <a href="mailto:team@hellodossi.com" class="btn-white">
+                <i class="ph-bold ph-envelope"></i>
+                Get In Touch
             </a>
         </div>
     </section>
@@ -2044,8 +1073,7 @@
                 <img src="pitchdeck/dossi-wordmark.png" alt="Dossi">
             </div>
             <div class="footer-links">
-                <a href="/pitchdeck">Pitch Deck</a>
-                <a href="/preliminary">Preliminary</a>
+                <a href="/features">Features</a>
                 <a href="mailto:team@hellodossi.com">Contact</a>
             </div>
             <p class="footer-copy">&copy; 2026 Dossi. All rights reserved.</p>
@@ -2062,37 +1090,14 @@
             });
         }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
 
-        // Observe all animated elements
-        document.querySelectorAll('.animate-on-scroll, .animate-scale, .animate-left, .animate-right').forEach(el => animateObserver.observe(el));
+        document.querySelectorAll('.animate-on-scroll').forEach(el => animateObserver.observe(el));
 
-        // Stagger delays per section - more noticeable cascade effect
+        // Stagger animations
         document.querySelectorAll('.problem-card').forEach((el, i) => { el.style.transitionDelay = `${i * 0.12}s`; animateObserver.observe(el); });
         document.querySelectorAll('.feature-card').forEach((el, i) => { el.style.transitionDelay = `${i * 0.1}s`; animateObserver.observe(el); });
-        document.querySelectorAll('.step-card').forEach((el, i) => { el.style.transitionDelay = `${i * 0.15}s`; animateObserver.observe(el); });
+        document.querySelectorAll('.hiw-card').forEach((el, i) => { el.style.transitionDelay = `${i * 0.15}s`; animateObserver.observe(el); });
         document.querySelectorAll('.market-stat').forEach((el, i) => { el.style.transitionDelay = `${i * 0.2}s`; animateObserver.observe(el); });
-        document.querySelectorAll('.factor-card').forEach((el, i) => { el.style.transitionDelay = `${i * 0.1}s`; animateObserver.observe(el); });
-        document.querySelectorAll('.basal-period').forEach((el, i) => { el.style.transitionDelay = `${i * 0.12}s`; animateObserver.observe(el); });
-        document.querySelectorAll('.photo-step').forEach((el, i) => { el.style.transitionDelay = `${i * 0.1}s`; animateObserver.observe(el); });
-        document.querySelectorAll('.safety-step').forEach((el, i) => { el.style.transitionDelay = `${i * 0.1}s`; animateObserver.observe(el); });
         document.querySelectorAll('.learning-step').forEach((el, i) => { el.style.transitionDelay = `${i * 0.12}s`; animateObserver.observe(el); });
-        document.querySelectorAll('.comparison-item').forEach((el, i) => { el.style.transitionDelay = `${i * 0.08}s`; animateObserver.observe(el); });
-
-        // Smooth hover on phone
-        const phone = document.querySelector('.phone-image');
-        const heroPhone = document.querySelector('.hero-phone');
-
-        if (phone && heroPhone) {
-            heroPhone.addEventListener('mousemove', (e) => {
-                const rect = heroPhone.getBoundingClientRect();
-                const x = (e.clientX - rect.left) / rect.width - 0.5;
-                const y = (e.clientY - rect.top) / rect.height - 0.5;
-                phone.style.transform = `perspective(1000px) rotateY(${x * 15}deg) rotateX(${-y * 15}deg)`;
-            });
-
-            heroPhone.addEventListener('mouseleave', () => {
-                phone.style.transform = 'perspective(1000px) rotateY(0) rotateX(0)';
-            });
-        }
 
         // Animated number counters
         function animateValue(element, start, end, duration, suffix = '') {
@@ -2104,30 +1109,21 @@
                 const progress = Math.min(elapsed / duration, 1);
                 const easeOut = 1 - Math.pow(1 - progress, 3);
                 const current = start + (end - start) * easeOut;
-
                 element.textContent = isFloat ? current.toFixed(1) + suffix : Math.floor(current) + suffix;
-
-                if (progress < 1) {
-                    requestAnimationFrame(update);
-                }
+                if (progress < 1) requestAnimationFrame(update);
             }
             requestAnimationFrame(update);
         }
 
-        // Trigger number animations when stats come into view
         const statsObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const numbers = entry.target.querySelectorAll('.market-stat-number');
                     numbers.forEach(num => {
                         const text = num.textContent;
-                        if (text.includes('M')) {
-                            animateValue(num, 0, 1.7, 1500, 'M');
-                        } else if (text.includes('%')) {
-                            animateValue(num, 0, 21, 1500, '%');
-                        } else if (text.includes('+')) {
-                            animateValue(num, 0, 180, 1500, '+');
-                        }
+                        if (text.includes('M')) animateValue(num, 0, 1.7, 1500, 'M');
+                        else if (text.includes('%')) animateValue(num, 0, 21, 1500, '%');
+                        else if (text.includes('+')) animateValue(num, 0, 180, 1500, '+');
                     });
                     statsObserver.unobserve(entry.target);
                 }
@@ -2135,9 +1131,7 @@
         }, { threshold: 0.5 });
 
         const marketStats = document.querySelector('.market-stats');
-        if (marketStats) {
-            statsObserver.observe(marketStats);
-        }
+        if (marketStats) statsObserver.observe(marketStats);
     </script>
 </body>
 </html>
