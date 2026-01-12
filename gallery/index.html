@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dossi — Slide Gallery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        :root {
+            --accent: #737BF2;
+            --accent-light: rgba(115, 123, 242, 0.15);
+            --text-dark: #1a1a1a;
+            --text-medium: #4a4a4a;
+            --text-light: #8E8E93;
+            --bg-page: #F5F5F8;
+            --bg-card: white;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-page);
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .page-header h1 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 3em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -0.02em;
+        }
+
+        .page-header p {
+            color: var(--text-light);
+            font-size: 1.1em;
+        }
+
+        .hint {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent-light);
+            color: var(--accent);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 0.85em;
+            font-weight: 500;
+            margin-top: 16px;
+        }
+
+        /* Categories */
+        .category {
+            margin-bottom: 24px;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            background: white;
+            border-radius: 16px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .category-header:hover {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .category-header i {
+            font-size: 1.4em;
+            color: var(--accent);
+            transition: transform 0.3s ease;
+        }
+
+        .category.collapsed .category-header i.ph-caret-down {
+            transform: rotate(-90deg);
+        }
+
+        .category-header h2 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.2em;
+            font-weight: 700;
+            flex: 1;
+        }
+
+        .category-count {
+            background: var(--bg-page);
+            color: var(--text-light);
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+
+        .category-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+            padding: 16px 0 0 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .category.collapsed .category-content {
+            display: none;
+        }
+
+        /* Slide Cards */
+        .slide-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 24px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+
+        .slide-card:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+            border-color: var(--accent);
+        }
+
+        .slide-card h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.1em;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .slide-card p {
+            color: var(--text-light);
+            font-size: 0.85em;
+            line-height: 1.5;
+        }
+
+        .slide-card .source {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 12px;
+            font-size: 0.75em;
+            color: var(--text-light);
+            background: var(--bg-page);
+            padding: 4px 10px;
+            border-radius: 100px;
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            height: 80vh;
+            background: var(--bg-page);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-content iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: white;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .modal-close kbd {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-family: inherit;
+        }
+
+        /* Back link */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9em;
+            margin-bottom: 30px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+
+            .page-header h1 {
+                font-size: 2em;
+            }
+
+            .category-content {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                height: 60vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-link">
+            <i class="ph ph-arrow-left"></i>
+            Back to Home
+        </a>
+
+        <div class="page-header">
+            <h1>Slide Gallery</h1>
+            <p>Browse all Dossi presentation content by topic</p>
+            <div class="hint">
+                <i class="ph ph-keyboard"></i>
+                Press ESC to close slides
+            </div>
+        </div>
+
+        <!-- Overview -->
+        <div class="category" data-category="overview">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <i class="ph ph-caret-down"></i>
+                <h2>Overview</h2>
+                <span class="category-count">4 slides</span>
+            </div>
+            <div class="category-content">
+                <div class="slide-card" onclick="openSlide('/pitchdeck/#/0')">
+                    <h3>Title Slide</h3>
+                    <p>Dossi introduction and tagline</p>
+                    <span class="source"><i class="ph ph-presentation"></i> Pitchdeck</span>
+                </div>
+                <div class="slide-card" onclick="openSlide('/pitchdeck/#/1')">
+                    <h3>About Me</h3>
+                    <p>Casey's background and why this matters personally</p>
+                    <span class="source"><i class="ph ph-presentation"></i> Pitchdeck</span>
+                </div>
+                <div class="slide-card" onclick="openSlide('/pitchdeck/#/2')">
+                    <h3>What is Type 1 Diabetes</h3>
+                    <p>Overview of T1D and the pancreas</p>
+                    <span class="source"><i class="ph ph-presentation"></i> Pitchdeck</span>
+                </div>
+                <div class="slide-card" onclick="openSlide('/pitchdeck/#/16')">
+                    <h3>Why I'm Doing This</h3>
+                    <p>Personal motivation and unique position</p>
+                    <span class="source"><i class="ph ph-presentation"></i> Pitchdeck</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Problem -->
+        <div class="category" data-category="problem">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <i class="ph ph-caret-down"></i>
+                <h2>The Problem</h2>
+                <span class="category-count">3 slides</span>
+            </div>
+            <div class="category-content">
+                <div class="slide-card" onclick="openSlide('/pitchdeck/#/3')">
+                    <h3>The Problem</h3>
+                    <p>Current pumps use outdated math from 1970s</p>
+                    <span class="source"><i class="ph ph-presentation"></i> Pitchdeck</span>
+                </div>
+                <div class="slide-card" onclick="openSlide('/pitchdeck/#/4')">
+                    <h3>What My Pump Doesn't Know</h3>
+                    <p>The gap between what pumps see and what affects glucose</p>
+                    <span class="source"><i class="ph ph-presentation"></i> Pitchdeck</span>
+                </div>
+                <div class="slide-card" onclick="openSlide('/extras/#the-gap')">
+                    <h3>The Gap (Detailed)</h3>
+                    <p>Specific examples of contextual factors pumps miss</p>
+                    <span class="source"><i class="ph ph-archive"></i> Extras</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Solution -->
+        <div class="category" data-category="solution">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <i class="ph ph-caret-down"></i>
+                <h2>The Solution</h2>
+                <span class="category-count">3 slides</span>
+            </div>
+            <div class="category-content">
+                <div class="slide-card" onclick="openSlide('/pitchdeck/#/5')">
+                    <h3>The Solution</h3>
+                    <p>Dossi: an insulin advisor that sees the full picture</p>
+                    <span class="source"><i class="ph ph-presentation"></i> Pitchdeck</span>
+                </div>
+                <div class="slide-card" onclick="openSlide('/preliminary/#/4')">
+                    <h3>How It Works</h3>
+                    <p>Circular flow: Collect → Detect → Predict → Act</p>
+                    <span class="source"><i class="ph ph-presentation"></i> Preliminary</span>
+                </div>
+                <div class="slide-card" onclick="openSlide('/pitchdeck/#/9')">
+                    <h3>Context Assembly</h3>
+                    <p>How Dossi builds a complete picture of your state</p>
+                    <span class="source"><i class="ph ph-presentation"></i> Pitchdeck</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div class="category" data-category="features">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <i class="ph ph-caret-down"></i>
+                <h2>Features</h2>
+                <span class="category-count">6 slides</span>
+            </div>
+            <div class="category-content">
+                <div class="slide-card" onclick="openSlide('/extras/#two-types')">
+                    <h3>Two Types of Insulin</h3>
+                    <p>Basal vs Bolus insulin delivery explained</p>
+                    <span class="source"><i class="ph ph-archive"></i> Extras</span>
+                </div>
+                <div class="slide-card" onclick="openSlide('/extras/#factors')">
+                    <h3>The 60+ Factors</h3>
+                    <p>All the contextual factors Dossi considers</p>
+                    <span class="source"><i class="ph ph-archive"></i> Extras</span>
+                </div>
+                <div class="slide-card" onclick="openSlide('/pitchdeck/#/8')">
+                    <h3>Photo Meal Recognition</h3>
+                    <p>Snap a photo, get macro estimates and dosing advice</p>
+                    <span class="source"><i class="ph ph-presentation"></i> Pitchdeck</span>
+                </div>
+                <div class="slide-card" onclick="openSlide('/pitchdeck/#/10')">
+                    <h3>Basal Rate Intelligence</h3>
+                    <p>Learning your background insulin needs throughout the day</p>
+                    <span class="source"><i class="ph ph-presentation"></i> Pitchdeck</span>
+                </div>
+                <div class="slide-card" onclick="openSlide('/pitchdeck/#/11')">
+                    <h3>The Learning Loop</h3>
+                    <p>How Dossi learns from predictions vs actual outcomes</p>
+                    <span class="source"><i class="ph ph-presentation"></i> Pitchdeck</span>
+                </div>
+                <div class="slide-card" onclick="openSlide('/pitchdeck/#/7')">
+                    <h3>Onboarding Flow</h3>
+                    <p>How new users set up their personalized experience</p>
+                    <span class="source"><i class="ph ph-presentation"></i> Pitchdeck</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Safety & Impact -->
+        <div class="category" data-category="safety">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <i class="ph ph-caret-down"></i>
+                <h2>Safety & Impact</h2>
+                <span class="category-count">2 slides</span>
+            </div>
+            <div class="category-content">
+                <div class="slide-card" onclick="openSlide('/pitchdeck/#/12')">
+                    <h3>Safety First</h3>
+                    <p>5-layer safety validation system</p>
+                    <span class="source"><i class="ph ph-presentation"></i> Pitchdeck</span>
+                </div>
+                <div class="slide-card" onclick="openSlide('/pitchdeck/#/13')">
+                    <h3>Why This Matters</h3>
+                    <p>Impact statistics: 1.7M Americans, complications, costs</p>
+                    <span class="source"><i class="ph ph-presentation"></i> Pitchdeck</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Business -->
+        <div class="category" data-category="business">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <i class="ph ph-caret-down"></i>
+                <h2>Business & Roadmap</h2>
+                <span class="category-count">4 slides</span>
+            </div>
+            <div class="category-content">
+                <div class="slide-card" onclick="openSlide('/pitchdeck/#/14')">
+                    <h3>Business Model</h3>
+                    <p>Freemium model with premium AI features</p>
+                    <span class="source"><i class="ph ph-presentation"></i> Pitchdeck</span>
+                </div>
+                <div class="slide-card" onclick="openSlide('/pitchdeck/#/17')">
+                    <h3>Path to Market</h3>
+                    <p>FDA regulatory pathway and timeline</p>
+                    <span class="source"><i class="ph ph-presentation"></i> Pitchdeck</span>
+                </div>
+                <div class="slide-card" onclick="openSlide('/pitchdeck/#/18')">
+                    <h3>Where I'd Love Guidance</h3>
+                    <p>Areas seeking mentorship and advice</p>
+                    <span class="source"><i class="ph ph-presentation"></i> Pitchdeck</span>
+                </div>
+                <div class="slide-card" onclick="openSlide('/pitchdeck/#/19')">
+                    <h3>Thank You</h3>
+                    <p>Contact information and closing</p>
+                    <span class="source"><i class="ph ph-presentation"></i> Pitchdeck</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Full Presentations -->
+        <div class="category" data-category="presentations">
+            <div class="category-header" onclick="toggleCategory(this)">
+                <i class="ph ph-caret-down"></i>
+                <h2>Full Presentations</h2>
+                <span class="category-count">3 decks</span>
+            </div>
+            <div class="category-content">
+                <div class="slide-card" onclick="openSlide('/preliminary/')">
+                    <h3>Preliminary Round</h3>
+                    <p>8-slide quick pitch for InVenture Prize</p>
+                    <span class="source"><i class="ph ph-presentation"></i> 8 slides</span>
+                </div>
+                <div class="slide-card" onclick="openSlide('/pitchdeck/')">
+                    <h3>Full Pitchdeck</h3>
+                    <p>Complete presentation with all details</p>
+                    <span class="source"><i class="ph ph-presentation"></i> 20 slides</span>
+                </div>
+                <div class="slide-card" onclick="window.location.href='/extras/'">
+                    <h3>Extras & Archives</h3>
+                    <p>Additional reference slides</p>
+                    <span class="source"><i class="ph ph-archive"></i> Reference</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for viewing slides -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal-close">
+            Press <kbd>ESC</kbd> to close
+        </div>
+        <div class="modal-content">
+            <iframe id="slideFrame" src=""></iframe>
+        </div>
+    </div>
+
+    <script>
+        function toggleCategory(header) {
+            const category = header.parentElement;
+            category.classList.toggle('collapsed');
+        }
+
+        function openSlide(url) {
+            const modal = document.getElementById('modal');
+            const frame = document.getElementById('slideFrame');
+            frame.src = url;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            const frame = document.getElementById('slideFrame');
+            modal.classList.remove('active');
+            frame.src = '';
+            document.body.style.overflow = '';
+        }
+
+        // ESC key to close
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Click outside to close
+        document.getElementById('modal').addEventListener('click', (e) => {
+            if (e.target.id === 'modal') {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>
