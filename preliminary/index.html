@@ -365,9 +365,9 @@
             position: absolute;
             background: white;
             border: none;
-            border-radius: 100px;
-            width: 160px;
-            height: 110px;
+            border-radius: 50%;
+            width: 155px;
+            height: 115px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -409,12 +409,12 @@
 
         .flow-arrows path {
             fill: none;
-            stroke: #333;
-            stroke-width: 1.5;
+            stroke: var(--accent);
+            stroke-width: 2.5;
         }
 
         .flow-arrows .arrowhead {
-            fill: #333;
+            fill: var(--accent);
         }
 
         .flow-label {
@@ -1467,13 +1467,13 @@
                                 </marker>
                             </defs>
                             <!-- Top to Right -->
-                            <path d="M 560 70 Q 750 70, 850 155" marker-end="url(#arrowhead)" />
+                            <path d="M 570 85 Q 720 85, 800 160" marker-end="url(#arrowhead)" />
                             <!-- Right to Bottom -->
-                            <path d="M 850 265 Q 750 350, 560 350" marker-end="url(#arrowhead)" />
+                            <path d="M 800 260 Q 720 335, 570 335" marker-end="url(#arrowhead)" />
                             <!-- Bottom to Left -->
-                            <path d="M 390 350 Q 200 350, 100 265" marker-end="url(#arrowhead)" />
+                            <path d="M 380 335 Q 230 335, 150 260" marker-end="url(#arrowhead)" />
                             <!-- Left to Top -->
-                            <path d="M 100 155 Q 200 70, 390 70" marker-end="url(#arrowhead)" />
+                            <path d="M 150 160 Q 230 85, 380 85" marker-end="url(#arrowhead)" />
                         </svg>
 
                         <!-- Flow Labels -->
