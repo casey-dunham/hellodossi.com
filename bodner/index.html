@@ -1797,110 +1797,71 @@
             }
         }
 
-        /* How It Works Circular Flow */
-        .flow-diagram {
-            position: relative;
-            width: 950px;
-            height: 420px;
-            margin: 0.5em auto 0;
-        }
-
-        .flow-node {
-            position: absolute;
-            background: white;
-            border: none;
-            border-radius: 50%;
-            width: 180px;
-            height: 115px;
+        /* How It Works Cards */
+        .how-it-works-cards {
             display: flex;
             flex-direction: column;
+            gap: 14px;
+            margin-top: 1.2em;
+            max-width: 700px;
+        }
+
+        .how-card {
+            display: flex;
+            align-items: center;
+            gap: 1.2em;
+            background: white;
+            border-radius: 100px;
+            padding: 1.1em 1.6em;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .how-card:hover {
+            transform: translateX(6px);
+            box-shadow: 0 8px 30px rgba(115, 123, 242, 0.12);
+        }
+
+        .how-card-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            padding: 12px 16px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(115, 123, 242, 0.4);
         }
 
-        .flow-node.top { top: 0; left: 385px; }
-        .flow-node.right { top: 152px; right: 0; }
-        .flow-node.bottom { bottom: 0; left: 385px; }
-        .flow-node.left { top: 152px; left: 0; }
+        .how-card-icon i {
+            font-size: 1.3em;
+            color: white;
+        }
 
-        .flow-node h4 {
+        .how-card-content h4 {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 0.95em;
+            font-size: 1.1em;
             font-weight: 700;
             color: var(--text-dark);
-            margin: 0;
-            line-height: 1.3;
+            margin: 0 0 0.2em 0;
         }
 
-        .flow-node span {
-            font-size: 0.72em;
-            color: var(--text-light);
-            margin-top: 4px;
-            line-height: 1.3;
-        }
-
-        .flow-arrows {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .flow-arrows path {
-            fill: none;
-            stroke: var(--accent);
-            stroke-width: 3.5;
-        }
-
-        .flow-arrows .arrowhead {
-            fill: var(--accent);
-        }
-
-        .flow-label {
-            position: absolute;
-            font-size: 0.75em;
+        .how-card-content p {
+            font-size: 0.95em;
             color: var(--text-medium);
-            font-style: italic;
+            margin: 0;
+            line-height: 1.4;
         }
 
-        .flow-label.top-right { top: 85px; right: 160px; }
-        .flow-label.bottom-right { bottom: 85px; right: 160px; }
-        .flow-label.bottom-left { bottom: 85px; left: 160px; }
-        .flow-label.top-left { top: 85px; left: 160px; }
-
-        /* Flow diagram animations */
-        .flow-node, .flow-label, .flow-arrows path {
-            opacity: 0;
+        /* How It Works card animations */
+        .reveal section.present .how-card {
+            animation: slideInLeft 0.5s ease-out both;
         }
-
-        .reveal section.present .flow-node {
-            animation: fadeInUp 0.5s ease-out forwards;
-        }
-        .reveal section.present .flow-node.top { animation-delay: 0.1s; }
-        .reveal section.present .flow-node.right { animation-delay: 0.2s; }
-        .reveal section.present .flow-node.bottom { animation-delay: 0.3s; }
-        .reveal section.present .flow-node.left { animation-delay: 0.4s; }
-
-        .reveal section.present .flow-arrows path {
-            animation: fadeIn 0.4s ease-out forwards;
-        }
-        .reveal section.present .flow-arrows path:nth-child(2) { animation-delay: 0.5s; }
-        .reveal section.present .flow-arrows path:nth-child(3) { animation-delay: 0.6s; }
-        .reveal section.present .flow-arrows path:nth-child(4) { animation-delay: 0.7s; }
-        .reveal section.present .flow-arrows path:nth-child(5) { animation-delay: 0.8s; }
-
-        .reveal section.present .flow-label {
-            animation: fadeIn 0.3s ease-out forwards;
-        }
-        .reveal section.present .flow-label.top-right { animation-delay: 0.5s; }
-        .reveal section.present .flow-label.bottom-right { animation-delay: 0.6s; }
-        .reveal section.present .flow-label.bottom-left { animation-delay: 0.7s; }
-        .reveal section.present .flow-label.top-left { animation-delay: 0.8s; }
+        .reveal section.present .how-it-works-cards .how-card:nth-child(1) { animation-delay: 0.1s; }
+        .reveal section.present .how-it-works-cards .how-card:nth-child(2) { animation-delay: 0.2s; }
+        .reveal section.present .how-it-works-cards .how-card:nth-child(3) { animation-delay: 0.3s; }
+        .reveal section.present .how-it-works-cards .how-card:nth-child(4) { animation-delay: 0.4s; }
 
     </style>
 </head>
@@ -2000,49 +1961,37 @@
 
             <!-- How It Works Overview -->
             <section>
-                <div class="slide-content" style="max-width: none;">
+                <div class="slide-content">
                     <h3>Overview</h3>
                     <h2>How It Works</h2>
-                    <div class="flow-diagram">
-                        <!-- SVG Arrows -->
-                        <svg class="flow-arrows" viewBox="0 0 950 420">
-                            <defs>
-                                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                                    <polygon class="arrowhead" points="0 0, 10 3.5, 0 7" />
-                                </marker>
-                            </defs>
-                            <!-- Top to Right (Patterns) -->
-                            <path d="M 600 120 Q 700 120, 760 165" marker-end="url(#arrowhead)" />
-                            <!-- Right to Bottom (Forecast) -->
-                            <path d="M 760 255 Q 700 300, 600 300" marker-end="url(#arrowhead)" />
-                            <!-- Bottom to Left (Recommend) -->
-                            <path d="M 350 300 Q 250 300, 190 255" marker-end="url(#arrowhead)" />
-                            <!-- Left to Top (Learn) -->
-                            <path d="M 190 165 Q 250 120, 350 120" marker-end="url(#arrowhead)" />
-                        </svg>
-
-                        <!-- Flow Labels -->
-                        <span class="flow-label top-right">Patterns</span>
-                        <span class="flow-label bottom-right">Forecast</span>
-                        <span class="flow-label bottom-left">Recommend</span>
-                        <span class="flow-label top-left">Learn</span>
-
-                        <!-- Nodes -->
-                        <div class="flow-node top">
-                            <h4>Collect Data</h4>
-                            <span>Glucose, insulin,<br>activity, meals</span>
+                    <div class="how-it-works-cards">
+                        <div class="how-card">
+                            <div class="how-card-icon"><i class="ph ph-database"></i></div>
+                            <div class="how-card-content">
+                                <h4>Collect Data</h4>
+                                <p>Glucose, insulin, activity, meals</p>
+                            </div>
                         </div>
-                        <div class="flow-node right">
-                            <h4>Detect Patterns</h4>
-                            <span>Sensitivity shifts,<br>meal effects</span>
+                        <div class="how-card">
+                            <div class="how-card-icon"><i class="ph ph-chart-line-up"></i></div>
+                            <div class="how-card-content">
+                                <h4>Detect Patterns</h4>
+                                <p>Sensitivity shifts, meal effects</p>
+                            </div>
                         </div>
-                        <div class="flow-node bottom">
-                            <h4>Predict</h4>
-                            <span>Glucose trajectory,<br>insulin impact</span>
+                        <div class="how-card">
+                            <div class="how-card-icon"><i class="ph ph-trend-up"></i></div>
+                            <div class="how-card-content">
+                                <h4>Predict</h4>
+                                <p>Glucose trajectory, insulin impact</p>
+                            </div>
                         </div>
-                        <div class="flow-node left">
-                            <h4>Act</h4>
-                            <span>Dosing advice,<br>basal adjustments</span>
+                        <div class="how-card">
+                            <div class="how-card-icon"><i class="ph ph-lightning"></i></div>
+                            <div class="how-card-content">
+                                <h4>Act</h4>
+                                <p>Dosing advice, basal adjustments</p>
+                            </div>
                         </div>
                     </div>
                 </div>
