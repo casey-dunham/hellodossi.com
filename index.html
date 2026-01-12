@@ -257,16 +257,9 @@
 
         .hero-title .highlight {
             background: linear-gradient(135deg, var(--accent-deep) 0%, var(--accent) 50%, var(--accent-dark) 100%);
-            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: shimmer 3s linear infinite;
-        }
-
-        @keyframes shimmer {
-            0% { background-position: 0% center; }
-            100% { background-position: 200% center; }
         }
 
         .hero-subtitle {
@@ -352,7 +345,7 @@
             flex-shrink: 0;
             position: relative;
             animation: phoneFloat 4s ease-in-out infinite;
-            margin-right: -80px;
+            margin-right: -150px;
         }
 
         @keyframes phoneFloat {
@@ -1551,11 +1544,7 @@
                     Current pumps only know glucose and carbs. Dossi considers 60+ factors and learns your unique patterns over time.
                 </p>
                 <div class="hero-buttons">
-                    <a href="/pitchdeck" class="btn-primary">
-                        <i class="ph-bold ph-play"></i>
-                        View Pitch Deck
-                    </a>
-                    <a href="#how-it-works" class="btn-secondary">
+                    <a href="#how-it-works" class="btn-primary">
                         <i class="ph-bold ph-arrow-down"></i>
                         Learn More
                     </a>
