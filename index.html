@@ -117,9 +117,44 @@
         }
 
         .hero-container {
-            max-width: 800px;
+            max-width: 1100px;
             width: 100%;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .hero-content {
+            flex: 1;
+            text-align: left;
+        }
+
+        .hero-phone {
+            flex-shrink: 0;
+            position: relative;
+            align-self: flex-end;
+            margin-bottom: -120px;
+        }
+
+        .hero-phone-glow {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 450px;
+            height: 500px;
+            background: radial-gradient(ellipse, rgba(115, 123, 242, 0.4) 0%, rgba(115, 123, 242, 0.15) 40%, transparent 70%);
+            filter: blur(50px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .hero-phone img {
+            position: relative;
+            z-index: 1;
+            width: 320px;
+            height: auto;
+            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
         }
 
         .hero-badge {
@@ -160,10 +195,7 @@
         }
 
         .hero-title .highlight {
-            background: linear-gradient(135deg, var(--accent-deeper) 0%, var(--accent) 50%, var(--accent-dark) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--accent);
         }
 
         .hero-subtitle {
@@ -171,16 +203,13 @@
             color: var(--gray-600);
             margin-bottom: 36px;
             line-height: 1.7;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+            max-width: 500px;
             animation: slideUp 0.7s ease-out 0.2s both;
         }
 
         .hero-buttons {
             display: flex;
             gap: 16px;
-            justify-content: center;
             animation: slideUp 0.7s ease-out 0.3s both;
         }
 
@@ -206,25 +235,33 @@
 
         .hero-stats {
             display: flex;
-            gap: 48px;
-            justify-content: center;
-            margin-top: 60px;
+            gap: 16px;
+            margin-top: 50px;
             animation: slideUp 0.7s ease-out 0.4s both;
         }
 
-        .hero-stat { text-align: center; }
+        .hero-stat {
+            background: white;
+            border-radius: 16px;
+            padding: 20px 24px;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            min-width: 120px;
+        }
 
         .hero-stat-number {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 2.2em;
+            font-size: 1.8em;
             font-weight: 700;
             color: var(--accent);
+            line-height: 1;
         }
 
         .hero-stat-label {
-            font-size: 0.9em;
-            color: var(--gray-400);
-            margin-top: 4px;
+            font-size: 0.8em;
+            color: var(--gray-500);
+            margin-top: 6px;
+            font-weight: 500;
         }
 
         /* Section Styles */
@@ -321,7 +358,7 @@
 
         .problem-bottom strong { color: var(--accent); font-weight: 600; }
 
-        /* How It Works */
+        /* How It Works - Flow Diagram */
         .how-it-works {
             padding: 100px 40px;
             background: white;
@@ -332,73 +369,102 @@
             margin: 0 auto;
         }
 
-        .how-it-works-grid {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            justify-content: center;
+        .flow-diagram {
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            height: 380px;
+            margin: 0 auto;
         }
 
-        .hiw-card {
+        .flow-node {
+            position: absolute;
             background: var(--bg-page);
-            border-radius: 20px;
-            padding: 28px 20px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
-            width: 200px;
-            height: 240px;
-            flex-shrink: 0;
-        }
-
-        .hiw-number {
-            width: 40px;
-            height: 40px;
-            background: var(--accent);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-weight: 700;
-            font-size: 1.1em;
-            color: white;
-            margin-bottom: 16px;
-            box-shadow: var(--shadow-accent);
-        }
-
-        .hiw-card h4 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.05em;
-            font-weight: 700;
-            color: var(--gray-900);
-            margin-bottom: 14px;
-        }
-
-        .hiw-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+            width: 160px;
+            height: 100px;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
         }
 
-        .hiw-list li {
-            font-size: 0.82em;
-            color: var(--gray-600);
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-            padding-left: 0;
-            line-height: 1.4;
+        .flow-node.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .hiw-list li::before {
-            content: "›";
+        .flow-node.top { top: 0; left: 50%; transform: translateX(-50%) translateY(20px); }
+        .flow-node.top.visible { transform: translateX(-50%) translateY(0); }
+        .flow-node.right { top: 50%; right: 0; transform: translateY(-50%) translateX(20px); }
+        .flow-node.right.visible { transform: translateY(-50%) translateX(0); }
+        .flow-node.bottom { bottom: 0; left: 50%; transform: translateX(-50%) translateY(-20px); }
+        .flow-node.bottom.visible { transform: translateX(-50%) translateY(0); }
+        .flow-node.left { top: 50%; left: 0; transform: translateY(-50%) translateX(-20px); }
+        .flow-node.left.visible { transform: translateY(-50%) translateX(0); }
+
+        .flow-node h4 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.95em;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .flow-node span {
+            font-size: 0.75em;
+            color: var(--gray-500);
+            margin-top: 4px;
+            line-height: 1.3;
+        }
+
+        .flow-arrows {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .flow-arrows path {
+            fill: none;
+            stroke: var(--accent);
+            stroke-width: 3;
+            opacity: 0;
+            transition: opacity 0.4s ease-out;
+        }
+
+        .flow-arrows.visible path {
+            opacity: 1;
+        }
+
+        .flow-arrows .arrowhead {
+            fill: var(--accent);
+        }
+
+        .flow-label {
+            position: absolute;
+            font-size: 0.8em;
             color: var(--accent);
             font-weight: 600;
-            font-size: 1.1em;
-            flex-shrink: 0;
+            opacity: 0;
+            transition: opacity 0.4s ease-out;
         }
+
+        .flow-label.visible { opacity: 1; }
+
+        .flow-label.top-right { top: 80px; right: 100px; }
+        .flow-label.bottom-right { bottom: 80px; right: 100px; }
+        .flow-label.bottom-left { bottom: 80px; left: 100px; }
+        .flow-label.top-left { top: 80px; left: 100px; }
 
         .hiw-arrow {
             color: var(--accent);
@@ -764,10 +830,26 @@
 
             .hero { padding: 100px 24px 60px; }
 
-            .hero-stats {
+            .hero-container {
                 flex-direction: column;
-                gap: 20px;
+                text-align: center;
             }
+
+            .hero-content { text-align: center; }
+
+            .hero-buttons { justify-content: center; }
+
+            .hero-phone { order: -1; margin-bottom: 30px; }
+            .hero-phone img { width: 240px; }
+            .hero-phone-glow { width: 350px; height: 400px; }
+
+            .hero-stats {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .hero-stat { min-width: 100px; }
 
             .problem-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -810,37 +892,43 @@
     <!-- Hero -->
     <section class="hero">
         <div class="hero-container">
-            <div class="hero-badge">
-                <div class="hero-badge-icon">
-                    <i class="ph-fill ph-sparkle"></i>
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <div class="hero-badge-icon">
+                        <i class="ph-fill ph-sparkle"></i>
+                    </div>
+                    <span>AI-Powered Decision Support</span>
                 </div>
-                <span>AI-Powered Decision Support</span>
+                <h1 class="hero-title">
+                    Where insulin dosing meets <span class="highlight">predictive intelligence</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Current pumps only know glucose and carbs. Dossi considers 60+ factors and learns your unique patterns over time.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#how-it-works" class="btn-primary">
+                        <i class="ph-bold ph-arrow-down"></i>
+                        Learn More
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">60+</div>
+                        <div class="hero-stat-label">Contextual Factors</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">5</div>
+                        <div class="hero-stat-label">Safety Layers</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-number">24/7</div>
+                        <div class="hero-stat-label">Learning</div>
+                    </div>
+                </div>
             </div>
-            <h1 class="hero-title">
-                Where insulin dosing meets <span class="highlight">predictive intelligence</span>
-            </h1>
-            <p class="hero-subtitle">
-                Current pumps only know glucose and carbs. Dossi considers 60+ factors and learns your unique patterns over time.
-            </p>
-            <div class="hero-buttons">
-                <a href="#how-it-works" class="btn-primary">
-                    <i class="ph-bold ph-arrow-down"></i>
-                    Learn More
-                </a>
-            </div>
-            <div class="hero-stats">
-                <div class="hero-stat">
-                    <div class="hero-stat-number">60+</div>
-                    <div class="hero-stat-label">Contextual Factors</div>
-                </div>
-                <div class="hero-stat">
-                    <div class="hero-stat-number">5</div>
-                    <div class="hero-stat-label">Safety Layers</div>
-                </div>
-                <div class="hero-stat">
-                    <div class="hero-stat-number">24/7</div>
-                    <div class="hero-stat-label">Learning</div>
-                </div>
+            <div class="hero-phone">
+                <div class="hero-phone-glow"></div>
+                <img src="pitchdeck/dossi-dashboard.png" alt="Dossi Dashboard">
             </div>
         </div>
     </section>
@@ -1054,18 +1142,6 @@
         </div>
     </section>
 
-    <!-- CTA -->
-    <section class="cta">
-        <div class="cta-container animate-on-scroll">
-            <h2>Ready to learn more?</h2>
-            <p>Dossi is being built for the InVenture Prize at Georgia Tech. Get in touch to follow our journey.</p>
-            <a href="mailto:team@hellodossi.com" class="btn-white">
-                <i class="ph-bold ph-envelope"></i>
-                Get In Touch
-            </a>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-inner">
@@ -1081,6 +1157,12 @@
     </footer>
 
     <script>
+        // Scroll to top on page load
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+
         // Intersection Observer for scroll animations
         const animateObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {

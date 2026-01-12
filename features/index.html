@@ -434,8 +434,8 @@
             align-items: flex-start;
         }
 
-        .safety-card.full-width {
-            grid-column: span 2;
+        .safety-grid {
+            grid-template-columns: repeat(3, 1fr);
         }
 
         .safety-num {
@@ -796,32 +796,6 @@
                     <p>Time of day, day of week, site age, temperature</p>
                 </div>
             </div>
-            <div class="context-sources">
-                <div class="context-source">
-                    <i class="ph ph-heart-half"></i>
-                    <span>HealthKit</span>
-                </div>
-                <div class="context-source">
-                    <i class="ph ph-chart-line-up"></i>
-                    <span>CGM</span>
-                </div>
-                <div class="context-source">
-                    <i class="ph ph-moon"></i>
-                    <span>Sleep</span>
-                </div>
-                <div class="context-source">
-                    <i class="ph ph-person-simple-run"></i>
-                    <span>Activity</span>
-                </div>
-                <div class="context-source">
-                    <i class="ph ph-calendar"></i>
-                    <span>History</span>
-                </div>
-                <div class="context-source">
-                    <i class="ph ph-clock"></i>
-                    <span>Time</span>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -863,46 +837,12 @@
         </div>
     </section>
 
-    <!-- The Learning Loop -->
-    <section class="section gray" id="learning">
-        <div class="section-container">
-            <div class="two-col reverse">
-                <div class="learning-visual">
-                    <img src="../pitchdeck/loop.png" alt="Learning Loop">
-                </div>
-                <div class="col-content">
-                    <h3>Continuous Improvement</h3>
-                    <h2>The Learning Loop</h2>
-                    <p>Dossi learns by comparing predictions to actual outcomes. After every meal, it refines its understanding of YOUR unique physiology.</p>
-                    <div class="steps-list">
-                        <div class="step-item">
-                            <span class="step-num">1</span>
-                            <span class="step-text"><strong>Predict</strong> — Expected glucose outcome</span>
-                        </div>
-                        <div class="step-item">
-                            <span class="step-num">2</span>
-                            <span class="step-text"><strong>Observe</strong> — What actually happened</span>
-                        </div>
-                        <div class="step-item">
-                            <span class="step-num">3</span>
-                            <span class="step-text"><strong>Attribute</strong> — Which factors were active</span>
-                        </div>
-                        <div class="step-item">
-                            <span class="step-num">4</span>
-                            <span class="step-text"><strong>Update</strong> — Refine personal model</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 5-Layer Safety -->
-    <section class="section white" id="safety">
+    <!-- 6-Layer Safety -->
+    <section class="section gray" id="safety">
         <div class="section-container">
             <div class="section-header animate-on-scroll">
                 <h3>Safety First</h3>
-                <h2>5 Layers of Validation</h2>
+                <h2>6 Layers of Validation</h2>
                 <p>Insulin errors can be dangerous. Every recommendation passes through graduated safety checks before reaching you.</p>
             </div>
             <div class="safety-grid">
@@ -916,29 +856,36 @@
                 <div class="safety-card">
                     <div class="safety-num">2</div>
                     <div class="safety-content">
+                        <h4>User Confirmation</h4>
+                        <p>Biometric authentication (Face ID/Touch ID) required before any insulin delivery. You always have final say.</p>
+                    </div>
+                </div>
+                <div class="safety-card">
+                    <div class="safety-num">3</div>
+                    <div class="safety-content">
                         <h4>Physiological Bounds</h4>
                         <p>Validates against expected glucose drop, insulin stacking risk, and carb-to-insulin ratios.</p>
                     </div>
                 </div>
                 <div class="safety-card">
-                    <div class="safety-num">3</div>
+                    <div class="safety-num">4</div>
                     <div class="safety-content">
                         <h4>Predictive Safety</h4>
                         <p>Calculates hypo risk at 15, 30, 60, and 120 minute horizons. Reduces dose if risk detected.</p>
                     </div>
                 </div>
                 <div class="safety-card">
-                    <div class="safety-num">4</div>
+                    <div class="safety-num">5</div>
                     <div class="safety-content">
                         <h4>Anomaly Detection</h4>
                         <p>Validates sensor data quality, detects compression lows, and flags implausible readings.</p>
                     </div>
                 </div>
-                <div class="safety-card full-width">
-                    <div class="safety-num">5</div>
+                <div class="safety-card">
+                    <div class="safety-num">6</div>
                     <div class="safety-content">
                         <h4>Learning Validation</h4>
-                        <p>Monitors recent outcomes for algorithm drift, pauses personalization if patterns change unexpectedly, and requires minimum data confidence before applying learned adjustments.</p>
+                        <p>Monitors outcomes for algorithm drift and requires minimum confidence before applying learned adjustments.</p>
                     </div>
                 </div>
             </div>
@@ -1001,20 +948,33 @@
                         <td><i class="ph-fill ph-x-circle x"></i></td>
                         <td><i class="ph-fill ph-check-circle check"></i></td>
                     </tr>
+                    <tr>
+                        <td>Stress & HRV awareness</td>
+                        <td><i class="ph-fill ph-x-circle x"></i></td>
+                        <td><i class="ph-fill ph-check-circle check"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Menstrual cycle tracking</td>
+                        <td><i class="ph-fill ph-x-circle x"></i></td>
+                        <td><i class="ph-fill ph-check-circle check"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Sick day mode</td>
+                        <td><i class="ph-fill ph-x-circle x"></i></td>
+                        <td><i class="ph-fill ph-check-circle check"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Site age tracking</td>
+                        <td><i class="ph-fill ph-x-circle x"></i></td>
+                        <td><i class="ph-fill ph-check-circle check"></i></td>
+                    </tr>
+                    <tr>
+                        <td>Caregiver app</td>
+                        <td><i class="ph-fill ph-x-circle x"></i></td>
+                        <td><i class="ph-fill ph-check-circle check"></i></td>
+                    </tr>
                 </tbody>
             </table>
-        </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="cta">
-        <div class="cta-container animate-on-scroll">
-            <h2>See the full picture</h2>
-            <p>Dossi is being built for the InVenture Prize at Georgia Tech. Get in touch to learn more about how it works.</p>
-            <a href="mailto:team@hellodossi.com" class="btn-white">
-                <i class="ph-bold ph-envelope"></i>
-                Get In Touch
-            </a>
         </div>
     </section>
 
