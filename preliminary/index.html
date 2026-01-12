@@ -391,6 +391,14 @@
             font-weight: 700;
             color: var(--text-dark);
             margin-bottom: 0.8em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hiw-card h4 i {
+            color: var(--text-medium);
+            font-size: 1em;
         }
 
         .hiw-list {
@@ -412,13 +420,11 @@
         }
 
         .hiw-list li::before {
-            display: none;
-        }
-
-        .hiw-list li i {
+            content: "›";
             color: var(--accent);
-            font-size: 1.1em;
-            flex-shrink: 0;
+            font-weight: 600;
+            font-size: 1.2em;
+            line-height: 1;
         }
 
         /* Numbered steps */
@@ -1468,38 +1474,38 @@
                     <div class="how-it-works-grid">
                         <div class="hiw-card">
                             <div class="hiw-number">1</div>
-                            <h4>Data Ingestion</h4>
+                            <h4><i class="ph ph-database"></i>Data Ingestion</h4>
                             <ul class="hiw-list">
-                                <li><i class="ph ph-drop"></i>Glucose & insulin data</li>
-                                <li><i class="ph ph-heartbeat"></i>Activity, sleep, heart rate</li>
-                                <li><i class="ph ph-clock"></i>Meals & time of day</li>
+                                <li>Glucose & insulin data</li>
+                                <li>Activity, sleep, heart rate</li>
+                                <li>Meals & time of day</li>
                             </ul>
                         </div>
                         <div class="hiw-card">
                             <div class="hiw-number">2</div>
-                            <h4>Pattern Detection</h4>
+                            <h4><i class="ph ph-magnifying-glass"></i>Pattern Detection</h4>
                             <ul class="hiw-list">
-                                <li><i class="ph ph-chart-line-up"></i>Glucose response patterns</li>
-                                <li><i class="ph ph-arrows-clockwise"></i>Sensitivity changes</li>
-                                <li><i class="ph ph-person-simple-run"></i>Exercise & meal effects</li>
+                                <li>Glucose response patterns</li>
+                                <li>Sensitivity changes</li>
+                                <li>Exercise & meal effects</li>
                             </ul>
                         </div>
                         <div class="hiw-card">
                             <div class="hiw-number">3</div>
-                            <h4>Prediction</h4>
+                            <h4><i class="ph ph-chart-line-up"></i>Prediction</h4>
                             <ul class="hiw-list">
-                                <li><i class="ph ph-trend-up"></i>Forecast glucose trajectories</li>
-                                <li><i class="ph ph-syringe"></i>Estimate insulin impact</li>
-                                <li><i class="ph ph-question"></i>Quantify uncertainty</li>
+                                <li>Forecast glucose trajectories</li>
+                                <li>Estimate insulin impact</li>
+                                <li>Quantify uncertainty</li>
                             </ul>
                         </div>
                         <div class="hiw-card">
                             <div class="hiw-number">4</div>
-                            <h4>Action</h4>
+                            <h4><i class="ph ph-lightning"></i>Action</h4>
                             <ul class="hiw-list">
-                                <li><i class="ph ph-sliders"></i>Dynamic basal modulation</li>
-                                <li><i class="ph ph-target"></i>Adaptive dosing recommendations</li>
-                                <li><i class="ph ph-shield-check"></i>Safety-bounded automation</li>
+                                <li>Dynamic basal modulation</li>
+                                <li>Adaptive dosing recommendations</li>
+                                <li>Safety-bounded automation</li>
                             </ul>
                         </div>
                     </div>
