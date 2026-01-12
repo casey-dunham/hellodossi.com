@@ -1,0 +1,2215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dossi — Intelligent Insulin Dosing</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        :root {
+            --accent: #737BF2;
+            --accent-light: rgba(115, 123, 242, 0.15);
+            --text-dark: #1a1a1a;
+            --text-medium: #4a4a4a;
+            --text-light: #8E8E93;
+            --icon-gray: #8E8E93;
+            --icon-accent: var(--accent);
+            --bg-paper: #F5F5F8;
+            --bg-card: #EDEDF0;
+            /* Tab colors - cool gray tones */
+            --tab-1: #E0E0E5;
+            --tab-2: #E2E2E7;
+            --tab-3: #E4E4E9;
+            --tab-4: #E1E1E6;
+            --tab-5: #E3E3E8;
+            --tab-6: #E5E5EA;
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: #E8E8ED;
+            overflow: hidden;
+        }
+
+        /* Binder Frame - centered without tab offset */
+        .binder-frame {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(var(--scale, 1));
+            display: flex;
+        }
+
+        .binder-page {
+            width: 1100px;
+            height: 700px;
+            background: var(--bg-paper);
+            border-radius: 24px;
+            box-shadow: 0 8px 60px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: visible;
+        }
+
+        .binder-page .reveal {
+            overflow: hidden;
+            border-radius: 24px;
+        }
+
+        /* Hole punches */
+        .hole-punches {
+            position: absolute;
+            left: 30px;
+            top: 0;
+            bottom: 0;
+            width: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            padding: 60px 0;
+            z-index: 100;
+        }
+
+        .hole {
+            width: 14px;
+            height: 14px;
+            background: #E8E8ED;
+            border-radius: 50%;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Section tabs */
+        .section-tabs {
+            position: absolute;
+            right: -36px;
+            top: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            z-index: 100;
+        }
+
+        .tab {
+            width: 36px;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            font-family: 'Inter', sans-serif;
+            font-size: 9px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            color: rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            background: #E2E2E7;
+            border-top-right-radius: 12px;
+            border-bottom-right-radius: 12px;
+            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab:hover {
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        .tab.active {
+            color: rgba(0, 0, 0, 0.85);
+            font-weight: 600;
+            background: var(--bg-paper);
+            border-top-right-radius: 16px;
+            border-bottom-right-radius: 16px;
+            width: 40px;
+            margin-left: -4px;
+        }
+
+        .reveal .controls { display: none !important; }
+
+        .reveal-viewport {
+            background: var(--bg-paper);
+        }
+
+        .reveal {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-dark);
+        }
+
+        .reveal .slides {
+            text-align: left;
+        }
+
+        .reveal .slides section {
+            padding: 50px 60px 50px 60px;
+            height: 100%;
+            width: 100%;
+            background: var(--bg-paper);
+        }
+
+        .reveal h1, .reveal h2 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            text-transform: none;
+            font-weight: 700;
+            color: var(--text-dark);
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .reveal h1 {
+            font-size: 4em;
+            font-weight: 700;
+        }
+
+        .reveal h2 {
+            font-size: 2.6em;
+            margin-bottom: 0.5em;
+            font-weight: 700;
+        }
+
+        .reveal h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75em;
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 0.8em;
+        }
+
+        .reveal p {
+            font-size: 1.15em;
+            line-height: 1.7;
+            color: var(--text-medium);
+            margin-bottom: 0.6em;
+        }
+
+        .reveal li {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 0.5em;
+            color: var(--text-medium);
+        }
+
+        .reveal ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .reveal ul li {
+            position: relative;
+            padding-left: 1.5em;
+        }
+
+        .reveal ul li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.6em;
+            width: 6px;
+            height: 6px;
+            background: var(--text-dark);
+            border-radius: 50%;
+        }
+
+        .reveal strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .accent {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .gradient-text {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .subtitle {
+            font-size: 1.4em !important;
+            color: var(--text-light) !important;
+            font-weight: 400;
+        }
+
+        /* Slide layouts */
+        .slide-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+            max-width: 950px;
+        }
+
+        .centered {
+            text-align: center;
+            max-width: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Truly centered slides - compensate for asymmetric padding */
+        .reveal .slides section.true-center {
+            padding-left: 60px;
+            padding-right: 60px;
+        }
+
+        .reveal .slides section.true-center .slide-content {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 100px;
+            padding: 1.6em;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        /* About Me stack */
+        .about-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 1em;
+        }
+
+        .about-card {
+            background: white;
+            border-radius: 100px;
+            padding: 1.2em 1.4em;
+            display: flex;
+            align-items: center;
+            gap: 1em;
+            font-size: 1.05em;
+            color: var(--text-medium);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .about-card i {
+            font-size: 1.4em;
+            color: var(--text-medium);
+        }
+
+        .about-card strong {
+            color: var(--text-dark);
+        }
+
+        /* Gap list */
+        .gap-list {
+            list-style: none;
+            padding: 0;
+            margin: 1.6em 0;
+        }
+
+        .gap-list li {
+            display: flex;
+            align-items: center;
+            gap: 1em;
+            padding: 1.1em 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            font-size: 1.1em;
+            color: var(--text-medium);
+        }
+
+        .gap-list li::before {
+            display: none;
+        }
+
+        .gap-list li:last-child {
+            border-bottom: none;
+        }
+
+        .gap-list i {
+            font-size: 1.3em;
+            color: var(--text-medium);
+            width: 28px;
+        }
+
+        .gap-list strong {
+            color: var(--text-dark);
+        }
+
+        /* Factor grid full */
+        .factor-grid-full {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 0.8em;
+        }
+
+        .factor-item-full {
+            background: white;
+            padding: 0.9em 1.1em;
+            border-radius: 100px;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8em;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .factor-item-full .factor-icon {
+            font-size: 0.9em;
+            color: white;
+            background: var(--accent);
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 3px 10px rgba(115, 123, 242, 0.4);
+        }
+
+        .factor-item-full .factor-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.15em;
+        }
+
+        .factor-item-full .factor-content strong {
+            color: var(--text-dark);
+            font-size: 0.95em;
+            font-weight: 600;
+            display: inline;
+        }
+
+        .factor-count {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            font-size: 0.7em;
+            font-weight: 600;
+            padding: 0.15em 0.5em;
+            border-radius: 12px;
+            margin-left: 0.5em;
+            vertical-align: middle;
+        }
+
+        .factor-list {
+            color: var(--text-medium);
+            font-size: 0.8em;
+            line-height: 1.4;
+        }
+
+        /* Stat boxes */
+        .stat-row {
+            display: flex;
+            gap: 24px;
+            margin: 1.2em 0;
+        }
+
+        .stat-box {
+            background: white;
+            border-radius: 100px;
+            padding: 1.2em 1.6em;
+            flex: 1;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 1em;
+        }
+
+        .stat-box .number {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.3em;
+            font-weight: 700;
+            color: white;
+            background: var(--accent);
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(115, 123, 242, 0.4);
+        }
+
+        .stat-box .label {
+            font-size: 1.1em;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        /* Two column */
+        .two-col {
+            display: flex;
+            gap: 40px;
+            margin-top: 1em;
+        }
+
+        .two-col > div {
+            flex: 1;
+            background: white;
+            border-radius: 20px;
+            padding: 1.5em;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .two-col h4 {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.8em;
+            margin-top: 0;
+        }
+
+        .two-col ul li {
+            font-size: 1.05em;
+            padding-left: 1.3em;
+        }
+
+        .two-col ul li::before {
+            width: 6px;
+            height: 6px;
+            top: 0.5em;
+        }
+
+        /* T1D intro */
+        .t1d-intro {
+            font-size: 1.15em;
+            color: var(--text-dark);
+            max-width: 850px;
+            line-height: 1.7;
+            margin-bottom: 2.4em;
+        }
+
+        .t1d-challenge-title {
+            font-size: 1.22em;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 1em;
+        }
+
+        /* Factor grid */
+        .factor-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 1em;
+        }
+
+        .factor-item {
+            background: white;
+            padding: 1.1em 1.3em;
+            border-radius: 100px;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.9em;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .factor-item .factor-icon {
+            font-size: 1em;
+            color: white;
+            background: var(--accent);
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(115, 123, 242, 0.4);
+        }
+
+        .factor-item .factor-content strong {
+            color: var(--text-dark);
+            display: block;
+            font-size: 0.95em;
+            font-weight: 600;
+            margin-bottom: 0.2em;
+        }
+
+        .factor-item .factor-content span {
+            color: var(--text-medium);
+            font-size: 0.85em;
+            line-height: 1.4;
+        }
+
+        /* Numbered steps */
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 1em;
+            padding: 1em 1.5em;
+            margin: 0.8em 0;
+            border-radius: 100px;
+            background: white;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .step-num {
+            font-family: 'Plus Jakarta Sans', Georgia, serif;
+            font-weight: 700;
+            font-size: 1.4em;
+            color: var(--text-dark);
+            flex-shrink: 0;
+            min-width: 1.2em;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-content strong {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .step-content span {
+            color: var(--text-medium);
+        }
+
+        /* Numbered list */
+        .numbered-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.85em;
+        }
+
+        .numbered-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6em;
+            font-size: 1.15em;
+            color: var(--text-medium);
+            padding: 0.3em 0;
+        }
+
+        .numbered-item .num {
+            font-family: 'Plus Jakarta Sans', Georgia, serif;
+            font-size: 1.1em;
+            font-weight: 400;
+            color: var(--text-dark);
+            min-width: 1.2em;
+        }
+
+        /* Tables */
+        .reveal table {
+            font-size: 0.95em;
+            margin: 1em 0;
+            border-collapse: separate;
+            border-spacing: 0;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        .reveal th {
+            background: linear-gradient(90deg, rgba(115, 123, 242, 1.0), rgba(115, 123, 242, 0.6));
+            color: white;
+            padding: 1em 1.6em;
+            font-weight: 600;
+            text-align: left;
+            font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .reveal td {
+            padding: 1em 1.6em;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            color: var(--text-medium);
+        }
+
+        .reveal tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Timeline */
+        .timeline {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-top: 1.5em;
+        }
+
+        .timeline-phase {
+            flex: 1;
+            background: white;
+            border-radius: 20px;
+            padding: 1.4em;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: 0.6em;
+            margin-bottom: 1em;
+            padding-bottom: 0.8em;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .phase-header i {
+            font-size: 1.4em;
+            color: var(--accent);
+        }
+
+        .phase-header span {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .phase-items {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5em;
+        }
+
+        .phase-item {
+            font-size: 0.95em;
+            color: var(--text-medium);
+            padding: 0.4em 0;
+            padding-left: 1em;
+            position: relative;
+        }
+
+        .phase-item::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.7em;
+            width: 5px;
+            height: 5px;
+            background: var(--icon-gray);
+            border-radius: 50%;
+        }
+
+        .timeline-arrow {
+            display: flex;
+            align-items: center;
+            align-self: center;
+            color: var(--accent);
+            font-size: 1.8em;
+        }
+
+        /* Big statement */
+        .big-statement {
+            font-family: 'Plus Jakarta Sans', Georgia, serif !important;
+            font-size: 1.5em !important;
+            font-weight: 400;
+            color: var(--text-dark) !important;
+            line-height: 1.4;
+        }
+
+        /* Title slide */
+        .title-slide {
+            background: var(--bg-paper) !important;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .title-slide .slide-content {
+            align-items: flex-start;
+            max-width: 550px;
+        }
+
+        .title-slide .title-tagline,
+        .title-slide .title-subtitle {
+            text-align: left;
+        }
+
+        .title-phone {
+            position: absolute;
+            right: 110px;
+            bottom: -120px;
+            width: 320px;
+            z-index: 10;
+        }
+
+        .title-phone img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .title-phone-glow {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 750px;
+            background: radial-gradient(ellipse, rgba(115, 123, 242, 0.6) 0%, rgba(115, 123, 242, 0.35) 30%, rgba(115, 123, 242, 0.15) 50%, transparent 70%);
+            filter: blur(40px);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .title-phone img {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Problem slide with pump */
+        .problem-slide {
+            position: relative;
+            overflow: visible !important;
+        }
+
+        /* Two Types of Insulin slide */
+        .insulin-type-card {
+            flex: 1;
+            background: white;
+            border-radius: 32px;
+            padding: 1.8em 2em;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .insulin-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1em;
+        }
+
+        .insulin-icon i {
+            font-size: 1.5em;
+            color: white;
+        }
+
+        .insulin-icon.basal {
+            background: #737BF2;
+            box-shadow: 0 4px 16px rgba(115, 123, 242, 0.4);
+        }
+
+        .insulin-icon.bolus {
+            background: #737BF2;
+            box-shadow: 0 4px 16px rgba(115, 123, 242, 0.4);
+        }
+
+        .insulin-type-card h4 {
+            font-size: 1.3em;
+            font-weight: 700;
+            margin-bottom: 0.3em;
+            color: var(--text-dark);
+        }
+
+        .insulin-desc {
+            color: var(--text-light);
+            font-size: 0.95em;
+            margin-bottom: 1em;
+        }
+
+        .insulin-details {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .insulin-details li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6em;
+            padding: 0.35em 0;
+            font-size: 0.9em;
+            color: var(--text-dark);
+        }
+
+        .insulin-details li::before {
+            content: "•";
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.2em;
+            line-height: 1;
+        }
+
+        /* Basal Rate Intelligence slide */
+        .basal-timeline {
+            display: flex;
+            gap: 12px;
+            margin-top: 1.5em;
+            align-items: flex-end;
+        }
+
+        .basal-period {
+            flex: 1;
+            text-align: center;
+        }
+
+        .period-time {
+            font-size: 0.75em;
+            color: var(--text-light);
+            margin-bottom: 0.5em;
+            font-weight: 600;
+        }
+
+        .period-bar {
+            width: 100%;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 0.5em;
+            transition: height 0.3s ease;
+        }
+
+        .period-bar.low {
+            height: 60px;
+            background: linear-gradient(180deg, #C7CAFC, #A5ABFA);
+        }
+
+        .period-bar.medium {
+            height: 90px;
+            background: linear-gradient(180deg, #8B92F7, #737BF2);
+        }
+
+        .period-bar.high {
+            height: 130px;
+            background: linear-gradient(180deg, #5B63E0, #4338CA);
+        }
+
+        .period-label {
+            font-size: 0.8em;
+            font-weight: 600;
+            color: var(--text-dark);
+            line-height: 1.3;
+        }
+
+        .period-label span {
+            font-weight: 400;
+            color: var(--text-light);
+            font-size: 0.9em;
+        }
+
+        /* Learning Loop slide */
+        .learning-loop-slide {
+            position: relative;
+        }
+
+        .business-model-slide {
+            position: relative;
+            overflow: visible !important;
+        }
+
+        .omnipod-img {
+            position: absolute;
+            top: 130px;
+            right: 100px;
+            width: 180px;
+            border-radius: 12px;
+        }
+
+        .reveal section.present .omnipod-img {
+            animation: scaleIn 0.5s ease-out 0.3s both;
+        }
+
+        /* Photo Meal slide with phone */
+        .photo-meal-slide {
+            position: relative;
+            overflow: visible !important;
+        }
+
+        .nutrition-phone {
+            position: absolute;
+            left: 60px;
+            bottom: -30px;
+            width: 280px;
+            z-index: 10;
+        }
+
+        .nutrition-phone img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .title-tagline {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 4.2em;
+            font-weight: 800;
+            color: var(--text-dark);
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.3em;
+            text-align: left;
+        }
+
+        .title-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.15em;
+            color: var(--text-light);
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            text-align: left;
+        }
+
+        /* Logo */
+        .logo-large {
+            height: 64px;
+            margin-bottom: 1.5em;
+        }
+
+        .logo-small {
+            height: 48px;
+            margin-bottom: 1em;
+        }
+
+        .logo-hero {
+            height: 80px;
+        }
+
+        /* Context sources */
+        .context-sources {
+            display: flex;
+            gap: 16px;
+            margin-top: 1.2em;
+            flex-wrap: wrap;
+        }
+
+        .context-source {
+            background: white;
+            border-radius: 16px;
+            padding: 1em 1.3em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5em;
+            width: 100px;
+            height: 90px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .context-source i {
+            font-size: 1.8em;
+            color: var(--icon-gray);
+        }
+
+        .context-source span {
+            font-size: 0.9em;
+            font-weight: 500;
+            color: var(--text-medium);
+        }
+
+        /* Feature highlights */
+        .feature-highlights {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 1.2em;
+        }
+
+        .feature-item {
+            background: white;
+            border-radius: 100px;
+            padding: 1em 1.2em;
+            display: flex;
+            align-items: center;
+            gap: 0.9em;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-item i {
+            font-size: 1.5em;
+            color: var(--icon-gray);
+        }
+
+        .feature-item span {
+            font-size: 1em;
+            color: var(--text-medium);
+        }
+
+        /* Photo feature layout */
+        .photo-feature-layout {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+            margin-top: 1.2em;
+        }
+
+        .phone-mockup {
+            width: 140px;
+            height: 340px;
+            background: linear-gradient(145deg, #2a2a2a 0%, #1a1a1a 100%);
+            border-radius: 32px;
+            padding: 10px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255,255,255,0.1);
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .phone-mockup::before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 20px;
+            background: #1a1a1a;
+            border-radius: 0 0 12px 12px;
+            z-index: 10;
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: var(--bg-paper);
+            border-radius: 24px;
+        }
+
+        .phone-camera-ui {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .camera-viewfinder {
+            width: 80px;
+            height: 80px;
+            border: 2px solid var(--accent);
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .camera-viewfinder::before,
+        .camera-viewfinder::after {
+            content: "";
+            position: absolute;
+            background: var(--accent);
+        }
+
+        .camera-viewfinder::before {
+            width: 12px;
+            height: 2px;
+            top: -6px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .camera-viewfinder::after {
+            width: 2px;
+            height: 12px;
+            left: -6px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .phone-camera-ui i {
+            font-size: 1.8em;
+            color: var(--accent);
+        }
+
+        .camera-circle {
+            width: 44px;
+            height: 44px;
+            border: 3px solid var(--accent);
+            border-radius: 50%;
+            position: relative;
+            background: rgba(115, 123, 242, 0.1);
+        }
+
+        .camera-dots {
+            display: none;
+        }
+
+        .photo-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            min-width: 500px;
+        }
+
+        .photo-step {
+            display: flex;
+            align-items: center;
+            gap: 0.8em;
+            font-size: 1.05em;
+            color: var(--text-medium);
+            padding: 1.1em 1.5em;
+            background: white;
+            border-radius: 100px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .photo-step .step-num {
+            font-family: 'Plus Jakarta Sans', Georgia, serif;
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--text-dark);
+            min-width: 1.5em;
+        }
+
+        /* Thank you */
+        .thank-you-text {
+            font-family: 'Plus Jakarta Sans', sans-serif !important;
+            font-size: 6.5em !important;
+            font-weight: 800 !important;
+            text-align: center !important;
+            width: 100%;
+        }
+
+        .thank-you-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .thank-you-slide {
+            position: relative;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
+        .confetti-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        .confetti {
+            position: absolute;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            opacity: 0;
+        }
+
+        .confetti.circle { border-radius: 50%; }
+        .confetti.square { border-radius: 2px; }
+
+        @keyframes confetti-fall {
+            0% {
+                opacity: 1;
+                transform: translateY(-50px) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(700px) rotate(720deg);
+            }
+        }
+
+        /* Status */
+        .status-complete { color: #10b981; font-weight: 600; }
+        .status-progress { color: #f59e0b; font-weight: 600; }
+
+        /* Code */
+        code {
+            background: var(--gradient-soft);
+            padding: 0.25em 0.6em;
+            border-radius: 12px;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 0.9em;
+            color: var(--accent-dark);
+        }
+
+        /* Progress bar */
+        /* Progress bar - purple */
+        .reveal .progress {
+            background: white;
+            height: 4px;
+        }
+
+        .reveal .progress span {
+            background: var(--accent);
+        }
+
+        .reveal .slide-number { display: none !important; }
+
+        /* Links */
+        .reveal a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .reveal a:hover {
+            text-decoration: underline;
+        }
+
+        /* Icon list - with gray icons */
+        .icon-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .icon-list li {
+            display: flex;
+            align-items: center;
+            gap: 1em;
+            margin-bottom: 0.9em;
+            font-size: 1.15em;
+            padding-left: 0;
+        }
+
+        .icon-list li::before {
+            display: none;
+        }
+
+        .icon-list .icon {
+            font-size: 1.5em;
+            color: var(--icon-gray);
+            width: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Problem list */
+        .problem-list {
+            list-style: none;
+            padding: 0;
+            margin: 0.8em 0;
+        }
+
+        .problem-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 1em;
+            padding: 0.8em 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            font-size: 1.1em;
+            padding-left: 0;
+        }
+
+        .problem-list li::before {
+            display: none;
+        }
+
+        .problem-list li:last-child {
+            border-bottom: none;
+        }
+
+        .problem-list .dot {
+            width: 10px;
+            height: 10px;
+            background: var(--accent);
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 0.45em;
+        }
+
+        /* Ensure slides don't overflow */
+        .reveal .slides section {
+            overflow: hidden;
+        }
+
+        /* Decorative elements */
+        .decoration-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--gradient-soft);
+            pointer-events: none;
+        }
+
+        /* ========== ANIMATIONS ========== */
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideUpFromBottom {
+            from { opacity: 0; transform: translateY(100px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Slide animations */
+        .reveal section.present h2 { animation: fadeInUp 0.6s ease-out forwards; }
+        .reveal section.present h3 { animation: fadeIn 0.4s ease-out forwards; }
+        .reveal section.present p { animation: fadeInUp 0.6s ease-out 0.1s both; }
+
+        .reveal section.present .stat-box { animation: scaleIn 0.5s ease-out both; }
+        .reveal section.present .stat-row .stat-box:nth-child(1) { animation-delay: 0.2s; }
+        .reveal section.present .stat-row .stat-box:nth-child(2) { animation-delay: 0.35s; }
+        .reveal section.present .stat-row .stat-box:nth-child(3) { animation-delay: 0.5s; }
+
+        .reveal section.present .about-card { animation: scaleIn 0.4s ease-out both; }
+        .reveal section.present .about-stack .about-card:nth-child(1) { animation-delay: 0.1s; }
+        .reveal section.present .about-stack .about-card:nth-child(2) { animation-delay: 0.14s; }
+        .reveal section.present .about-stack .about-card:nth-child(3) { animation-delay: 0.18s; }
+        .reveal section.present .about-stack .about-card:nth-child(4) { animation-delay: 0.22s; }
+        .reveal section.present .about-stack .about-card:nth-child(5) { animation-delay: 0.26s; }
+
+        .reveal section.present .gap-list li { animation: fadeInUp 0.4s ease-out both; }
+        .reveal section.present .gap-list li:nth-child(1) { animation-delay: 0.1s; }
+        .reveal section.present .gap-list li:nth-child(2) { animation-delay: 0.15s; }
+        .reveal section.present .gap-list li:nth-child(3) { animation-delay: 0.2s; }
+        .reveal section.present .gap-list li:nth-child(4) { animation-delay: 0.25s; }
+
+        .reveal section.present .step-item { animation: slideInLeft 0.5s ease-out both; }
+        .reveal section.present .step-item:nth-child(1) { animation-delay: 0.15s; }
+        .reveal section.present .step-item:nth-child(2) { animation-delay: 0.25s; }
+        .reveal section.present .step-item:nth-child(3) { animation-delay: 0.35s; }
+        .reveal section.present .step-item:nth-child(4) { animation-delay: 0.45s; }
+        .reveal section.present .step-item:nth-child(5) { animation-delay: 0.55s; }
+
+        .reveal section.present .factor-item { animation: scaleIn 0.4s ease-out both; }
+        .reveal section.present .factor-grid .factor-item:nth-child(1) { animation-delay: 0.1s; }
+        .reveal section.present .factor-grid .factor-item:nth-child(2) { animation-delay: 0.15s; }
+        .reveal section.present .factor-grid .factor-item:nth-child(3) { animation-delay: 0.2s; }
+        .reveal section.present .factor-grid .factor-item:nth-child(4) { animation-delay: 0.25s; }
+        .reveal section.present .factor-grid .factor-item:nth-child(5) { animation-delay: 0.3s; }
+        .reveal section.present .factor-grid .factor-item:nth-child(6) { animation-delay: 0.35s; }
+
+        .reveal section.present .context-source { animation: scaleIn 0.4s ease-out both; }
+        .reveal section.present .context-sources .context-source:nth-child(1) { animation-delay: 0.1s; }
+        .reveal section.present .context-sources .context-source:nth-child(2) { animation-delay: 0.15s; }
+        .reveal section.present .context-sources .context-source:nth-child(3) { animation-delay: 0.2s; }
+        .reveal section.present .context-sources .context-source:nth-child(4) { animation-delay: 0.25s; }
+        .reveal section.present .context-sources .context-source:nth-child(5) { animation-delay: 0.3s; }
+        .reveal section.present .context-sources .context-source:nth-child(6) { animation-delay: 0.35s; }
+
+        .reveal section.present .two-col > div:nth-child(1) { animation: slideInLeft 0.5s ease-out 0.2s both; }
+        .reveal section.present .two-col > div:nth-child(2) { animation: slideInRight 0.5s ease-out 0.3s both; }
+
+        .reveal section.present .stat-circle { animation: scaleIn 0.5s ease-out both; }
+        .reveal section.present .stats-circles .stat-circle:nth-child(1) { animation-delay: 0.2s; }
+        .reveal section.present .stats-circles .stat-circle:nth-child(2) { animation-delay: 0.35s; }
+        .reveal section.present .stats-circles .stat-circle:nth-child(3) { animation-delay: 0.5s; }
+
+        .reveal section.present table { animation: fadeInUp 0.6s ease-out 0.2s both; }
+        .reveal section.present .card { animation: scaleIn 0.5s ease-out 0.2s both; }
+
+        .reveal section.present .photo-step { animation: slideInLeft 0.5s ease-out both; }
+        .reveal section.present .photo-steps .photo-step:nth-child(1) { animation-delay: 0.15s; }
+        .reveal section.present .photo-steps .photo-step:nth-child(2) { animation-delay: 0.25s; }
+        .reveal section.present .photo-steps .photo-step:nth-child(3) { animation-delay: 0.35s; }
+        .reveal section.present .photo-steps .photo-step:nth-child(4) { animation-delay: 0.45s; }
+        .reveal section.present .photo-steps .photo-step:nth-child(5) { animation-delay: 0.55s; }
+
+        .reveal section.present .nutrition-phone { animation: slideUpFromBottom 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both; }
+        /* Loop circle diagram */
+        .loop-circle {
+            position: absolute;
+            top: 330px;
+            right: 70px;
+            width: 180px;
+            height: 180px;
+        }
+
+        .loop-arrows {
+            width: 100%;
+            height: 100%;
+        }
+
+        .loop-label {
+            position: absolute;
+            font-size: 0.75em;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .loop-top { top: -8px; left: 50%; transform: translateX(-50%); }
+        .loop-right { right: -45px; top: 50%; transform: translateY(-50%); }
+        .loop-bottom { bottom: -8px; left: 50%; transform: translateX(-50%); }
+        .loop-left { left: -40px; top: 50%; transform: translateY(-50%); }
+
+        .reveal section.present .loop-circle {
+            animation: scaleIn 0.5s ease-out 0.3s both;
+        }
+        .reveal section.present img[alt="FDA logo"] { animation: scaleIn 0.5s ease-out 0.3s both; }
+
+        /* Logo stack layout */
+        .logo-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1em;
+            margin-top: -50px;
+            margin-left: 60px;
+        }
+
+        .logo-stack img {
+            width: 200px;
+            height: auto;
+            opacity: 0.7;
+        }
+
+        .logo-stack img:first-child {
+            margin-bottom: -0.8em;
+        }
+
+        .logo-stack img:nth-child(2) {
+            width: 270px;
+            margin-top: -0.6em;
+            margin-bottom: 0.3em;
+        }
+
+        .logo-stack img:nth-child(3) {
+            width: 230px;
+        }
+
+        /* Logo stack animations */
+        .reveal section.present .logo-stack img {
+            animation: fadeInUp 0.5s ease-out both;
+        }
+        .reveal section.present .logo-stack img:nth-child(1) { animation-delay: 0.3s; }
+        .reveal section.present .logo-stack img:nth-child(2) { animation-delay: 0.45s; }
+        .reveal section.present .logo-stack img:nth-child(3) { animation-delay: 0.6s; }
+
+        /* Two Types of Insulin Delivery animations */
+        .reveal section.present .insulin-type-card { animation: scaleIn 0.5s ease-out both; }
+        .reveal section.present .insulin-type-card:nth-child(1) { animation-delay: 0.15s; }
+        .reveal section.present .insulin-type-card:nth-child(2) { animation-delay: 0.3s; }
+        .reveal section.present .insulin-type-card .insulin-icon { animation: scaleIn 0.4s ease-out both; }
+        .reveal section.present .insulin-type-card:nth-child(1) .insulin-icon { animation-delay: 0.3s; }
+        .reveal section.present .insulin-type-card:nth-child(2) .insulin-icon { animation-delay: 0.45s; }
+        .reveal section.present .insulin-details li { animation: fadeInUp 0.4s ease-out both; }
+        .reveal section.present .insulin-type-card:nth-child(1) .insulin-details li:nth-child(1) { animation-delay: 0.4s; }
+        .reveal section.present .insulin-type-card:nth-child(1) .insulin-details li:nth-child(2) { animation-delay: 0.5s; }
+        .reveal section.present .insulin-type-card:nth-child(1) .insulin-details li:nth-child(3) { animation-delay: 0.6s; }
+        .reveal section.present .insulin-type-card:nth-child(2) .insulin-details li:nth-child(1) { animation-delay: 0.55s; }
+        .reveal section.present .insulin-type-card:nth-child(2) .insulin-details li:nth-child(2) { animation-delay: 0.65s; }
+        .reveal section.present .insulin-type-card:nth-child(2) .insulin-details li:nth-child(3) { animation-delay: 0.75s; }
+
+        /* Basal Rate Intelligence animations */
+        .reveal section.present .basal-period { animation: slideUpFromBottom 0.5s ease-out both; }
+        .reveal section.present .basal-timeline .basal-period:nth-child(1) { animation-delay: 0.15s; }
+        .reveal section.present .basal-timeline .basal-period:nth-child(2) { animation-delay: 0.25s; }
+        .reveal section.present .basal-timeline .basal-period:nth-child(3) { animation-delay: 0.35s; }
+        .reveal section.present .basal-timeline .basal-period:nth-child(4) { animation-delay: 0.45s; }
+        .reveal section.present .basal-timeline .basal-period:nth-child(5) { animation-delay: 0.55s; }
+
+        @keyframes loopSpin {
+            0% { transform: rotate(0deg); }
+            16.67% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+            66.67% { transform: rotate(180deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Timeline phase animations */
+        .reveal section.present .timeline-phase { animation: scaleIn 0.5s ease-out both; }
+        .reveal section.present .timeline .timeline-phase:nth-child(1) { animation-delay: 0.2s; }
+        .reveal section.present .timeline .timeline-phase:nth-child(3) { animation-delay: 0.4s; }
+        .reveal section.present .timeline .timeline-phase:nth-child(5) { animation-delay: 0.6s; }
+        .reveal section.present .timeline-arrow { animation: fadeIn 0.3s ease-out both; }
+        .reveal section.present .timeline .timeline-arrow:nth-child(2) { animation-delay: 0.35s; }
+        .reveal section.present .timeline .timeline-arrow:nth-child(4) { animation-delay: 0.55s; }
+
+        /* Animated number counter */
+        .animate-number {
+            display: inline-block;
+        }
+
+        /* Animated numbers in headings */
+        h2 [data-animate-number] {
+            color: var(--text-dark);
+            font-weight: 400;
+        }
+
+        /* Numbers in paragraphs and tables */
+        p [data-animate-number],
+        td [data-animate-number] {
+            font-family: 'Plus Jakarta Sans', Georgia, serif;
+            font-weight: 400;
+            color: var(--text-dark);
+        }
+        /* Hover effects */
+        .stat-box {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(99, 102, 241, 0.15);
+        }
+
+        .factor-item {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .factor-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.12);
+        }
+
+        .step-item {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .step-item:hover {
+            transform: translateX(4px);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.1);
+        }
+
+
+        /* Big percentage numbers */
+        .big-percent {
+            font-size: 4em;
+            font-weight: 800;
+            color: var(--accent);
+            line-height: 1;
+            display: inline-block;
+        }
+
+        /* Pattern cards for onboarding */
+        .pattern-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1em 1.2em;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pattern-accent {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent);
+            border-radius: 12px 0 0 12px;
+        }
+
+        .pattern-title {
+            font-size: 0.95em;
+            font-weight: 600;
+            color: var(--text-medium);
+            margin-bottom: 0.4em;
+        }
+
+        .pattern-desc {
+            font-size: 0.85em;
+            color: var(--text-light);
+        }
+
+        /* Why This Matters - Circular Stats */
+        .stats-circles {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            margin-top: 2em;
+        }
+
+        .stat-circle {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.2em;
+        }
+
+        .stat-circle .circle-wrapper {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stat-circle .circle {
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 8px 40px rgba(115, 123, 242, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 1 / 1;
+        }
+
+        .stat-circle .circle.large {
+            width: 200px;
+            height: 200px;
+        }
+
+        .stat-circle .circle.medium {
+            width: 170px;
+            height: 170px;
+        }
+
+        .stat-circle .circle.small {
+            width: 140px;
+            height: 140px;
+        }
+
+        .stat-circle .circle-number {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .stat-circle .circle.large .circle-number {
+            font-size: 3em;
+        }
+
+        .stat-circle .circle.medium .circle-number {
+            font-size: 2.5em;
+        }
+
+        .stat-circle .circle.small .circle-number {
+            font-size: 2em;
+        }
+
+        .stat-circle .circle-label {
+            font-size: 1em;
+            color: var(--text-medium);
+            text-align: center;
+            max-width: 200px;
+            line-height: 1.4;
+            min-height: 2.8em;
+        }
+
+        /* Fullscreen mode - no rounded corners, fill screen */
+        :fullscreen .binder-frame {
+            transform: none !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+        }
+
+        :fullscreen .binder-page {
+            width: 100vw !important;
+            height: 100vh !important;
+            border-radius: 0 !important;
+        }
+
+        :fullscreen .binder-page .reveal {
+            border-radius: 0 !important;
+        }
+
+        /* Webkit fullscreen support */
+        :-webkit-full-screen .binder-frame {
+            transform: none !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+        }
+
+        :-webkit-full-screen .binder-page {
+            width: 100vw !important;
+            height: 100vh !important;
+            border-radius: 0 !important;
+        }
+
+        :-webkit-full-screen .binder-page .reveal {
+            border-radius: 0 !important;
+        }
+
+        /* Solution slide - logo zoom animation */
+        .solution-logo {
+            opacity: 0;
+            transform: scale(0);
+        }
+
+        .reveal section.solution-slide.present .solution-logo {
+            animation: logoZoomIn 1.1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.35s forwards;
+        }
+
+        .reveal section.solution-slide.present .logo-glow {
+            animation: glowFadeIn 0.5s ease-out 1.2s forwards;
+        }
+
+        @keyframes logoZoomIn {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes glowFadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Sparks */
+        .sparks-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .spark {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            opacity: 0;
+            top: 50%;
+            left: 50%;
+        }
+
+        .spark.circle { border-radius: 50%; }
+        .spark.square { border-radius: 2px; }
+
+        @keyframes sparkBurst {
+            0% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty)) scale(0.5) rotate(360deg);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="binder-frame">
+        <div class="binder-page">
+            <div class="reveal">
+                <div class="slides">
+
+            <!-- 1. Title -->
+            <section class="title-slide">
+                <div class="slide-content" style="margin-top: 120px;">
+                    <div style="display: flex; align-items: center; gap: 35px;">
+                        <img src="dossi-wordmark.png" alt="Dossi" style="width: 380px;">
+                        <div style="width: 60px; height: 60px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 20px; box-shadow: 0 8px 24px rgba(115, 123, 242, 0.4);">
+                            <i class="ph-bold ph-arrow-right" style="color: white; font-size: 1.6em;"></i>
+                        </div>
+                    </div>
+                    <p class="title-subtitle" style="margin-top: 1.5em;">Where insulin dosing meets predictive intelligence.</p>
+                </div>
+                <div class="title-phone">
+                    <div class="title-phone-glow"></div>
+                    <img src="dossi-dashboard.png" alt="Dossi Dashboard">
+                </div>
+            </section>
+
+            <!-- 2. About Me -->
+            <section>
+                <div class="slide-content">
+                    <h3>About Me</h3>
+                    <h2>Hi, I'm Casey</h2>
+                    <div class="about-stack">
+                        <div class="about-card"><i class="ph ph-graduation-cap"></i><span>Georgia Tech, Industrial Design</span></div>
+                        <div class="about-card"><i class="ph ph-rocket-launch"></i><span>I want to be an <strong>entrepreneur</strong></span></div>
+                        <div class="about-card"><i class="ph ph-lightbulb"></i><span>Hoping to do Idea to Prototype (I2P)</span></div>
+                        <div class="about-card"><i class="ph ph-heart"></i><span>I have <strong>Type 1 Diabetes</strong></span></div>
+                        <div class="about-card"><i class="ph ph-users"></i><span>Former Breakthrough T1D Youth Ambassador</span></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- What is Type 1 Diabetes -->
+            <section class="t1d-slide">
+                <div class="slide-content">
+                    <h3>Introduction</h3>
+                    <h2>What Is Type 1 Diabetes?</h2>
+                    <p class="t1d-intro">Type 1 diabetes is a condition where the body does not produce insulin. People with T1D must deliver insulin themselves through insulin pumps to control the levels of sugar in their blood.</p>
+
+                    <div class="t1d-challenge-section">
+                        <h4 class="t1d-challenge-title">Many factors affect blood sugar and insulin needs</h4>
+                        <div class="factor-grid">
+                            <div class="factor-item"><div class="factor-icon"><i class="ph ph-chart-line-up"></i></div><div class="factor-content"><strong>Glucose</strong><span>Value, trend, velocity, momentum</span></div></div>
+                            <div class="factor-item"><div class="factor-icon"><i class="ph ph-drop"></i></div><div class="factor-content"><strong>Insulin</strong><span>IOB, decay curve, recent boluses</span></div></div>
+                            <div class="factor-item"><div class="factor-icon"><i class="ph ph-fork-knife"></i></div><div class="factor-content"><strong>Nutrition</strong><span>Carbs, protein, fat, fiber</span></div></div>
+                            <div class="factor-item"><div class="factor-icon"><i class="ph ph-person-simple-run"></i></div><div class="factor-content"><strong>Activity</strong><span>Workouts, intensity, steps</span></div></div>
+                            <div class="factor-item"><div class="factor-icon"><i class="ph ph-moon-stars"></i></div><div class="factor-content"><strong>Sleep & Body</strong><span>Hours, quality, illness, stress</span></div></div>
+                            <div class="factor-item"><div class="factor-icon"><i class="ph ph-clock"></i></div><div class="factor-content"><strong>Environment</strong><span>Time, day, temperature, site age</span></div></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. The Problem -->
+            <section class="problem-slide">
+                <img src="omnipod-photo.png" alt="Omnipod insulin pump" class="omnipod-img">
+                <div class="slide-content">
+                    <h3>The Problem</h3>
+                    <h2>My "Smart" Pump Isn't Very Smart</h2>
+                    <p>I wear an insulin pump and a continuous glucose monitor.</p>
+                    <p style="margin-top: 0.8em;">But it really only knows two things:</p>
+                    <div class="stat-row">
+                        <div class="stat-box">
+                            <div class="number">1</div>
+                            <div class="label">My current glucose</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="number">2</div>
+                            <div class="label">Carbs I'm about to eat</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- The Solution -->
+            <section class="true-center solution-slide">
+                <div class="slide-content centered">
+                    <h3>The Solution</h3>
+                    <div class="logo-container" style="position: relative; margin: 2.5em 0;">
+                        <div class="logo-glow" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 500px; height: 180px; background: radial-gradient(ellipse, rgba(255, 240, 120, 0.45) 0%, transparent 70%); z-index: 0; opacity: 0;"></div>
+                        <img src="dossi-wordmark.png" alt="Dossi" class="logo-hero solution-logo" style="position: relative; z-index: 1;">
+                        <div class="sparks-container"></div>
+                    </div>
+                    <p class="big-statement">An insulin advisor that sees the <span class="gradient-text">full picture</span></p>
+                    <p style="margin-top: 1em;">Dossi considers <strong><span class="number" data-animate-number="60" data-suffix="+">60+</span> factors</strong> and <strong>learns your patterns</strong> over time.</p>
+                </div>
+            </section>
+
+            <!-- How It Works Transition -->
+            <section class="true-center">
+                <div class="slide-content centered">
+                    <h2 class="thank-you-text" style="font-size: 5em !important;">How It Works</h2>
+                </div>
+            </section>
+
+            <!-- Why This Matters -->
+            <section class="true-center">
+                <div class="slide-content centered">
+                    <h3>The Impact</h3>
+                    <h2>Why This Matters</h2>
+                    <div class="stats-circles">
+                        <div class="stat-circle">
+                            <div class="circle-wrapper">
+                                <div class="circle large">
+                                    <span class="circle-number" data-animate-number="1.7" data-suffix="M">1.7M</span>
+                                </div>
+                            </div>
+                            <span class="circle-label">Americans live with Type 1 diabetes.</span>
+                        </div>
+                        <div class="stat-circle">
+                            <div class="circle-wrapper">
+                                <div class="circle medium">
+                                    <span class="circle-number" data-animate-number="21" data-suffix="%">21%</span>
+                                </div>
+                            </div>
+                            <span class="circle-label">Only 21% of adults with T1D meet glucose targets.</span>
+                        </div>
+                        <div class="stat-circle">
+                            <div class="circle-wrapper">
+                                <div class="circle small">
+                                    <span class="circle-number" data-animate-number="180" data-suffix="+">180+</span>
+                                </div>
+                            </div>
+                            <span class="circle-label">Extra decisions made per day by people with T1D</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Business Model -->
+            <section class="business-model-slide">
+                <div class="logo-stack" style="position: absolute; top: 180px; right: 60px; margin: 0; gap: 0.6em;">
+                    <img src="fda-logo.png" alt="FDA logo">
+                    <img src="tidepool-logo.png" alt="Tidepool logo">
+                    <img src="bigfoot-logo.webp" alt="Bigfoot Biomedical logo">
+                </div>
+                <div class="slide-content" style="max-width: 650px;">
+                    <h3>Business Model</h3>
+                    <h2>Path to Market</h2>
+                    <p>The global diabetes care market is valued at <strong>$72 billion</strong>.<br>Insulin delivery devices are growing 8% annually.</p>
+                    <table style="margin-top: 1em;">
+                        <tbody>
+                            <tr>
+                                <td style="width: 140px;"><strong>Regulatory</strong></td>
+                                <td>FDA 510(k) clearance as Class II medical device</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Distribution</strong></td>
+                                <td>Prescription app sold through healthcare providers</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Coverage</strong></td>
+                                <td>Insurance reimbursement under diabetes management codes</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Pricing</strong></td>
+                                <td>$30-50/month subscription or annual plans</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Research</strong></td>
+                                <td>De-identified data partnerships with research institutions</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p style="margin-top: 1.2em; font-style: italic; color: var(--text-light);">Tidepool and Bigfoot have proven this regulatory and reimbursement model.</p>
+                </div>
+            </section>
+
+            <!-- Where I'd Love Guidance -->
+            <section>
+                <div class="slide-content">
+                    <h3>Mentorship</h3>
+                    <h2>Where I'd Love Guidance</h2>
+                    <div style="margin-top: 0.8em; max-width: 650px;">
+                        <div class="step-item"><span class="step-num">1.</span><div class="step-content">Navigating medical design</div></div>
+                        <div class="step-item"><span class="step-num">2.</span><div class="step-content">Feedback on my work and suggest improvements</div></div>
+                        <div class="step-item"><span class="step-num">3.</span><div class="step-content">Out of the idea realm</div></div>
+                        <div class="step-item"><span class="step-num">4.</span><div class="step-content">Possible connections to others who could help me</div></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Thank You -->
+            <section class="true-center thank-you-section">
+                <div class="confetti-container"></div>
+                <div class="slide-content centered thank-you-slide">
+                    <h2 class="thank-you-text">Thank you!</h2>
+                </div>
+            </section>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: false,
+            transition: 'fade',
+            transitionSpeed: 'fast',
+            controls: true,
+            progress: true,
+            center: false,
+            width: 1100,
+            height: 700,
+            margin: 0,
+            embedded: true
+        });
+
+        // Responsive scaling
+        function scaleBinder() {
+            const frame = document.querySelector('.binder-frame');
+            const frameWidth = 1100;
+            const frameHeight = 700;
+            const padding = 80;
+
+            const availableWidth = window.innerWidth - padding;
+            const availableHeight = window.innerHeight - padding;
+
+            const scaleX = availableWidth / frameWidth;
+            const scaleY = availableHeight / frameHeight;
+            const scale = Math.min(scaleX, scaleY);
+
+            frame.style.setProperty('--scale', scale);
+        }
+
+        scaleBinder();
+        window.addEventListener('resize', scaleBinder);
+
+        // Format number with commas
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        // Animated number counter
+        function animateNumber(element, start, end, duration, suffix = '', prefix = '', onComplete = null) {
+            const startTime = performance.now();
+            const isDecimal = String(end).includes('.');
+            const needsCommas = end >= 1000;
+
+            element.classList.add('counting');
+
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+
+                // Easing function (ease-out cubic)
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+
+                const current = start + (end - start) * easeOut;
+
+                let displayValue;
+                if (isDecimal) {
+                    displayValue = current.toFixed(1);
+                } else {
+                    displayValue = Math.round(current);
+                    if (needsCommas) {
+                        displayValue = formatNumber(displayValue);
+                    }
+                }
+
+                element.textContent = prefix + displayValue + suffix;
+
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                } else {
+                    element.classList.remove('counting');
+                    if (onComplete) onComplete();
+                }
+            }
+
+            requestAnimationFrame(update);
+        }
+
+        // Animate percentage with smooth counting
+        function animatePercent(element, targetPercent, duration = 1500) {
+            animateNumber(element, 0, targetPercent, duration, '%');
+        }
+
+        // Find all animated numbers and trigger them on slide change
+        function triggerNumberAnimations() {
+            const currentSlide = Reveal.getCurrentSlide();
+            const animatedNumbers = currentSlide.querySelectorAll('[data-animate-number]');
+
+            animatedNumbers.forEach((el, index) => {
+                const value = el.getAttribute('data-animate-number');
+                const suffix = el.getAttribute('data-suffix') || '';
+                const prefix = el.getAttribute('data-prefix') || '';
+                const duration = parseInt(el.getAttribute('data-duration')) || 1200;
+                const delay = index * 150; // Stagger animations
+
+                // Reset to 0 first
+                el.textContent = prefix + '0' + suffix;
+
+                setTimeout(() => {
+                    if (value.includes('.')) {
+                        animateNumber(el, 0, parseFloat(value), duration, suffix, prefix);
+                    } else {
+                        animateNumber(el, 0, parseInt(value), duration, suffix, prefix);
+                    }
+                }, delay + 300); // Delay for slide transition
+            });
+        }
+
+        // Trigger on slide change
+        Reveal.on('slidechanged', triggerNumberAnimations);
+
+        // Initial trigger for first slide
+        setTimeout(triggerNumberAnimations, 500);
+
+        // Sparks animation for solution slide
+        function createSparks() {
+            const container = document.querySelector('.solution-slide.present .sparks-container');
+            if (!container) return;
+
+            // Clear existing sparks
+            container.innerHTML = '';
+
+            // Colorful confetti like thank you page
+            const colors = ['#737BF2', '#A78BFA', '#34D399', '#FBBF24', '#F472B6', '#60A5FA'];
+            const shapes = ['circle', 'square'];
+            const numSparks = 40;
+
+            for (let i = 0; i < numSparks; i++) {
+                const spark = document.createElement('div');
+                spark.className = 'spark ' + shapes[Math.floor(Math.random() * shapes.length)];
+                spark.style.background = colors[Math.floor(Math.random() * colors.length)];
+
+                // Burst effect - radiate outward in all directions
+                const angle = (Math.PI * 2 * i) / numSparks + (Math.random() - 0.5) * 0.5;
+                const distance = 100 + Math.random() * 150;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+
+                spark.style.setProperty('--tx', tx + 'px');
+                spark.style.setProperty('--ty', ty + 'px');
+
+                const size = 4 + Math.random() * 6;
+                spark.style.width = size + 'px';
+                spark.style.height = size + 'px';
+                spark.style.animation = `sparkBurst ${1 + Math.random() * 0.8}s ease-out forwards`;
+                spark.style.animationDelay = (Math.random() * 0.1) + 's';
+
+                container.appendChild(spark);
+            }
+        }
+
+        // Trigger sparks when solution slide animation completes
+        let sparksFired = false;
+        Reveal.on('slidechanged', (event) => {
+            if (event.currentSlide.classList.contains('solution-slide') && !sparksFired) {
+                sparksFired = true;
+                // Trigger sparks after logo animation completes (0.35s delay + 1.1s animation)
+                setTimeout(createSparks, 1450);
+            } else if (!event.currentSlide.classList.contains('solution-slide')) {
+                sparksFired = false;
+            }
+        });
+
+        // Confetti animation
+        function createConfetti() {
+            const container = document.querySelector('.confetti-container');
+            if (!container) return;
+
+            // Clear existing confetti
+            container.innerHTML = '';
+
+            const colors = ['#737BF2', '#A78BFA', '#34D399', '#FBBF24', '#F472B6', '#60A5FA'];
+            const shapes = ['circle', 'square'];
+
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = `confetti ${shapes[Math.floor(Math.random() * shapes.length)]}`;
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = (Math.random() * 8 + 6) + 'px';
+                confetti.style.height = confetti.style.width;
+                confetti.style.animation = `confetti-fall ${Math.random() * 2 + 2}s ease-out ${Math.random() * 0.5}s forwards`;
+                container.appendChild(confetti);
+            }
+        }
+
+        // Trigger confetti on thank you slide
+        Reveal.on('slidechanged', (event) => {
+            if (event.currentSlide.querySelector('.thank-you-slide')) {
+                setTimeout(createConfetti, 300);
+            }
+        });
+
+        // Fullscreen mode - press F to toggle
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'f' || e.key === 'F') {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen();
+                } else {
+                    document.exitFullscreen();
+                }
+            }
+            if (e.key === 'r' || e.key === 'R') {
+                Reveal.slide(0);
+            }
+        });
+    </script>
+</body>
+</html>
