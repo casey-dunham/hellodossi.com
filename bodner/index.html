@@ -1873,6 +1873,35 @@
         .flow-label.bottom-left { bottom: 85px; left: 160px; }
         .flow-label.top-left { top: 85px; left: 160px; }
 
+        /* Flow diagram animations */
+        .flow-node, .flow-label, .flow-arrows path {
+            opacity: 0;
+        }
+
+        .reveal section.present .flow-node {
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+        .reveal section.present .flow-node.top { animation-delay: 0.1s; }
+        .reveal section.present .flow-node.right { animation-delay: 0.2s; }
+        .reveal section.present .flow-node.bottom { animation-delay: 0.3s; }
+        .reveal section.present .flow-node.left { animation-delay: 0.4s; }
+
+        .reveal section.present .flow-arrows path {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        .reveal section.present .flow-arrows path:nth-child(2) { animation-delay: 0.5s; }
+        .reveal section.present .flow-arrows path:nth-child(3) { animation-delay: 0.6s; }
+        .reveal section.present .flow-arrows path:nth-child(4) { animation-delay: 0.7s; }
+        .reveal section.present .flow-arrows path:nth-child(5) { animation-delay: 0.8s; }
+
+        .reveal section.present .flow-label {
+            animation: fadeIn 0.3s ease-out forwards;
+        }
+        .reveal section.present .flow-label.top-right { animation-delay: 0.5s; }
+        .reveal section.present .flow-label.bottom-right { animation-delay: 0.6s; }
+        .reveal section.present .flow-label.bottom-left { animation-delay: 0.7s; }
+        .reveal section.present .flow-label.top-left { animation-delay: 0.8s; }
+
     </style>
 </head>
 <body>
@@ -2016,6 +2045,24 @@
                             <span>Dosing advice,<br>basal adjustments</span>
                         </div>
                     </div>
+                </div>
+            </section>
+
+            <!-- Photo Meal Recognition -->
+            <section class="photo-meal-slide">
+                <div class="slide-content" style="max-width: none;">
+                    <h3>How It Works</h3>
+                    <h2>Photo Meal Recognition</h2>
+                    <div class="photo-steps" style="margin-top: 2.5em; margin-left: 330px; max-width: 400px;">
+                        <div class="photo-step"><span class="step-num">1.</span><span>Snap a photo of any meal</span></div>
+                        <div class="photo-step"><span class="step-num">2.</span><span>AI identifies individual foods</span></div>
+                        <div class="photo-step"><span class="step-num">3.</span><span>Estimates carbs, protein, fat, fiber</span></div>
+                        <div class="photo-step"><span class="step-num">4.</span><span>Models interaction of different macros</span></div>
+                        <div class="photo-step"><span class="step-num">5.</span><span>Suggests dosage</span></div>
+                    </div>
+                </div>
+                <div class="nutrition-phone">
+                    <img src="nutrition-tracker.png" alt="Nutrition Tracker">
                 </div>
             </section>
 
