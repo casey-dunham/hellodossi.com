@@ -1801,11 +1801,17 @@
 
         /* How It Works Grid */
         .how-it-works-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
             margin-top: 1.5em;
-            max-width: 920px;
+            max-width: 960px;
+        }
+
+        .hiw-arrow {
+            color: var(--accent);
+            font-size: 1.2em;
+            flex-shrink: 0;
         }
 
         .hiw-card {
@@ -1815,6 +1821,7 @@
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
             position: relative;
             min-height: 220px;
+            flex: 1;
         }
 
         .hiw-number {
@@ -1871,9 +1878,14 @@
         /* How It Works card animations */
         .reveal section.present .hiw-card { animation: scaleIn 0.5s ease-out both; }
         .reveal section.present .how-it-works-grid .hiw-card:nth-child(1) { animation-delay: 0.1s; }
-        .reveal section.present .how-it-works-grid .hiw-card:nth-child(2) { animation-delay: 0.2s; }
-        .reveal section.present .how-it-works-grid .hiw-card:nth-child(3) { animation-delay: 0.3s; }
-        .reveal section.present .how-it-works-grid .hiw-card:nth-child(4) { animation-delay: 0.4s; }
+        .reveal section.present .how-it-works-grid .hiw-card:nth-child(3) { animation-delay: 0.25s; }
+        .reveal section.present .how-it-works-grid .hiw-card:nth-child(5) { animation-delay: 0.4s; }
+        .reveal section.present .how-it-works-grid .hiw-card:nth-child(7) { animation-delay: 0.55s; }
+
+        .reveal section.present .hiw-arrow { animation: fadeIn 0.3s ease-out both; }
+        .reveal section.present .how-it-works-grid .hiw-arrow:nth-child(2) { animation-delay: 0.2s; }
+        .reveal section.present .how-it-works-grid .hiw-arrow:nth-child(4) { animation-delay: 0.35s; }
+        .reveal section.present .how-it-works-grid .hiw-arrow:nth-child(6) { animation-delay: 0.5s; }
 
     </style>
 </head>
@@ -1986,6 +1998,7 @@
                                 <li>Meals & time of day</li>
                             </ul>
                         </div>
+                        <div class="hiw-arrow"><i class="ph-bold ph-arrow-right"></i></div>
                         <div class="hiw-card">
                             <div class="hiw-number">2</div>
                             <h4>Pattern Detection</h4>
@@ -1995,6 +2008,7 @@
                                 <li>Exercise & meal effects</li>
                             </ul>
                         </div>
+                        <div class="hiw-arrow"><i class="ph-bold ph-arrow-right"></i></div>
                         <div class="hiw-card">
                             <div class="hiw-number">3</div>
                             <h4>Prediction</h4>
@@ -2004,6 +2018,7 @@
                                 <li>Quantify uncertainty</li>
                             </ul>
                         </div>
+                        <div class="hiw-arrow"><i class="ph-bold ph-arrow-right"></i></div>
                         <div class="hiw-card">
                             <div class="hiw-number">4</div>
                             <h4>Action</h4>
