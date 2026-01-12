@@ -576,46 +576,27 @@
 
         /* ========== PHOTO MEAL RECOGNITION ========== */
         .photo-meal {
-            padding: 100px 40px;
-            background: white;
+            padding: 80px 40px 0;
+            background: var(--bg-page);
+            position: relative;
+            overflow: hidden;
         }
 
         .photo-meal-container {
-            max-width: 1000px;
+            max-width: 1100px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 1.2fr;
+            grid-template-columns: 340px 1fr;
             gap: 60px;
-            align-items: center;
+            align-items: start;
         }
 
-        .photo-meal-visual {
-            display: flex;
-            justify-content: center;
-            position: relative;
+        .photo-meal-header {
+            grid-column: 1 / -1;
+            margin-bottom: 20px;
         }
 
-        .photo-meal-visual img {
-            width: 280px;
-            height: auto;
-            filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.15));
-            animation: phoneFloat 4s ease-in-out infinite;
-        }
-
-        .photo-meal-visual::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 350px;
-            height: 400px;
-            background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(115, 123, 242, 0.15) 0%, transparent 60%);
-            filter: blur(40px);
-            z-index: 0;
-        }
-
-        .photo-meal-content h3 {
+        .photo-meal-header h3 {
             font-family: 'Inter', sans-serif;
             font-size: 0.75em;
             color: var(--accent);
@@ -625,59 +606,74 @@
             margin-bottom: 16px;
         }
 
-        .photo-meal-content h2 {
+        .photo-meal-header h2 {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 2.2em;
-            font-weight: 700;
-            line-height: 1.2;
+            font-size: 2.6em;
+            font-weight: 800;
+            line-height: 1.15;
             color: var(--gray-900);
-            margin-bottom: 20px;
         }
 
-        .photo-meal-content > p {
-            font-size: 1.05em;
-            color: var(--gray-500);
-            line-height: 1.7;
-            margin-bottom: 32px;
+        .photo-meal-visual {
+            position: relative;
+            height: 500px;
+        }
+
+        .photo-meal-visual img {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 280px;
+            height: auto;
+            filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.2));
+            z-index: 2;
+        }
+
+        .photo-meal-bottom-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-dark) 100%);
+            z-index: 10;
         }
 
         .photo-steps {
             display: flex;
             flex-direction: column;
             gap: 16px;
+            padding-top: 20px;
         }
 
         .photo-step {
             display: flex;
             align-items: center;
-            gap: 16px;
-            padding: 16px 20px;
-            background: var(--bg-page);
-            border-radius: 16px;
+            gap: 20px;
+            padding: 20px 28px;
+            background: white;
+            border-radius: 100px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
             transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .photo-step:hover {
             transform: translateX(8px);
-            box-shadow: 0 4px 20px rgba(115, 123, 242, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
         }
 
         .photo-step-num {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.85em;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.3em;
             font-weight: 700;
+            color: var(--accent);
             flex-shrink: 0;
+            min-width: 28px;
         }
 
         .photo-step span:last-child {
-            font-size: 0.95em;
+            font-size: 1.05em;
             color: var(--gray-700);
             font-weight: 500;
         }
@@ -689,7 +685,12 @@
             }
 
             .photo-meal-visual {
-                order: -1;
+                height: 400px;
+                order: 2;
+            }
+
+            .photo-steps {
+                order: 1;
             }
         }
 
@@ -741,14 +742,14 @@
         }
 
         .comparison-item {
-            background: var(--gray-100);
+            background: #EBEBF0;
             padding: 16px 24px;
             border-radius: 100px;
             font-size: 0.95em;
             display: flex;
             align-items: center;
             gap: 12px;
-            color: var(--gray-600);
+            color: var(--gray-700);
             font-weight: 500;
         }
 
@@ -934,14 +935,6 @@
         .basal-period {
             flex: 1;
             text-align: center;
-            opacity: 0;
-            transform: translateY(15px);
-            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
-        }
-
-        .basal-period.visible {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         .period-time {
@@ -1373,8 +1366,8 @@
 
         .animate-on-scroll {
             opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.4s ease-out, transform 0.4s ease-out;
+            transform: translateY(12px);
+            transition: opacity 0.25s ease-out, transform 0.25s ease-out;
         }
 
         .animate-on-scroll.visible {
@@ -1383,13 +1376,13 @@
         }
 
         /* Staggered animations for grids */
-        .problem-card, .feature-card, .step-card, .market-stat, .factor-card, .photo-step {
+        .problem-card, .feature-card, .step-card, .market-stat, .factor-card, .photo-step, .basal-period {
             opacity: 0;
-            transform: translateY(15px);
-            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+            transform: translateY(10px);
+            transition: opacity 0.2s ease-out, transform 0.2s ease-out;
         }
 
-        .problem-card.visible, .feature-card.visible, .step-card.visible, .market-stat.visible, .factor-card.visible, .photo-step.visible {
+        .problem-card.visible, .feature-card.visible, .step-card.visible, .market-stat.visible, .factor-card.visible, .photo-step.visible, .basal-period.visible {
             opacity: 1;
             transform: translateY(0);
         }
@@ -1617,37 +1610,37 @@
     <!-- Photo Meal Recognition -->
     <section class="photo-meal">
         <div class="photo-meal-container">
-            <div class="photo-meal-visual animate-on-scroll">
+            <div class="photo-meal-header animate-on-scroll">
+                <h3>How It Works</h3>
+                <h2>Step 1: Photo Meal Recognition</h2>
+            </div>
+            <div class="photo-meal-visual">
                 <img src="pitchdeck/nutrition-tracker.png" alt="Photo Meal Recognition">
             </div>
-            <div class="photo-meal-content">
-                <h3 class="animate-on-scroll">AI-Powered</h3>
-                <h2 class="animate-on-scroll">Photo Meal Recognition</h2>
-                <p class="animate-on-scroll">No more guessing carbs. Just snap a photo and let AI do the work.</p>
-                <div class="photo-steps">
-                    <div class="photo-step">
-                        <span class="photo-step-num">1</span>
-                        <span>Snap a photo of any meal</span>
-                    </div>
-                    <div class="photo-step">
-                        <span class="photo-step-num">2</span>
-                        <span>AI identifies individual foods</span>
-                    </div>
-                    <div class="photo-step">
-                        <span class="photo-step-num">3</span>
-                        <span>Estimates carbs, protein, fat, fiber</span>
-                    </div>
-                    <div class="photo-step">
-                        <span class="photo-step-num">4</span>
-                        <span>Models interaction of macros</span>
-                    </div>
-                    <div class="photo-step">
-                        <span class="photo-step-num">5</span>
-                        <span>Suggests personalized dosage</span>
-                    </div>
+            <div class="photo-steps">
+                <div class="photo-step">
+                    <span class="photo-step-num">1.</span>
+                    <span>Snap a photo of any meal</span>
+                </div>
+                <div class="photo-step">
+                    <span class="photo-step-num">2.</span>
+                    <span>AI identifies individual foods</span>
+                </div>
+                <div class="photo-step">
+                    <span class="photo-step-num">3.</span>
+                    <span>Estimates carbs, protein, fat, fiber</span>
+                </div>
+                <div class="photo-step">
+                    <span class="photo-step-num">4.</span>
+                    <span>Models interaction of different macros</span>
+                </div>
+                <div class="photo-step">
+                    <span class="photo-step-num">5.</span>
+                    <span>Suggests dosage</span>
                 </div>
             </div>
         </div>
+        <div class="photo-meal-bottom-bar"></div>
     </section>
 
     <!-- Comparison -->
@@ -1923,29 +1916,26 @@
     </footer>
 
     <script>
-        // Intersection Observer for scroll animations
+        // Intersection Observer for scroll animations - trigger early
         const animateObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
                 }
             });
-        }, { threshold: 0.02, rootMargin: '0px 0px -50px 0px' });
+        }, { threshold: 0, rootMargin: '0px 0px 50px 0px' });
 
         // Observe all animated elements
-        document.querySelectorAll('.animate-on-scroll, .problem-card, .feature-card, .step-card, .market-stat, .factor-card, .basal-period, .photo-step').forEach((el, index) => {
-            // Add staggered delay for grid items
-            if (el.classList.contains('problem-card') || el.classList.contains('feature-card') || el.classList.contains('market-stat') || el.classList.contains('factor-card')) {
-                el.style.transitionDelay = `${index * 0.05}s`;
-            }
-            if (el.classList.contains('step-card') || el.classList.contains('photo-step')) {
-                el.style.transitionDelay = `${index * 0.08}s`;
-            }
-            if (el.classList.contains('basal-period')) {
-                el.style.transitionDelay = `${index * 0.1}s`;
-            }
-            animateObserver.observe(el);
-        });
+        document.querySelectorAll('.animate-on-scroll').forEach(el => animateObserver.observe(el));
+
+        // Stagger delays per section - quick subtle stagger
+        document.querySelectorAll('.problem-card').forEach((el, i) => { el.style.transitionDelay = `${i * 0.04}s`; animateObserver.observe(el); });
+        document.querySelectorAll('.feature-card').forEach((el, i) => { el.style.transitionDelay = `${i * 0.04}s`; animateObserver.observe(el); });
+        document.querySelectorAll('.step-card').forEach((el, i) => { el.style.transitionDelay = `${i * 0.05}s`; animateObserver.observe(el); });
+        document.querySelectorAll('.market-stat').forEach((el, i) => { el.style.transitionDelay = `${i * 0.08}s`; animateObserver.observe(el); });
+        document.querySelectorAll('.factor-card').forEach((el, i) => { el.style.transitionDelay = `${i * 0.04}s`; animateObserver.observe(el); });
+        document.querySelectorAll('.basal-period').forEach((el, i) => { el.style.transitionDelay = `${i * 0.06}s`; animateObserver.observe(el); });
+        document.querySelectorAll('.photo-step').forEach((el, i) => { el.style.transitionDelay = `${i * 0.04}s`; animateObserver.observe(el); });
 
         // Smooth hover on phone
         const phone = document.querySelector('.phone-image');
