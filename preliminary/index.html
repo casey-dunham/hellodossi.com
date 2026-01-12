@@ -354,28 +354,11 @@
         }
 
         /* How It Works Grid */
-        .how-it-works-wrapper {
-            display: flex;
-            gap: 40px;
-            align-items: center;
-            margin-top: 1em;
-        }
-
         .how-it-works-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 16px;
-            flex: 1;
-        }
-
-        .how-it-works-image {
-            flex-shrink: 0;
-            width: 280px;
-        }
-
-        .how-it-works-image img {
-            width: 100%;
-            height: auto;
+            margin-top: 1.5em;
         }
 
         .hiw-card {
@@ -384,7 +367,6 @@
             padding: 1.3em;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
             position: relative;
-            aspect-ratio: 1;
         }
 
         .hiw-number {
@@ -1467,47 +1449,42 @@
                 <div class="slide-content" style="max-width: none;">
                     <h3>Overview</h3>
                     <h2>How It Works</h2>
-                    <div class="how-it-works-wrapper">
-                        <div class="how-it-works-grid">
-                            <div class="hiw-card">
-                                <div class="hiw-number">1</div>
-                                <h4>Data Ingestion</h4>
-                                <ul class="hiw-list">
-                                    <li>Glucose & insulin data</li>
-                                    <li>Activity, sleep, heart rate</li>
-                                    <li>Meals & time of day</li>
-                                </ul>
-                            </div>
-                            <div class="hiw-card">
-                                <div class="hiw-number">2</div>
-                                <h4>Pattern Detection</h4>
-                                <ul class="hiw-list">
-                                    <li>Glucose response patterns</li>
-                                    <li>Sensitivity changes</li>
-                                    <li>Exercise & meal effects</li>
-                                </ul>
-                            </div>
-                            <div class="hiw-card">
-                                <div class="hiw-number">3</div>
-                                <h4>Prediction</h4>
-                                <ul class="hiw-list">
-                                    <li>Forecast glucose trajectories</li>
-                                    <li>Estimate insulin impact</li>
-                                    <li>Quantify uncertainty</li>
-                                </ul>
-                            </div>
-                            <div class="hiw-card">
-                                <div class="hiw-number">4</div>
-                                <h4>Action</h4>
-                                <ul class="hiw-list">
-                                    <li>Dynamic basal modulation</li>
-                                    <li>Adaptive dosing recommendations</li>
-                                    <li>Safety-bounded automation</li>
-                                </ul>
-                            </div>
+                    <div class="how-it-works-grid">
+                        <div class="hiw-card">
+                            <div class="hiw-number">1</div>
+                            <h4>Data Ingestion</h4>
+                            <ul class="hiw-list">
+                                <li>Glucose & insulin data</li>
+                                <li>Activity, sleep, heart rate</li>
+                                <li>Meals & time of day</li>
+                            </ul>
                         </div>
-                        <div class="how-it-works-image">
-                            <img src="loop.png" alt="Learning Loop">
+                        <div class="hiw-card">
+                            <div class="hiw-number">2</div>
+                            <h4>Pattern Detection</h4>
+                            <ul class="hiw-list">
+                                <li>Glucose response patterns</li>
+                                <li>Sensitivity changes</li>
+                                <li>Exercise & meal effects</li>
+                            </ul>
+                        </div>
+                        <div class="hiw-card">
+                            <div class="hiw-number">3</div>
+                            <h4>Prediction</h4>
+                            <ul class="hiw-list">
+                                <li>Forecast glucose trajectories</li>
+                                <li>Estimate insulin impact</li>
+                                <li>Quantify uncertainty</li>
+                            </ul>
+                        </div>
+                        <div class="hiw-card">
+                            <div class="hiw-number">4</div>
+                            <h4>Action</h4>
+                            <ul class="hiw-list">
+                                <li>Dynamic basal modulation</li>
+                                <li>Adaptive dosing recommendations</li>
+                                <li>Safety-bounded automation</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
