@@ -368,7 +368,7 @@
         }
 
         .how-it-works-container {
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
         }
 
@@ -471,21 +471,20 @@
 
         /* How It Works Cards */
         .how-it-works-grid {
-            display: grid;
-            grid-template-columns: 270px 30px 270px 30px 270px 30px 270px;
-            align-items: stretch;
-            gap: 12px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
             justify-content: center;
         }
 
         .hiw-card {
             background: white;
             border-radius: 20px;
-            padding: 32px 24px;
+            padding: 28px 20px;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-            width: 100%;
-            min-height: 450px;
-            height: auto;
+            width: 200px;
+            height: 240px;
+            flex-shrink: 0;
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.5s ease-out, transform 0.5s ease-out, box-shadow 0.3s;
@@ -529,7 +528,7 @@
             margin: 0;
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 8px;
         }
 
         .hiw-list li {
@@ -553,8 +552,6 @@
             color: var(--accent);
             font-size: 1.4em;
             flex-shrink: 0;
-            display: flex;
-            align-items: center;
         }
 
         /* Features */
@@ -931,13 +928,15 @@
         /* Responsive */
         @media (max-width: 1024px) {
             .how-it-works-grid {
-                grid-template-columns: repeat(2, 1fr);
-                max-width: 700px;
-                margin: 0 auto;
+                flex-wrap: wrap;
                 gap: 20px;
             }
 
             .hiw-arrow { display: none; }
+
+            .hiw-card {
+                width: calc(50% - 10px);
+            }
 
             .features-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -982,9 +981,7 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .how-it-works-grid {
-                grid-template-columns: 1fr;
-            }
+            .hiw-card { width: 100%; }
 
             .features-grid {
                 grid-template-columns: 1fr;
