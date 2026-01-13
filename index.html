@@ -133,18 +133,19 @@
             flex-shrink: 0;
             position: relative;
             align-self: flex-end;
-            margin-bottom: -120px;
+            margin-bottom: -60px;
+            transition: transform 0.1s ease-out;
         }
 
         .hero-phone-glow {
             position: absolute;
-            top: 30%;
+            top: 40%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 450px;
+            width: 400px;
             height: 500px;
-            background: radial-gradient(ellipse, rgba(115, 123, 242, 0.4) 0%, rgba(115, 123, 242, 0.15) 40%, transparent 70%);
-            filter: blur(50px);
+            background: radial-gradient(ellipse, rgba(115, 123, 242, 0.5) 0%, rgba(115, 123, 242, 0.2) 35%, transparent 65%);
+            filter: blur(60px);
             pointer-events: none;
             z-index: 0;
         }
@@ -154,7 +155,8 @@
             z-index: 1;
             width: 320px;
             height: auto;
-            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.15));
+            filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.2));
+            transition: transform 0.15s ease-out;
         }
 
         .hero-badge {
@@ -465,6 +467,85 @@
         .flow-label.bottom-right { bottom: 80px; right: 100px; }
         .flow-label.bottom-left { bottom: 80px; left: 100px; }
         .flow-label.top-left { top: 80px; left: 100px; }
+
+        /* How It Works Cards */
+        .how-it-works-grid {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        .hiw-card {
+            background: var(--bg-page);
+            border-radius: 20px;
+            padding: 28px 20px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            width: 200px;
+            height: 240px;
+            flex-shrink: 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out, box-shadow 0.3s;
+        }
+
+        .hiw-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hiw-card:hover {
+            box-shadow: 0 8px 30px rgba(115, 123, 242, 0.15);
+        }
+
+        .hiw-number {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 1.1em;
+            color: white;
+            margin-bottom: 16px;
+        }
+
+        .hiw-card h4 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.05em;
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 14px;
+        }
+
+        .hiw-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .hiw-list li {
+            font-size: 0.82em;
+            color: var(--gray-600);
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            line-height: 1.4;
+        }
+
+        .hiw-list li::before {
+            content: "›";
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 1.1em;
+            flex-shrink: 0;
+        }
 
         .hiw-arrow {
             color: var(--accent);
@@ -1163,6 +1244,46 @@
         }
         window.scrollTo(0, 0);
 
+        // Parallax effect for hero phone
+        const heroPhone = document.querySelector('.hero-phone');
+        const heroPhoneImg = document.querySelector('.hero-phone img');
+        const heroGlow = document.querySelector('.hero-phone-glow');
+
+        // Mouse move parallax on hero
+        document.querySelector('.hero').addEventListener('mousemove', (e) => {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const x = (e.clientX - rect.left - rect.width / 2) / rect.width;
+            const y = (e.clientY - rect.top - rect.height / 2) / rect.height;
+
+            if (heroPhoneImg) {
+                heroPhoneImg.style.transform = `rotateY(${x * 8}deg) rotateX(${-y * 5}deg)`;
+            }
+            if (heroGlow) {
+                heroGlow.style.transform = `translate(calc(-50% + ${x * 20}px), calc(-50% + ${y * 20}px))`;
+            }
+        });
+
+        // Reset on mouse leave
+        document.querySelector('.hero').addEventListener('mouseleave', () => {
+            if (heroPhoneImg) heroPhoneImg.style.transform = '';
+            if (heroGlow) heroGlow.style.transform = 'translate(-50%, -50%)';
+        });
+
+        // Scroll parallax
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    const scrollY = window.scrollY;
+                    if (heroPhone && scrollY < window.innerHeight) {
+                        heroPhone.style.transform = `translateY(${scrollY * 0.15}px)`;
+                    }
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
         // Intersection Observer for scroll animations
         const animateObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -1175,11 +1296,12 @@
         document.querySelectorAll('.animate-on-scroll').forEach(el => animateObserver.observe(el));
 
         // Stagger animations
-        document.querySelectorAll('.problem-card').forEach((el, i) => { el.style.transitionDelay = `${i * 0.12}s`; animateObserver.observe(el); });
-        document.querySelectorAll('.feature-card').forEach((el, i) => { el.style.transitionDelay = `${i * 0.1}s`; animateObserver.observe(el); });
-        document.querySelectorAll('.hiw-card').forEach((el, i) => { el.style.transitionDelay = `${i * 0.15}s`; animateObserver.observe(el); });
-        document.querySelectorAll('.market-stat').forEach((el, i) => { el.style.transitionDelay = `${i * 0.2}s`; animateObserver.observe(el); });
-        document.querySelectorAll('.learning-step').forEach((el, i) => { el.style.transitionDelay = `${i * 0.12}s`; animateObserver.observe(el); });
+        document.querySelectorAll('.problem-card').forEach((el, i) => { el.style.transitionDelay = `${i * 0.1}s`; animateObserver.observe(el); });
+        document.querySelectorAll('.feature-card').forEach((el, i) => { el.style.transitionDelay = `${i * 0.08}s`; animateObserver.observe(el); });
+        document.querySelectorAll('.hiw-card').forEach((el, i) => { el.style.transitionDelay = `${i * 0.12}s`; animateObserver.observe(el); });
+        document.querySelectorAll('.market-stat').forEach((el, i) => { el.style.transitionDelay = `${i * 0.15}s`; animateObserver.observe(el); });
+        document.querySelectorAll('.learning-step').forEach((el, i) => { el.style.transitionDelay = `${i * 0.1}s`; animateObserver.observe(el); });
+        document.querySelectorAll('.hero-stat').forEach((el, i) => { el.style.transitionDelay = `${0.5 + i * 0.1}s`; });
 
         // Animated number counters
         function animateValue(element, start, end, duration, suffix = '') {
@@ -1214,6 +1336,16 @@
 
         const marketStats = document.querySelector('.market-stats');
         if (marketStats) statsObserver.observe(marketStats);
+
+        // Hero stat number animation on load
+        setTimeout(() => {
+            document.querySelectorAll('.hero-stat-number').forEach(num => {
+                const text = num.textContent;
+                if (text.includes('60')) animateValue(num, 0, 60, 1200, '+');
+                else if (text === '5') animateValue(num, 0, 5, 1000, '');
+                else if (text.includes('24')) { num.textContent = '24/7'; }
+            });
+        }, 800);
     </script>
 </body>
 </html>
