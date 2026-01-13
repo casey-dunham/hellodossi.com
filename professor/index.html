@@ -1802,17 +1802,21 @@
 
         /* How It Works Grid */
         .how-it-works-grid {
-            display: flex;
-            align-items: center;
+            display: grid;
+            grid-template-columns: 260px 30px 260px 30px 260px 30px 260px;
+            align-items: stretch;
             gap: 12px;
             margin-top: 1.5em;
-            max-width: 960px;
+            max-width: 1200px;
+            justify-content: center;
         }
 
         .hiw-arrow {
             color: var(--accent);
             font-size: 1.2em;
             flex-shrink: 0;
+            display: flex;
+            align-items: center;
         }
 
         .hiw-card {
@@ -1821,8 +1825,9 @@
             padding: 1.5em 1.1em;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
             position: relative;
-            width: 195px;
-            height: 220px;
+            width: 100%;
+            min-height: 450px;
+            height: auto;
             flex-shrink: 0;
         }
 
@@ -1855,7 +1860,7 @@
             margin: 0;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 4px;
         }
 
         .hiw-list li {
