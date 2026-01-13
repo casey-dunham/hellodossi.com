@@ -245,10 +245,11 @@
         .hero-stat {
             background: white;
             border-radius: 16px;
-            padding: 20px 24px;
+            padding: 24px 28px;
             text-align: center;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-            min-width: 120px;
+            width: 160px;
+            flex-shrink: 0;
         }
 
         .hero-stat-number {
@@ -477,10 +478,10 @@
         }
 
         .hiw-card {
-            background: var(--bg-page);
+            background: white;
             border-radius: 20px;
             padding: 28px 20px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
             width: 200px;
             height: 240px;
             flex-shrink: 0;
@@ -495,7 +496,7 @@
         }
 
         .hiw-card:hover {
-            box-shadow: 0 8px 30px rgba(115, 123, 242, 0.15);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
         }
 
         .hiw-number {
@@ -813,6 +814,50 @@
         .btn-white:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+        }
+
+        /* Closing Section */
+        .closing {
+            padding: 100px 40px;
+            background: white;
+            text-align: center;
+        }
+
+        .closing-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .closing h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75em;
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 16px;
+        }
+
+        .closing h2 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2.2em;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.2;
+            color: var(--gray-900);
+        }
+
+        .closing p {
+            font-size: 1.1em;
+            color: var(--gray-600);
+            line-height: 1.7;
+            margin-bottom: 32px;
+        }
+
+        .closing-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
         }
 
         /* Footer */
@@ -1219,6 +1264,21 @@
                     </div>
                     <p class="market-stat-label">Extra health decisions every single day.</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Closing Section -->
+    <section class="closing">
+        <div class="closing-container animate-on-scroll">
+            <h3>Join the Journey</h3>
+            <h2>Building the future of insulin dosing</h2>
+            <p>Dossi is being developed by a team that lives with T1D every day. We're building the tool we wish we had.</p>
+            <div class="closing-buttons">
+                <a href="mailto:team@hellodossi.com" class="btn-primary">
+                    <i class="ph-bold ph-envelope"></i>
+                    Get In Touch
+                </a>
             </div>
         </div>
     </section>
