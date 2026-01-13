@@ -927,6 +927,28 @@
 
         /* Responsive */
         @media (max-width: 1024px) {
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 40px;
+            }
+
+            .hero-content {
+                text-align: center;
+                align-items: center;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .hero-buttons { justify-content: center; }
+            .hero-stats { justify-content: center; }
+
+            .hero-phone {
+                order: -1;
+                margin-bottom: 30px;
+                align-self: center;
+            }
+
             .how-it-works-grid {
                 flex-wrap: wrap;
                 gap: 20px;
