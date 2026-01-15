@@ -746,21 +746,31 @@
             min-width: 1.5em;
         }
 
-        /* Thank you */
-        .thank-you-text {
+        /* Conclusion */
+        .conclusion-text {
             font-family: 'Plus Jakarta Sans', sans-serif !important;
-            font-size: 6.5em !important;
+            font-size: 5em !important;
             font-weight: 800 !important;
             text-align: center !important;
             width: 100%;
+            line-height: 1.2 !important;
+            margin-bottom: 0.2em !important;
         }
 
-        .thank-you-section {
+        .conclusion-subtitle {
+            font-family: 'Plus Jakarta Sans', sans-serif !important;
+            font-size: 2em !important;
+            font-weight: 500 !important;
+            text-align: center !important;
+            color: var(--text-light) !important;
+        }
+
+        .conclusion-section {
             position: relative;
             overflow: hidden;
         }
 
-        .thank-you-slide {
+        .conclusion-slide {
             position: relative;
             align-items: center !important;
             justify-content: center !important;
@@ -1453,87 +1463,32 @@
                 </div>
             </section>
 
-            <!-- How It Works Overview -->
-            <section>
-                <div class="slide-content" style="max-width: none;">
-                    <h3>Overview</h3>
-                    <h2>How It Works</h2>
-                    <div class="flow-diagram">
-                        <!-- SVG Arrows -->
-                        <svg class="flow-arrows" viewBox="0 0 950 420">
-                            <defs>
-                                <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
-                                    <polygon class="arrowhead" points="0 0, 10 3.5, 0 7" />
-                                </marker>
-                            </defs>
-                            <!-- Top to Right (Patterns) -->
-                            <path d="M 600 120 Q 700 120, 760 165" marker-end="url(#arrowhead)" />
-                            <!-- Right to Bottom (Forecast) -->
-                            <path d="M 760 255 Q 700 300, 600 300" marker-end="url(#arrowhead)" />
-                            <!-- Bottom to Left (Recommend) -->
-                            <path d="M 350 300 Q 250 300, 190 255" marker-end="url(#arrowhead)" />
-                            <!-- Left to Top (Learn) -->
-                            <path d="M 190 165 Q 250 120, 350 120" marker-end="url(#arrowhead)" />
-                        </svg>
-
-                        <!-- Flow Labels -->
-                        <span class="flow-label top-right">Patterns</span>
-                        <span class="flow-label bottom-right">Forecast</span>
-                        <span class="flow-label bottom-left">Recommend</span>
-                        <span class="flow-label top-left">Learn</span>
-
-                        <!-- Nodes -->
-                        <div class="flow-node top">
-                            <h4>Collect Data</h4>
-                            <span>Glucose, insulin,<br>activity, meals</span>
-                        </div>
-                        <div class="flow-node right">
-                            <h4>Detect Patterns</h4>
-                            <span>Sensitivity shifts,<br>meal effects</span>
-                        </div>
-                        <div class="flow-node bottom">
-                            <h4>Predict</h4>
-                            <span>Glucose trajectory,<br>insulin impact</span>
-                        </div>
-                        <div class="flow-node left">
-                            <h4>Act</h4>
-                            <span>Dosing advice,<br>basal adjustments</span>
-                        </div>
+            <!-- How It Works - Learning Loop -->
+            <section class="learning-loop-slide">
+                <img src="loop.png" alt="Learning loop" class="loop-circle">
+                <div class="slide-content">
+                    <h3>How It Works</h3>
+                    <h2>The Learning Loop</h2>
+                    <p>Dossi learns by comparing what it expected to happen with what actually happened.</p>
+                    <div style="margin-top: 0.8em; min-width: 650px; max-width: 650px;">
+                        <div class="step-item"><span class="step-num" style="color: var(--accent); font-weight: 700;">1.</span><div class="step-content"><strong>Predict</strong> <span>— Given this context, glucose should land at X</span></div></div>
+                        <div class="step-item"><span class="step-num" style="color: var(--accent); font-weight: 700;">2.</span><div class="step-content"><strong>Observe</strong> <span>— Identifies delta between predicted vs actual</span></div></div>
+                        <div class="step-item"><span class="step-num" style="color: var(--accent); font-weight: 700;">3.</span><div class="step-content"><strong>Attribute</strong> <span>— What factors were active?</span></div></div>
+                        <div class="step-item"><span class="step-num" style="color: var(--accent); font-weight: 700;">4.</span><div class="step-content"><strong>Update</strong> <span>— Adjust personal sensitivity model for that factor</span></div></div>
                     </div>
                 </div>
             </section>
 
-            <!-- Why This Matters -->
-            <section class="true-center">
-                <div class="slide-content centered">
-                    <h3>The Impact</h3>
-                    <h2>Why This Matters</h2>
-                    <div class="stats-circles">
-                        <div class="stat-circle">
-                            <div class="circle-wrapper">
-                                <div class="circle large">
-                                    <span class="circle-number" data-animate-number="1.7" data-suffix="M">1.7M</span>
-                                </div>
-                            </div>
-                            <span class="circle-label">Americans live with Type 1 diabetes.</span>
-                        </div>
-                        <div class="stat-circle">
-                            <div class="circle-wrapper">
-                                <div class="circle medium">
-                                    <span class="circle-number" data-animate-number="21" data-suffix="%">21%</span>
-                                </div>
-                            </div>
-                            <span class="circle-label">Only 21% of adults with T1D meet glucose targets.</span>
-                        </div>
-                        <div class="stat-circle">
-                            <div class="circle-wrapper">
-                                <div class="circle small">
-                                    <span class="circle-number" data-animate-number="180" data-suffix="+">180+</span>
-                                </div>
-                            </div>
-                            <span class="circle-label">Extra decisions made per day by people with T1D</span>
-                        </div>
-                    </div>
+            <!-- Why Am I the Right Person to Build This? -->
+            <section>
+                <div class="slide-content">
+                    <h3>Motivation</h3>
+                    <h2 style="margin-bottom: 1em;">Why Am I the Right Person to Build This?</h2>
+                    <ul class="gap-list">
+                        <li><i class="ph ph-heart"></i><span><strong>I live this problem</strong> — I know exactly what's missing</span></li>
+                        <li><i class="ph ph-users-three"></i><span><strong>I'd love to build a team</strong> as the business grows</span></li>
+                        <li><i class="ph ph-code"></i><span><strong>I'm technically and artistically proficient</strong></span></li>
+                    </ul>
                 </div>
             </section>
 
@@ -1576,11 +1531,11 @@
                 </div>
             </section>
 
-            <!-- Thank You -->
-            <section class="true-center thank-you-section">
-                <div class="confetti-container"></div>
-                <div class="slide-content centered thank-you-slide">
-                    <h2 class="thank-you-text">Thank you!</h2>
+            <!-- Conclusion -->
+            <section class="true-center conclusion-section">
+                <div class="slide-content centered conclusion-slide">
+                    <h2 class="conclusion-text">Dossi</h2>
+                    <p class="conclusion-subtitle">The future of insulin delivery.</p>
                 </div>
             </section>
 
