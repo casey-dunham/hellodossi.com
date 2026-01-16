@@ -175,34 +175,6 @@
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
         }
 
-        /* About cards for team slide */
-        .about-stack {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-
-        .about-card {
-            background: white;
-            border-radius: 16px;
-            padding: 1.2em 1.6em;
-            display: flex;
-            align-items: center;
-            gap: 1em;
-            font-size: 1.1em;
-            color: var(--text-medium);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-        }
-
-        .about-card i {
-            font-size: 1.5em;
-            color: var(--accent);
-        }
-
-        .about-card strong {
-            color: var(--text-dark);
-        }
-
         /* Title slide */
         .title-slide {
             background: var(--bg-paper) !important;
@@ -267,122 +239,140 @@
             line-height: 1.4;
         }
 
-        /* ===== Problem Slide Two-Column Layout ===== */
-        .problem-columns {
-            display: flex;
-            gap: 40px;
-            margin-top: 1.5em;
+        /* ===== What is Type 1 Diabetes Slide ===== */
+        .t1d-slide {
+            position: relative;
         }
 
-        .problem-column {
-            flex: 1;
-            background: white;
-            border-radius: 20px;
-            padding: 1.8em;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        }
-
-        .problem-column h4 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.1em;
-            font-weight: 700;
+        .t1d-intro {
+            font-size: 1.15em;
             color: var(--text-dark);
-            margin: 0 0 1em 0;
-            text-align: center;
+            max-width: 850px;
+            line-height: 1.7;
+            margin-bottom: 2.5em;
         }
 
-        .factor-count {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 2.5em;
-            font-weight: 700;
-            color: var(--accent);
-            text-align: center;
-            margin-bottom: 0.3em;
-        }
-
-        .factor-label {
-            font-size: 0.95em;
-            color: var(--text-medium);
-            text-align: center;
+        .t1d-challenge-section {
             margin-bottom: 1em;
         }
 
-        .factor-icons {
+        .t1d-challenge-title {
+            font-size: 1.15em;
+            font-weight: 400;
+            color: var(--text-dark);
+            margin-bottom: 1em;
+            margin-top: 5px;
+        }
+
+        /* Factor grid from preliminary */
+        .factor-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 12px;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
             margin-top: 1em;
         }
 
-        .factor-icon-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            padding: 0.8em;
-            background: var(--bg-card);
-            border-radius: 12px;
-        }
-
-        .factor-icon-item i {
-            font-size: 1.6em;
-            color: var(--accent);
-        }
-
-        .factor-icon-item span {
-            font-size: 0.75em;
-            color: var(--text-medium);
-            text-align: center;
-        }
-
-        .pump-image {
-            width: 140px;
-            margin: 0 auto 1em;
-            display: block;
-            border-radius: 12px;
-        }
-
-        .pump-stats {
-            text-align: center;
-            margin-top: 0.5em;
-        }
-
-        .pump-stats .big-number {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 2.5em;
-            font-weight: 700;
-            color: var(--text-dark);
-        }
-
-        .pump-stats .label {
-            font-size: 0.95em;
-            color: var(--text-medium);
-            margin-bottom: 0.8em;
-        }
-
-        .reactive-badge {
-            display: inline-block;
-            background: rgba(239, 68, 68, 0.1);
-            color: var(--red);
-            font-weight: 600;
-            font-size: 0.9em;
-            padding: 0.5em 1em;
+        .factor-item {
+            background: white;
+            padding: 1.1em 1.5em;
             border-radius: 100px;
-            margin-top: 0.5em;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.9em;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
         }
 
-        .problem-banner {
-            background: linear-gradient(135deg, var(--accent) 0%, #5B63D8 100%);
+        .factor-item .factor-icon {
+            font-size: 1em;
             color: white;
-            padding: 1em 1.5em;
+            background: var(--accent);
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(115, 123, 242, 0.4);
+        }
+
+        .factor-item .factor-content strong {
+            color: var(--text-dark);
+            display: block;
+            font-size: 0.95em;
+            font-weight: 600;
+            margin-bottom: 0.2em;
+        }
+
+        .factor-item .factor-content span {
+            color: var(--text-medium);
+            font-size: 0.85em;
+            line-height: 1.4;
+        }
+
+        .t1d-result {
+            font-style: italic;
+            color: var(--text-medium);
+            margin-top: 1.2em;
+            font-size: 1em;
+        }
+
+        /* ===== Problem Slide (from preliminary) ===== */
+        .problem-slide {
+            position: relative;
+            overflow: visible !important;
+        }
+
+        .omnipod-img {
+            position: absolute;
+            top: 130px;
+            right: 100px;
+            width: 180px;
             border-radius: 12px;
-            margin-top: 1.5em;
-            text-align: center;
-            font-size: 1.05em;
         }
 
-        .problem-banner strong {
+        .reveal section.present .omnipod-img {
+            animation: scaleIn 0.5s ease-out 0.3s both;
+        }
+
+        .stat-row {
+            display: flex;
+            gap: 24px;
+            margin: 1.2em 0;
+        }
+
+        .stat-box {
+            background: white;
+            border-radius: 100px;
+            padding: 1.2em 1.6em;
+            flex: 1;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 1em;
+        }
+
+        .stat-box .number {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.3em;
+            font-weight: 700;
             color: white;
+            background: var(--accent);
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(115, 123, 242, 0.4);
+        }
+
+        .stat-box .label {
+            font-size: 1.1em;
+            color: var(--text-dark);
+            font-weight: 500;
         }
 
         /* ===== Solution Slide ===== */
@@ -418,11 +408,11 @@
         }
 
         .reveal section.solution-slide.present .solution-logo {
-            animation: logoZoomIn 1.1s cubic-bezier(0.34, 1.56, 0.64, 1) 0.35s forwards;
+            animation: logoZoomIn 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s forwards;
         }
 
         .reveal section.solution-slide.present .logo-glow {
-            animation: glowFadeIn 0.5s ease-out 1.2s forwards;
+            animation: glowFadeIn 0.4s ease-out 0.7s forwards;
         }
 
         /* Sparks */
@@ -450,79 +440,67 @@
         .spark.circle { border-radius: 50%; }
         .spark.square { border-radius: 2px; }
 
-        /* ===== Learning Before Control Timeline ===== */
-        .timeline-visual {
+        /* ===== Learning Before Control - Consolidated Chart ===== */
+        .learning-slide-intro {
+            font-size: 1.1em;
+            color: var(--text-medium);
+            margin-bottom: 1.2em;
+            max-width: 700px;
+        }
+
+        .chart-container {
             background: white;
             border-radius: 24px;
             padding: 2em;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            margin-top: 1.5em;
-            position: relative;
+            margin-top: 1em;
         }
 
-        .timeline-row {
+        .chart-header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 1.5em;
-            padding: 1em 0;
+            margin-bottom: 1em;
         }
 
-        .timeline-row.actual {
-            border-bottom: 2px dashed rgba(0, 0, 0, 0.1);
-            padding-bottom: 1.5em;
-        }
-
-        .timeline-row.shadow {
-            padding-top: 1.5em;
-        }
-
-        .timeline-label {
-            width: 180px;
-            flex-shrink: 0;
-        }
-
-        .timeline-label .title {
+        .chart-title {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 0.95em;
+            font-size: 1.1em;
             font-weight: 700;
             color: var(--text-dark);
-            margin-bottom: 0.3em;
         }
 
-        .timeline-label .subtitle {
-            font-size: 0.8em !important;
-            color: var(--text-light) !important;
+        .chart-legend {
+            display: flex;
+            gap: 1.5em;
         }
 
-        .timeline-chart {
-            flex: 1;
-            height: 60px;
-            position: relative;
-            overflow: hidden;
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+            font-size: 0.85em;
+            color: var(--text-medium);
         }
 
-        .glucose-line {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
+        .legend-line {
+            width: 24px;
             height: 3px;
-            transform: translateY(-50%);
+            border-radius: 2px;
         }
 
-        .glucose-line.actual {
+        .legend-line.actual {
             background: var(--text-medium);
         }
 
-        .glucose-line.shadow {
+        .legend-line.dossi {
             background: var(--accent);
-            border: none;
+            border-style: dashed;
         }
 
-        /* Animated glucose paths using SVG */
-        .glucose-svg {
+        .glucose-chart {
             width: 100%;
-            height: 100%;
+            height: 140px;
         }
 
         .glucose-path {
@@ -535,44 +513,13 @@
             stroke: var(--text-medium);
         }
 
-        .glucose-path.shadow {
+        .glucose-path.dossi {
             stroke: var(--accent);
             stroke-dasharray: 8, 4;
         }
 
         .delta-fill {
-            fill: rgba(115, 123, 242, 0.15);
-        }
-
-        .context-icons {
-            display: flex;
-            gap: 8px;
-            margin-left: auto;
-        }
-
-        .context-icons .icon {
-            width: 32px;
-            height: 32px;
-            background: var(--bg-card);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .context-icons .icon i {
-            font-size: 1em;
-            color: var(--icon-gray);
-        }
-
-        .dossi-badge {
-            background: var(--accent);
-            color: white;
-            font-size: 0.75em;
-            font-weight: 600;
-            padding: 0.4em 0.8em;
-            border-radius: 6px;
-            margin-left: auto;
+            fill: rgba(115, 123, 242, 0.2);
         }
 
         .key-points {
@@ -605,125 +552,134 @@
             line-height: 1.4;
         }
 
-        /* ===== Market Slide ===== */
-        .market-stats {
+        /* ===== Market Slide - Circles Format ===== */
+        .stats-circles {
             display: flex;
-            gap: 24px;
-            margin: 1.2em 0;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            margin-top: 2em;
         }
 
-        .market-stat {
-            flex: 1;
+        .stat-circle {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.2em;
+        }
+
+        .stat-circle .circle-wrapper {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .stat-circle .circle {
+            border-radius: 50%;
             background: white;
-            border-radius: 16px;
-            padding: 1.2em;
-            text-align: center;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 8px 40px rgba(115, 123, 242, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            aspect-ratio: 1 / 1;
         }
 
-        .market-stat .number {
+        .stat-circle .circle.large {
+            width: 200px;
+            height: 200px;
+        }
+
+        .stat-circle .circle.medium {
+            width: 170px;
+            height: 170px;
+        }
+
+        .stat-circle .circle.small {
+            width: 140px;
+            height: 140px;
+        }
+
+        .stat-circle .circle-number {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 2em;
-            font-weight: 700;
+            font-weight: 600;
             color: var(--accent);
         }
 
-        .market-stat .label {
-            font-size: 0.85em;
-            color: var(--text-medium);
-            margin-top: 0.3em;
+        .stat-circle .circle.large .circle-number {
+            font-size: 3em;
         }
 
-        .acquisitions-table {
-            width: 100%;
-            margin-top: 1.2em;
+        .stat-circle .circle.medium .circle-number {
+            font-size: 2.5em;
         }
 
-        .acquisitions-table table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        .stat-circle .circle.small .circle-number {
+            font-size: 2em;
         }
 
-        .acquisitions-table th {
-            background: var(--accent);
-            color: white;
-            padding: 0.9em 1.2em;
-            font-weight: 600;
-            text-align: left;
-            font-size: 0.85em;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .acquisitions-table td {
-            padding: 0.9em 1.2em;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-            color: var(--text-medium);
-            font-size: 0.95em;
-        }
-
-        .acquisitions-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .acquisitions-table td:first-child {
-            font-weight: 600;
-            color: var(--text-dark);
-        }
-
-        .strategy-tagline {
-            background: linear-gradient(135deg, var(--accent) 0%, #5B63D8 100%);
-            color: white;
-            padding: 1em 1.5em;
-            border-radius: 12px;
-            margin-top: 1.2em;
-            text-align: center;
+        .stat-circle .circle-label {
             font-size: 1em;
+            color: var(--text-medium);
+            text-align: center;
+            max-width: 200px;
+            line-height: 1.4;
+            min-height: 2.8em;
         }
 
-        /* ===== Team Slide ===== */
-        .team-layout {
-            display: flex;
-            gap: 50px;
-            align-items: center;
-            margin-top: 1em;
+        /* ===== Team Slide - Learning Loop Wireframe ===== */
+        .team-slide {
+            position: relative;
         }
 
-        .team-photo {
-            flex-shrink: 0;
+        .team-portrait {
+            position: absolute;
+            top: 140px;
+            right: 100px;
+            width: 200px;
+            height: 200px;
         }
 
-        .team-photo img {
-            width: 240px;
-            height: 240px;
+        .team-portrait img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             border-radius: 50%;
             box-shadow: 0 8px 40px rgba(115, 123, 242, 0.25);
             border: 4px solid white;
         }
 
-        .team-info {
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 1em;
+            padding: 1em 1.5em;
+            margin: 0.8em 0;
+            border-radius: 100px;
+            background: white;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .step-num {
+            font-family: 'Plus Jakarta Sans', Georgia, serif;
+            font-weight: 700;
+            font-size: 1.4em;
+            color: var(--accent);
+            flex-shrink: 0;
+            min-width: 1.2em;
+        }
+
+        .step-content {
             flex: 1;
         }
 
-        .team-info h4 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.8em;
-            font-weight: 700;
+        .step-content strong {
             color: var(--text-dark);
-            margin: 0 0 0.2em 0;
+            font-weight: 600;
         }
 
-        .team-info .role {
-            font-size: 1.1em;
-            color: var(--accent);
-            font-weight: 500;
-            margin-bottom: 1.2em;
+        .step-content span {
+            color: var(--text-medium);
         }
 
         /* ===== Animations ===== */
@@ -779,65 +735,70 @@
             }
         }
 
-        @keyframes drawPath {
-            from { stroke-dashoffset: 1000; }
-            to { stroke-dashoffset: 0; }
-        }
-
         /* Slide animations */
         .reveal section.present h2 { animation: fadeInUp 0.6s ease-out forwards; }
         .reveal section.present h3 { animation: fadeIn 0.4s ease-out forwards; }
         .reveal section.present p { animation: fadeInUp 0.6s ease-out 0.1s both; }
 
-        .reveal section.present .problem-column { animation: scaleIn 0.5s ease-out both; }
-        .reveal section.present .problem-columns .problem-column:nth-child(1) { animation-delay: 0.15s; }
-        .reveal section.present .problem-columns .problem-column:nth-child(2) { animation-delay: 0.3s; }
+        /* T1D slide animations */
+        .reveal section.present .factor-item { animation: scaleIn 0.4s ease-out both; }
+        .reveal section.present .factor-grid .factor-item:nth-child(1) { animation-delay: 0.1s; }
+        .reveal section.present .factor-grid .factor-item:nth-child(2) { animation-delay: 0.15s; }
+        .reveal section.present .factor-grid .factor-item:nth-child(3) { animation-delay: 0.2s; }
+        .reveal section.present .factor-grid .factor-item:nth-child(4) { animation-delay: 0.25s; }
+        .reveal section.present .factor-grid .factor-item:nth-child(5) { animation-delay: 0.3s; }
+        .reveal section.present .factor-grid .factor-item:nth-child(6) { animation-delay: 0.35s; }
 
-        .reveal section.present .factor-icon-item { animation: scaleIn 0.4s ease-out both; }
-        .reveal section.present .factor-icons .factor-icon-item:nth-child(1) { animation-delay: 0.25s; }
-        .reveal section.present .factor-icons .factor-icon-item:nth-child(2) { animation-delay: 0.3s; }
-        .reveal section.present .factor-icons .factor-icon-item:nth-child(3) { animation-delay: 0.35s; }
-        .reveal section.present .factor-icons .factor-icon-item:nth-child(4) { animation-delay: 0.4s; }
-        .reveal section.present .factor-icons .factor-icon-item:nth-child(5) { animation-delay: 0.45s; }
-        .reveal section.present .factor-icons .factor-icon-item:nth-child(6) { animation-delay: 0.5s; }
+        .reveal section.present .t1d-result { animation: fadeInUp 0.5s ease-out 0.45s both; }
 
-        .reveal section.present .problem-banner { animation: fadeInUp 0.5s ease-out 0.55s both; }
+        /* Problem slide animations */
+        .reveal section.present .stat-box { animation: scaleIn 0.5s ease-out both; }
+        .reveal section.present .stat-row .stat-box:nth-child(1) { animation-delay: 0.2s; }
+        .reveal section.present .stat-row .stat-box:nth-child(2) { animation-delay: 0.35s; }
 
+        /* Solution slide - faster animations */
         .reveal section.present .solution-feature { animation: scaleIn 0.4s ease-out both; }
-        .reveal section.present .solution-features .solution-feature:nth-child(1) { animation-delay: 1.5s; }
-        .reveal section.present .solution-features .solution-feature:nth-child(2) { animation-delay: 1.6s; }
-        .reveal section.present .solution-features .solution-feature:nth-child(3) { animation-delay: 1.7s; }
-        .reveal section.present .solution-features .solution-feature:nth-child(4) { animation-delay: 1.8s; }
+        .reveal section.present .solution-features .solution-feature:nth-child(1) { animation-delay: 0.3s; }
+        .reveal section.present .solution-features .solution-feature:nth-child(2) { animation-delay: 0.4s; }
+        .reveal section.present .solution-features .solution-feature:nth-child(3) { animation-delay: 0.5s; }
 
-        .reveal section.present .timeline-visual { animation: fadeInUp 0.6s ease-out 0.2s both; }
-
+        /* Learning slide animations */
+        .reveal section.present .chart-container { animation: fadeInUp 0.6s ease-out 0.2s both; }
         .reveal section.present .key-point { animation: slideInLeft 0.5s ease-out both; }
         .reveal section.present .key-points .key-point:nth-child(1) { animation-delay: 0.4s; }
         .reveal section.present .key-points .key-point:nth-child(2) { animation-delay: 0.5s; }
         .reveal section.present .key-points .key-point:nth-child(3) { animation-delay: 0.6s; }
 
-        .reveal section.present .market-stat { animation: scaleIn 0.5s ease-out both; }
-        .reveal section.present .market-stats .market-stat:nth-child(1) { animation-delay: 0.15s; }
-        .reveal section.present .market-stats .market-stat:nth-child(2) { animation-delay: 0.25s; }
-        .reveal section.present .market-stats .market-stat:nth-child(3) { animation-delay: 0.35s; }
+        /* Market slide animations */
+        .reveal section.present .stat-circle { animation: scaleIn 0.5s ease-out both; }
+        .reveal section.present .stats-circles .stat-circle:nth-child(1) { animation-delay: 0.2s; }
+        .reveal section.present .stats-circles .stat-circle:nth-child(2) { animation-delay: 0.35s; }
+        .reveal section.present .stats-circles .stat-circle:nth-child(3) { animation-delay: 0.5s; }
 
-        .reveal section.present .acquisitions-table { animation: fadeInUp 0.6s ease-out 0.4s both; }
-        .reveal section.present .strategy-tagline { animation: fadeInUp 0.5s ease-out 0.6s both; }
-
-        .reveal section.present .team-photo { animation: scaleIn 0.6s ease-out 0.2s both; }
-        .reveal section.present .about-card { animation: slideInLeft 0.5s ease-out both; }
-        .reveal section.present .about-stack .about-card:nth-child(1) { animation-delay: 0.3s; }
-        .reveal section.present .about-stack .about-card:nth-child(2) { animation-delay: 0.4s; }
-        .reveal section.present .about-stack .about-card:nth-child(3) { animation-delay: 0.5s; }
+        /* Team slide animations */
+        .reveal section.present .team-portrait { animation: scaleIn 0.5s ease-out 0.3s both; }
+        .reveal section.present .step-item { animation: slideInLeft 0.5s ease-out both; }
+        .reveal section.present .step-item:nth-child(1) { animation-delay: 0.15s; }
+        .reveal section.present .step-item:nth-child(2) { animation-delay: 0.25s; }
+        .reveal section.present .step-item:nth-child(3) { animation-delay: 0.35s; }
 
         /* Hover effects */
-        .problem-column {
+        .stat-box {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .problem-column:hover {
+        .stat-box:hover {
             transform: translateY(-4px);
             box-shadow: 0 12px 40px rgba(99, 102, 241, 0.15);
+        }
+
+        .factor-item {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .factor-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.12);
         }
 
         .solution-feature {
@@ -858,13 +819,13 @@
             box-shadow: 0 8px 30px rgba(99, 102, 241, 0.1);
         }
 
-        .about-card {
+        .step-item {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .about-card:hover {
+        .step-item:hover {
             transform: translateX(4px);
-            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.12);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.1);
         }
 
         /* Progress bar */
@@ -933,7 +894,7 @@
                             <i class="ph-bold ph-arrow-right" style="color: white; font-size: 1.6em;"></i>
                         </div>
                     </div>
-                    <p class="title-subtitle" style="margin-top: 1.5em;">The future of insulin delivery</p>
+                    <p class="title-subtitle" style="margin-top: 1.5em;">Where insulin dosing meets predictive intelligence.</p>
                 </div>
                 <div class="title-phone">
                     <div class="title-phone-glow"></div>
@@ -941,60 +902,50 @@
                 </div>
             </section>
 
-            <!-- 2. The Problem (Consolidated) -->
-            <section>
-                <div class="slide-content" style="max-width: none;">
-                    <h3>The Problem</h3>
-                    <h2>Insulin pumps are reactive, not predictive</h2>
-                    <div class="problem-columns">
-                        <div class="problem-column">
-                            <h4>The Biological Reality</h4>
-                            <div class="factor-count">60+</div>
-                            <div class="factor-label">Variables affect blood glucose</div>
-                            <div class="factor-icons">
-                                <div class="factor-icon-item">
-                                    <i class="ph ph-moon"></i>
-                                    <span>Sleep</span>
-                                </div>
-                                <div class="factor-icon-item">
-                                    <i class="ph ph-brain"></i>
-                                    <span>Stress</span>
-                                </div>
-                                <div class="factor-icon-item">
-                                    <i class="ph ph-person-simple-run"></i>
-                                    <span>Exercise</span>
-                                </div>
-                                <div class="factor-icon-item">
-                                    <i class="ph ph-gender-female"></i>
-                                    <span>Hormones</span>
-                                </div>
-                                <div class="factor-icon-item">
-                                    <i class="ph ph-fork-knife"></i>
-                                    <span>Meals</span>
-                                </div>
-                                <div class="factor-icon-item">
-                                    <i class="ph ph-clock"></i>
-                                    <span>Time of Day</span>
-                                </div>
-                            </div>
+            <!-- 2. What is Type 1 Diabetes -->
+            <section class="t1d-slide">
+                <div class="slide-content">
+                    <h3>Introduction</h3>
+                    <h2>What Is Type 1 Diabetes?</h2>
+                    <p class="t1d-intro">Type 1 diabetes is a condition where the body does not produce insulin. People with T1D must deliver insulin themselves through insulin pumps to control the levels of sugar in their blood.</p>
+
+                    <div class="t1d-challenge-section">
+                        <h4 class="t1d-challenge-title">Many factors affect blood sugar and insulin needs</h4>
+                        <div class="factor-grid">
+                            <div class="factor-item"><div class="factor-icon"><i class="ph ph-chart-line-up"></i></div><div class="factor-content"><strong>Glucose</strong><span>Value, trend, velocity, momentum</span></div></div>
+                            <div class="factor-item"><div class="factor-icon"><i class="ph ph-drop"></i></div><div class="factor-content"><strong>Insulin</strong><span>IOB, decay curve, recent boluses</span></div></div>
+                            <div class="factor-item"><div class="factor-icon"><i class="ph ph-fork-knife"></i></div><div class="factor-content"><strong>Nutrition</strong><span>Carbs, protein, fat, fiber</span></div></div>
+                            <div class="factor-item"><div class="factor-icon"><i class="ph ph-person-simple-run"></i></div><div class="factor-content"><strong>Activity</strong><span>Workouts, intensity, steps</span></div></div>
+                            <div class="factor-item"><div class="factor-icon"><i class="ph ph-moon-stars"></i></div><div class="factor-content"><strong>Sleep & Body</strong><span>Hours, quality, illness, stress</span></div></div>
+                            <div class="factor-item"><div class="factor-icon"><i class="ph ph-clock"></i></div><div class="factor-content"><strong>Environment</strong><span>Time, day, temperature, site age</span></div></div>
                         </div>
-                        <div class="problem-column">
-                            <h4>The Current Tech</h4>
-                            <img src="omnipod-photo.png" alt="Omnipod" class="pump-image">
-                            <div class="pump-stats">
-                                <div class="big-number">2</div>
-                                <div class="label">Variables (Carbs + Glucose)</div>
-                                <div class="reactive-badge">Reactive, NOT Predictive</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="problem-banner">
-                        <strong>Result:</strong> Patients spend only 30-40% of time in range
+                        <p class="t1d-result">Result: 60-70% time-out-of-range</p>
                     </div>
                 </div>
             </section>
 
-            <!-- 3. The Solution -->
+            <!-- 3. The Problem -->
+            <section class="problem-slide">
+                <img src="omnipod-photo.png" alt="Omnipod insulin pump" class="omnipod-img">
+                <div class="slide-content">
+                    <h3>The Problem</h3>
+                    <h2>My "Smart" Pump Isn't Very Smart</h2>
+                    <p>Insulin pumps are reactive, not predictive.</p>
+                    <p style="margin-top: 0.8em;">They really only know two things:</p>
+                    <div class="stat-row">
+                        <div class="stat-box">
+                            <div class="number">1</div>
+                            <div class="label">My current glucose</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="number">2</div>
+                            <div class="label">Carbs I'm about to eat</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. The Solution -->
             <section class="true-center solution-slide">
                 <div class="slide-content centered">
                     <h3>The Solution</h3>
@@ -1003,162 +954,118 @@
                         <img src="dossi-wordmark.png" alt="Dossi" class="logo-hero solution-logo" style="position: relative; z-index: 1;">
                         <div class="sparks-container"></div>
                     </div>
-                    <p class="big-statement">The missing <span class="gradient-text">intelligence layer</span></p>
+                    <p class="big-statement">Insulin delivery that sees the <span class="gradient-text">full picture</span></p>
+                    <p style="margin-top: 1em;">Dossi considers <strong>60+ factors</strong> and <strong>learns your patterns</strong> over time.</p>
                     <div class="solution-features">
                         <div class="solution-feature">
-                            <i class="ph ph-code"></i>
-                            <span>Software, not hardware</span>
+                            <i class="ph ph-brain"></i>
+                            <span>Learns your unique responses</span>
+                        </div>
+                        <div class="solution-feature">
+                            <i class="ph ph-arrows-clockwise"></i>
+                            <span>Adapts over time</span>
                         </div>
                         <div class="solution-feature">
                             <i class="ph ph-plugs-connected"></i>
-                            <span>Runs alongside existing pumps</span>
-                        </div>
-                        <div class="solution-feature">
-                            <i class="ph ph-user-circle"></i>
-                            <span>Builds a personalized digital twin</span>
+                            <span>No hardware replacement</span>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- 4. Learning Before Control -->
+            <!-- 5. Learning Before Control -->
             <section>
                 <div class="slide-content" style="max-width: none;">
                     <h3>How It Works</h3>
-                    <h2>Learning Before Control</h2>
-                    <div class="timeline-visual">
-                        <div class="timeline-row actual">
-                            <div class="timeline-label">
-                                <div class="title">What Actually Happened</div>
-                                <div class="subtitle">CGM glucose data</div>
-                            </div>
-                            <div class="timeline-chart">
-                                <svg class="glucose-svg" viewBox="0 0 500 60" preserveAspectRatio="none">
-                                    <path class="glucose-path actual" d="M0,40 C50,35 80,45 120,50 C160,55 200,30 250,25 C300,20 350,40 400,45 C450,50 480,35 500,30" />
-                                </svg>
-                            </div>
-                            <div class="context-icons">
-                                <div class="icon"><i class="ph ph-moon"></i></div>
-                                <div class="icon"><i class="ph ph-person-simple-run"></i></div>
-                                <div class="icon"><i class="ph ph-pizza"></i></div>
+                    <h2>What Happened vs What Dossi Would Have Done</h2>
+                    <p class="learning-slide-intro">A learning phase that builds an understanding of your glucose behavior.</p>
+                    <div class="chart-container">
+                        <div class="chart-header">
+                            <div class="chart-title">24-Hour Glucose Comparison</div>
+                            <div class="chart-legend">
+                                <div class="legend-item">
+                                    <div class="legend-line actual"></div>
+                                    <span>Actual</span>
+                                </div>
+                                <div class="legend-item">
+                                    <div class="legend-line dossi"></div>
+                                    <span>Dossi</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="timeline-row shadow">
-                            <div class="timeline-label">
-                                <div class="title">What Dossi Would Have Done</div>
-                                <div class="subtitle">Projected outcome</div>
-                            </div>
-                            <div class="timeline-chart">
-                                <svg class="glucose-svg" viewBox="0 0 500 60" preserveAspectRatio="none">
-                                    <path class="delta-fill" d="M0,40 C50,35 80,45 120,50 C160,55 200,30 250,25 C300,20 350,40 400,45 C450,50 480,35 500,30 L500,35 C480,32 450,38 400,35 C350,32 300,28 250,30 C200,32 160,38 120,38 C80,38 50,35 0,38 Z" />
-                                    <path class="glucose-path shadow" d="M0,38 C50,35 80,38 120,38 C160,38 200,32 250,30 C300,28 350,32 400,35 C450,38 480,32 500,35" />
-                                </svg>
-                            </div>
-                            <div class="dossi-badge">Dossi</div>
-                        </div>
+                        <svg class="glucose-chart" viewBox="0 0 800 140" preserveAspectRatio="none">
+                            <!-- Delta fill between the two lines -->
+                            <path class="delta-fill" d="M0,70 C40,85 60,50 100,95 C140,130 180,40 220,25 C260,10 300,60 340,90 C380,120 420,30 460,20 C500,10 540,70 580,100 C620,125 660,45 700,35 C740,25 780,55 800,65 L800,70 C780,60 740,45 700,50 C660,55 620,65 580,60 C540,55 500,50 460,55 C420,60 380,55 340,60 C300,65 260,55 220,55 C180,55 140,65 100,60 C60,55 40,65 0,65 Z" />
+                            <!-- Actual glucose - more volatile with higher peaks and drops -->
+                            <path class="glucose-path actual" d="M0,70 C40,85 60,50 100,95 C140,130 180,40 220,25 C260,10 300,60 340,90 C380,120 420,30 460,20 C500,10 540,70 580,100 C620,125 660,45 700,35 C740,25 780,55 800,65" />
+                            <!-- Dossi projection - smoother, more stable -->
+                            <path class="glucose-path dossi" d="M0,65 C40,65 60,55 100,60 C140,65 180,55 220,55 C260,55 300,65 340,60 C380,55 420,60 460,55 C500,50 540,55 580,60 C620,65 660,55 700,50 C740,45 780,60 800,70" />
+                        </svg>
                     </div>
                     <div class="key-points">
                         <div class="key-point">
                             <i class="ph ph-eye"></i>
-                            <span>Reveals invisible patterns (sleep, time-of-day sensitivity)</span>
+                            <span>Reveals hidden response patterns (e.g. sleep, timing sensitivity)</span>
                         </div>
                         <div class="key-point">
-                            <i class="ph ph-check-circle"></i>
-                            <span>Validates algorithms without active dosing</span>
+                            <i class="ph ph-shield-check"></i>
+                            <span>Validates algorithms without dosing risk</span>
                         </div>
                         <div class="key-point">
-                            <i class="ph ph-certificate"></i>
-                            <span>Generates real-world evidence for FDA clearance</span>
+                            <i class="ph ph-chart-line-up"></i>
+                            <span>Generates real-world evidence</span>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- 5. Market + Exit Path -->
-            <section>
-                <div class="slide-content" style="max-width: none;">
+            <!-- 6. Market & Exit Strategy -->
+            <section class="true-center">
+                <div class="slide-content centered">
                     <h3>Business</h3>
                     <h2>Market & Exit Strategy</h2>
-                    <div class="market-stats">
-                        <div class="market-stat">
-                            <div class="number">1.7M</div>
-                            <div class="label">Americans with T1D</div>
+                    <div class="stats-circles">
+                        <div class="stat-circle">
+                            <div class="circle-wrapper">
+                                <div class="circle large">
+                                    <span class="circle-number">1.7M</span>
+                                </div>
+                            </div>
+                            <span class="circle-label">Americans with Type 1 Diabetes</span>
                         </div>
-                        <div class="market-stat">
-                            <div class="number">1.2M</div>
-                            <div class="label">Pump users</div>
+                        <div class="stat-circle">
+                            <div class="circle-wrapper">
+                                <div class="circle medium">
+                                    <span class="circle-number">$1B+</span>
+                                </div>
+                            </div>
+                            <span class="circle-label">Diabetes software market</span>
                         </div>
-                        <div class="market-stat">
-                            <div class="number">$1B+</div>
-                            <div class="label">Diabetes software market</div>
+                        <div class="stat-circle">
+                            <div class="circle-wrapper">
+                                <div class="circle small">
+                                    <span class="circle-number">4</span>
+                                </div>
+                            </div>
+                            <span class="circle-label">Major pump manufacturers seeking AI</span>
                         </div>
-                    </div>
-                    <div class="acquisitions-table">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Company</th>
-                                    <th>Acquirer</th>
-                                    <th>Value</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>mySugr</td>
-                                    <td>Roche</td>
-                                    <td>~$100M</td>
-                                </tr>
-                                <tr>
-                                    <td>Nutrino</td>
-                                    <td>Medtronic</td>
-                                    <td>~$100M</td>
-                                </tr>
-                                <tr>
-                                    <td>Sugarmate</td>
-                                    <td>Tandem</td>
-                                    <td>Undisclosed</td>
-                                </tr>
-                                <tr>
-                                    <td>TypeZero</td>
-                                    <td>Dexcom</td>
-                                    <td>Undisclosed</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="strategy-tagline">
-                        Build the predictive engine, then license or exit to pump manufacturers
                     </div>
                 </div>
             </section>
 
-            <!-- 6. Team Slide -->
-            <section>
-                <div class="slide-content" style="max-width: none;">
+            <!-- 7. Team Slide -->
+            <section class="team-slide">
+                <div class="team-portrait">
+                    <img src="myportrait.jpeg" alt="Casey">
+                </div>
+                <div class="slide-content">
                     <h3>Team</h3>
-                    <h2>The Team</h2>
-                    <div class="team-layout">
-                        <div class="team-photo">
-                            <img src="myportrait.jpeg" alt="Casey">
-                        </div>
-                        <div class="team-info">
-                            <h4>Casey</h4>
-                            <div class="role">Founder</div>
-                            <div class="about-stack">
-                                <div class="about-card">
-                                    <i class="ph ph-heart"></i>
-                                    <span>I have <strong>Type 1 Diabetes</strong> — I live this problem daily</span>
-                                </div>
-                                <div class="about-card">
-                                    <i class="ph ph-device-mobile"></i>
-                                    <span>Mobile app <strong>development background</strong></span>
-                                </div>
-                                <div class="about-card">
-                                    <i class="ph ph-users"></i>
-                                    <span>Looking to <strong>hire engineers</strong> as the business grows</span>
-                                </div>
-                            </div>
-                        </div>
+                    <h2>Why Me</h2>
+                    <p>Building from lived experience and technical expertise.</p>
+                    <div style="margin-top: 0.8em; min-width: 650px; max-width: 650px;">
+                        <div class="step-item"><span class="step-num">1.</span><div class="step-content"><strong>I have Type 1 Diabetes</strong> <span>— I live this problem every single day</span></div></div>
+                        <div class="step-item"><span class="step-num">2.</span><div class="step-content"><strong>Mobile development background</strong> <span>— Built and shipped iOS apps</span></div></div>
+                        <div class="step-item"><span class="step-num">3.</span><div class="step-content"><strong>Growing the team</strong> <span>— Looking to hire engineers as the business scales</span></div></div>
                     </div>
                 </div>
             </section>
@@ -1204,79 +1111,7 @@
         scaleBinder();
         window.addEventListener('resize', scaleBinder);
 
-        // Format number with commas
-        function formatNumber(num) {
-            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        }
-
-        // Animated number counter
-        function animateNumber(element, start, end, duration, suffix = '', prefix = '', onComplete = null) {
-            const startTime = performance.now();
-            const isDecimal = String(end).includes('.');
-            const needsCommas = end >= 1000;
-
-            element.classList.add('counting');
-
-            function update(currentTime) {
-                const elapsed = currentTime - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-
-                // Easing function (ease-out cubic)
-                const easeOut = 1 - Math.pow(1 - progress, 3);
-
-                const current = start + (end - start) * easeOut;
-
-                let displayValue;
-                if (isDecimal) {
-                    displayValue = current.toFixed(1);
-                } else {
-                    displayValue = Math.round(current);
-                    if (needsCommas) {
-                        displayValue = formatNumber(displayValue);
-                    }
-                }
-
-                element.textContent = prefix + displayValue + suffix;
-
-                if (progress < 1) {
-                    requestAnimationFrame(update);
-                } else {
-                    element.classList.remove('counting');
-                    if (onComplete) onComplete();
-                }
-            }
-
-            requestAnimationFrame(update);
-        }
-
-        // Find all animated numbers and trigger them on slide change
-        function triggerNumberAnimations() {
-            const currentSlide = Reveal.getCurrentSlide();
-            const animatedNumbers = currentSlide.querySelectorAll('[data-animate-number]');
-
-            animatedNumbers.forEach((el, index) => {
-                const value = el.getAttribute('data-animate-number');
-                const suffix = el.getAttribute('data-suffix') || '';
-                const prefix = el.getAttribute('data-prefix') || '';
-                const duration = parseInt(el.getAttribute('data-duration')) || 1200;
-                const delay = index * 150;
-
-                el.textContent = prefix + '0' + suffix;
-
-                setTimeout(() => {
-                    if (value.includes('.')) {
-                        animateNumber(el, 0, parseFloat(value), duration, suffix, prefix);
-                    } else {
-                        animateNumber(el, 0, parseInt(value), duration, suffix, prefix);
-                    }
-                }, delay + 300);
-            });
-        }
-
-        Reveal.on('slidechanged', triggerNumberAnimations);
-        setTimeout(triggerNumberAnimations, 500);
-
-        // Sparks animation for solution slide
+        // Sparks animation for solution slide - fires faster now
         function createSparks() {
             const container = document.querySelector('.solution-slide.present .sparks-container');
             if (!container) return;
@@ -1310,12 +1145,12 @@
             }
         }
 
-        // Trigger sparks when solution slide animation completes
+        // Trigger sparks faster - after logo animation (0.2s delay + 0.7s animation = 0.9s)
         let sparksFired = false;
         Reveal.on('slidechanged', (event) => {
             if (event.currentSlide.classList.contains('solution-slide') && !sparksFired) {
                 sparksFired = true;
-                setTimeout(createSparks, 1450);
+                setTimeout(createSparks, 900);
             } else if (!event.currentSlide.classList.contains('solution-slide')) {
                 sparksFired = false;
             }
