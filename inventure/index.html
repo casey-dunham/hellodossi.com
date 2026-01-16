@@ -522,8 +522,7 @@
 
         .glucose-path.dossi {
             stroke: var(--accent);
-            stroke-dasharray: 1200;
-            stroke-dashoffset: 1200;
+            stroke-dasharray: 8, 4;
         }
 
         @keyframes drawLine {
@@ -532,19 +531,8 @@
             }
         }
 
-        @keyframes drawDashedLine {
-            to {
-                stroke-dashoffset: 0;
-            }
-        }
-
         .reveal section.present .glucose-path.actual {
             animation: drawLine 1.2s ease-out 0.3s forwards;
-        }
-
-        .reveal section.present .glucose-path.dossi {
-            animation: drawLine 1.2s ease-out 0.6s forwards;
-            stroke-dasharray: 8, 4;
         }
 
         .delta-fill {
@@ -606,59 +594,58 @@
         }
 
         /* ===== Why This Matters Slide ===== */
-        .value-cards-row {
+        .value-cards-col {
             display: flex;
-            gap: 30px;
-            margin-top: 2em;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 1.5em;
+            max-width: 800px;
         }
 
         .value-card-v2 {
-            flex: 1;
             background: white;
-            border-radius: 24px;
-            padding: 2em;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border-radius: 100px;
+            padding: 1.2em 2em;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             align-items: center;
-            text-align: center;
-            min-height: 280px;
+            gap: 1.2em;
         }
 
         .value-circle {
-            width: 50px;
-            height: 50px;
+            width: 44px;
+            height: 44px;
             background: var(--accent);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.4em;
+            font-size: 1.3em;
             font-weight: 700;
             color: white;
-            margin-bottom: 1em;
+            flex-shrink: 0;
             box-shadow: 0 4px 12px rgba(115, 123, 242, 0.4);
         }
 
         .value-icon {
-            font-size: 2.5em;
+            font-size: 1.8em;
             color: var(--accent);
-            margin-bottom: 0.8em;
-            opacity: 0.9;
+            flex-shrink: 0;
         }
 
         .value-card-v2 strong {
-            font-size: 1.2em;
+            font-size: 1.05em;
             color: var(--text-dark);
             font-weight: 600;
-            margin-bottom: 0.5em;
+            white-space: nowrap;
         }
 
         .value-card-v2 span {
-            font-size: 1em;
+            font-size: 0.95em;
             color: var(--text-medium);
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         .value-card-v2 em {
@@ -667,9 +654,9 @@
         }
 
         /* Why This Matters animations */
-        .reveal section.present .value-card-v2 { animation: scaleIn 0.5s ease-out both; }
-        .reveal section.present .value-cards-row .value-card-v2:nth-child(1) { animation-delay: 0.15s; }
-        .reveal section.present .value-cards-row .value-card-v2:nth-child(2) { animation-delay: 0.3s; }
+        .reveal section.present .value-card-v2 { animation: slideInLeft 0.5s ease-out both; }
+        .reveal section.present .value-cards-col .value-card-v2:nth-child(1) { animation-delay: 0.15s; }
+        .reveal section.present .value-cards-col .value-card-v2:nth-child(2) { animation-delay: 0.3s; }
 
         /* ===== Market Slide - Circles Format ===== */
         .stats-circles {
@@ -1153,17 +1140,17 @@
                 <div class="slide-content">
                     <h3>The Value</h3>
                     <h2>Why This Matters</h2>
-                    <div class="value-cards-row">
+                    <div class="value-cards-col">
                         <div class="value-card-v2">
                             <div class="value-circle">1</div>
-                            <div class="value-icon"><i class="ph ph-magnifying-glass"></i></div>
                             <strong>Discover Hidden Patterns</strong>
+                            <div class="value-icon"><i class="ph ph-magnifying-glass"></i></div>
                             <span>See how sleep, stress, and timing affect <em>your</em> insulin sensitivity</span>
                         </div>
                         <div class="value-card-v2">
                             <div class="value-circle">2</div>
-                            <div class="value-icon"><i class="ph ph-shield-check"></i></div>
                             <strong>Prove It Works, Safely</strong>
+                            <div class="value-icon"><i class="ph ph-shield-check"></i></div>
                             <span>Generate FDA-ready evidence without ever touching insulin delivery</span>
                         </div>
                     </div>
