@@ -551,10 +551,28 @@
             margin-top: 0.1em;
         }
 
-        .key-point span {
-            font-size: 0.95em;
+        .key-point-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2em;
+        }
+
+        .key-point-content strong {
+            font-size: 0.9em;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .key-point-content span {
+            font-size: 0.85em;
             color: var(--text-medium);
             line-height: 1.4;
+        }
+
+        .key-point-content small {
+            font-size: 0.75em;
+            color: var(--text-light);
+            font-style: italic;
         }
 
         /* ===== Market Slide - Circles Format ===== */
@@ -1010,15 +1028,25 @@
                     <div class="key-points">
                         <div class="key-point">
                             <i class="ph ph-eye"></i>
-                            <span>Reveals hidden response patterns (e.g. sleep, timing sensitivity)</span>
+                            <div class="key-point-content">
+                                <strong>Reveals hidden response patterns</strong>
+                                <span>Surfaces personal glucose sensitivities</span>
+                                <small>sleep, timing, stress, activity</small>
+                            </div>
                         </div>
                         <div class="key-point">
                             <i class="ph ph-shield-check"></i>
-                            <span>Validates algorithms without dosing risk</span>
+                            <div class="key-point-content">
+                                <strong>Validates algorithms without dosing risk</strong>
+                                <span>Proves safety before any insulin control</span>
+                            </div>
                         </div>
                         <div class="key-point">
                             <i class="ph ph-chart-line-up"></i>
-                            <span>Generates real-world evidence</span>
+                            <div class="key-point-content">
+                                <strong>Generates real-world evidence</strong>
+                                <span>Creates regulatory-grade performance data</span>
+                            </div>
                         </div>
                     </div>
                 </div>
