@@ -597,19 +597,19 @@
         .value-cards-col {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 16px;
             margin-top: 1.5em;
-            max-width: 800px;
+            max-width: 750px;
         }
 
         .value-card-v2 {
             background: white;
-            border-radius: 100px;
-            padding: 1.2em 2em;
+            border-radius: 20px;
+            padding: 1.3em 1.8em;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
             display: flex;
             flex-direction: row;
-            align-items: center;
+            align-items: flex-start;
             gap: 1.2em;
         }
 
@@ -629,28 +629,22 @@
             box-shadow: 0 4px 12px rgba(115, 123, 242, 0.4);
         }
 
-        .value-icon {
-            font-size: 1.8em;
-            color: var(--accent);
-            flex-shrink: 0;
+        .value-text {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3em;
         }
 
-        .value-card-v2 strong {
-            font-size: 1.05em;
+        .value-text strong {
+            font-size: 1.1em;
             color: var(--text-dark);
             font-weight: 600;
-            white-space: nowrap;
         }
 
-        .value-card-v2 span {
+        .value-text span {
             font-size: 0.95em;
             color: var(--text-medium);
             line-height: 1.5;
-        }
-
-        .value-card-v2 em {
-            font-style: italic;
-            color: var(--accent);
         }
 
         /* Why This Matters animations */
@@ -1143,15 +1137,17 @@
                     <div class="value-cards-col">
                         <div class="value-card-v2">
                             <div class="value-circle">1</div>
-                            <strong>Discover Hidden Patterns</strong>
-                            <div class="value-icon"><i class="ph ph-magnifying-glass"></i></div>
-                            <span>See how sleep, stress, and timing affect <em>your</em> insulin sensitivity</span>
+                            <div class="value-text">
+                                <strong>Discover Hidden Patterns</strong>
+                                <span>See how sleep, stress, and timing affect your insulin sensitivity</span>
+                            </div>
                         </div>
                         <div class="value-card-v2">
                             <div class="value-circle">2</div>
-                            <strong>Prove It Works, Safely</strong>
-                            <div class="value-icon"><i class="ph ph-shield-check"></i></div>
-                            <span>Generate FDA-ready evidence without ever touching insulin delivery</span>
+                            <div class="value-text">
+                                <strong>Prove It Works, Safely</strong>
+                                <span>Generate FDA-ready evidence without ever touching insulin delivery</span>
+                            </div>
                         </div>
                     </div>
                 </div>
