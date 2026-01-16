@@ -576,6 +576,48 @@
             font-style: italic;
         }
 
+        /* ===== Why This Matters Slide ===== */
+        .value-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.2em;
+            background: white;
+            padding: 1.4em 1.8em;
+            border-radius: 20px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .value-num {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .value-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3em;
+        }
+
+        .value-content strong {
+            font-size: 1.1em;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .value-content span {
+            font-size: 1em;
+            color: var(--text-medium);
+            line-height: 1.5;
+        }
+
+        /* Why This Matters animations */
+        .reveal section.present .value-card { animation: slideInLeft 0.5s ease-out both; }
+        .reveal section.present .value-card:nth-child(1) { animation-delay: 0.15s; }
+        .reveal section.present .value-card:nth-child(2) { animation-delay: 0.3s; }
+
         /* ===== Market Slide - Circles Format ===== */
         .stats-circles {
             display: flex;
@@ -1053,7 +1095,32 @@
                 </div>
             </section>
 
-            <!-- 6. Market & Exit Strategy -->
+            <!-- 6. Why This Matters -->
+            <section class="why-matters-slide">
+                <div class="slide-content">
+                    <h3>The Value</h3>
+                    <h2>Why This Matters</h2>
+                    <p style="max-width: 700px; margin-bottom: 1.5em;">This approach delivers two critical advantages.</p>
+                    <div style="display: flex; flex-direction: column; gap: 1.2em; max-width: 800px;">
+                        <div class="value-card">
+                            <div class="value-num">1</div>
+                            <div class="value-content">
+                                <strong>Uncovers hidden patterns</strong>
+                                <span>Surfaces insights users would never catch — like how sleep quality affects insulin sensitivity</span>
+                            </div>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-num">2</div>
+                            <div class="value-content">
+                                <strong>Builds the regulatory foundation</strong>
+                                <span>Generates real-world evidence for FDA clearance or acquisition — without the risk of active dosing</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. Market & Exit Strategy -->
             <section class="true-center">
                 <div class="slide-content centered">
                     <h3>Business</h3>
