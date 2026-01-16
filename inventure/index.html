@@ -494,8 +494,13 @@
         }
 
         .legend-line.dossi {
-            background: var(--accent);
-            border-style: dashed;
+            background: repeating-linear-gradient(
+                to right,
+                var(--accent) 0px,
+                var(--accent) 4px,
+                transparent 4px,
+                transparent 7px
+            );
         }
 
         .glucose-chart {
@@ -995,11 +1000,11 @@
                         </div>
                         <svg class="glucose-chart" viewBox="0 0 800 140" preserveAspectRatio="none">
                             <!-- Delta fill between the two lines -->
-                            <path class="delta-fill" d="M0,70 C40,85 60,50 100,95 C140,130 180,40 220,25 C260,10 300,60 340,90 C380,120 420,30 460,20 C500,10 540,70 580,100 C620,125 660,45 700,35 C740,25 780,55 800,65 L800,70 C780,60 740,45 700,50 C660,55 620,65 580,60 C540,55 500,50 460,55 C420,60 380,55 340,60 C300,65 260,55 220,55 C180,55 140,65 100,60 C60,55 40,65 0,65 Z" />
-                            <!-- Actual glucose - more volatile with higher peaks and drops -->
-                            <path class="glucose-path actual" d="M0,70 C40,85 60,50 100,95 C140,130 180,40 220,25 C260,10 300,60 340,90 C380,120 420,30 460,20 C500,10 540,70 580,100 C620,125 660,45 700,35 C740,25 780,55 800,65" />
-                            <!-- Dossi projection - smoother, more stable -->
-                            <path class="glucose-path dossi" d="M0,65 C40,65 60,55 100,60 C140,65 180,55 220,55 C260,55 300,65 340,60 C380,55 420,60 460,55 C500,50 540,55 580,60 C620,65 660,55 700,50 C740,45 780,60 800,70" />
+                            <path class="delta-fill" d="M0,75 C30,85 50,60 80,45 C110,30 130,25 160,20 C190,15 210,45 240,70 C270,95 290,110 320,95 C350,80 370,50 400,35 C430,20 460,55 490,80 C520,105 540,90 570,70 C600,50 630,30 660,25 C690,20 720,40 750,55 C780,70 800,75 800,75 L800,68 C780,65 750,58 720,55 C690,52 660,48 630,52 C600,56 570,62 540,65 C510,68 480,72 450,68 C420,64 390,55 360,58 C330,61 300,70 270,72 C240,74 210,70 180,65 C150,60 120,55 90,58 C60,61 30,68 0,70 Z" />
+                            <!-- Actual glucose - varied peaks: big spike, medium dip, small bump, big spike, medium wave -->
+                            <path class="glucose-path actual" d="M0,75 C30,85 50,60 80,45 C110,30 130,25 160,20 C190,15 210,45 240,70 C270,95 290,110 320,95 C350,80 370,50 400,35 C430,20 460,55 490,80 C520,105 540,90 570,70 C600,50 630,30 660,25 C690,20 720,40 750,55 C780,70 800,75 800,75" />
+                            <!-- Dossi projection - follows same rhythm but dampened -->
+                            <path class="glucose-path dossi" d="M0,70 C30,68 50,62 80,58 C110,54 130,52 160,50 C190,48 210,55 240,62 C270,69 290,74 320,72 C350,70 370,62 400,58 C430,54 460,60 490,65 C520,70 540,68 570,64 C600,60 630,54 660,52 C690,50 720,55 750,60 C780,65 800,68 800,68" />
                         </svg>
                     </div>
                     <div class="key-points">
