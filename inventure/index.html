@@ -639,7 +639,7 @@
 
         .team-portrait {
             position: absolute;
-            top: 140px;
+            top: 320px;
             right: 100px;
             width: 200px;
             height: 200px;
@@ -1033,7 +1033,7 @@
                         <div class="stat-circle">
                             <div class="circle-wrapper">
                                 <div class="circle large">
-                                    <span class="circle-number">1.7M</span>
+                                    <span class="circle-number" data-animate-number="1.7" data-suffix="M">0M</span>
                                 </div>
                             </div>
                             <span class="circle-label">Americans with Type 1 Diabetes</span>
@@ -1041,7 +1041,7 @@
                         <div class="stat-circle">
                             <div class="circle-wrapper">
                                 <div class="circle medium">
-                                    <span class="circle-number">$1B+</span>
+                                    <span class="circle-number" data-animate-number="1" data-prefix="$" data-suffix="B+">$0B+</span>
                                 </div>
                             </div>
                             <span class="circle-label">Diabetes software market</span>
@@ -1049,7 +1049,7 @@
                         <div class="stat-circle">
                             <div class="circle-wrapper">
                                 <div class="circle small">
-                                    <span class="circle-number">4</span>
+                                    <span class="circle-number" data-animate-number="4">0</span>
                                 </div>
                             </div>
                             <span class="circle-label">Major pump manufacturers seeking AI</span>
@@ -1069,7 +1069,7 @@
                     <p>Building from lived experience and technical expertise.</p>
                     <div style="margin-top: 0.8em; min-width: 650px; max-width: 650px;">
                         <div class="step-item"><span class="step-num">1.</span><div class="step-content"><strong>I have Type 1 Diabetes</strong> <span>— I live this problem every single day</span></div></div>
-                        <div class="step-item"><span class="step-num">2.</span><div class="step-content"><strong>Mobile development background</strong> <span>— Built and shipped iOS apps</span></div></div>
+                        <div class="step-item"><span class="step-num">2.</span><div class="step-content"><strong>Mobile development background</strong> <span>— Built iOS apps</span></div></div>
                         <div class="step-item"><span class="step-num">3.</span><div class="step-content"><strong>Growing the team</strong> <span>— Looking to hire engineers as the business scales</span></div></div>
                     </div>
                 </div>
@@ -1115,6 +1115,66 @@
 
         scaleBinder();
         window.addEventListener('resize', scaleBinder);
+
+        // Format number with commas
+        function formatNumber(num) {
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        // Animated number counter
+        function animateNumber(element, start, end, duration, suffix = '', prefix = '') {
+            const startTime = performance.now();
+            const isDecimal = String(end).includes('.');
+
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+                const current = start + (end - start) * easeOut;
+
+                let displayValue;
+                if (isDecimal) {
+                    displayValue = current.toFixed(1);
+                } else {
+                    displayValue = Math.round(current);
+                }
+
+                element.textContent = prefix + displayValue + suffix;
+
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+
+            requestAnimationFrame(update);
+        }
+
+        // Trigger number animations on slide change
+        function triggerNumberAnimations() {
+            const currentSlide = Reveal.getCurrentSlide();
+            const animatedNumbers = currentSlide.querySelectorAll('[data-animate-number]');
+
+            animatedNumbers.forEach((el, index) => {
+                const value = el.getAttribute('data-animate-number');
+                const suffix = el.getAttribute('data-suffix') || '';
+                const prefix = el.getAttribute('data-prefix') || '';
+                const duration = 1200;
+                const delay = index * 150;
+
+                el.textContent = prefix + '0' + suffix;
+
+                setTimeout(() => {
+                    if (value.includes('.')) {
+                        animateNumber(el, 0, parseFloat(value), duration, suffix, prefix);
+                    } else {
+                        animateNumber(el, 0, parseInt(value), duration, suffix, prefix);
+                    }
+                }, delay + 300);
+            });
+        }
+
+        Reveal.on('slidechanged', triggerNumberAnimations);
+        setTimeout(triggerNumberAnimations, 500);
 
         // Sparks animation for solution slide - fires faster now
         function createSparks() {
