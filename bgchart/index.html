@@ -32,7 +32,6 @@
     body {
       margin: 0;
       padding: 0;
-      /* Background for the whole page (behind the card) */
       background-color: #E8E8ED; 
       font-family: var(--font-stack);
       display: flex;
@@ -45,17 +44,13 @@
     }
 
     .dashboard-card {
-      /* Binder Page Dimensions & Style */
       width: 1000px;
       height: 700px;
-      /* Responsive fallback */
       max-width: 95vw;
       max-height: 95vh;
-      
       background: var(--bg-paper);
       border-radius: 24px;
       box-shadow: 0 8px 60px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.08);
-      
       padding: 48px;
       box-sizing: border-box;
       display: flex;
@@ -64,7 +59,6 @@
       position: relative;
     }
 
-    /* 1. TOP IMAGE */
     .top-image-container {
       width: 100%;
       display: flex;
@@ -78,7 +72,6 @@
       opacity: 0.9;
     }
 
-    /* 2. HEADER */
     .header-row {
       display: flex;
       justify-content: space-between;
@@ -127,32 +120,27 @@
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      gap: 16px;
+      gap: 20px;
+      padding-bottom: 8px; /* Move up slightly */
     }
 
-    /* LEGEND */
+    /* LEGEND - STACKED */
     .legend {
       display: flex;
-      gap: 24px;
-      align-items: center;
-      margin-bottom: 4px;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-end;
     }
     
     .legend-item {
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 14px;
-      font-weight: 700;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 800;
       color: var(--text-muted);
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    
-    .legend-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      letter-spacing: 0.8px;
     }
     
     .legend-icon.line {
@@ -163,30 +151,15 @@
     }
     
     .legend-icon.dots {
-      gap: 4px;
+      display: flex;
+      gap: 3px;
     }
     
     .legend-icon.dots .dot {
-      width: 6px;
-      height: 6px;
+      width: 5px;
+      height: 5px;
       background: var(--color-black);
       border-radius: 50%;
-    }
-
-    .time-container {
-      text-align: right;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-    }
-
-    .time-label {
-      font-size: 14px;
-      color: var(--text-muted);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 4px;
     }
 
     .current-time {
@@ -196,12 +169,11 @@
       font-variant-numeric: tabular-nums;
     }
 
-    /* 3. CHART */
     .chart-wrapper {
       flex: 1;
       position: relative;
       width: 100%;
-      min-height: 0; /* Flexbox trick */
+      min-height: 0;
     }
 
     canvas {
@@ -209,29 +181,11 @@
       width: 100%;
       height: 100%;
     }
-    
-    /* Full Screen Adjustments */
-    :fullscreen .dashboard-card,
-    :-webkit-full-screen .dashboard-card {
-      width: 100vw;
-      height: 100vh;
-      max-width: none;
-      max-height: none;
-      border-radius: 0;
-      padding: 64px;
-      box-shadow: none;
-    }
-    
-    :fullscreen body,
-    :-webkit-full-screen body {
-      background-color: var(--bg-paper);
-    }
   </style>
 </head>
 <body>
 
   <div class="dashboard-card">
-    
     <div class="top-image-container">
       <img src="dossi-wordmark.png" alt="dossi" class="logo-img">
     </div>
@@ -257,12 +211,11 @@
           </div>
           <div class="legend-item">
             <div class="legend-icon line"></div>
-            <span>Dossi</span>
+            <span>Dossi AI</span>
           </div>
         </div>
 
         <div class="time-container">
-          <!-- <div class="time-label">Time</div> -->
           <div class="current-time" id="timeValue">--:--</div>
         </div>
       </div>
@@ -271,42 +224,27 @@
     <div class="chart-wrapper">
       <canvas id="cgmChart"></canvas>
     </div>
-
   </div>
 
   <script>
-    /**
-     * CONFIGURATION
-     */
     const CONFIG = {
       minutesPerFrame: 0.5, 
       hoursVisible: 4,
-
-      // UI Config
       colors: {
-        bg: '#F5F5F8', // Matches paper bg
+        bg: '#F5F5F8',
         text: '#1a1a1a',     
         dotInRange: '#000000', 
         high: '#FFC107',     
         low: '#EF4444',      
-        
-        targetBand: '#E5E5EA', // Slightly darker than bg
-        
-        // Lines
+        targetBand: '#E5E5EA',
         lineHigh: '#FFC107',   
         lineLow: '#EF4444',    
-        
-        predictionLine: '#737BF2', // Accent color
-        
-        // Event Colors
+        predictionLine: '#737BF2',
         eventFill: 'rgba(115, 123, 242, 0.1)', 
         eventBorder: 'rgba(115, 123, 242, 0.4)',                 
         eventText: '#5B63E0'                    
       },
-
       baseGlucose: 90, 
-      
-      // Events 
       events: [
         { start: 23, end: 7, label: 'Sleep' },
         { start: 7.0, end: 9.0, label: 'Breakfast' }, 
@@ -314,7 +252,6 @@
         { start: 17.0, end: 18.5, label: 'Exercise' },
         { start: 19.0, end: 21.0, label: 'Dinner' }
       ],
-      
       meals: [
         { time: 8.0, height: 210, width: 1.2 }, 
         { time: 12.5, height: 160, width: 2.0 }, 
@@ -322,9 +259,6 @@
       ]
     };
 
-    /**
-     * MATH HELPERS
-     */
     function gaussian(x, peakTime, height, width) {
       let dx = x - peakTime;
       if (dx > 12) dx -= 24;
@@ -332,35 +266,22 @@
       return height * Math.exp(-(dx * dx) / (2 * (width * width / 4)));
     }
 
-    // 1. ACTUAL GLUCOSE
     function getGlucoseAtTime(t) {
       const tMod = ((t % 24) + 24) % 24;
-      
       const circadian = Math.sin((tMod - 4) * (Math.PI / 12)) * 10; 
-      
       let mealImpact = 0;
       CONFIG.meals.forEach(m => mealImpact += gaussian(tMod, m.time, m.height, m.width));
-      
-      // Exercise Crash
       const exerciseImpact = -gaussian(tMod, 18.0, 75, 0.7); 
-      
       const noise = Math.sin(tMod * 25) * 4 + Math.sin(tMod * 40) * 2;
-      
       return CONFIG.baseGlucose + circadian + mealImpact + exerciseImpact + noise;
     }
 
-    // 2. PREDICTION GLUCOSE
     function getPredictionAtTime(t) {
       const tMod = ((t % 24) + 24) % 24;
       const circadian = Math.sin((tMod - 4) * (Math.PI / 12)) * 8; 
-
       let mealImpact = 0;
-      CONFIG.meals.forEach(m => {
-        mealImpact += gaussian(tMod, m.time, m.height * 0.4, m.width);
-      });
-
+      CONFIG.meals.forEach(m => { mealImpact += gaussian(tMod, m.time, m.height * 0.4, m.width); });
       const exerciseImpact = -gaussian(tMod, 18.0, 20, 1.5);
-      
       return CONFIG.baseGlucose + circadian + mealImpact + exerciseImpact - 5;
     }
 
@@ -375,12 +296,8 @@
       return '→';
     }
 
-    /**
-     * ENGINE
-     */
     const canvas = document.getElementById('cgmChart');
     const ctx = canvas.getContext('2d');
-    
     const elBgValue = document.getElementById('bgValue');
     const elTrend = document.getElementById('trendArrow');
     const elTime = document.getElementById('timeValue');
@@ -409,7 +326,6 @@
     window.addEventListener('resize', resize);
     resize();
 
-    // Helper: Rounded Rect
     function roundRectPath(ctx, x, y, w, h, radius) {
       if (w < 2 * radius) radius = w / 2;
       if (h < 2 * radius) radius = h / 2;
@@ -425,116 +341,100 @@
     function draw() {
       currentTime += (CONFIG.minutesPerFrame / 60);
       if (currentTime > 100) currentTime %= 24;
-
       ctx.clearRect(0, 0, width, height);
+      const GRAPH_RIGHT_BOUNDARY = width - 80;
 
-      const GRAPH_RIGHT_BOUNDARY = width - 60;
-
-      // --- LAYER 1: Grid & Limits ---
       const y180 = mapY(180);
       const y70 = mapY(70); 
       ctx.fillStyle = CONFIG.colors.targetBand;
       ctx.fillRect(0, y180, width, y70 - y180);
 
-      // Lines
-      ctx.lineWidth = 1;
-      ctx.beginPath(); ctx.moveTo(0, y180); ctx.lineTo(width, y180); 
-      ctx.strokeStyle = CONFIG.colors.lineHigh; ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(0, y70); ctx.lineTo(width, y70);
-      ctx.strokeStyle = CONFIG.colors.lineLow; ctx.stroke();
-
       const viewEnd = currentTime;
       const viewStart = viewEnd - CONFIG.hoursVisible;
 
-      // --- LAYER 2: Events (With Wrap Logic) ---
+      // Activity Blocks with Wrap logic
       CONFIG.events.forEach(ev => {
-        // Handle events that might wrap around (e.g. sleep 23 -> 7)
         if (ev.start > ev.end) {
-          // Event wraps around midnight
           [-24, 0, 24].forEach(offset => {
              drawEventRect(ev, viewStart, viewEnd, ev.start + offset, ev.end + offset + 24, GRAPH_RIGHT_BOUNDARY);
           });
         } else {
-          // Standard event
           [-24, 0, 24].forEach(offset => {
             drawEventRect(ev, viewStart, viewEnd, ev.start + offset, ev.end + offset, GRAPH_RIGHT_BOUNDARY);
           });
         }
       });
 
-
-      // --- LAYER 3: Prediction Line ---
+      // Dossi Prediction Line
       ctx.beginPath();
-      const predLimitX = GRAPH_RIGHT_BOUNDARY; 
-      
-      for (let x = 0; x <= predLimitX; x += 2) {
+      let lastPredY = 0;
+      for (let x = 0; x <= GRAPH_RIGHT_BOUNDARY; x += 2) {
         const t = viewStart + (x / GRAPH_RIGHT_BOUNDARY) * CONFIG.hoursVisible;
         const val = getPredictionAtTime(t);
         const y = mapY(val);
-        if (x===0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
+        if (x===0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        lastPredY = y;
       }
       ctx.strokeStyle = CONFIG.colors.predictionLine;
       ctx.lineWidth = 3; 
       ctx.lineCap = 'round';
       ctx.stroke();
-
-
-      // --- LAYER 4: The DOTS ---
-      const minutesPerDot = 5;
-      const hoursPerDot = minutesPerDot / 60;
-      let tLoop = Math.floor(viewStart / hoursPerDot) * hoursPerDot;
       
+      // Dossi Label
+      ctx.fillStyle = CONFIG.colors.predictionLine;
+      ctx.font = '800 11px Plus Jakarta Sans';
+      ctx.textAlign = 'left';
+      ctx.fillText('DOSSI AI', GRAPH_RIGHT_BOUNDARY + 8, lastPredY + 4);
+
+      // Glucose Dots
+      const hoursPerDot = 5 / 60;
+      let tLoop = Math.floor(viewStart / hoursPerDot) * hoursPerDot;
+      let lastDotY = 0;
       while (tLoop <= viewEnd) {
         if (tLoop >= viewStart) {
           const glucose = getGlucoseAtTime(tLoop);
           const x = ((tLoop - viewStart) / CONFIG.hoursVisible) * GRAPH_RIGHT_BOUNDARY;
           const y = mapY(glucose);
-          
           if (x <= GRAPH_RIGHT_BOUNDARY) {
             ctx.beginPath();
             ctx.arc(x, y, 4, 0, Math.PI * 2);
-            
             if (glucose > 180) ctx.fillStyle = CONFIG.colors.high;
             else if (glucose < 70) ctx.fillStyle = CONFIG.colors.low;
             else ctx.fillStyle = CONFIG.colors.dotInRange; 
-            
             ctx.fill();
+            lastDotY = y;
           }
         }
         tLoop += hoursPerDot;
       }
+      
+      // Glucose Label
+      ctx.fillStyle = CONFIG.colors.text;
+      ctx.font = '800 11px Plus Jakarta Sans';
+      ctx.textAlign = 'left';
+      ctx.fillText('GLUCOSE', GRAPH_RIGHT_BOUNDARY + 8, lastDotY + 4);
 
-      // --- LAYER 5: DOM Updates ---
       updateDOM(currentTime);
-
       requestAnimationFrame(draw);
     }
 
     function drawEventRect(ev, viewStart, viewEnd, evStartAbs, evEndAbs, graphRight) {
         const drawStart = Math.max(viewStart, evStartAbs);
         const drawEnd = Math.min(viewEnd, evEndAbs);
-
         if (drawStart < drawEnd) {
           const x1 = ((drawStart - viewStart) / CONFIG.hoursVisible) * graphRight;
           const x2 = ((drawEnd - viewStart) / CONFIG.hoursVisible) * graphRight;
-
           ctx.save();
           ctx.beginPath();
           ctx.rect(0, 0, graphRight, canvas.height); 
           ctx.clip();
-          
           roundRectPath(ctx, x1, 0, x2 - x1, canvas.height, 16);
           ctx.fillStyle = CONFIG.colors.eventFill;
           ctx.fill();
-
-          // Title
-          const blockWidth = x2 - x1;
-          const centerX = x1 + (blockWidth / 2);
-          
+          const centerX = x1 + ((x2 - x1) / 2);
           if (x2 > 0 && x1 < graphRight) {
             ctx.fillStyle = CONFIG.colors.eventText;
-            ctx.font = '800 14px -apple-system, sans-serif';
+            ctx.font = '800 14px Plus Jakarta Sans';
             ctx.textAlign = 'center';
             ctx.textBaseline = 'top'; 
             ctx.fillText(ev.label.toUpperCase(), centerX, 12);
@@ -548,30 +448,22 @@
       let tMod = ((t % 24) + 24) % 24;
       const totalMinutes = Math.floor(tMod * 60);
       const roundedMinutes = Math.floor(totalMinutes / snapMinutes) * snapMinutes;
-      
       const displayTime = roundedMinutes / 60;
       const val = Math.round(getGlucoseAtTime(displayTime));
-      
       elBgValue.innerText = val < 40 ? "LOW" : val;
       elTrend.innerText = getTrendArrow(displayTime);
-
       if (val > 180) {
-        elBgValue.style.color = CONFIG.colors.high;
-        elTrend.style.color = CONFIG.colors.high;
+        elBgValue.style.color = CONFIG.colors.high; elTrend.style.color = CONFIG.colors.high;
       } else if (val < 70) {
-        elBgValue.style.color = CONFIG.colors.low;
-        elTrend.style.color = CONFIG.colors.low;
+        elBgValue.style.color = CONFIG.colors.low; elTrend.style.color = CONFIG.colors.low;
       } else {
-        elBgValue.style.color = CONFIG.colors.text; 
-        elTrend.style.color = CONFIG.colors.text; 
+        elBgValue.style.color = CONFIG.colors.text; elTrend.style.color = CONFIG.colors.text; 
       }
-
       const h = Math.floor(roundedMinutes / 60);
       const m = roundedMinutes % 60;
       const ampm = h >= 12 ? 'PM' : 'AM';
       const h12 = h % 12 || 12; 
       const pad = n => n.toString().padStart(2, '0');
-      
       elTime.innerText = `${h12}:${pad(m)} ${ampm}`;
     }
 
