@@ -121,7 +121,7 @@
       flex-direction: column;
       align-items: flex-end;
       gap: 20px;
-      padding-bottom: 8px; /* Move up slightly */
+      padding-bottom: 8px; 
     }
 
     /* LEGEND - STACKED */
@@ -211,7 +211,7 @@
           </div>
           <div class="legend-item">
             <div class="legend-icon line"></div>
-            <span>Dossi AI</span>
+            <span>With Dossi</span>
           </div>
         </div>
 
@@ -349,10 +349,17 @@
       ctx.fillStyle = CONFIG.colors.targetBand;
       ctx.fillRect(0, y180, width, y70 - y180);
 
+      // Lines
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(0, y180); ctx.lineTo(width, y180); 
+      ctx.strokeStyle = CONFIG.colors.lineHigh; ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(0, y70); ctx.lineTo(width, y70);
+      ctx.strokeStyle = CONFIG.colors.lineLow; ctx.stroke();
+
       const viewEnd = currentTime;
       const viewStart = viewEnd - CONFIG.hoursVisible;
 
-      // Activity Blocks with Wrap logic
+      // Activity Blocks
       CONFIG.events.forEach(ev => {
         if (ev.start > ev.end) {
           [-24, 0, 24].forEach(offset => {
@@ -367,29 +374,20 @@
 
       // Dossi Prediction Line
       ctx.beginPath();
-      let lastPredY = 0;
       for (let x = 0; x <= GRAPH_RIGHT_BOUNDARY; x += 2) {
         const t = viewStart + (x / GRAPH_RIGHT_BOUNDARY) * CONFIG.hoursVisible;
         const val = getPredictionAtTime(t);
         const y = mapY(val);
         if (x===0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-        lastPredY = y;
       }
       ctx.strokeStyle = CONFIG.colors.predictionLine;
       ctx.lineWidth = 3; 
       ctx.lineCap = 'round';
       ctx.stroke();
       
-      // Dossi Label
-      ctx.fillStyle = CONFIG.colors.predictionLine;
-      ctx.font = '800 11px Plus Jakarta Sans';
-      ctx.textAlign = 'left';
-      ctx.fillText('DOSSI AI', GRAPH_RIGHT_BOUNDARY + 8, lastPredY + 4);
-
       // Glucose Dots
       const hoursPerDot = 5 / 60;
       let tLoop = Math.floor(viewStart / hoursPerDot) * hoursPerDot;
-      let lastDotY = 0;
       while (tLoop <= viewEnd) {
         if (tLoop >= viewStart) {
           const glucose = getGlucoseAtTime(tLoop);
@@ -402,17 +400,35 @@
             else if (glucose < 70) ctx.fillStyle = CONFIG.colors.low;
             else ctx.fillStyle = CONFIG.colors.dotInRange; 
             ctx.fill();
-            lastDotY = y;
           }
         }
         tLoop += hoursPerDot;
       }
       
-      // Glucose Label
-      ctx.fillStyle = CONFIG.colors.text;
+      // LABEL LOGIC (Continuous, Smooth, Non-Overlapping)
+      const nowG = getGlucoseAtTime(viewEnd);
+      const nowD = getPredictionAtTime(viewEnd);
+      
+      let yG = mapY(nowG);
+      let yD = mapY(nowD);
+      
+      // Prevent overlap (16px threshold)
+      if (Math.abs(yG - yD) < 16) {
+        const mid = (yG + yD) / 2;
+        if (yG < yD) { yG = mid - 8; yD = mid + 8; }
+        else { yG = mid + 8; yD = mid - 8; }
+      }
+      
       ctx.font = '800 11px Plus Jakarta Sans';
       ctx.textAlign = 'left';
-      ctx.fillText('GLUCOSE', GRAPH_RIGHT_BOUNDARY + 8, lastDotY + 4);
+      
+      // Glucose Label
+      ctx.fillStyle = CONFIG.colors.text;
+      ctx.fillText('GLUCOSE', GRAPH_RIGHT_BOUNDARY + 8, yG + 4);
+      
+      // Dossi Label
+      ctx.fillStyle = CONFIG.colors.predictionLine;
+      ctx.fillText('WITH DOSSI', GRAPH_RIGHT_BOUNDARY + 8, yD + 4);
 
       updateDOM(currentTime);
       requestAnimationFrame(draw);
