@@ -471,20 +471,18 @@
 
         /* How It Works Cards */
         .how-it-works-grid {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
         .hiw-card {
             background: white;
             border-radius: 20px;
-            padding: 32px 24px;
+            padding: 28px 24px;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-            width: 200px;
-            height: 240px;
-            flex-shrink: 0;
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.5s ease-out, transform 0.5s ease-out, box-shadow 0.3s;
@@ -500,8 +498,8 @@
         }
 
         .hiw-number {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             background: var(--accent);
             border-radius: 50%;
             display: flex;
@@ -516,10 +514,10 @@
 
         .hiw-card h4 {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.05em;
+            font-size: 1.1em;
             font-weight: 700;
             color: var(--gray-900);
-            margin-bottom: 14px;
+            margin-bottom: 16px;
         }
 
         .hiw-list {
@@ -528,30 +526,30 @@
             margin: 0;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
         }
 
         .hiw-list li {
-            font-size: 0.82em;
+            font-size: 0.9em;
             color: var(--gray-600);
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-            line-height: 1.4;
+            line-height: 1.5;
+            padding-left: 16px;
+            position: relative;
         }
 
         .hiw-list li::before {
-            content: "•";
-            color: black;
-            font-weight: 600;
-            font-size: 1.1em;
-            flex-shrink: 0;
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 5px;
+            height: 5px;
+            background: var(--accent);
+            border-radius: 50%;
         }
 
         .hiw-arrow {
-            color: var(--accent);
-            font-size: 1.4em;
-            flex-shrink: 0;
+            display: none;
         }
 
         /* Features */
@@ -997,18 +995,12 @@
             }
 
             .how-it-works-grid {
-                flex-wrap: wrap;
-                gap: 20px;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
             }
 
             .problem-grid {
                 grid-template-columns: repeat(2, 1fr);
-            }
-
-            .hiw-arrow { display: none; }
-
-            .hiw-card {
-                width: calc(50% - 10px);
             }
 
             .features-grid {
@@ -1054,7 +1046,9 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .hiw-card { width: 100%; }
+            .how-it-works-grid {
+                grid-template-columns: 1fr;
+            }
 
             .features-grid {
                 grid-template-columns: 1fr;
@@ -1192,7 +1186,6 @@
                         <li>Meals & time of day</li>
                     </ul>
                 </div>
-                <div class="hiw-arrow"><i class="ph-bold ph-arrow-right"></i></div>
                 <div class="hiw-card">
                     <div class="hiw-number">2</div>
                     <h4>Pattern Detection</h4>
@@ -1202,7 +1195,6 @@
                         <li>Exercise & meal effects</li>
                     </ul>
                 </div>
-                <div class="hiw-arrow"><i class="ph-bold ph-arrow-right"></i></div>
                 <div class="hiw-card">
                     <div class="hiw-number">3</div>
                     <h4>Modeling</h4>
@@ -1212,7 +1204,6 @@
                         <li>Quantify uncertainty</li>
                     </ul>
                 </div>
-                <div class="hiw-arrow"><i class="ph-bold ph-arrow-right"></i></div>
                 <div class="hiw-card">
                     <div class="hiw-number">4</div>
                     <h4>Insight</h4>
