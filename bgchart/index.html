@@ -7,10 +7,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Dossi Dashboard</title>
   
-  <!-- Fonts & Icons -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Icons Only -->
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
   <style>
@@ -26,16 +23,15 @@
       --color-high: #FFC107;   
       --color-low: #EF4444;    
       
-      /* Pitch Deck Font Stacks */
-      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      /* Apple System Font Stack (SF Pro) */
+      --font-stack: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
     }
 
     body {
       margin: 0;
       padding: 0;
       background-color: #E8E8ED; 
-      font-family: var(--font-body);
+      font-family: var(--font-stack);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -43,6 +39,7 @@
       height: 100vh;
       color: var(--text-dark);
       overflow: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
     .dashboard-card {
@@ -95,9 +92,8 @@
     }
 
     .glucose-value {
-      font-family: var(--font-heading);
       font-size: 110px; 
-      font-weight: 800;
+      font-weight: 700; /* SF Pro Bold */
       color: var(--color-black);
       letter-spacing: -4px;
       font-variant-numeric: tabular-nums;
@@ -128,9 +124,8 @@
     }
 
     .current-time {
-      font-family: var(--font-heading);
       font-size: 36px;
-      font-weight: 700;
+      font-weight: 600;
       color: var(--text-dark);
       font-variant-numeric: tabular-nums;
     }
@@ -227,7 +222,6 @@
       return CONFIG.baseGlucose + circadian + mealImpact + exerciseImpact + noise;
     }
 
-    // Helper to get glucose without high-freq noise for smoother labels
     function getSmoothGlucoseAtTime(t) {
       const tMod = ((t % 24) + 24) % 24;
       const circadian = Math.sin((tMod - 4) * (Math.PI / 12)) * 10; 
@@ -265,8 +259,6 @@
     const elTime = document.getElementById('timeValue');
 
     let currentTime = 8.0;
-    
-    // Smoothing variables for labels
     let smoothLabelG = 0;
     let smoothLabelD = 0;
     let isFirstFrame = true;
@@ -310,19 +302,16 @@
       ctx.clearRect(0, 0, width, height);
       const GRAPH_RIGHT_BOUNDARY = width - 80;
 
-      // Target Range Gray Block (70-180)
       const y180 = mapY(180);
       const y70 = mapY(70); 
       ctx.fillStyle = CONFIG.colors.targetBand;
       ctx.fillRect(0, y180, width, y70 - y180);
 
-      // Hyper Line (Yellow @ 250)
       const y250 = mapY(250);
       ctx.lineWidth = 1;
       ctx.beginPath(); ctx.moveTo(0, y250); ctx.lineTo(width, y250); 
       ctx.strokeStyle = CONFIG.colors.lineHigh; ctx.stroke();
 
-      // Hypo Line (Red @ 55)
       const y55 = mapY(55);
       ctx.beginPath(); ctx.moveTo(0, y55); ctx.lineTo(width, y55);
       ctx.strokeStyle = CONFIG.colors.lineLow; ctx.stroke();
@@ -330,7 +319,6 @@
       const viewEnd = currentTime;
       const viewStart = viewEnd - CONFIG.hoursVisible;
 
-      // Activity Blocks
       CONFIG.events.forEach(ev => {
         if (ev.start > ev.end) {
           [-24, 0, 24].forEach(offset => {
@@ -343,7 +331,6 @@
         }
       });
 
-      // Dossi Prediction Line
       ctx.beginPath();
       for (let x = 0; x <= GRAPH_RIGHT_BOUNDARY; x += 2) {
         const t = viewStart + (x / GRAPH_RIGHT_BOUNDARY) * CONFIG.hoursVisible;
@@ -356,7 +343,6 @@
       ctx.lineCap = 'round';
       ctx.stroke();
       
-      // Glucose Dots
       const hoursPerDot = 5 / 60;
       let tLoop = Math.floor(viewStart / hoursPerDot) * hoursPerDot;
       while (tLoop <= viewEnd) {
@@ -376,7 +362,6 @@
         tLoop += hoursPerDot;
       }
       
-      // --- SMOOTH LABEL LOGIC ---
       const targetG = mapY(getSmoothGlucoseAtTime(viewEnd));
       const targetD = mapY(getPredictionAtTime(viewEnd));
       
@@ -391,7 +376,6 @@
       
       let yG = smoothLabelG;
       let yD = smoothLabelD;
-      
       const dist = Math.abs(yG - yD);
       const minDist = 16;
       if (dist < minDist) {
@@ -400,12 +384,11 @@
         else { yG += push; yD -= push; }
       }
       
-      ctx.font = '700 11px Inter'; 
+      // Use system font for canvas
+      ctx.font = '700 11px -apple-system, system-ui, sans-serif'; 
       ctx.textAlign = 'left';
-      
       ctx.fillStyle = CONFIG.colors.text;
       ctx.fillText('GLUCOSE', GRAPH_RIGHT_BOUNDARY + 8, yG + 4);
-      
       ctx.fillStyle = CONFIG.colors.predictionLine;
       ctx.fillText('WITH DOSSI', GRAPH_RIGHT_BOUNDARY + 8, yD + 4);
 
@@ -423,15 +406,13 @@
           ctx.beginPath();
           ctx.rect(0, 0, graphRight, canvas.height); 
           ctx.clip();
-          
           roundRectPath(ctx, x1, 0, x2 - x1, canvas.height, 16);
           ctx.fillStyle = CONFIG.colors.eventFill;
           ctx.fill();
-
           const centerX = x1 + ((x2 - x1) / 2);
           if (x2 > 0 && x1 < graphRight) {
             ctx.fillStyle = CONFIG.colors.eventText;
-            ctx.font = '700 13px Inter'; 
+            ctx.font = '700 13px -apple-system, system-ui, sans-serif'; 
             ctx.textAlign = 'center';
             ctx.textBaseline = 'top'; 
             ctx.fillText(ev.label.toUpperCase(), centerX, 12);
