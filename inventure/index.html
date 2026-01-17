@@ -734,22 +734,17 @@
 
         .team-photos {
             position: absolute;
-            top: 140px;
-            right: 60px;
+            top: 120px;
+            right: 80px;
             display: flex;
             flex-direction: column;
-            align-items: flex-end;
-            gap: 12px;
-        }
-
-        .team-photos-row {
-            display: flex;
-            gap: 12px;
+            align-items: center;
+            gap: 16px;
         }
 
         .team-photo {
-            width: 140px;
-            height: 140px;
+            width: 130px;
+            height: 130px;
             border-radius: 50%;
             overflow: hidden;
             box-shadow: 0 8px 40px rgba(115, 123, 242, 0.25);
@@ -757,8 +752,8 @@
         }
 
         .team-photo.main {
-            width: 160px;
-            height: 160px;
+            width: 150px;
+            height: 150px;
         }
 
         .team-photo img {
@@ -767,37 +762,10 @@
             object-fit: cover;
         }
 
-        .network-pill {
-            background: white;
-            border-radius: 100px;
-            padding: 0.8em 1.4em;
-            display: flex;
-            align-items: center;
-            gap: 0.8em;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-            margin-top: 1.2em;
-            max-width: fit-content;
-        }
-
-        .network-pill i {
-            font-size: 1.3em;
-            color: var(--accent);
-        }
-
-        .network-pill span {
-            font-size: 0.95em;
-            color: var(--text-medium);
-        }
-
-        .network-pill strong {
-            color: var(--text-dark);
-        }
-
         .reveal section.present .team-photo { animation: scaleIn 0.5s ease-out both; }
         .reveal section.present .team-photos .team-photo:nth-child(1) { animation-delay: 0.2s; }
-        .reveal section.present .team-photos-row .team-photo:nth-child(1) { animation-delay: 0.35s; }
-        .reveal section.present .team-photos-row .team-photo:nth-child(2) { animation-delay: 0.5s; }
-        .reveal section.present .network-pill { animation: scaleIn 0.4s ease-out 0.45s both; }
+        .reveal section.present .team-photos .team-photo:nth-child(2) { animation-delay: 0.35s; }
+        .reveal section.present .team-photos .team-photo:nth-child(3) { animation-delay: 0.5s; }
 
         /* ===== Path to Market Slide ===== */
         .path-slide {
@@ -1116,6 +1084,7 @@
         .reveal section.present .step-item:nth-child(1) { animation-delay: 0.15s; }
         .reveal section.present .step-item:nth-child(2) { animation-delay: 0.25s; }
         .reveal section.present .step-item:nth-child(3) { animation-delay: 0.35s; }
+        .reveal section.present .step-item:nth-child(4) { animation-delay: 0.45s; }
 
         /* Hover effects */
         .stat-box {
@@ -1498,27 +1467,22 @@
                     <div class="team-photo main">
                         <img src="myportrait.jpeg" alt="Casey">
                     </div>
-                    <div class="team-photos-row">
-                        <div class="team-photo">
-                            <img src="group.JPG" alt="Team photo">
-                        </div>
-                        <div class="team-photo">
-                            <img src="jdrfselfie.jpeg" alt="JDRF event">
-                        </div>
+                    <div class="team-photo">
+                        <img src="group.JPG" alt="Team photo">
+                    </div>
+                    <div class="team-photo">
+                        <img src="jdrfselfie.jpeg" alt="JDRF event">
                     </div>
                 </div>
                 <div class="slide-content">
                     <h3>Team</h3>
                     <h2>Why Me</h2>
                     <p>Building from lived experience and technical expertise.</p>
-                    <div style="margin-top: 0.8em; min-width: 550px; max-width: 550px;">
+                    <div style="margin-top: 0.8em; min-width: 650px; max-width: 650px;">
                         <div class="step-item"><span class="step-num">1.</span><div class="step-content"><strong>I have Type 1 Diabetes</strong> <span>— I live this problem every single day</span></div></div>
                         <div class="step-item"><span class="step-num">2.</span><div class="step-content"><strong>Mobile development background</strong> <span>— Built iOS apps before</span></div></div>
                         <div class="step-item"><span class="step-num">3.</span><div class="step-content"><strong>Growing the team</strong> <span>— Looking to hire engineers as the business scales</span></div></div>
-                    </div>
-                    <div class="network-pill">
-                        <i class="ph ph-users-three"></i>
-                        <span><strong>Strong Network</strong> — I2P, GT mentor, family, Breakthrough T1D</span>
+                        <div class="step-item"><span class="step-num">4.</span><div class="step-content"><strong>Strong Network</strong> <span>— I2P, GT mentor, family, Breakthrough T1D</span></div></div>
                     </div>
                 </div>
             </section>
