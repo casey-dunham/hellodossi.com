@@ -510,7 +510,7 @@
 
         .glucose-path {
             fill: none;
-            stroke-width: 3;
+            stroke-width: 2.5;
             stroke-linecap: round;
         }
 
@@ -671,7 +671,7 @@
         .stat-circle .circle-wrapper {
             height: 200px;
             display: flex;
-            align-items: flex-end;
+            align-items: center;
             justify-content: center;
         }
 
@@ -727,27 +727,262 @@
             min-height: 2.8em;
         }
 
-        /* ===== Team Slide - Learning Loop Wireframe ===== */
+        /* ===== Team Slide - Why Me ===== */
         .team-slide {
             position: relative;
         }
 
-        .team-portrait {
+        .team-photos {
             position: absolute;
-            top: 320px;
-            right: 100px;
-            width: 200px;
-            height: 200px;
+            top: 140px;
+            right: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 12px;
         }
 
-        .team-portrait img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .team-photos-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .team-photo {
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
+            overflow: hidden;
             box-shadow: 0 8px 40px rgba(115, 123, 242, 0.25);
             border: 4px solid white;
         }
+
+        .team-photo.main {
+            width: 160px;
+            height: 160px;
+        }
+
+        .team-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .network-pill {
+            background: white;
+            border-radius: 100px;
+            padding: 0.8em 1.4em;
+            display: flex;
+            align-items: center;
+            gap: 0.8em;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            margin-top: 1.2em;
+            max-width: fit-content;
+        }
+
+        .network-pill i {
+            font-size: 1.3em;
+            color: var(--accent);
+        }
+
+        .network-pill span {
+            font-size: 0.95em;
+            color: var(--text-medium);
+        }
+
+        .network-pill strong {
+            color: var(--text-dark);
+        }
+
+        .reveal section.present .team-photo { animation: scaleIn 0.5s ease-out both; }
+        .reveal section.present .team-photos .team-photo:nth-child(1) { animation-delay: 0.2s; }
+        .reveal section.present .team-photos-row .team-photo:nth-child(1) { animation-delay: 0.35s; }
+        .reveal section.present .team-photos-row .team-photo:nth-child(2) { animation-delay: 0.5s; }
+        .reveal section.present .network-pill { animation: scaleIn 0.4s ease-out 0.45s both; }
+
+        /* ===== Path to Market Slide ===== */
+        .path-slide {
+            position: relative;
+        }
+
+        .path-slide .logo-stack {
+            position: absolute;
+            top: 180px;
+            right: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.6em;
+            margin: 0;
+        }
+
+        .path-slide .logo-stack img {
+            width: 180px;
+            height: auto;
+            opacity: 0.7;
+        }
+
+        .path-slide .logo-stack img:nth-child(2) {
+            width: 240px;
+        }
+
+        .path-slide .logo-stack img:nth-child(3) {
+            width: 200px;
+        }
+
+        .phase-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 1em;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .phase-table th {
+            background: linear-gradient(90deg, rgba(115, 123, 242, 1.0), rgba(115, 123, 242, 0.6));
+            color: white;
+            padding: 1em 1.2em;
+            font-weight: 600;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        .phase-table th:first-child {
+            background: var(--bg-card);
+            color: var(--text-light);
+            font-size: 0.8em;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .phase-table td {
+            padding: 0.8em 1.2em;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            color: var(--text-medium);
+            font-size: 0.9em;
+            text-align: center;
+        }
+
+        .phase-table td:first-child {
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-dark);
+            background: var(--bg-card);
+        }
+
+        .phase-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .path-subtitle {
+            font-size: 1em;
+            color: var(--text-medium);
+            margin-top: 0.5em;
+            max-width: 600px;
+        }
+
+        .path-footer {
+            margin-top: 1.2em;
+            font-size: 0.95em;
+        }
+
+        .path-footer strong {
+            color: var(--text-dark);
+        }
+
+        .path-footer span {
+            color: var(--text-medium);
+        }
+
+        .reveal section.present .phase-table { animation: fadeInUp 0.6s ease-out 0.2s both; }
+        .reveal section.present .path-slide .logo-stack img { animation: fadeInUp 0.5s ease-out both; }
+        .reveal section.present .path-slide .logo-stack img:nth-child(1) { animation-delay: 0.3s; }
+        .reveal section.present .path-slide .logo-stack img:nth-child(2) { animation-delay: 0.45s; }
+        .reveal section.present .path-slide .logo-stack img:nth-child(3) { animation-delay: 0.6s; }
+
+        /* ===== Competitive Landscape Slide ===== */
+        .landscape-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 1.5em;
+            max-width: 900px;
+        }
+
+        .landscape-card {
+            background: white;
+            border-radius: 20px;
+            padding: 1.4em 2em;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .landscape-card.dossi-card {
+            background: linear-gradient(135deg, rgba(115, 123, 242, 0.1) 0%, rgba(115, 123, 242, 0.05) 100%);
+            border: 2px solid var(--accent);
+            padding: 2em 2em;
+        }
+
+        .landscape-logos {
+            display: flex;
+            gap: 2em;
+            align-items: center;
+            margin-bottom: 0.8em;
+        }
+
+        .landscape-logos img {
+            height: 32px;
+            width: auto;
+            opacity: 0.8;
+        }
+
+        .landscape-card .card-label {
+            font-size: 0.75em;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.6em;
+            font-weight: 600;
+        }
+
+        .landscape-card .card-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.3em;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.3em;
+        }
+
+        .landscape-card.dossi-card .card-title {
+            color: var(--accent);
+            font-size: 1.5em;
+        }
+
+        .landscape-card .card-caption {
+            font-size: 0.95em;
+            color: var(--text-medium);
+        }
+
+        .landscape-card.dossi-card .card-caption {
+            font-size: 1.05em;
+        }
+
+        .dossi-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.6em;
+            margin-bottom: 0.6em;
+        }
+
+        .dossi-badge img {
+            height: 28px;
+        }
+
+        .reveal section.present .landscape-card { animation: slideInLeft 0.5s ease-out both; }
+        .reveal section.present .landscape-stack .landscape-card:nth-child(1) { animation-delay: 0.15s; }
+        .reveal section.present .landscape-stack .landscape-card:nth-child(2) { animation-delay: 0.3s; }
+        .reveal section.present .landscape-stack .landscape-card:nth-child(3) { animation-delay: 0.45s; }
 
         .step-item {
             display: flex;
@@ -877,7 +1112,6 @@
         .reveal section.present .stats-circles .stat-circle:nth-child(3) { animation-delay: 0.5s; }
 
         /* Team slide animations */
-        .reveal section.present .team-portrait { animation: scaleIn 0.5s ease-out 0.3s both; }
         .reveal section.present .step-item { animation: slideInLeft 0.5s ease-out both; }
         .reveal section.present .step-item:nth-child(1) { animation-delay: 0.15s; }
         .reveal section.present .step-item:nth-child(2) { animation-delay: 0.25s; }
@@ -1163,19 +1397,128 @@
                 </div>
             </section>
 
-            <!-- 7. Team Slide -->
+            <!-- 7. Path to Market -->
+            <section class="path-slide">
+                <div class="logo-stack">
+                    <img src="fda-logo.png" alt="FDA logo">
+                    <img src="tidepool-logo.png" alt="Tidepool logo">
+                    <img src="bigfoot-logo.webp" alt="Bigfoot Biomedical logo">
+                </div>
+                <div class="slide-content" style="max-width: 620px;">
+                    <h3>Business</h3>
+                    <h2>Path to Market</h2>
+                    <p class="path-subtitle">Dossi enters the market as a low-risk intelligence product and expands into regulated insulin decision support as evidence accumulates.</p>
+                    <table class="phase-table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>1: Launch</th>
+                                <th>2: Validate</th>
+                                <th>3: Scale</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Regulatory</td>
+                                <td>Class I</td>
+                                <td>510(k)</td>
+                                <td>Class II clearance</td>
+                            </tr>
+                            <tr>
+                                <td>Product</td>
+                                <td>Algorithm comparison</td>
+                                <td>Predictive recs</td>
+                                <td>Dosing intelligence</td>
+                            </tr>
+                            <tr>
+                                <td>Distribution</td>
+                                <td>DTC</td>
+                                <td>DTC</td>
+                                <td>Pump & CGM platforms</td>
+                            </tr>
+                            <tr>
+                                <td>Revenue</td>
+                                <td>Subscription</td>
+                                <td>Reimbursement pilots</td>
+                                <td>Licensing/enterprise</td>
+                            </tr>
+                            <tr>
+                                <td>Outcome</td>
+                                <td>Predictive evidence</td>
+                                <td>Clinically validated</td>
+                                <td>Complete intelligence layer</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="path-footer">
+                        <strong>Research & Data Partnerships</strong><br>
+                        <span>De-identified, consented real-world evidence for metabolic research</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 8. Competitive Landscape -->
+            <section>
+                <div class="slide-content" style="max-width: none;">
+                    <h3>Competition</h3>
+                    <h2>Competitive Landscape</h2>
+                    <div class="landscape-stack">
+                        <div class="landscape-card">
+                            <div class="card-label">Embedded Pump Algorithms</div>
+                            <div class="landscape-logos">
+                                <img src="Medtronic-Logo.png" alt="Medtronic">
+                                <img src="Tandem_Logo_Mark_RGB.png" alt="Tandem">
+                                <img src="insulet.jpg" alt="Insulet">
+                            </div>
+                            <div class="card-caption">Reactive, hardware-constrained dosing logic</div>
+                        </div>
+                        <div class="landscape-card dossi-card">
+                            <div class="dossi-badge">
+                                <img src="dossi-wordmark.png" alt="Dossi">
+                            </div>
+                            <div class="card-title">Predictive Intelligence Layer</div>
+                            <div class="card-caption">Shadow-mode • multi-signal • hardware-agnostic</div>
+                        </div>
+                        <div class="landscape-card">
+                            <div class="card-label">Analytics & Reporting</div>
+                            <div class="landscape-logos">
+                                <img src="glooko.png" alt="Glooko">
+                                <img src="sugarmate-1.png.webp" alt="Sugarmate">
+                                <img src="dexcom.png" alt="Dexcom Clarity">
+                            </div>
+                            <div class="card-caption">Retrospective insights, no prediction</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 9. Team Slide -->
             <section class="team-slide">
-                <div class="team-portrait">
-                    <img src="myportrait.jpeg" alt="Casey">
+                <div class="team-photos">
+                    <div class="team-photo main">
+                        <img src="myportrait.jpeg" alt="Casey">
+                    </div>
+                    <div class="team-photos-row">
+                        <div class="team-photo">
+                            <img src="group.JPG" alt="Team photo">
+                        </div>
+                        <div class="team-photo">
+                            <img src="jdrfselfie.jpeg" alt="JDRF event">
+                        </div>
+                    </div>
                 </div>
                 <div class="slide-content">
                     <h3>Team</h3>
                     <h2>Why Me</h2>
                     <p>Building from lived experience and technical expertise.</p>
-                    <div style="margin-top: 0.8em; min-width: 650px; max-width: 650px;">
+                    <div style="margin-top: 0.8em; min-width: 550px; max-width: 550px;">
                         <div class="step-item"><span class="step-num">1.</span><div class="step-content"><strong>I have Type 1 Diabetes</strong> <span>— I live this problem every single day</span></div></div>
                         <div class="step-item"><span class="step-num">2.</span><div class="step-content"><strong>Mobile development background</strong> <span>— Built iOS apps before</span></div></div>
-                        <div class="step-item"><span class="step-num">3.</span><div class="step-content"><strong>Growing the team</strong> <span>— Looking to hire a team as the business scales</span></div></div>
+                        <div class="step-item"><span class="step-num">3.</span><div class="step-content"><strong>Growing the team</strong> <span>— Looking to hire engineers as the business scales</span></div></div>
+                    </div>
+                    <div class="network-pill">
+                        <i class="ph ph-users-three"></i>
+                        <span><strong>Strong Network</strong> — I2P, GT mentor, family, Breakthrough T1D</span>
                     </div>
                 </div>
             </section>
