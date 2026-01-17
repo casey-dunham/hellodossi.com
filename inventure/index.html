@@ -813,11 +813,17 @@
             border-collapse: separate;
             border-spacing: 0;
             table-layout: fixed;
+            padding: 0 0.5em;
         }
 
-        .path-slide table th,
-        .path-slide table td {
-            width: 25%;
+        .path-slide table th:first-child,
+        .path-slide table td:first-child {
+            width: 18%;
+        }
+
+        .path-slide table th:not(:first-child),
+        .path-slide table td:not(:first-child) {
+            width: 27%;
         }
 
         .path-slide table th {
