@@ -810,11 +810,21 @@
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            border-collapse: separate;
+            border-spacing: 0;
         }
 
-        .path-slide table th,
+        .path-slide table th {
+            padding: 0.8em 1em 0.5em 1em;
+        }
+
         .path-slide table td {
             padding: 0.5em 1em;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+        }
+
+        .path-slide table tr:last-child td {
+            border-bottom: none;
         }
 
         .path-footer {
