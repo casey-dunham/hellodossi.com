@@ -905,51 +905,18 @@
             gap: 16px;
         }
 
-        /* Email Signup */
-        .email-signup {
-            padding: 80px 40px;
-            background: var(--bg-page);
-            text-align: center;
-        }
-
-        .email-signup-container {
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .email-signup h3 {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.75em;
-            color: var(--accent);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            margin-bottom: 12px;
-        }
-
-        .email-signup h2 {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 1.8em;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: var(--gray-900);
-        }
-
-        .email-signup p {
-            font-size: 1em;
-            color: var(--gray-600);
-            margin-bottom: 24px;
-        }
-
+        /* Email Form */
         .email-form {
             display: flex;
             gap: 12px;
             max-width: 420px;
             margin: 0 auto;
+            justify-content: center;
         }
 
         .email-form input[type="email"] {
             flex: 1;
+            max-width: 280px;
             padding: 16px 20px;
             border: 2px solid var(--gray-200);
             border-radius: 12px;
@@ -1165,7 +1132,7 @@
             <a href="#how-it-works">How It Works</a>
         </div>
         <div class="nav-cta">
-            <a href="mailto:team@hellodossi.com">Get In Touch</a>
+            <a href="#signup">Stay Updated</a>
         </div>
     </nav>
 
@@ -1491,31 +1458,16 @@
     </section>
 
     <!-- Closing Section -->
-    <section class="closing">
+    <section class="closing" id="signup">
         <div class="closing-container animate-on-scroll">
             <h3>Join the Journey</h3>
             <h2>Building the future of metabolic intelligence</h2>
-            <p>Dossi is being developed by a team that lives with T1D every day. We're building the tool we wish we had.</p>
-            <div class="closing-buttons">
-                <a href="mailto:team@hellodossi.com" class="btn-primary">
-                    <i class="ph-bold ph-envelope"></i>
-                    Get In Touch
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Email Signup -->
-    <section class="email-signup">
-        <div class="email-signup-container">
-            <h3>Stay Updated</h3>
-            <h2>Be the first to know</h2>
-            <p>Sign up to receive updates about Dossi's development and launch.</p>
+            <p>Dossi is built by someone who lives with T1D every day. This is the tool I wish I had.</p>
             <form class="email-form" id="emailForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                 <input type="email" name="email" placeholder="Enter your email" required>
-                <button type="submit">Subscribe</button>
+                <button type="submit">Get Updates</button>
             </form>
-            <p class="email-success" id="emailSuccess">Thanks for signing up! We'll keep you posted.</p>
+            <p class="email-success" id="emailSuccess">Thanks for signing up! I'll keep you posted.</p>
         </div>
     </section>
 
