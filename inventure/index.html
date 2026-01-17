@@ -812,6 +812,12 @@
             box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
             border-collapse: separate;
             border-spacing: 0;
+            table-layout: fixed;
+        }
+
+        .path-slide table th,
+        .path-slide table td {
+            width: 25%;
         }
 
         .path-slide table th {
@@ -1335,7 +1341,7 @@
                     <table style="margin-top: 1em;">
                         <thead>
                             <tr>
-                                <th style="width: 100px;"></th>
+                                <th></th>
                                 <th>1: Launch</th>
                                 <th>2: Validate</th>
                                 <th>3: Scale</th>
