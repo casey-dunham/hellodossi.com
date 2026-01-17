@@ -3,141 +3,238 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Dossi - Glucose Demo</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>Dossi Dashboard</title>
   <style>
     :root {
-      --accent: #737BF2;
-      --accent-dark: #5B63E0;
-      --bg-page: #F5F5F8;
-      --bg-card: #ffffff;
+      /* Colors from Pitch Deck */
+      --bg-paper: #F5F5F8;
+      --bg-card: #FFFFFF;
       --text-dark: #1a1a1a;
-      --text-medium: #4a4a4a;
-      --text-light: #8E8E93;
-      --gray-900: #1C1C1E;
-      --gray-600: #48484A;
-      --gray-500: #636366;
-      --shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.08);
-      --shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.1);
+      --text-muted: #8E8E93;
+      --accent: #737BF2;
+      
+      --color-black: #000000;
+      --color-high: #FFC107;   
+      --color-low: #EF4444;    
+      
+      --font-stack: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* Font Import */
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background-color: var(--bg-page);
+      margin: 0;
+      padding: 0;
+      /* Background for the whole page (behind the card) */
+      background-color: #E8E8ED; 
+      font-family: var(--font-stack);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
+      height: 100vh;
       color: var(--text-dark);
-      padding: 40px;
     }
 
-    .logo {
-      margin-bottom: 32px;
-    }
-
-    .logo img {
-      height: 32px;
-      width: auto;
-    }
-
-    .card {
-      background: var(--bg-card);
+    .dashboard-card {
+      /* Binder Page Dimensions & Style */
+      width: 1000px;
+      height: 700px;
+      /* Responsive fallback */
+      max-width: 95vw;
+      max-height: 95vh;
+      
+      background: var(--bg-paper);
       border-radius: 24px;
-      box-shadow: var(--shadow-medium);
-      overflow: hidden;
+      box-shadow: 0 8px 60px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.08);
+      
+      padding: 48px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
       position: relative;
     }
 
-    .card-header {
-      position: absolute;
-      top: 20px;
-      left: 24px;
-      z-index: 10;
-      pointer-events: none;
+    /* 1. TOP IMAGE */
+    .top-image-container {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 8px;
+    }
+    .logo-img {
+      height: 36px; 
+      width: auto;
+      display: block;
+      opacity: 0.9;
     }
 
-    .card-header h2 {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 1.1em;
+    /* 2. HEADER */
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end; 
+      padding: 0 4px;
+    }
+
+    .glucose-display {
+      display: flex;
+      align-items: flex-end; 
+      gap: 20px;
+    }
+
+    .glucose-group {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1;
+    }
+
+    .glucose-value {
+      font-size: 110px; 
+      font-weight: 800;
+      color: var(--color-black);
+      letter-spacing: -4px;
+      font-variant-numeric: tabular-nums;
+      margin-bottom: -10px; 
+    }
+
+    .glucose-unit {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-left: 8px;
+      margin-top: 12px; 
+    }
+
+    .trend-arrow {
+      font-size: 64px;
+      color: var(--text-muted);
       font-weight: 700;
-      color: var(--gray-900);
-      margin: 0;
+      margin-bottom: 12px; 
     }
 
-    .card-header .time {
-      font-size: 0.85em;
-      color: var(--gray-500);
-      margin-top: 4px;
-      font-weight: 500;
+    .time-container {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding-bottom: 12px;
+    }
+
+    .time-label {
+      font-size: 14px;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .current-time {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--text-dark);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* 3. CHART */
+    .chart-wrapper {
+      flex: 1;
+      position: relative;
+      width: 100%;
+      min-height: 0; /* Flexbox trick */
     }
 
     canvas {
       display: block;
-    }
-
-    .caption {
-      margin-top: 24px;
-      font-size: 0.9em;
-      color: var(--gray-500);
-      text-align: center;
-      font-weight: 500;
+      width: 100%;
+      height: 100%;
     }
   </style>
 </head>
 <body>
 
-  <div class="logo">
-    <img src="../pitchdeck/dossi-wordmark.png" alt="Dossi">
-  </div>
-
-  <div class="card">
-    <div class="card-header">
-      <h2>Daily Glucose Rhythm</h2>
-      <div class="time" id="timeDisplay">--:--</div>
+  <div class="dashboard-card">
+    
+    <div class="top-image-container">
+      <img src="dossi-wordmark.png" alt="dossi" class="logo-img">
     </div>
-    <canvas id="chartCanvas" width="900" height="360"></canvas>
-  </div>
 
-  <p class="caption">Simulated 24-hour continuous glucose monitoring</p>
+    <div class="header-row">
+      <div class="glucose-display">
+        <div class="glucose-group">
+          <div class="glucose-value" id="bgValue">--</div>
+          <div class="glucose-unit">mg/dL</div>
+        </div>
+        <div class="trend-arrow" id="trendArrow">--</div>
+      </div>
+      
+      <div class="time-container">
+        <div class="time-label">Time</div>
+        <div class="current-time" id="timeValue">--:--</div>
+      </div>
+    </div>
+
+    <div class="chart-wrapper">
+      <canvas id="cgmChart"></canvas>
+    </div>
+
+  </div>
 
   <script>
     /**
      * CONFIGURATION
      */
     const CONFIG = {
-      minutesPerFrame: 2,
-      hoursVisible: 6,
-      baseGlucose: 110,
-      targetMin: 70,
-      targetMax: 180,
+      minutesPerFrame: 0.5, 
+      hoursVisible: 4,
 
-      cBackground: '#ffffff',
-      cGrid: '#e2e8f0',
-      cTargetBand: '#f0fdf4',
-      cLine: '#737BF2',
-      cLineShadow: 'rgba(115, 123, 242, 0.2)',
-      cText: '#94a3b8',
-      cEventSleep: 'rgba(71, 85, 105, 0.08)',
-      cEventExercise: 'rgba(245, 158, 11, 0.15)',
+      // UI Config
+      colors: {
+        bg: '#F5F5F8', // Matches paper bg
+        text: '#1a1a1a',     
+        dotInRange: '#000000', 
+        high: '#FFC107',     
+        low: '#EF4444',      
+        
+        targetBand: '#E5E5EA', // Slightly darker than bg
+        
+        // Lines
+        lineHigh: '#FFC107',   
+        lineLow: '#EF4444',    
+        
+        predictionLine: '#737BF2', // Accent color
+        
+        // Event Colors
+        eventFill: 'rgba(115, 123, 242, 0.1)', 
+        eventBorder: 'rgba(115, 123, 242, 0.4)',                 
+        eventText: '#5B63E0'                    
+      },
 
+      baseGlucose: 90, 
+      
+      // Events 
       events: [
-        { type: 'Sleep', start: 23, end: 7, color: 'rgba(71, 85, 105, 0.08)', label: 'Sleep' },
-        { type: 'Exercise', start: 17.5, end: 18.5, color: 'rgba(245, 158, 11, 0.15)', label: 'Run' }
+        { start: 23, end: 7, label: 'Sleep' },
+        { start: 7.0, end: 9.0, label: 'Breakfast' }, 
+        { start: 11.5, end: 14.0, label: 'Lunch' },   
+        { start: 17.0, end: 18.5, label: 'Exercise' },
+        { start: 19.0, end: 21.0, label: 'Dinner' }
       ],
-
+      
       meals: [
-        { time: 8.0, height: 60, width: 1.5 },
-        { time: 12.5, height: 80, width: 2.0 },
-        { time: 19.0, height: 70, width: 2.5 }
+        { time: 8.0, height: 210, width: 1.2 }, 
+        { time: 12.5, height: 160, width: 2.0 }, 
+        { time: 20.0, height: 180, width: 2.5 }  
       ]
     };
 
+    /**
+     * MATH HELPERS
+     */
     function gaussian(x, peakTime, height, width) {
       let dx = x - peakTime;
       if (dx > 12) dx -= 24;
@@ -145,173 +242,271 @@
       return height * Math.exp(-(dx * dx) / (2 * (width * width / 4)));
     }
 
-    function getExerciseEffect(t) {
-      return -gaussian(t, 18, 40, 1.0);
-    }
-
-    function getPeriodicNoise(t) {
-      return Math.sin(t * 23) * 2 + Math.sin(t * 47) * 1.5 + Math.sin(t * 13) * 2;
-    }
-
+    // 1. ACTUAL GLUCOSE
     function getGlucoseAtTime(t) {
       const tMod = ((t % 24) + 24) % 24;
-      const circadian = Math.sin((tMod - 0) * (Math.PI / 12)) * 10;
+      
+      const circadian = Math.sin((tMod - 4) * (Math.PI / 12)) * 10; 
+      
       let mealImpact = 0;
-      CONFIG.meals.forEach(m => {
-        mealImpact += gaussian(tMod, m.time, m.height, m.width);
-      });
-      const exerciseImpact = getExerciseEffect(tMod);
-      const noise = getPeriodicNoise(tMod);
+      CONFIG.meals.forEach(m => mealImpact += gaussian(tMod, m.time, m.height, m.width));
+      
+      // Exercise Crash
+      const exerciseImpact = -gaussian(tMod, 18.0, 75, 0.7); 
+      
+      const noise = Math.sin(tMod * 25) * 4 + Math.sin(tMod * 40) * 2;
+      
       return CONFIG.baseGlucose + circadian + mealImpact + exerciseImpact + noise;
     }
 
-    const canvas = document.getElementById('chartCanvas');
-    const ctx = canvas.getContext('2d', { alpha: false });
-    const timeDisplay = document.getElementById('timeDisplay');
+    // 2. PREDICTION GLUCOSE
+    function getPredictionAtTime(t) {
+      const tMod = ((t % 24) + 24) % 24;
+      const circadian = Math.sin((tMod - 4) * (Math.PI / 12)) * 8; 
+
+      let mealImpact = 0;
+      CONFIG.meals.forEach(m => {
+        mealImpact += gaussian(tMod, m.time, m.height * 0.4, m.width);
+      });
+
+      const exerciseImpact = -gaussian(tMod, 18.0, 20, 1.5);
+      
+      return CONFIG.baseGlucose + circadian + mealImpact + exerciseImpact - 5;
+    }
+
+    function getTrendArrow(t) {
+      const current = getGlucoseAtTime(t);
+      const prev = getGlucoseAtTime(t - (10/60)); 
+      const delta = current - prev;
+      if (delta > 8) return '↑'; 
+      if (delta > 3) return '↗';
+      if (delta < -8) return '↓'; 
+      if (delta < -3) return '↘';
+      return '→';
+    }
+
+    /**
+     * ENGINE
+     */
+    const canvas = document.getElementById('cgmChart');
+    const ctx = canvas.getContext('2d');
+    
+    const elBgValue = document.getElementById('bgValue');
+    const elTrend = document.getElementById('trendArrow');
+    const elTime = document.getElementById('timeValue');
 
     let currentTime = 8.0;
-
-    const width = canvas.width;
-    const height = canvas.height;
+    let lastDomUpdateT = -1;
 
     const Y_MAX = 350;
-    const Y_MIN = 40;
+    const Y_MIN = 40; 
     function mapY(val) {
-      return height - ((val - Y_MIN) / (Y_MAX - Y_MIN)) * height;
+      return (canvas.height / window.devicePixelRatio) - ((val - Y_MIN) / (Y_MAX - Y_MIN)) * (canvas.height / window.devicePixelRatio);
+    }
+
+    let width, height; 
+    function resize() {
+      const parent = canvas.parentElement;
+      const dpr = window.devicePixelRatio || 1;
+      const rect = parent.getBoundingClientRect();
+      width = rect.width;
+      height = rect.height;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.resetTransform(); 
+      ctx.scale(dpr, dpr);
+    }
+    window.addEventListener('resize', resize);
+    resize();
+
+    // Helper: Rounded Rect
+    function roundRectPath(ctx, x, y, w, h, radius) {
+      if (w < 2 * radius) radius = w / 2;
+      if (h < 2 * radius) radius = h / 2;
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.arcTo(x + w, y, x + w, y + h, radius);
+      ctx.arcTo(x + w, y + h, x, y + h, radius);
+      ctx.arcTo(x, y + h, x, y, radius);
+      ctx.arcTo(x, y, x + w, y, radius);
+      ctx.closePath();
     }
 
     function draw() {
       currentTime += (CONFIG.minutesPerFrame / 60);
-      if (currentTime > 10000) currentTime %= 24;
+      if (currentTime > 100) currentTime %= 24;
 
-      ctx.fillStyle = CONFIG.cBackground;
-      ctx.fillRect(0, 0, width, height);
+      ctx.clearRect(0, 0, width, height);
 
-      const yTargetTop = mapY(CONFIG.targetMax);
-      const yTargetBottom = mapY(CONFIG.targetMin);
-      ctx.fillStyle = CONFIG.cTargetBand;
-      ctx.fillRect(0, yTargetTop, width, yTargetBottom - yTargetTop);
+      const GRAPH_RIGHT_BOUNDARY = width - 60;
+
+      // --- LAYER 1: Grid & Limits ---
+      const y250 = mapY(250);
+      const y180 = mapY(180);
+      const y55  = mapY(55);
+
+      const y70 = mapY(70); 
+      ctx.fillStyle = CONFIG.colors.targetBand;
+      ctx.fillRect(0, y180, width, y70 - y180);
+
+      ctx.lineWidth = 1;
+      
+      // High Limit
+      ctx.beginPath();
+      ctx.moveTo(0, y250); ctx.lineTo(width, y250);
+      ctx.strokeStyle = CONFIG.colors.lineHigh;
+      ctx.stroke();
+
+      // Low Limit
+      ctx.beginPath();
+      ctx.moveTo(0, y55); ctx.lineTo(width, y55);
+      ctx.strokeStyle = CONFIG.colors.lineLow;
+      ctx.stroke();
 
       const viewEnd = currentTime;
       const viewStart = viewEnd - CONFIG.hoursVisible;
 
+      // --- LAYER 2: Events ---
       CONFIG.events.forEach(ev => {
-        if (ev.start > ev.end) {
-          [-24, 0, 24].forEach(offset => {
-             drawEventRect(ev, viewStart, viewEnd, ev.start + offset, ev.end + offset + (ev.start > ev.end ? 24 : 0));
-          });
-        } else {
-          [-24, 0, 24].forEach(offset => {
-            drawEventRect(ev, viewStart, viewEnd, ev.start + offset, ev.end + offset);
-          });
+        const drawStart = Math.max(viewStart, ev.start);
+        const drawEnd = Math.min(viewEnd, ev.end);
+
+        if (drawStart < drawEnd) {
+          const realX1 = ((ev.start - viewStart) / CONFIG.hoursVisible) * GRAPH_RIGHT_BOUNDARY;
+          const realX2 = ((ev.end - viewStart) / CONFIG.hoursVisible) * GRAPH_RIGHT_BOUNDARY;
+
+          ctx.save();
+          ctx.beginPath();
+          ctx.rect(0, 0, GRAPH_RIGHT_BOUNDARY, height); 
+          ctx.clip();
+          
+          roundRectPath(ctx, realX1, 0, realX2 - realX1, height, 16);
+          ctx.fillStyle = CONFIG.colors.eventFill;
+          ctx.fill();
+
+          ctx.lineWidth = 2;
+          ctx.strokeStyle = CONFIG.colors.eventBorder;
+          ctx.stroke();
+
+          // Title
+          const visibleLeft = Math.max(0, realX1);
+          const visibleRight = Math.min(GRAPH_RIGHT_BOUNDARY, realX2);
+          const centerX = (visibleLeft + visibleRight) / 2;
+          
+          if (visibleRight - visibleLeft > 40) {
+            ctx.fillStyle = CONFIG.colors.eventText;
+            ctx.font = '800 14px -apple-system, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'top'; 
+            ctx.fillText(ev.label.toUpperCase(), centerX, 12);
+          }
+          ctx.restore();
         }
       });
 
-      drawGrid();
 
+      // --- LAYER 3: Prediction Line ---
+      // UPDATED: Now goes all the way (no * 2/3 limit)
       ctx.beginPath();
-      ctx.lineWidth = 4;
+      // Draw to full graph width
+      const predLimitX = GRAPH_RIGHT_BOUNDARY; 
+      
+      for (let x = 0; x <= predLimitX; x += 2) {
+        const t = viewStart + (x / GRAPH_RIGHT_BOUNDARY) * CONFIG.hoursVisible;
+        const val = getPredictionAtTime(t);
+        const y = mapY(val);
+        if (x===0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = CONFIG.colors.predictionLine;
+      ctx.lineWidth = 3; 
       ctx.lineCap = 'round';
-      ctx.lineJoin = 'round';
-      ctx.strokeStyle = CONFIG.cLine;
+      ctx.stroke();
 
-      const stepPixels = 2;
-      let first = true;
 
-      for (let x = 0; x <= width; x += stepPixels) {
-        const t = viewStart + (x / width) * CONFIG.hoursVisible;
-        const glucose = getGlucoseAtTime(t);
-        const y = mapY(glucose);
+      // --- LAYER 4: The DOTS ---
+      let lastDotValue = 0;
+      const minutesPerDot = 5;
+      const hoursPerDot = minutesPerDot / 60;
+      let tLoop = Math.floor(viewStart / hoursPerDot) * hoursPerDot;
+      
+      while (tLoop <= viewEnd) {
+        if (tLoop >= viewStart) {
+          const glucose = getGlucoseAtTime(tLoop);
+          const x = ((tLoop - viewStart) / CONFIG.hoursVisible) * GRAPH_RIGHT_BOUNDARY;
+          
+          let y = mapY(glucose);
+          let isClippedLow = false;
+          
+          if (glucose < 40) {
+             y = height - 6; 
+             isClippedLow = true;
+          }
 
-        if (first) {
-          ctx.moveTo(x, y);
-          first = false;
-        } else {
-          ctx.lineTo(x, y);
+          if (x <= GRAPH_RIGHT_BOUNDARY) {
+            ctx.beginPath();
+            ctx.arc(x, y, 4, 0, Math.PI * 2);
+            
+            if (glucose > 180) ctx.fillStyle = CONFIG.colors.high;
+            else if (glucose < 70) ctx.fillStyle = CONFIG.colors.low;
+            else ctx.fillStyle = CONFIG.colors.dotInRange; 
+            
+            ctx.fill();
+            
+            if (isClippedLow) {
+                ctx.strokeStyle = CONFIG.colors.low;
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+
+            lastDotValue = glucose;
+          }
         }
+        tLoop += hoursPerDot;
       }
 
-      ctx.stroke();
-
-      ctx.save();
-      ctx.lineWidth = 8;
-      ctx.strokeStyle = CONFIG.cLineShadow;
-      ctx.stroke();
-      ctx.restore();
-
-      const nowVal = getGlucoseAtTime(viewEnd);
-      const nowY = mapY(nowVal);
-
-      ctx.beginPath();
-      ctx.arc(width - 4, nowY, 6, 0, Math.PI * 2);
-      ctx.fillStyle = CONFIG.cLine;
-      ctx.fill();
-      ctx.strokeStyle = '#fff';
-      ctx.lineWidth = 2;
-      ctx.stroke();
-
-      ctx.font = 'bold 14px Inter, sans-serif';
-      ctx.fillStyle = CONFIG.cLine;
-      ctx.textAlign = 'right';
-      ctx.fillText(Math.round(nowVal).toString(), width - 15, nowY - 15);
-
-      updateTimeDisplay(currentTime);
+      // --- LAYER 5: DOM Updates ---
+      const updateInterval = 0.25; 
+      if (lastDomUpdateT < 0 || (currentTime - lastDomUpdateT) >= updateInterval) {
+        updateDOM(currentTime, lastDotValue);
+        lastDomUpdateT = currentTime;
+      }
 
       requestAnimationFrame(draw);
     }
 
-    function drawEventRect(ev, viewStart, viewEnd, evStartAbs, evEndAbs) {
-      const drawStart = Math.max(viewStart, evStartAbs);
-      const drawEnd = Math.min(viewEnd, evEndAbs);
+    function updateDOM(t, valToDisplay) {
+      const val = Math.round(valToDisplay || getGlucoseAtTime(t));
+      
+      elBgValue.innerText = val < 40 ? "LOW" : val;
+      elTrend.innerText = getTrendArrow(t);
 
-      if (drawStart < drawEnd) {
-        const x1 = ((drawStart - viewStart) / CONFIG.hoursVisible) * width;
-        const x2 = ((drawEnd - viewStart) / CONFIG.hoursVisible) * width;
-
-        ctx.fillStyle = ev.color;
-        ctx.fillRect(x1, 0, x2 - x1, height);
-
-        if (ev.label && (x2 - x1 > 20)) {
-           ctx.fillStyle = CONFIG.cText;
-           ctx.font = '10px Inter, sans-serif';
-           ctx.textAlign = 'center';
-           ctx.fillText(ev.label.toUpperCase(), x1 + (x2-x1)/2, 20);
-        }
+      if (val > 180) {
+        elBgValue.style.color = CONFIG.colors.high;
+        elTrend.style.color = CONFIG.colors.high;
+      } else if (val < 70) {
+        elBgValue.style.color = CONFIG.colors.low;
+        elTrend.style.color = CONFIG.colors.low;
+      } else {
+        elBgValue.style.color = CONFIG.colors.text; 
+        elTrend.style.color = CONFIG.colors.text; 
       }
-    }
 
-    function drawGrid() {
-      const ticks = [70, 180, 250];
-      ctx.textAlign = 'right';
-      ctx.textBaseline = 'middle';
-      ctx.font = '11px Inter, sans-serif';
-
-      ticks.forEach(val => {
-        const y = mapY(val);
-
-        ctx.beginPath();
-        ctx.moveTo(0, y);
-        ctx.lineTo(width, y);
-        ctx.strokeStyle = CONFIG.cGrid;
-        ctx.lineWidth = 1;
-        ctx.setLineDash([4, 4]);
-        ctx.stroke();
-        ctx.setLineDash([]);
-
-        ctx.fillStyle = CONFIG.cText;
-        ctx.fillText(val, width - 6, y - 8);
-      });
-    }
-
-    function updateTimeDisplay(t) {
       let tMod = ((t % 24) + 24) % 24;
-      const hours = Math.floor(tMod);
-      const minutes = Math.floor((tMod - hours) * 60);
+      const snapMinutes = 15;
+      const totalMinutes = Math.floor(tMod * 60);
+      const roundedMinutes = Math.floor(totalMinutes / snapMinutes) * snapMinutes;
+      const h = Math.floor(roundedMinutes / 60);
+      const m = roundedMinutes % 60;
+      const ampm = h >= 12 ? 'PM' : 'AM';
+      const h12 = h % 12 || 12; 
       const pad = n => n.toString().padStart(2, '0');
-      timeDisplay.innerText = `${pad(hours)}:${pad(minutes)}`;
+      
+      elTime.innerText = `${h12}:${pad(m)} ${ampm}`;
     }
 
     requestAnimationFrame(draw);
+
   </script>
 </body>
 </html>
