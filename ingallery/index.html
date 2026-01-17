@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dossi — Slide Gallery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        :root {
+            --accent: #737BF2;
+            --accent-light: rgba(115, 123, 242, 0.15);
+            --text-dark: #1a1a1a;
+            --text-medium: #4a4a4a;
+            --text-light: #8E8E93;
+            --bg-paper: #F5F5F8;
+            --bg-card: #EDEDF0;
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: #E8E8ED;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        /* Gallery View */
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .gallery-header h1 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.3em;
+        }
+
+        .gallery-header p {
+            color: var(--text-light);
+            font-size: 1.1em;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .gallery-item {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(115, 123, 242, 0.2);
+        }
+
+        .gallery-preview {
+            width: 100%;
+            height: 200px;
+            background: var(--bg-paper);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .gallery-preview .mini-slide {
+            transform: scale(0.28);
+            transform-origin: center center;
+            width: 1100px;
+            height: 700px;
+            pointer-events: none;
+        }
+
+        .gallery-info {
+            padding: 20px;
+        }
+
+        .gallery-info h3 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin: 0 0 0.3em 0;
+        }
+
+        .gallery-info p {
+            font-size: 0.9em;
+            color: var(--text-light);
+            margin: 0;
+        }
+
+        /* Slide Overlay */
+        .slide-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .slide-overlay.active {
+            display: flex;
+        }
+
+        .slide-frame {
+            width: 1100px;
+            height: 700px;
+            background: var(--bg-paper);
+            border-radius: 24px;
+            box-shadow: 0 8px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+            transform: scale(var(--overlay-scale, 0.85));
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            background: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4em;
+            color: var(--text-medium);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+            z-index: 1001;
+            transition: transform 0.2s ease;
+        }
+
+        .close-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .esc-hint {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.85em;
+            color: var(--text-medium);
+            z-index: 1001;
+        }
+
+        .esc-hint kbd {
+            background: var(--bg-card);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            margin-right: 4px;
+        }
+
+        /* ===== Slide Styles ===== */
+        .slide {
+            width: 100%;
+            height: 100%;
+            padding: 50px 60px;
+            background: var(--bg-paper);
+            position: relative;
+        }
+
+        .slide h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75em;
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 0.8em;
+        }
+
+        .slide h2 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2.4em;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5em;
+            line-height: 1.1;
+        }
+
+        .slide p {
+            font-size: 1.15em;
+            line-height: 1.7;
+            color: var(--text-medium);
+            margin-bottom: 0.6em;
+        }
+
+        .slide strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        /* Tables */
+        .slide table {
+            font-size: 0.95em;
+            margin: 1em 0;
+            border-collapse: separate;
+            border-spacing: 0;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        .slide th {
+            background: linear-gradient(90deg, rgba(115, 123, 242, 1.0), rgba(115, 123, 242, 0.6));
+            color: white;
+            padding: 1em 1.6em;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .slide td {
+            padding: 1em 1.6em;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            color: var(--text-medium);
+        }
+
+        .slide tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Step items */
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 1em;
+            padding: 1em 1.5em;
+            margin: 0.8em 0;
+            border-radius: 100px;
+            background: white;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .step-num {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 1.4em;
+            color: var(--accent);
+            flex-shrink: 0;
+            min-width: 1.2em;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-content strong {
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .step-content span {
+            color: var(--text-medium);
+        }
+
+        /* Photo Meal slide */
+        .photo-meal-slide {
+            position: relative;
+        }
+
+        .nutrition-phone {
+            position: absolute;
+            left: 60px;
+            bottom: -30px;
+            width: 280px;
+            z-index: 10;
+        }
+
+        .nutrition-phone img {
+            width: 100%;
+            height: auto;
+        }
+
+        .photo-steps {
+            margin-top: 2.5em;
+            margin-left: 330px;
+            max-width: 400px;
+        }
+
+        .photo-step {
+            display: flex;
+            align-items: center;
+            gap: 0.8em;
+            padding: 0.8em 1.2em;
+            margin: 0.6em 0;
+            background: white;
+            border-radius: 100px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            font-size: 1em;
+            color: var(--text-dark);
+        }
+
+        .photo-step .step-num {
+            font-size: 1.2em;
+        }
+
+        /* Basal Rate slide */
+        .basal-timeline {
+            display: flex;
+            gap: 12px;
+            margin-top: 1.5em;
+            align-items: flex-end;
+        }
+
+        .basal-period {
+            flex: 1;
+            text-align: center;
+        }
+
+        .period-time {
+            font-size: 0.75em;
+            color: var(--text-light);
+            margin-bottom: 0.5em;
+            font-weight: 600;
+        }
+
+        .period-bar {
+            width: 100%;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 0.5em;
+        }
+
+        .period-bar.low {
+            height: 60px;
+            background: linear-gradient(180deg, #C7CAFC, #A5ABFA);
+        }
+
+        .period-bar.medium {
+            height: 90px;
+            background: linear-gradient(180deg, #8B92F7, #737BF2);
+        }
+
+        .period-bar.high {
+            height: 130px;
+            background: linear-gradient(180deg, #5B63E0, #4338CA);
+        }
+
+        .period-label {
+            font-size: 0.8em;
+            font-weight: 600;
+            color: var(--text-dark);
+            line-height: 1.3;
+        }
+
+        .period-label span {
+            font-weight: 400;
+            color: var(--text-light);
+            font-size: 0.9em;
+        }
+
+        /* Learning Loop slide */
+        .learning-loop-slide {
+            position: relative;
+        }
+
+        .loop-circle {
+            position: absolute;
+            top: 180px;
+            right: 80px;
+            width: 250px;
+            height: auto;
+        }
+
+        .slide-footer {
+            margin-top: 1em;
+            font-style: italic;
+            color: var(--text-light);
+            font-size: 1em;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Gallery View -->
+    <div class="gallery-container">
+        <div class="gallery-header">
+            <h1>Slide Gallery</h1>
+            <p>Click a slide to view full size. Press <kbd>Esc</kbd> to return.</p>
+        </div>
+        <div class="gallery-grid">
+            <!-- 1. Photo Meal Recognition -->
+            <div class="gallery-item" data-slide="photo-meal">
+                <div class="gallery-preview">
+                    <div class="mini-slide slide photo-meal-slide">
+                        <h3>How It Works</h3>
+                        <h2>Photo Meal Recognition</h2>
+                        <div class="photo-steps">
+                            <div class="photo-step"><span class="step-num">1.</span><span>Snap a photo of any meal</span></div>
+                            <div class="photo-step"><span class="step-num">2.</span><span>AI identifies individual foods</span></div>
+                            <div class="photo-step"><span class="step-num">3.</span><span>Estimates carbs, protein, fat, fiber</span></div>
+                        </div>
+                        <div class="nutrition-phone">
+                            <img src="nutrition-tracker.png" alt="Nutrition Tracker">
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-info">
+                    <h3>Photo Meal Recognition</h3>
+                    <p>AI-powered food identification</p>
+                </div>
+            </div>
+
+            <!-- 2. Personalized From Day One -->
+            <div class="gallery-item" data-slide="personalized">
+                <div class="gallery-preview">
+                    <div class="mini-slide slide">
+                        <h3>Getting Started</h3>
+                        <h2>Personalized From Day One</h2>
+                        <p style="font-size: 0.9em;">During onboarding, Dossi pulls your historical health data.</p>
+                        <table style="max-width: 500px; margin-top: 0.8em; font-size: 0.8em;">
+                            <thead><tr><th>Pattern</th><th>What It Learns</th></tr></thead>
+                            <tbody>
+                                <tr><td>Dawn Phenomenon</td><td>Morning glucose rise</td></tr>
+                                <tr><td>Exercise</td><td>Workout effects</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="gallery-info">
+                    <h3>Personalized From Day One</h3>
+                    <p>Historical data analysis during onboarding</p>
+                </div>
+            </div>
+
+            <!-- 3. Basal Rate Intelligence -->
+            <div class="gallery-item" data-slide="basal">
+                <div class="gallery-preview">
+                    <div class="mini-slide slide">
+                        <h3>Beyond Meals</h3>
+                        <h2>Basal Rate Intelligence</h2>
+                        <div class="basal-timeline" style="transform: scale(0.7); transform-origin: top left; margin-top: 0.8em;">
+                            <div class="basal-period"><div class="period-bar low"></div></div>
+                            <div class="basal-period"><div class="period-bar high"></div></div>
+                            <div class="basal-period"><div class="period-bar medium"></div></div>
+                            <div class="basal-period"><div class="period-bar medium"></div></div>
+                            <div class="basal-period"><div class="period-bar low"></div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="gallery-info">
+                    <h3>Basal Rate Intelligence</h3>
+                    <p>Learn daily insulin patterns</p>
+                </div>
+            </div>
+
+            <!-- 4. The Learning Loop -->
+            <div class="gallery-item" data-slide="learning-loop">
+                <div class="gallery-preview">
+                    <div class="mini-slide slide learning-loop-slide">
+                        <h3>How It Works</h3>
+                        <h2>The Learning Loop</h2>
+                        <img src="loop.png" alt="Learning loop" class="loop-circle" style="width: 120px; top: 80px; right: 40px;">
+                    </div>
+                </div>
+                <div class="gallery-info">
+                    <h3>The Learning Loop</h3>
+                    <p>Predict, observe, attribute, update</p>
+                </div>
+            </div>
+
+            <!-- 5. Intelligent Insulin Dosing -->
+            <div class="gallery-item" data-slide="intelligent">
+                <div class="gallery-preview">
+                    <div class="mini-slide slide learning-loop-slide">
+                        <h3>How It Works</h3>
+                        <h2>Intelligent Insulin Dosing</h2>
+                        <img src="loop.png" alt="Loop" class="loop-circle" style="width: 120px; top: 80px; right: 40px;">
+                    </div>
+                </div>
+                <div class="gallery-info">
+                    <h3>Intelligent Insulin Dosing</h3>
+                    <p>60+ factors, personalized recommendations</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide Overlay -->
+    <div class="slide-overlay" id="slideOverlay">
+        <button class="close-btn" onclick="closeSlide()"><i class="ph ph-x"></i></button>
+        <div class="slide-frame" id="slideFrame">
+            <!-- Slide content injected here -->
+        </div>
+        <div class="esc-hint"><kbd>Esc</kbd> to return to gallery</div>
+    </div>
+
+    <script>
+        // Slide content templates
+        const slides = {
+            'photo-meal': `
+                <div class="slide photo-meal-slide">
+                    <h3>How It Works</h3>
+                    <h2>Photo Meal Recognition</h2>
+                    <div class="photo-steps">
+                        <div class="photo-step"><span class="step-num">1.</span><span>Snap a photo of any meal</span></div>
+                        <div class="photo-step"><span class="step-num">2.</span><span>AI identifies individual foods</span></div>
+                        <div class="photo-step"><span class="step-num">3.</span><span>Estimates carbs, protein, fat, fiber</span></div>
+                        <div class="photo-step"><span class="step-num">4.</span><span>Models interaction of different macros</span></div>
+                        <div class="photo-step"><span class="step-num">5.</span><span>Suggests dosage</span></div>
+                    </div>
+                    <div class="nutrition-phone">
+                        <img src="nutrition-tracker.png" alt="Nutrition Tracker">
+                    </div>
+                </div>
+            `,
+            'personalized': `
+                <div class="slide">
+                    <h3>Getting Started</h3>
+                    <h2>Personalized From Day One</h2>
+                    <p>During onboarding, Dossi pulls your historical health data from phone records.</p>
+                    <table style="max-width: 650px; margin-top: 1em;">
+                        <thead>
+                            <tr><th>Pattern</th><th>What It Learns</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Dawn Phenomenon</td><td>Your <strong>morning glucose rise</strong> timing & magnitude</td></tr>
+                            <tr><td>Exercise Sensitivity</td><td>How <strong>workouts affect</strong> your insulin needs</td></tr>
+                            <tr><td>Basal Patterns</td><td>Your <strong>hourly insulin</strong> requirements</td></tr>
+                            <tr><td>Meal Response</td><td>Your <strong>food absorption</strong> rates by meal type</td></tr>
+                        </tbody>
+                    </table>
+                    <p style="margin-top: 0.8em; font-style: italic;">With <strong>14+ days</strong> of data, machine learning detects your patterns.</p>
+                </div>
+            `,
+            'basal': `
+                <div class="slide">
+                    <h3>Beyond Meals</h3>
+                    <h2>Basal Rate Intelligence</h2>
+                    <p>Dossi learns how your basal needs vary throughout the day and models optimal rate patterns.</p>
+                    <div class="basal-timeline">
+                        <div class="basal-period">
+                            <div class="period-time">12am – 4am</div>
+                            <div class="period-bar low"></div>
+                            <div class="period-label">Deep Sleep<br><span>Lower rates during rest</span></div>
+                        </div>
+                        <div class="basal-period">
+                            <div class="period-time">4am – 8am</div>
+                            <div class="period-bar high"></div>
+                            <div class="period-label">Dawn Phenomenon<br><span>Hormones spike glucose</span></div>
+                        </div>
+                        <div class="basal-period">
+                            <div class="period-time">8am – 12pm</div>
+                            <div class="period-bar medium"></div>
+                            <div class="period-label">Morning Active<br><span>Moderate baseline</span></div>
+                        </div>
+                        <div class="basal-period">
+                            <div class="period-time">12pm – 6pm</div>
+                            <div class="period-bar medium"></div>
+                            <div class="period-label">Afternoon<br><span>Activity-adjusted</span></div>
+                        </div>
+                        <div class="basal-period">
+                            <div class="period-time">6pm – 12am</div>
+                            <div class="period-bar low"></div>
+                            <div class="period-label">Evening Wind-down<br><span>Gradual reduction</span></div>
+                        </div>
+                    </div>
+                    <p class="slide-footer">Dossi learns YOUR unique patterns and shows how different factors affect your blood sugar.</p>
+                </div>
+            `,
+            'learning-loop': `
+                <div class="slide learning-loop-slide">
+                    <img src="loop.png" alt="Learning loop" class="loop-circle">
+                    <h3>How It Works</h3>
+                    <h2>The Learning Loop</h2>
+                    <p>Dossi learns by comparing what it expected to happen with what actually happened.</p>
+                    <div style="margin-top: 0.8em; min-width: 650px; max-width: 650px;">
+                        <div class="step-item"><span class="step-num">1.</span><div class="step-content"><strong>Predict</strong> <span>— Given this context, glucose should land at X</span></div></div>
+                        <div class="step-item"><span class="step-num">2.</span><div class="step-content"><strong>Observe</strong> <span>— Identifies delta between predicted vs actual</span></div></div>
+                        <div class="step-item"><span class="step-num">3.</span><div class="step-content"><strong>Attribute</strong> <span>— What factors were active?</span></div></div>
+                        <div class="step-item"><span class="step-num">4.</span><div class="step-content"><strong>Update</strong> <span>— Adjust personal sensitivity model for that factor</span></div></div>
+                    </div>
+                </div>
+            `,
+            'intelligent': `
+                <div class="slide learning-loop-slide">
+                    <img src="loop.png" alt="How Dossi works" class="loop-circle">
+                    <h3>How It Works</h3>
+                    <h2>Intelligent Insulin Dosing</h2>
+                    <p>Dossi continuously monitors 60+ factors and learns your unique patterns to provide personalized insulin recommendations.</p>
+                    <div style="margin-top: 0.8em; min-width: 650px; max-width: 650px;">
+                        <div class="step-item"><span class="step-num">1.</span><div class="step-content"><strong>Collect Context</strong> <span>— Glucose, meals, activity, sleep, stress, time of day</span></div></div>
+                        <div class="step-item"><span class="step-num">2.</span><div class="step-content"><strong>Predict Impact</strong> <span>— Machine learning forecasts glucose trajectory</span></div></div>
+                        <div class="step-item"><span class="step-num">3.</span><div class="step-content"><strong>Validate Safety</strong> <span>— 5-layer safety checks before every recommendation</span></div></div>
+                        <div class="step-item"><span class="step-num">4.</span><div class="step-content"><strong>Learn & Adapt</strong> <span>— Continuously refines based on your outcomes</span></div></div>
+                    </div>
+                </div>
+            `
+        };
+
+        // Scale overlay based on window size
+        function scaleOverlay() {
+            const frame = document.querySelector('.slide-frame');
+            const padding = 100;
+            const scaleX = (window.innerWidth - padding) / 1100;
+            const scaleY = (window.innerHeight - padding) / 700;
+            const scale = Math.min(scaleX, scaleY, 1);
+            document.documentElement.style.setProperty('--overlay-scale', scale);
+        }
+
+        // Open slide
+        function openSlide(slideId) {
+            const overlay = document.getElementById('slideOverlay');
+            const frame = document.getElementById('slideFrame');
+            frame.innerHTML = slides[slideId];
+            overlay.classList.add('active');
+            scaleOverlay();
+        }
+
+        // Close slide
+        function closeSlide() {
+            const overlay = document.getElementById('slideOverlay');
+            overlay.classList.remove('active');
+        }
+
+        // Click handlers
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const slideId = item.getAttribute('data-slide');
+                openSlide(slideId);
+            });
+        });
+
+        // Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeSlide();
+            }
+        });
+
+        // Click outside to close
+        document.getElementById('slideOverlay').addEventListener('click', (e) => {
+            if (e.target.id === 'slideOverlay') {
+                closeSlide();
+            }
+        });
+
+        // Resize handler
+        window.addEventListener('resize', scaleOverlay);
+    </script>
+</body>
+</html>
