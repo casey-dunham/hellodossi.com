@@ -234,7 +234,6 @@
       let mealImpact = 0;
       CONFIG.meals.forEach(m => mealImpact += gaussian(tMod, m.time, m.height, m.width));
       const exerciseImpact = -gaussian(tMod, 18.0, 75, 0.7); 
-      // Reduced noise amplitude significantly for label positioning
       const smoothNoise = Math.sin(tMod * 25) * 0.5; 
       return CONFIG.baseGlucose + circadian + mealImpact + exerciseImpact + smoothNoise;
     }
@@ -373,7 +372,6 @@
       }
       
       // --- SMOOTH LABEL LOGIC ---
-      // Use low-noise function for target position
       const targetG = mapY(getSmoothGlucoseAtTime(viewEnd));
       const targetD = mapY(getPredictionAtTime(viewEnd));
       
@@ -382,7 +380,6 @@
         smoothLabelD = targetD;
         isFirstFrame = false;
       } else {
-        // Lerp factor 0.05 for very smooth, heavy feel
         smoothLabelG += (targetG - smoothLabelG) * 0.05;
         smoothLabelD += (targetD - smoothLabelD) * 0.05;
       }
@@ -390,7 +387,6 @@
       let yG = smoothLabelG;
       let yD = smoothLabelD;
       
-      // Collision Avoidance (Slide apart if too close)
       const dist = Math.abs(yG - yD);
       const minDist = 16;
       if (dist < minDist) {
@@ -399,14 +395,12 @@
         else { yG += push; yD -= push; }
       }
       
-      ctx.font = '700 11px Inter'; // Use Inter for small labels
+      ctx.font = '700 11px Inter'; 
       ctx.textAlign = 'left';
       
-      // Glucose Label
       ctx.fillStyle = CONFIG.colors.text;
       ctx.fillText('GLUCOSE', GRAPH_RIGHT_BOUNDARY + 8, yG + 4);
       
-      // Dossi Label
       ctx.fillStyle = CONFIG.colors.predictionLine;
       ctx.fillText('WITH DOSSI', GRAPH_RIGHT_BOUNDARY + 8, yD + 4);
 
@@ -425,15 +419,15 @@
           ctx.rect(0, 0, graphRight, canvas.height); 
           ctx.clip();
           
-          // No outline stroke here, just fill
-          // Use activity color but faint
+          // Use rounded rect instead of fillRect
+          roundRectPath(ctx, x1, 0, x2 - x1, canvas.height, 16);
           ctx.fillStyle = CONFIG.colors.eventFill;
-          ctx.fillRect(x1, 0, x2 - x1, canvas.height);
+          ctx.fill();
 
           const centerX = x1 + ((x2 - x1) / 2);
           if (x2 > 0 && x1 < graphRight) {
             ctx.fillStyle = CONFIG.colors.eventText;
-            ctx.font = '700 13px Inter'; // Match pitch deck body font
+            ctx.font = '700 13px Inter'; 
             ctx.textAlign = 'center';
             ctx.textBaseline = 'top'; 
             ctx.fillText(ev.label.toUpperCase(), centerX, 12);
