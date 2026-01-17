@@ -310,16 +310,21 @@
       ctx.clearRect(0, 0, width, height);
       const GRAPH_RIGHT_BOUNDARY = width - 80;
 
+      // Target Range Gray Block (70-180)
       const y180 = mapY(180);
       const y70 = mapY(70); 
       ctx.fillStyle = CONFIG.colors.targetBand;
       ctx.fillRect(0, y180, width, y70 - y180);
 
-      // Lines
+      // Hyper Line (Yellow @ 250)
+      const y250 = mapY(250);
       ctx.lineWidth = 1;
-      ctx.beginPath(); ctx.moveTo(0, y180); ctx.lineTo(width, y180); 
+      ctx.beginPath(); ctx.moveTo(0, y250); ctx.lineTo(width, y250); 
       ctx.strokeStyle = CONFIG.colors.lineHigh; ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(0, y70); ctx.lineTo(width, y70);
+
+      // Hypo Line (Red @ 55)
+      const y55 = mapY(55);
+      ctx.beginPath(); ctx.moveTo(0, y55); ctx.lineTo(width, y55);
       ctx.strokeStyle = CONFIG.colors.lineLow; ctx.stroke();
 
       const viewEnd = currentTime;
@@ -419,7 +424,6 @@
           ctx.rect(0, 0, graphRight, canvas.height); 
           ctx.clip();
           
-          // Use rounded rect instead of fillRect
           roundRectPath(ctx, x1, 0, x2 - x1, canvas.height, 16);
           ctx.fillStyle = CONFIG.colors.eventFill;
           ctx.fill();
