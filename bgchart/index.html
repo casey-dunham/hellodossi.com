@@ -391,15 +391,12 @@
           ctx.fillStyle = CONFIG.colors.eventFill;
           ctx.fill();
 
-          // Removed the stroke/outline here per user request
-
           // Title - FIXED: Now centered on the block itself, not the visible window
           // This makes it move naturally with the chart (static relative to the block)
           const blockWidth = realX2 - realX1;
           const centerX = realX1 + (blockWidth / 2);
           
           // Only draw if the center is roughly within view or close to it
-          // actually, canvas clip() handles the drawing, but optimization prevents drawing way off screen
           if (realX2 > 0 && realX1 < GRAPH_RIGHT_BOUNDARY) {
             ctx.fillStyle = CONFIG.colors.eventText;
             ctx.font = '800 14px -apple-system, sans-serif';
@@ -461,7 +458,7 @@
     }
 
     function updateDOM(t) {
-      const snapMinutes = 30; 
+      const snapMinutes = 60; // Changed from 30 to 60
       let tMod = ((t % 24) + 24) % 24;
       const totalMinutes = Math.floor(tMod * 60);
       const roundedMinutes = Math.floor(totalMinutes / snapMinutes) * snapMinutes;
