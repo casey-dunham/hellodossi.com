@@ -905,6 +905,94 @@
             gap: 16px;
         }
 
+        /* Email Signup */
+        .email-signup {
+            padding: 80px 40px;
+            background: var(--bg-page);
+            text-align: center;
+        }
+
+        .email-signup-container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .email-signup h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75em;
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 12px;
+        }
+
+        .email-signup h2 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.8em;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--gray-900);
+        }
+
+        .email-signup p {
+            font-size: 1em;
+            color: var(--gray-600);
+            margin-bottom: 24px;
+        }
+
+        .email-form {
+            display: flex;
+            gap: 12px;
+            max-width: 420px;
+            margin: 0 auto;
+        }
+
+        .email-form input[type="email"] {
+            flex: 1;
+            padding: 16px 20px;
+            border: 2px solid var(--gray-200);
+            border-radius: 12px;
+            font-size: 1em;
+            font-family: inherit;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .email-form input[type="email"]:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(115, 123, 242, 0.15);
+        }
+
+        .email-form button {
+            padding: 16px 28px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            white-space: nowrap;
+        }
+
+        .email-form button:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+        }
+
+        .email-success {
+            display: none;
+            color: #10B981;
+            font-weight: 600;
+            margin-top: 16px;
+        }
+
+        .email-success.show {
+            display: block;
+        }
+
         /* Footer */
         .footer {
             padding: 40px;
@@ -1417,6 +1505,20 @@
         </div>
     </section>
 
+    <!-- Email Signup -->
+    <section class="email-signup">
+        <div class="email-signup-container">
+            <h3>Stay Updated</h3>
+            <h2>Be the first to know</h2>
+            <p>Sign up to receive updates about Dossi's development and launch.</p>
+            <form class="email-form" id="emailForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <input type="email" name="email" placeholder="Enter your email" required>
+                <button type="submit">Subscribe</button>
+            </form>
+            <p class="email-success" id="emailSuccess">Thanks for signing up! We'll keep you posted.</p>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-inner">
@@ -1539,6 +1641,37 @@
                 else if (text.includes('24')) { num.textContent = '24/7'; }
             });
         }, 800);
+
+        // Email form submission
+        const emailForm = document.getElementById('emailForm');
+        const emailSuccess = document.getElementById('emailSuccess');
+
+        emailForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(emailForm);
+            const submitBtn = emailForm.querySelector('button');
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+
+            try {
+                const response = await fetch(emailForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    emailForm.style.display = 'none';
+                    emailSuccess.classList.add('show');
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                submitBtn.textContent = 'Subscribe';
+                submitBtn.disabled = false;
+                alert('Something went wrong. Please try again.');
+            }
+        });
     </script>
 </body>
 </html>
