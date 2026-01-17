@@ -160,6 +160,23 @@
       width: 100%;
       height: 100%;
     }
+    
+    /* Full Screen Adjustments */
+    :fullscreen .dashboard-card,
+    :-webkit-full-screen .dashboard-card {
+      width: 100vw;
+      height: 100vh;
+      max-width: none;
+      max-height: none;
+      border-radius: 0;
+      padding: 64px;
+      box-shadow: none;
+    }
+    
+    :fullscreen body,
+    :-webkit-full-screen body {
+      background-color: var(--bg-paper);
+    }
   </style>
 </head>
 <body>
@@ -348,10 +365,27 @@
       const GRAPH_RIGHT_BOUNDARY = width - 60;
 
       // --- LAYER 1: Grid & Limits ---
+      const y250 = mapY(250);
       const y180 = mapY(180);
+      const y55  = mapY(55);
+
       const y70 = mapY(70); 
       ctx.fillStyle = CONFIG.colors.targetBand;
       ctx.fillRect(0, y180, width, y70 - y180);
+
+      ctx.lineWidth = 1;
+      
+      // High Limit
+      ctx.beginPath();
+      ctx.moveTo(0, y250); ctx.lineTo(width, y250);
+      ctx.strokeStyle = CONFIG.colors.lineHigh;
+      ctx.stroke();
+
+      // Low Limit
+      ctx.beginPath();
+      ctx.moveTo(0, y55); ctx.lineTo(width, y55);
+      ctx.strokeStyle = CONFIG.colors.lineLow;
+      ctx.stroke();
 
       const viewEnd = currentTime;
       const viewStart = viewEnd - CONFIG.hoursVisible;
@@ -373,13 +407,32 @@
           roundRectPath(ctx, realX1, 0, realX2 - realX1, height, 16);
           ctx.fillStyle = CONFIG.colors.eventFill;
           ctx.fill();
+
+          ctx.lineWidth = 2;
+          ctx.strokeStyle = CONFIG.colors.eventBorder;
+          ctx.stroke();
+
+          // Title
+          const visibleLeft = Math.max(0, realX1);
+          const visibleRight = Math.min(GRAPH_RIGHT_BOUNDARY, realX2);
+          const centerX = (visibleLeft + visibleRight) / 2;
+          
+          if (visibleRight - visibleLeft > 40) {
+            ctx.fillStyle = CONFIG.colors.eventText;
+            ctx.font = '800 14px -apple-system, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'top'; 
+            ctx.fillText(ev.label.toUpperCase(), centerX, 12);
+          }
           ctx.restore();
         }
       });
 
 
       // --- LAYER 3: Prediction Line ---
+      // UPDATED: Now goes all the way (no * 2/3 limit)
       ctx.beginPath();
+      // Draw to full graph width
       const predLimitX = GRAPH_RIGHT_BOUNDARY; 
       
       for (let x = 0; x <= predLimitX; x += 2) {
@@ -396,6 +449,7 @@
 
 
       // --- LAYER 4: The DOTS ---
+      let lastDotValue = 0;
       const minutesPerDot = 5;
       const hoursPerDot = minutesPerDot / 60;
       let tLoop = Math.floor(viewStart / hoursPerDot) * hoursPerDot;
@@ -404,8 +458,15 @@
         if (tLoop >= viewStart) {
           const glucose = getGlucoseAtTime(tLoop);
           const x = ((tLoop - viewStart) / CONFIG.hoursVisible) * GRAPH_RIGHT_BOUNDARY;
-          const y = mapY(glucose);
           
+          let y = mapY(glucose);
+          let isClippedLow = false;
+          
+          if (glucose < 40) {
+             y = height - 6; 
+             isClippedLow = true;
+          }
+
           if (x <= GRAPH_RIGHT_BOUNDARY) {
             ctx.beginPath();
             ctx.arc(x, y, 4, 0, Math.PI * 2);
@@ -415,23 +476,36 @@
             else ctx.fillStyle = CONFIG.colors.dotInRange; 
             
             ctx.fill();
+            
+            if (isClippedLow) {
+                ctx.strokeStyle = CONFIG.colors.low;
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+
+            lastDotValue = glucose;
           }
         }
         tLoop += hoursPerDot;
       }
 
       // --- LAYER 5: DOM Updates ---
-      updateDOM(currentTime);
+      const updateInterval = 0.25; 
+      if (lastDomUpdateT < 0 || (currentTime - lastDomUpdateT) >= updateInterval) {
+        updateDOM(currentTime, lastDotValue);
+        lastDomUpdateT = currentTime;
+      }
 
       requestAnimationFrame(draw);
     }
 
-    function updateDOM(t) {
-      const snapMinutes = 30; 
+    function updateDOM(t, valToDisplay) {
+      const snapMinutes = 30; // Changed from 15 to 30
       let tMod = ((t % 24) + 24) % 24;
       const totalMinutes = Math.floor(tMod * 60);
       const roundedMinutes = Math.floor(totalMinutes / snapMinutes) * snapMinutes;
       
+      // Calculate display values based on rounded time
       const displayTime = roundedMinutes / 60;
       const val = Math.round(getGlucoseAtTime(displayTime));
       
@@ -459,6 +533,7 @@
     }
 
     requestAnimationFrame(draw);
+
   </script>
 </body>
 </html>
