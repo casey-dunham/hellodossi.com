@@ -10,7 +10,7 @@
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
   <style>
@@ -26,14 +26,16 @@
       --color-high: #FFC107;   
       --color-low: #EF4444;    
       
-      --font-stack: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      /* Pitch Deck Font Stacks */
+      --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
     body {
       margin: 0;
       padding: 0;
       background-color: #E8E8ED; 
-      font-family: var(--font-stack);
+      font-family: var(--font-body);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -93,6 +95,7 @@
     }
 
     .glucose-value {
+      font-family: var(--font-heading);
       font-size: 110px; 
       font-weight: 800;
       color: var(--color-black);
@@ -124,45 +127,8 @@
       padding-bottom: 8px; 
     }
 
-    /* LEGEND - STACKED */
-    .legend {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      align-items: flex-end;
-    }
-    
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 13px;
-      font-weight: 800;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-    }
-    
-    .legend-icon.line {
-      width: 24px;
-      height: 4px;
-      background: var(--accent);
-      border-radius: 4px;
-    }
-    
-    .legend-icon.dots {
-      display: flex;
-      gap: 3px;
-    }
-    
-    .legend-icon.dots .dot {
-      width: 5px;
-      height: 5px;
-      background: var(--color-black);
-      border-radius: 50%;
-    }
-
     .current-time {
+      font-family: var(--font-heading);
       font-size: 36px;
       font-weight: 700;
       color: var(--text-dark);
@@ -200,21 +166,6 @@
       </div>
       
       <div class="right-header-group">
-        <div class="legend">
-          <div class="legend-item">
-            <div class="legend-icon dots">
-              <div class="dot"></div>
-              <div class="dot"></div>
-              <div class="dot"></div>
-            </div>
-            <span>Glucose</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-icon line"></div>
-            <span>With Dossi</span>
-          </div>
-        </div>
-
         <div class="time-container">
           <div class="current-time" id="timeValue">--:--</div>
         </div>
@@ -276,6 +227,18 @@
       return CONFIG.baseGlucose + circadian + mealImpact + exerciseImpact + noise;
     }
 
+    // Helper to get glucose without high-freq noise for smoother labels
+    function getSmoothGlucoseAtTime(t) {
+      const tMod = ((t % 24) + 24) % 24;
+      const circadian = Math.sin((tMod - 4) * (Math.PI / 12)) * 10; 
+      let mealImpact = 0;
+      CONFIG.meals.forEach(m => mealImpact += gaussian(tMod, m.time, m.height, m.width));
+      const exerciseImpact = -gaussian(tMod, 18.0, 75, 0.7); 
+      // Reduced noise amplitude significantly for label positioning
+      const smoothNoise = Math.sin(tMod * 25) * 0.5; 
+      return CONFIG.baseGlucose + circadian + mealImpact + exerciseImpact + smoothNoise;
+    }
+
     function getPredictionAtTime(t) {
       const tMod = ((t % 24) + 24) % 24;
       const circadian = Math.sin((tMod - 4) * (Math.PI / 12)) * 8; 
@@ -303,7 +266,11 @@
     const elTime = document.getElementById('timeValue');
 
     let currentTime = 8.0;
-    let lastDomUpdateT = -1;
+    
+    // Smoothing variables for labels
+    let smoothLabelG = 0;
+    let smoothLabelD = 0;
+    let isFirstFrame = true;
 
     const Y_MAX = 350;
     const Y_MIN = 40; 
@@ -405,21 +372,34 @@
         tLoop += hoursPerDot;
       }
       
-      // LABEL LOGIC (Continuous, Smooth, Non-Overlapping)
-      const nowG = getGlucoseAtTime(viewEnd);
-      const nowD = getPredictionAtTime(viewEnd);
+      // --- SMOOTH LABEL LOGIC ---
+      // Use low-noise function for target position
+      const targetG = mapY(getSmoothGlucoseAtTime(viewEnd));
+      const targetD = mapY(getPredictionAtTime(viewEnd));
       
-      let yG = mapY(nowG);
-      let yD = mapY(nowD);
-      
-      // Prevent overlap (16px threshold)
-      if (Math.abs(yG - yD) < 16) {
-        const mid = (yG + yD) / 2;
-        if (yG < yD) { yG = mid - 8; yD = mid + 8; }
-        else { yG = mid + 8; yD = mid - 8; }
+      if (isFirstFrame) {
+        smoothLabelG = targetG;
+        smoothLabelD = targetD;
+        isFirstFrame = false;
+      } else {
+        // Lerp factor 0.05 for very smooth, heavy feel
+        smoothLabelG += (targetG - smoothLabelG) * 0.05;
+        smoothLabelD += (targetD - smoothLabelD) * 0.05;
       }
       
-      ctx.font = '800 11px Plus Jakarta Sans';
+      let yG = smoothLabelG;
+      let yD = smoothLabelD;
+      
+      // Collision Avoidance (Slide apart if too close)
+      const dist = Math.abs(yG - yD);
+      const minDist = 16;
+      if (dist < minDist) {
+        const push = (minDist - dist) / 2;
+        if (yG < yD) { yG -= push; yD += push; }
+        else { yG += push; yD -= push; }
+      }
+      
+      ctx.font = '700 11px Inter'; // Use Inter for small labels
       ctx.textAlign = 'left';
       
       // Glucose Label
@@ -444,13 +424,16 @@
           ctx.beginPath();
           ctx.rect(0, 0, graphRight, canvas.height); 
           ctx.clip();
-          roundRectPath(ctx, x1, 0, x2 - x1, canvas.height, 16);
+          
+          // No outline stroke here, just fill
+          // Use activity color but faint
           ctx.fillStyle = CONFIG.colors.eventFill;
-          ctx.fill();
+          ctx.fillRect(x1, 0, x2 - x1, canvas.height);
+
           const centerX = x1 + ((x2 - x1) / 2);
           if (x2 > 0 && x1 < graphRight) {
             ctx.fillStyle = CONFIG.colors.eventText;
-            ctx.font = '800 14px Plus Jakarta Sans';
+            ctx.font = '700 13px Inter'; // Match pitch deck body font
             ctx.textAlign = 'center';
             ctx.textBaseline = 'top'; 
             ctx.fillText(ev.label.toUpperCase(), centerX, 12);
