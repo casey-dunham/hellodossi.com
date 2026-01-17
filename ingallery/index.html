@@ -178,35 +178,6 @@
             overflow: hidden;
         }
 
-        .back-btn {
-            position: fixed;
-            top: 30px;
-            left: 30px;
-            background: white;
-            border: none;
-            border-radius: 50px;
-            padding: 12px 24px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.95em;
-            font-weight: 500;
-            color: var(--text-medium);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-            z-index: 1001;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .back-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        .back-btn i {
-            font-size: 1.2em;
-        }
 
         /* ===== Slide Content Styles ===== */
         .slide {
@@ -216,6 +187,14 @@
             background: var(--bg-paper);
             position: relative;
             overflow: hidden;
+        }
+
+        .slide-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+            max-width: 950px;
         }
 
         .slide h3 {
@@ -511,10 +490,6 @@
 
     <!-- Slide View -->
     <div class="slide-view" id="slideView">
-        <button class="back-btn" onclick="closeSlide()">
-            <i class="ph ph-arrow-left"></i>
-            Back to Gallery
-        </button>
         <div class="binder-frame">
             <div class="binder-page" id="slideContent">
                 <!-- Slide content injected here -->
@@ -526,99 +501,109 @@
         const slides = {
             'photo-meal': `
                 <div class="slide photo-meal-slide">
-                    <h3>How It Works</h3>
-                    <h2>Photo Meal Recognition</h2>
-                    <div class="photo-steps">
-                        <div class="photo-step"><span class="step-num">1.</span><span>Snap a photo of any meal</span></div>
-                        <div class="photo-step"><span class="step-num">2.</span><span>AI identifies individual foods</span></div>
-                        <div class="photo-step"><span class="step-num">3.</span><span>Estimates carbs, protein, fat, fiber</span></div>
-                        <div class="photo-step"><span class="step-num">4.</span><span>Models interaction of different macros</span></div>
-                        <div class="photo-step"><span class="step-num">5.</span><span>Suggests dosage</span></div>
+                    <div class="slide-content" style="max-width: none;">
+                        <h3>How It Works</h3>
+                        <h2>Photo Meal Recognition</h2>
+                        <div class="photo-steps" style="margin-top: 2.5em; margin-left: 330px; max-width: 400px;">
+                            <div class="photo-step"><span class="step-num">1.</span><span>Snap a photo of any meal</span></div>
+                            <div class="photo-step"><span class="step-num">2.</span><span>AI identifies individual foods</span></div>
+                            <div class="photo-step"><span class="step-num">3.</span><span>Estimates carbs, protein, fat, fiber</span></div>
+                            <div class="photo-step"><span class="step-num">4.</span><span>Models interaction of different macros</span></div>
+                            <div class="photo-step"><span class="step-num">5.</span><span>Suggests dosage</span></div>
+                        </div>
                     </div>
                     <div class="nutrition-phone">
-                        <img src="nutrition-tracker.png" alt="Nutrition Tracker">
+                        <img src="../pitchdeck/nutrition-tracker.png" alt="Nutrition Tracker">
                     </div>
                 </div>
             `,
             'personalized': `
                 <div class="slide">
-                    <h3>Getting Started</h3>
-                    <h2>Personalized From Day One</h2>
-                    <p>During onboarding, Dossi pulls your historical health data from phone records.</p>
-                    <table style="max-width: 650px; margin-top: 1em;">
-                        <thead>
-                            <tr><th>Pattern</th><th>What It Learns</th></tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>Dawn Phenomenon</td><td>Your <strong>morning glucose rise</strong> timing & magnitude</td></tr>
-                            <tr><td>Exercise Sensitivity</td><td>How <strong>workouts affect</strong> your insulin needs</td></tr>
-                            <tr><td>Basal Patterns</td><td>Your <strong>hourly insulin</strong> requirements</td></tr>
-                            <tr><td>Meal Response</td><td>Your <strong>food absorption</strong> rates by meal type</td></tr>
-                        </tbody>
-                    </table>
-                    <p style="margin-top: 0.8em; font-style: italic;">With <strong>14+ days</strong> of data, machine learning detects your patterns.</p>
+                    <div class="slide-content">
+                        <h3>Getting Started</h3>
+                        <h2>Personalized From Day One</h2>
+                        <p>During onboarding, Dossi pulls your historical health data from phone records.</p>
+                        <table style="max-width: 650px; margin-top: 1em;">
+                            <thead>
+                                <tr><th>Pattern</th><th>What It Learns</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Dawn Phenomenon</td><td>Your <strong>morning glucose rise</strong> timing & magnitude</td></tr>
+                                <tr><td>Exercise Sensitivity</td><td>How <strong>workouts affect</strong> your insulin needs</td></tr>
+                                <tr><td>Basal Patterns</td><td>Your <strong>hourly insulin</strong> requirements</td></tr>
+                                <tr><td>Meal Response</td><td>Your <strong>food absorption</strong> rates by meal type</td></tr>
+                            </tbody>
+                        </table>
+                        <p style="margin-top: 0.8em; font-style: italic;">With <strong>14+ days</strong> of data, machine learning detects your patterns.</p>
+                    </div>
                 </div>
             `,
             'basal': `
                 <div class="slide">
-                    <h3>Beyond Meals</h3>
-                    <h2>Basal Rate Intelligence</h2>
-                    <p>Dossi learns how your basal needs vary throughout the day and models optimal rate patterns.</p>
-                    <div class="basal-timeline">
-                        <div class="basal-period">
-                            <div class="period-time">12am – 4am</div>
-                            <div class="period-bar low"></div>
-                            <div class="period-label">Deep Sleep<br><span>Lower rates during rest</span></div>
+                    <div class="slide-content" style="max-width: none;">
+                        <h3>Beyond Meals</h3>
+                        <h2>Basal Rate Intelligence</h2>
+                        <p>Dossi learns how your basal needs vary throughout the day and models optimal rate patterns.</p>
+                        <div class="basal-timeline">
+                            <div class="basal-period">
+                                <div class="period-time">12am – 4am</div>
+                                <div class="period-bar low"></div>
+                                <div class="period-label">Deep Sleep<br><span>Lower rates during rest</span></div>
+                            </div>
+                            <div class="basal-period">
+                                <div class="period-time">4am – 8am</div>
+                                <div class="period-bar high"></div>
+                                <div class="period-label">Dawn Phenomenon<br><span>Hormones spike glucose</span></div>
+                            </div>
+                            <div class="basal-period">
+                                <div class="period-time">8am – 12pm</div>
+                                <div class="period-bar medium"></div>
+                                <div class="period-label">Morning Active<br><span>Moderate baseline</span></div>
+                            </div>
+                            <div class="basal-period">
+                                <div class="period-time">12pm – 6pm</div>
+                                <div class="period-bar medium"></div>
+                                <div class="period-label">Afternoon<br><span>Activity-adjusted</span></div>
+                            </div>
+                            <div class="basal-period">
+                                <div class="period-time">6pm – 12am</div>
+                                <div class="period-bar low"></div>
+                                <div class="period-label">Evening Wind-down<br><span>Gradual reduction</span></div>
+                            </div>
                         </div>
-                        <div class="basal-period">
-                            <div class="period-time">4am – 8am</div>
-                            <div class="period-bar high"></div>
-                            <div class="period-label">Dawn Phenomenon<br><span>Hormones spike glucose</span></div>
-                        </div>
-                        <div class="basal-period">
-                            <div class="period-time">8am – 12pm</div>
-                            <div class="period-bar medium"></div>
-                            <div class="period-label">Morning Active<br><span>Moderate baseline</span></div>
-                        </div>
-                        <div class="basal-period">
-                            <div class="period-time">12pm – 6pm</div>
-                            <div class="period-bar medium"></div>
-                            <div class="period-label">Afternoon<br><span>Activity-adjusted</span></div>
-                        </div>
-                        <div class="basal-period">
-                            <div class="period-time">6pm – 12am</div>
-                            <div class="period-bar low"></div>
-                            <div class="period-label">Evening Wind-down<br><span>Gradual reduction</span></div>
-                        </div>
+                        <p class="slide-footer">Dossi learns YOUR unique patterns and shows how different factors affect your blood sugar.</p>
                     </div>
-                    <p class="slide-footer">Dossi learns YOUR unique patterns and shows how different factors affect your blood sugar.</p>
                 </div>
             `,
             'learning-loop': `
                 <div class="slide learning-loop-slide">
-                    <img src="loop.png" alt="Learning loop" class="loop-circle">
-                    <h3>How It Works</h3>
-                    <h2>The Learning Loop</h2>
-                    <p>Dossi learns by comparing what it expected to happen with what actually happened.</p>
-                    <div style="margin-top: 0.8em; min-width: 650px; max-width: 650px;">
-                        <div class="step-item"><span class="step-num">1.</span><div class="step-content"><strong>Predict</strong> <span>— Given this context, glucose should land at X</span></div></div>
-                        <div class="step-item"><span class="step-num">2.</span><div class="step-content"><strong>Observe</strong> <span>— Identifies delta between predicted vs actual</span></div></div>
-                        <div class="step-item"><span class="step-num">3.</span><div class="step-content"><strong>Attribute</strong> <span>— What factors were active?</span></div></div>
-                        <div class="step-item"><span class="step-num">4.</span><div class="step-content"><strong>Update</strong> <span>— Adjust personal sensitivity model for that factor</span></div></div>
+                    <img src="../pitchdeck/loop.png" alt="Learning loop" class="loop-circle">
+                    <div class="slide-content">
+                        <h3>How It Works</h3>
+                        <h2>The Learning Loop</h2>
+                        <p>Dossi learns by comparing what it expected to happen with what actually happened.</p>
+                        <div style="margin-top: 0.8em; min-width: 650px; max-width: 650px;">
+                            <div class="step-item"><span class="step-num">1.</span><div class="step-content"><strong>Predict</strong> <span>— Given this context, glucose should land at X</span></div></div>
+                            <div class="step-item"><span class="step-num">2.</span><div class="step-content"><strong>Observe</strong> <span>— Identifies delta between predicted vs actual</span></div></div>
+                            <div class="step-item"><span class="step-num">3.</span><div class="step-content"><strong>Attribute</strong> <span>— What factors were active?</span></div></div>
+                            <div class="step-item"><span class="step-num">4.</span><div class="step-content"><strong>Update</strong> <span>— Adjust personal sensitivity model for that factor</span></div></div>
+                        </div>
                     </div>
                 </div>
             `,
             'intelligent': `
                 <div class="slide learning-loop-slide">
-                    <img src="loop.png" alt="How Dossi works" class="loop-circle">
-                    <h3>How It Works</h3>
-                    <h2>Intelligent Insulin Dosing</h2>
-                    <p>Dossi continuously monitors 60+ factors and learns your unique patterns to provide personalized insulin recommendations.</p>
-                    <div style="margin-top: 0.8em; min-width: 650px; max-width: 650px;">
-                        <div class="step-item"><span class="step-num">1.</span><div class="step-content"><strong>Collect Context</strong> <span>— Glucose, meals, activity, sleep, stress, time of day</span></div></div>
-                        <div class="step-item"><span class="step-num">2.</span><div class="step-content"><strong>Predict Impact</strong> <span>— Machine learning forecasts glucose trajectory</span></div></div>
-                        <div class="step-item"><span class="step-num">3.</span><div class="step-content"><strong>Validate Safety</strong> <span>— 5-layer safety checks before every recommendation</span></div></div>
-                        <div class="step-item"><span class="step-num">4.</span><div class="step-content"><strong>Learn & Adapt</strong> <span>— Continuously refines based on your outcomes</span></div></div>
+                    <img src="../pitchdeck/loop.png" alt="How Dossi works" class="loop-circle">
+                    <div class="slide-content">
+                        <h3>How It Works</h3>
+                        <h2>Intelligent Insulin Dosing</h2>
+                        <p>Dossi continuously monitors 60+ factors and learns your unique patterns to provide personalized insulin recommendations.</p>
+                        <div style="margin-top: 0.8em; min-width: 650px; max-width: 650px;">
+                            <div class="step-item"><span class="step-num">1.</span><div class="step-content"><strong>Collect Context</strong> <span>— Glucose, meals, activity, sleep, stress, time of day</span></div></div>
+                            <div class="step-item"><span class="step-num">2.</span><div class="step-content"><strong>Predict Impact</strong> <span>— Machine learning forecasts glucose trajectory</span></div></div>
+                            <div class="step-item"><span class="step-num">3.</span><div class="step-content"><strong>Validate Safety</strong> <span>— 5-layer safety checks before every recommendation</span></div></div>
+                            <div class="step-item"><span class="step-num">4.</span><div class="step-content"><strong>Learn & Adapt</strong> <span>— Continuously refines based on your outcomes</span></div></div>
+                        </div>
                     </div>
                 </div>
             `

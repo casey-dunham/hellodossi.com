@@ -762,14 +762,31 @@
             object-fit: cover;
         }
 
-        .reveal section.present .team-photo { animation: scaleIn 0.5s ease-out both; }
+        /* Ensure photos stay visible after animation */
+        .team-photo {
+            opacity: 0;
+            transform: scale(0.8);
+        }
+
+        .reveal section.present .team-photo {
+            animation: scaleIn 0.5s ease-out forwards;
+        }
         .reveal section.present .team-photos .team-photo:nth-child(1) { animation-delay: 0.2s; }
         .reveal section.present .team-photos .team-photo:nth-child(2) { animation-delay: 0.35s; }
         .reveal section.present .team-photos .team-photo:nth-child(3) { animation-delay: 0.5s; }
 
+        /* Keep photos visible after viewing the slide */
+        .reveal section.past .team-photo,
+        .reveal section.future .team-photo {
+            opacity: 1;
+            transform: scale(1);
+        }
+
         /* ===== Path to Market Slide ===== */
         .path-slide {
             position: relative;
+            padding-left: 80px !important;
+            padding-bottom: 70px !important;
         }
 
         .path-slide .logo-stack {
@@ -1402,6 +1419,7 @@
                                 <img src="Medtronic-Logo.png" alt="Medtronic">
                                 <img src="Tandem_Logo_Mark_RGB.png" alt="Tandem">
                                 <img src="insulet.jpg" alt="Insulet">
+                                <img src="omnipod-logo.png" alt="Omnipod">
                             </div>
                         </div>
                         <div class="landscape-card dossi-card">
