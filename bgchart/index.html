@@ -123,12 +123,61 @@
       margin-bottom: 12px; 
     }
 
+    .right-header-group {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 16px;
+    }
+
+    /* LEGEND */
+    .legend {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+    
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .legend-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .legend-icon.line {
+      width: 24px;
+      height: 4px;
+      background: var(--accent);
+      border-radius: 4px;
+    }
+    
+    .legend-icon.dots {
+      gap: 4px;
+    }
+    
+    .legend-icon.dots .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--color-black);
+      border-radius: 50%;
+    }
+
     .time-container {
       text-align: right;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      padding-bottom: 12px;
     }
 
     .time-label {
@@ -196,9 +245,26 @@
         <div class="trend-arrow" id="trendArrow">--</div>
       </div>
       
-      <div class="time-container">
-        <div class="time-label">Time</div>
-        <div class="current-time" id="timeValue">--:--</div>
+      <div class="right-header-group">
+        <div class="legend">
+          <div class="legend-item">
+            <div class="legend-icon dots">
+              <div class="dot"></div>
+              <div class="dot"></div>
+              <div class="dot"></div>
+            </div>
+            <span>Glucose</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-icon line"></div>
+            <span>Dossi</span>
+          </div>
+        </div>
+
+        <div class="time-container">
+          <!-- <div class="time-label">Time</div> -->
+          <div class="current-time" id="timeValue">--:--</div>
+        </div>
       </div>
     </div>
 
@@ -370,41 +436,29 @@
       ctx.fillStyle = CONFIG.colors.targetBand;
       ctx.fillRect(0, y180, width, y70 - y180);
 
+      // Lines
+      ctx.lineWidth = 1;
+      ctx.beginPath(); ctx.moveTo(0, y180); ctx.lineTo(width, y180); 
+      ctx.strokeStyle = CONFIG.colors.lineHigh; ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(0, y70); ctx.lineTo(width, y70);
+      ctx.strokeStyle = CONFIG.colors.lineLow; ctx.stroke();
+
       const viewEnd = currentTime;
       const viewStart = viewEnd - CONFIG.hoursVisible;
 
-      // --- LAYER 2: Events ---
+      // --- LAYER 2: Events (With Wrap Logic) ---
       CONFIG.events.forEach(ev => {
-        const drawStart = Math.max(viewStart, ev.start);
-        const drawEnd = Math.min(viewEnd, ev.end);
-
-        if (drawStart < drawEnd) {
-          const realX1 = ((ev.start - viewStart) / CONFIG.hoursVisible) * GRAPH_RIGHT_BOUNDARY;
-          const realX2 = ((ev.end - viewStart) / CONFIG.hoursVisible) * GRAPH_RIGHT_BOUNDARY;
-
-          ctx.save();
-          ctx.beginPath();
-          ctx.rect(0, 0, GRAPH_RIGHT_BOUNDARY, height); 
-          ctx.clip();
-          
-          roundRectPath(ctx, realX1, 0, realX2 - realX1, height, 16);
-          ctx.fillStyle = CONFIG.colors.eventFill;
-          ctx.fill();
-
-          // Title - FIXED: Now centered on the block itself, not the visible window
-          // This makes it move naturally with the chart (static relative to the block)
-          const blockWidth = realX2 - realX1;
-          const centerX = realX1 + (blockWidth / 2);
-          
-          // Only draw if the center is roughly within view or close to it
-          if (realX2 > 0 && realX1 < GRAPH_RIGHT_BOUNDARY) {
-            ctx.fillStyle = CONFIG.colors.eventText;
-            ctx.font = '800 14px -apple-system, sans-serif';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'top'; 
-            ctx.fillText(ev.label.toUpperCase(), centerX, 12);
-          }
-          ctx.restore();
+        // Handle events that might wrap around (e.g. sleep 23 -> 7)
+        if (ev.start > ev.end) {
+          // Event wraps around midnight
+          [-24, 0, 24].forEach(offset => {
+             drawEventRect(ev, viewStart, viewEnd, ev.start + offset, ev.end + offset + 24, GRAPH_RIGHT_BOUNDARY);
+          });
+        } else {
+          // Standard event
+          [-24, 0, 24].forEach(offset => {
+            drawEventRect(ev, viewStart, viewEnd, ev.start + offset, ev.end + offset, GRAPH_RIGHT_BOUNDARY);
+          });
         }
       });
 
@@ -457,8 +511,40 @@
       requestAnimationFrame(draw);
     }
 
+    function drawEventRect(ev, viewStart, viewEnd, evStartAbs, evEndAbs, graphRight) {
+        const drawStart = Math.max(viewStart, evStartAbs);
+        const drawEnd = Math.min(viewEnd, evEndAbs);
+
+        if (drawStart < drawEnd) {
+          const x1 = ((drawStart - viewStart) / CONFIG.hoursVisible) * graphRight;
+          const x2 = ((drawEnd - viewStart) / CONFIG.hoursVisible) * graphRight;
+
+          ctx.save();
+          ctx.beginPath();
+          ctx.rect(0, 0, graphRight, canvas.height); 
+          ctx.clip();
+          
+          roundRectPath(ctx, x1, 0, x2 - x1, canvas.height, 16);
+          ctx.fillStyle = CONFIG.colors.eventFill;
+          ctx.fill();
+
+          // Title
+          const blockWidth = x2 - x1;
+          const centerX = x1 + (blockWidth / 2);
+          
+          if (x2 > 0 && x1 < graphRight) {
+            ctx.fillStyle = CONFIG.colors.eventText;
+            ctx.font = '800 14px -apple-system, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'top'; 
+            ctx.fillText(ev.label.toUpperCase(), centerX, 12);
+          }
+          ctx.restore();
+        }
+    }
+
     function updateDOM(t) {
-      const snapMinutes = 60; // Changed from 30 to 60
+      const snapMinutes = 60; 
       let tMod = ((t % 24) + 24) % 24;
       const totalMinutes = Math.floor(tMod * 60);
       const roundedMinutes = Math.floor(totalMinutes / snapMinutes) * snapMinutes;
