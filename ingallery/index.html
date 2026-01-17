@@ -30,6 +30,14 @@
         }
 
         /* Gallery View */
+        .gallery-view {
+            display: block;
+        }
+
+        .gallery-view.hidden {
+            display: none;
+        }
+
         .gallery-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -54,6 +62,14 @@
             font-size: 1.1em;
         }
 
+        .gallery-header kbd {
+            background: white;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-family: monospace;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -76,21 +92,38 @@
 
         .gallery-preview {
             width: 100%;
-            height: 200px;
+            height: 180px;
             background: var(--bg-paper);
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
-            position: relative;
+            padding: 20px;
         }
 
-        .gallery-preview .mini-slide {
-            transform: scale(0.28);
-            transform-origin: center center;
-            width: 1100px;
-            height: 700px;
-            pointer-events: none;
+        .gallery-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .preview-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+        }
+
+        .preview-placeholder i {
+            font-size: 3em;
+            margin-bottom: 0.3em;
+        }
+
+        .preview-placeholder span {
+            font-size: 0.85em;
+            color: var(--text-light);
         }
 
         .gallery-info {
@@ -111,87 +144,78 @@
             margin: 0;
         }
 
-        /* Slide Overlay */
-        .slide-overlay {
+        /* Slide View - Full Screen Binder Frame */
+        .slide-view {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: rgba(0, 0, 0, 0.85);
-            display: none;
-            align-items: center;
-            justify-content: center;
+            background: #E8E8ED;
             z-index: 1000;
         }
 
-        .slide-overlay.active {
+        .slide-view.active {
+            display: block;
+        }
+
+        .binder-frame {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(var(--scale, 1));
             display: flex;
         }
 
-        .slide-frame {
+        .binder-page {
             width: 1100px;
             height: 700px;
             background: var(--bg-paper);
             border-radius: 24px;
-            box-shadow: 0 8px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 60px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.08);
             position: relative;
             overflow: hidden;
-            transform: scale(var(--overlay-scale, 0.85));
         }
 
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 44px;
-            height: 44px;
+        .back-btn {
+            position: fixed;
+            top: 30px;
+            left: 30px;
             background: white;
             border: none;
-            border-radius: 50%;
+            border-radius: 50px;
+            padding: 12px 24px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 1.4em;
+            gap: 8px;
+            font-size: 0.95em;
+            font-weight: 500;
             color: var(--text-medium);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
             z-index: 1001;
-            transition: transform 0.2s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            font-family: 'Inter', sans-serif;
         }
 
-        .close-btn:hover {
-            transform: scale(1.1);
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
 
-        .esc-hint {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.9);
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 0.85em;
-            color: var(--text-medium);
-            z-index: 1001;
+        .back-btn i {
+            font-size: 1.2em;
         }
 
-        .esc-hint kbd {
-            background: var(--bg-card);
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-family: monospace;
-            margin-right: 4px;
-        }
-
-        /* ===== Slide Styles ===== */
+        /* ===== Slide Content Styles ===== */
         .slide {
             width: 100%;
             height: 100%;
             padding: 50px 60px;
             background: var(--bg-paper);
             position: relative;
+            overflow: hidden;
         }
 
         .slide h3 {
@@ -206,11 +230,12 @@
 
         .slide h2 {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 2.4em;
+            font-size: 2.6em;
             font-weight: 700;
             color: var(--text-dark);
             margin-bottom: 0.5em;
             line-height: 1.1;
+            letter-spacing: -0.02em;
         }
 
         .slide p {
@@ -409,120 +434,95 @@
 </head>
 <body>
     <!-- Gallery View -->
-    <div class="gallery-container">
-        <div class="gallery-header">
-            <h1>Slide Gallery</h1>
-            <p>Click a slide to view full size. Press <kbd>Esc</kbd> to return.</p>
-        </div>
-        <div class="gallery-grid">
-            <!-- 1. Photo Meal Recognition -->
-            <div class="gallery-item" data-slide="photo-meal">
-                <div class="gallery-preview">
-                    <div class="mini-slide slide photo-meal-slide">
-                        <h3>How It Works</h3>
-                        <h2>Photo Meal Recognition</h2>
-                        <div class="photo-steps">
-                            <div class="photo-step"><span class="step-num">1.</span><span>Snap a photo of any meal</span></div>
-                            <div class="photo-step"><span class="step-num">2.</span><span>AI identifies individual foods</span></div>
-                            <div class="photo-step"><span class="step-num">3.</span><span>Estimates carbs, protein, fat, fiber</span></div>
-                        </div>
-                        <div class="nutrition-phone">
-                            <img src="nutrition-tracker.png" alt="Nutrition Tracker">
+    <div class="gallery-view" id="galleryView">
+        <div class="gallery-container">
+            <div class="gallery-header">
+                <h1>Slide Gallery</h1>
+                <p>Click a slide to view full size. Press <kbd>Esc</kbd> to return.</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item" data-slide="photo-meal">
+                    <div class="gallery-preview">
+                        <div class="preview-placeholder">
+                            <i class="ph ph-camera"></i>
+                            <span>Photo Meal</span>
                         </div>
                     </div>
-                </div>
-                <div class="gallery-info">
-                    <h3>Photo Meal Recognition</h3>
-                    <p>AI-powered food identification</p>
-                </div>
-            </div>
-
-            <!-- 2. Personalized From Day One -->
-            <div class="gallery-item" data-slide="personalized">
-                <div class="gallery-preview">
-                    <div class="mini-slide slide">
-                        <h3>Getting Started</h3>
-                        <h2>Personalized From Day One</h2>
-                        <p style="font-size: 0.9em;">During onboarding, Dossi pulls your historical health data.</p>
-                        <table style="max-width: 500px; margin-top: 0.8em; font-size: 0.8em;">
-                            <thead><tr><th>Pattern</th><th>What It Learns</th></tr></thead>
-                            <tbody>
-                                <tr><td>Dawn Phenomenon</td><td>Morning glucose rise</td></tr>
-                                <tr><td>Exercise</td><td>Workout effects</td></tr>
-                            </tbody>
-                        </table>
+                    <div class="gallery-info">
+                        <h3>Photo Meal Recognition</h3>
+                        <p>AI-powered food identification</p>
                     </div>
                 </div>
-                <div class="gallery-info">
-                    <h3>Personalized From Day One</h3>
-                    <p>Historical data analysis during onboarding</p>
-                </div>
-            </div>
 
-            <!-- 3. Basal Rate Intelligence -->
-            <div class="gallery-item" data-slide="basal">
-                <div class="gallery-preview">
-                    <div class="mini-slide slide">
-                        <h3>Beyond Meals</h3>
-                        <h2>Basal Rate Intelligence</h2>
-                        <div class="basal-timeline" style="transform: scale(0.7); transform-origin: top left; margin-top: 0.8em;">
-                            <div class="basal-period"><div class="period-bar low"></div></div>
-                            <div class="basal-period"><div class="period-bar high"></div></div>
-                            <div class="basal-period"><div class="period-bar medium"></div></div>
-                            <div class="basal-period"><div class="period-bar medium"></div></div>
-                            <div class="basal-period"><div class="period-bar low"></div></div>
+                <div class="gallery-item" data-slide="personalized">
+                    <div class="gallery-preview">
+                        <div class="preview-placeholder">
+                            <i class="ph ph-user-circle"></i>
+                            <span>Personalized</span>
                         </div>
                     </div>
-                </div>
-                <div class="gallery-info">
-                    <h3>Basal Rate Intelligence</h3>
-                    <p>Learn daily insulin patterns</p>
-                </div>
-            </div>
-
-            <!-- 4. The Learning Loop -->
-            <div class="gallery-item" data-slide="learning-loop">
-                <div class="gallery-preview">
-                    <div class="mini-slide slide learning-loop-slide">
-                        <h3>How It Works</h3>
-                        <h2>The Learning Loop</h2>
-                        <img src="loop.png" alt="Learning loop" class="loop-circle" style="width: 120px; top: 80px; right: 40px;">
+                    <div class="gallery-info">
+                        <h3>Personalized From Day One</h3>
+                        <p>Historical data analysis</p>
                     </div>
                 </div>
-                <div class="gallery-info">
-                    <h3>The Learning Loop</h3>
-                    <p>Predict, observe, attribute, update</p>
-                </div>
-            </div>
 
-            <!-- 5. Intelligent Insulin Dosing -->
-            <div class="gallery-item" data-slide="intelligent">
-                <div class="gallery-preview">
-                    <div class="mini-slide slide learning-loop-slide">
-                        <h3>How It Works</h3>
-                        <h2>Intelligent Insulin Dosing</h2>
-                        <img src="loop.png" alt="Loop" class="loop-circle" style="width: 120px; top: 80px; right: 40px;">
+                <div class="gallery-item" data-slide="basal">
+                    <div class="gallery-preview">
+                        <div class="preview-placeholder">
+                            <i class="ph ph-chart-bar"></i>
+                            <span>Basal Rate</span>
+                        </div>
+                    </div>
+                    <div class="gallery-info">
+                        <h3>Basal Rate Intelligence</h3>
+                        <p>Daily insulin patterns</p>
                     </div>
                 </div>
-                <div class="gallery-info">
-                    <h3>Intelligent Insulin Dosing</h3>
-                    <p>60+ factors, personalized recommendations</p>
+
+                <div class="gallery-item" data-slide="learning-loop">
+                    <div class="gallery-preview">
+                        <div class="preview-placeholder">
+                            <i class="ph ph-arrows-clockwise"></i>
+                            <span>Learning Loop</span>
+                        </div>
+                    </div>
+                    <div class="gallery-info">
+                        <h3>The Learning Loop</h3>
+                        <p>Predict, observe, attribute, update</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-slide="intelligent">
+                    <div class="gallery-preview">
+                        <div class="preview-placeholder">
+                            <i class="ph ph-brain"></i>
+                            <span>Intelligent Dosing</span>
+                        </div>
+                    </div>
+                    <div class="gallery-info">
+                        <h3>Intelligent Insulin Dosing</h3>
+                        <p>60+ factors, personalized recs</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Slide Overlay -->
-    <div class="slide-overlay" id="slideOverlay">
-        <button class="close-btn" onclick="closeSlide()"><i class="ph ph-x"></i></button>
-        <div class="slide-frame" id="slideFrame">
-            <!-- Slide content injected here -->
+    <!-- Slide View -->
+    <div class="slide-view" id="slideView">
+        <button class="back-btn" onclick="closeSlide()">
+            <i class="ph ph-arrow-left"></i>
+            Back to Gallery
+        </button>
+        <div class="binder-frame">
+            <div class="binder-page" id="slideContent">
+                <!-- Slide content injected here -->
+            </div>
         </div>
-        <div class="esc-hint"><kbd>Esc</kbd> to return to gallery</div>
     </div>
 
     <script>
-        // Slide content templates
         const slides = {
             'photo-meal': `
                 <div class="slide photo-meal-slide">
@@ -624,55 +624,47 @@
             `
         };
 
-        // Scale overlay based on window size
-        function scaleOverlay() {
-            const frame = document.querySelector('.slide-frame');
-            const padding = 100;
-            const scaleX = (window.innerWidth - padding) / 1100;
-            const scaleY = (window.innerHeight - padding) / 700;
-            const scale = Math.min(scaleX, scaleY, 1);
-            document.documentElement.style.setProperty('--overlay-scale', scale);
+        function scaleBinder() {
+            const frame = document.querySelector('.binder-frame');
+            const frameWidth = 1100;
+            const frameHeight = 700;
+            const padding = 80;
+
+            const availableWidth = window.innerWidth - padding;
+            const availableHeight = window.innerHeight - padding;
+
+            const scaleX = availableWidth / frameWidth;
+            const scaleY = availableHeight / frameHeight;
+            const scale = Math.min(scaleX, scaleY);
+
+            frame.style.setProperty('--scale', scale);
         }
 
-        // Open slide
         function openSlide(slideId) {
-            const overlay = document.getElementById('slideOverlay');
-            const frame = document.getElementById('slideFrame');
-            frame.innerHTML = slides[slideId];
-            overlay.classList.add('active');
-            scaleOverlay();
+            document.getElementById('galleryView').classList.add('hidden');
+            document.getElementById('slideView').classList.add('active');
+            document.getElementById('slideContent').innerHTML = slides[slideId];
+            scaleBinder();
         }
 
-        // Close slide
         function closeSlide() {
-            const overlay = document.getElementById('slideOverlay');
-            overlay.classList.remove('active');
+            document.getElementById('slideView').classList.remove('active');
+            document.getElementById('galleryView').classList.remove('hidden');
         }
 
-        // Click handlers
         document.querySelectorAll('.gallery-item').forEach(item => {
             item.addEventListener('click', () => {
-                const slideId = item.getAttribute('data-slide');
-                openSlide(slideId);
+                openSlide(item.getAttribute('data-slide'));
             });
         });
 
-        // Escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeSlide();
             }
         });
 
-        // Click outside to close
-        document.getElementById('slideOverlay').addEventListener('click', (e) => {
-            if (e.target.id === 'slideOverlay') {
-                closeSlide();
-            }
-        });
-
-        // Resize handler
-        window.addEventListener('resize', scaleOverlay);
+        window.addEventListener('resize', scaleBinder);
     </script>
 </body>
 </html>
