@@ -3,7 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Dossi Dashboard</title>
+  
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
   <style>
     :root {
       /* Colors from Pitch Deck */
@@ -20,13 +29,9 @@
       --font-stack: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     }
 
-    /* Font Import */
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-
     body {
       margin: 0;
       padding: 0;
-      /* Background for the whole page (behind the card) */
       background-color: #E8E8ED; 
       font-family: var(--font-stack);
       display: flex;
@@ -35,13 +40,12 @@
       justify-content: center;
       height: 100vh;
       color: var(--text-dark);
+      overflow: hidden;
     }
 
     .dashboard-card {
-      /* Binder Page Dimensions & Style */
       width: 1000px;
       height: 700px;
-      /* Responsive fallback */
       max-width: 95vw;
       max-height: 95vh;
       
@@ -55,9 +59,9 @@
       flex-direction: column;
       gap: 32px;
       position: relative;
+      transition: all 0.3s ease;
     }
 
-    /* 1. TOP IMAGE */
     .top-image-container {
       width: 100%;
       display: flex;
@@ -71,7 +75,6 @@
       opacity: 0.9;
     }
 
-    /* 2. HEADER */
     .header-row {
       display: flex;
       justify-content: space-between;
@@ -140,12 +143,11 @@
       font-variant-numeric: tabular-nums;
     }
 
-    /* 3. CHART */
     .chart-wrapper {
       flex: 1;
       position: relative;
       width: 100%;
-      min-height: 0; /* Flexbox trick */
+      min-height: 0;
     }
 
     canvas {
@@ -153,16 +155,58 @@
       width: 100%;
       height: 100%;
     }
+
+    /* Full Screen Button */
+    .fullscreen-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 48px;
+      height: 48px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: all 0.2s ease;
+      z-index: 1000;
+      border: none;
+      outline: none;
+    }
+    
+    .fullscreen-btn:hover {
+      transform: scale(1.1);
+      color: var(--accent);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
+    
+    /* Full Screen Adjustments */
+    :fullscreen .dashboard-card,
+    :-webkit-full-screen .dashboard-card {
+      width: 100vw;
+      height: 100vh;
+      max-width: none;
+      max-height: none;
+      border-radius: 0;
+      padding: 64px;
+      box-shadow: none;
+    }
+    
+    :fullscreen body,
+    :-webkit-full-screen body {
+      background-color: var(--bg-paper);
+    }
   </style>
 </head>
 <body>
 
   <div class="dashboard-card">
-    
     <div class="top-image-container">
       <img src="dossi-wordmark.png" alt="dossi" class="logo-img">
     </div>
-
     <div class="header-row">
       <div class="glucose-display">
         <div class="glucose-group">
@@ -171,52 +215,39 @@
         </div>
         <div class="trend-arrow" id="trendArrow">--</div>
       </div>
-      
       <div class="time-container">
         <div class="time-label">Time</div>
         <div class="current-time" id="timeValue">--:--</div>
       </div>
     </div>
-
     <div class="chart-wrapper">
       <canvas id="cgmChart"></canvas>
     </div>
-
   </div>
 
+  <button class="fullscreen-btn" onclick="toggleFullScreen()" title="Toggle Full Screen">
+    <i class="ph ph-arrows-out-simple"></i>
+  </button>
+
   <script>
-    /**
-     * CONFIGURATION
-     */
     const CONFIG = {
       minutesPerFrame: 0.5, 
       hoursVisible: 4,
-
-      // UI Config
       colors: {
-        bg: '#F5F5F8', // Matches paper bg
+        bg: '#F5F5F8',
         text: '#1a1a1a',     
         dotInRange: '#000000', 
         high: '#FFC107',     
         low: '#EF4444',      
-        
-        targetBand: '#E5E5EA', // Slightly darker than bg
-        
-        // Lines
+        targetBand: '#E5E5EA',
         lineHigh: '#FFC107',   
         lineLow: '#EF4444',    
-        
-        predictionLine: '#737BF2', // Accent color
-        
-        // Event Colors
+        predictionLine: '#737BF2',
         eventFill: 'rgba(115, 123, 242, 0.1)', 
         eventBorder: 'rgba(115, 123, 242, 0.4)',                 
         eventText: '#5B63E0'                    
       },
-
       baseGlucose: 90, 
-      
-      // Events 
       events: [
         { start: 23, end: 7, label: 'Sleep' },
         { start: 7.0, end: 9.0, label: 'Breakfast' }, 
@@ -224,7 +255,6 @@
         { start: 17.0, end: 18.5, label: 'Exercise' },
         { start: 19.0, end: 21.0, label: 'Dinner' }
       ],
-      
       meals: [
         { time: 8.0, height: 210, width: 1.2 }, 
         { time: 12.5, height: 160, width: 2.0 }, 
@@ -232,9 +262,6 @@
       ]
     };
 
-    /**
-     * MATH HELPERS
-     */
     function gaussian(x, peakTime, height, width) {
       let dx = x - peakTime;
       if (dx > 12) dx -= 24;
@@ -242,35 +269,22 @@
       return height * Math.exp(-(dx * dx) / (2 * (width * width / 4)));
     }
 
-    // 1. ACTUAL GLUCOSE
     function getGlucoseAtTime(t) {
       const tMod = ((t % 24) + 24) % 24;
-      
       const circadian = Math.sin((tMod - 4) * (Math.PI / 12)) * 10; 
-      
       let mealImpact = 0;
       CONFIG.meals.forEach(m => mealImpact += gaussian(tMod, m.time, m.height, m.width));
-      
-      // Exercise Crash
       const exerciseImpact = -gaussian(tMod, 18.0, 75, 0.7); 
-      
       const noise = Math.sin(tMod * 25) * 4 + Math.sin(tMod * 40) * 2;
-      
       return CONFIG.baseGlucose + circadian + mealImpact + exerciseImpact + noise;
     }
 
-    // 2. PREDICTION GLUCOSE
     function getPredictionAtTime(t) {
       const tMod = ((t % 24) + 24) % 24;
       const circadian = Math.sin((tMod - 4) * (Math.PI / 12)) * 8; 
-
       let mealImpact = 0;
-      CONFIG.meals.forEach(m => {
-        mealImpact += gaussian(tMod, m.time, m.height * 0.4, m.width);
-      });
-
+      CONFIG.meals.forEach(m => { mealImpact += gaussian(tMod, m.time, m.height * 0.4, m.width); });
       const exerciseImpact = -gaussian(tMod, 18.0, 20, 1.5);
-      
       return CONFIG.baseGlucose + circadian + mealImpact + exerciseImpact - 5;
     }
 
@@ -285,12 +299,8 @@
       return '→';
     }
 
-    /**
-     * ENGINE
-     */
     const canvas = document.getElementById('cgmChart');
     const ctx = canvas.getContext('2d');
-    
     const elBgValue = document.getElementById('bgValue');
     const elTrend = document.getElementById('trendArrow');
     const elTime = document.getElementById('timeValue');
@@ -319,7 +329,6 @@
     window.addEventListener('resize', resize);
     resize();
 
-    // Helper: Rounded Rect
     function roundRectPath(ctx, x, y, w, h, radius) {
       if (w < 2 * radius) radius = w / 2;
       if (h < 2 * radius) radius = h / 2;
@@ -335,151 +344,80 @@
     function draw() {
       currentTime += (CONFIG.minutesPerFrame / 60);
       if (currentTime > 100) currentTime %= 24;
-
       ctx.clearRect(0, 0, width, height);
-
       const GRAPH_RIGHT_BOUNDARY = width - 60;
 
-      // --- LAYER 1: Grid & Limits ---
-      const y250 = mapY(250);
       const y180 = mapY(180);
-      const y55  = mapY(55);
-
       const y70 = mapY(70); 
       ctx.fillStyle = CONFIG.colors.targetBand;
       ctx.fillRect(0, y180, width, y70 - y180);
 
-      ctx.lineWidth = 1;
-      
-      // High Limit
-      ctx.beginPath();
-      ctx.moveTo(0, y250); ctx.lineTo(width, y250);
-      ctx.strokeStyle = CONFIG.colors.lineHigh;
-      ctx.stroke();
-
-      // Low Limit
-      ctx.beginPath();
-      ctx.moveTo(0, y55); ctx.lineTo(width, y55);
-      ctx.strokeStyle = CONFIG.colors.lineLow;
-      ctx.stroke();
-
       const viewEnd = currentTime;
       const viewStart = viewEnd - CONFIG.hoursVisible;
 
-      // --- LAYER 2: Events ---
       CONFIG.events.forEach(ev => {
         const drawStart = Math.max(viewStart, ev.start);
         const drawEnd = Math.min(viewEnd, ev.end);
-
         if (drawStart < drawEnd) {
           const realX1 = ((ev.start - viewStart) / CONFIG.hoursVisible) * GRAPH_RIGHT_BOUNDARY;
           const realX2 = ((ev.end - viewStart) / CONFIG.hoursVisible) * GRAPH_RIGHT_BOUNDARY;
-
           ctx.save();
           ctx.beginPath();
           ctx.rect(0, 0, GRAPH_RIGHT_BOUNDARY, height); 
           ctx.clip();
-          
           roundRectPath(ctx, realX1, 0, realX2 - realX1, height, 16);
           ctx.fillStyle = CONFIG.colors.eventFill;
           ctx.fill();
-
-          ctx.lineWidth = 2;
-          ctx.strokeStyle = CONFIG.colors.eventBorder;
-          ctx.stroke();
-
-          // Title
-          const visibleLeft = Math.max(0, realX1);
-          const visibleRight = Math.min(GRAPH_RIGHT_BOUNDARY, realX2);
-          const centerX = (visibleLeft + visibleRight) / 2;
-          
-          if (visibleRight - visibleLeft > 40) {
-            ctx.fillStyle = CONFIG.colors.eventText;
-            ctx.font = '800 14px -apple-system, sans-serif';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'top'; 
-            ctx.fillText(ev.label.toUpperCase(), centerX, 12);
-          }
           ctx.restore();
         }
       });
 
-
-      // --- LAYER 3: Prediction Line ---
-      // UPDATED: Now goes all the way (no * 2/3 limit)
       ctx.beginPath();
-      // Draw to full graph width
-      const predLimitX = GRAPH_RIGHT_BOUNDARY; 
-      
-      for (let x = 0; x <= predLimitX; x += 2) {
+      for (let x = 0; x <= GRAPH_RIGHT_BOUNDARY; x += 2) {
         const t = viewStart + (x / GRAPH_RIGHT_BOUNDARY) * CONFIG.hoursVisible;
         const val = getPredictionAtTime(t);
         const y = mapY(val);
-        if (x===0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
+        if (x===0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
       }
       ctx.strokeStyle = CONFIG.colors.predictionLine;
       ctx.lineWidth = 3; 
-      ctx.lineCap = 'round';
       ctx.stroke();
 
-
-      // --- LAYER 4: The DOTS ---
-      let lastDotValue = 0;
-      const minutesPerDot = 5;
-      const hoursPerDot = minutesPerDot / 60;
+      const hoursPerDot = 5 / 60;
       let tLoop = Math.floor(viewStart / hoursPerDot) * hoursPerDot;
-      
       while (tLoop <= viewEnd) {
         if (tLoop >= viewStart) {
           const glucose = getGlucoseAtTime(tLoop);
           const x = ((tLoop - viewStart) / CONFIG.hoursVisible) * GRAPH_RIGHT_BOUNDARY;
-          
-          let y = mapY(glucose);
-          let isClippedLow = false;
-          
-          if (glucose < 40) {
-             y = height - 6; 
-             isClippedLow = true;
-          }
-
+          const y = mapY(glucose);
           if (x <= GRAPH_RIGHT_BOUNDARY) {
             ctx.beginPath();
             ctx.arc(x, y, 4, 0, Math.PI * 2);
-            
             if (glucose > 180) ctx.fillStyle = CONFIG.colors.high;
             else if (glucose < 70) ctx.fillStyle = CONFIG.colors.low;
             else ctx.fillStyle = CONFIG.colors.dotInRange; 
-            
             ctx.fill();
-            
-            if (isClippedLow) {
-                ctx.strokeStyle = CONFIG.colors.low;
-                ctx.lineWidth = 1;
-                ctx.stroke();
-            }
-
-            lastDotValue = glucose;
           }
         }
         tLoop += hoursPerDot;
       }
 
-      // --- LAYER 5: DOM Updates ---
-      const updateInterval = 0.25; 
-      if (lastDomUpdateT < 0 || (currentTime - lastDomUpdateT) >= updateInterval) {
-        updateDOM(currentTime, lastDotValue);
-        lastDomUpdateT = currentTime;
-      }
-
+      // Snap to 30 minutes
+      updateDOM(currentTime);
       requestAnimationFrame(draw);
     }
 
-    function updateDOM(t, valToDisplay) {
-      const val = Math.round(valToDisplay || getGlucoseAtTime(t));
+    function updateDOM(t) {
+      const snapMinutes = 30; // Changed from 15 to 30
+      let tMod = ((t % 24) + 24) % 24;
+      const totalMinutes = Math.floor(tMod * 60);
+      const roundedMinutes = Math.floor(totalMinutes / snapMinutes) * snapMinutes;
+      
+      const displayTime = roundedMinutes / 60;
+      const val = Math.round(getGlucoseAtTime(displayTime));
       
       elBgValue.innerText = val < 40 ? "LOW" : val;
-      elTrend.innerText = getTrendArrow(t);
+      elTrend.innerText = getTrendArrow(displayTime);
 
       if (val > 180) {
         elBgValue.style.color = CONFIG.colors.high;
@@ -492,21 +430,44 @@
         elTrend.style.color = CONFIG.colors.text; 
       }
 
-      let tMod = ((t % 24) + 24) % 24;
-      const snapMinutes = 15;
-      const totalMinutes = Math.floor(tMod * 60);
-      const roundedMinutes = Math.floor(totalMinutes / snapMinutes) * snapMinutes;
       const h = Math.floor(roundedMinutes / 60);
       const m = roundedMinutes % 60;
       const ampm = h >= 12 ? 'PM' : 'AM';
       const h12 = h % 12 || 12; 
       const pad = n => n.toString().padStart(2, '0');
-      
       elTime.innerText = `${h12}:${pad(m)} ${ampm}`;
     }
+    
+    function toggleFullScreen() {
+      if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+        if (document.documentElement.requestFullscreen) {
+          document.documentElement.requestFullscreen();
+        } else if (document.documentElement.webkitRequestFullscreen) {
+          document.documentElement.webkitRequestFullscreen();
+        }
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+          document.webkitExitFullscreen();
+        }
+      }
+    }
+
+    function onFullScreenChange() {
+      const isFull = document.fullscreenElement || document.webkitFullscreenElement;
+      const icon = document.querySelector('.fullscreen-btn i');
+      if (isFull) {
+        icon.classList.replace('ph-arrows-out-simple', 'ph-arrows-in-simple');
+      } else {
+        icon.classList.replace('ph-arrows-in-simple', 'ph-arrows-out-simple');
+      }
+      setTimeout(resize, 100);
+    }
+    document.addEventListener('fullscreenchange', onFullScreenChange);
+    document.addEventListener('webkitfullscreenchange', onFullScreenChange);
 
     requestAnimationFrame(draw);
-
   </script>
 </body>
 </html>
