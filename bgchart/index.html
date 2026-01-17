@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Dossi - Glucose Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #737BF2;
+      --accent-dark: #5B63E0;
+      --bg-page: #F5F5F8;
+      --bg-card: #ffffff;
+      --text-dark: #1a1a1a;
+      --text-medium: #4a4a4a;
+      --text-light: #8E8E93;
+      --gray-900: #1C1C1E;
+      --gray-600: #48484A;
+      --gray-500: #636366;
+      --shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.08);
+      --shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-page);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      color: var(--text-dark);
+      padding: 40px;
+    }
+
+    .logo {
+      margin-bottom: 32px;
+    }
+
+    .logo img {
+      height: 32px;
+      width: auto;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border-radius: 24px;
+      box-shadow: var(--shadow-medium);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .card-header {
+      position: absolute;
+      top: 20px;
+      left: 24px;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .card-header h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.1em;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin: 0;
+    }
+
+    .card-header .time {
+      font-size: 0.85em;
+      color: var(--gray-500);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    canvas {
+      display: block;
+    }
+
+    .caption {
+      margin-top: 24px;
+      font-size: 0.9em;
+      color: var(--gray-500);
+      text-align: center;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="logo">
+    <img src="../pitchdeck/dossi-wordmark.png" alt="Dossi">
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <h2>Daily Glucose Rhythm</h2>
+      <div class="time" id="timeDisplay">--:--</div>
+    </div>
+    <canvas id="chartCanvas" width="900" height="360"></canvas>
+  </div>
+
+  <p class="caption">Simulated 24-hour continuous glucose monitoring</p>
+
+  <script>
+    /**
+     * CONFIGURATION
+     */
+    const CONFIG = {
+      minutesPerFrame: 2,
+      hoursVisible: 6,
+      baseGlucose: 110,
+      targetMin: 70,
+      targetMax: 180,
+
+      cBackground: '#ffffff',
+      cGrid: '#e2e8f0',
+      cTargetBand: '#f0fdf4',
+      cLine: '#737BF2',
+      cLineShadow: 'rgba(115, 123, 242, 0.2)',
+      cText: '#94a3b8',
+      cEventSleep: 'rgba(71, 85, 105, 0.08)',
+      cEventExercise: 'rgba(245, 158, 11, 0.15)',
+
+      events: [
+        { type: 'Sleep', start: 23, end: 7, color: 'rgba(71, 85, 105, 0.08)', label: 'Sleep' },
+        { type: 'Exercise', start: 17.5, end: 18.5, color: 'rgba(245, 158, 11, 0.15)', label: 'Run' }
+      ],
+
+      meals: [
+        { time: 8.0, height: 60, width: 1.5 },
+        { time: 12.5, height: 80, width: 2.0 },
+        { time: 19.0, height: 70, width: 2.5 }
+      ]
+    };
+
+    function gaussian(x, peakTime, height, width) {
+      let dx = x - peakTime;
+      if (dx > 12) dx -= 24;
+      if (dx < -12) dx += 24;
+      return height * Math.exp(-(dx * dx) / (2 * (width * width / 4)));
+    }
+
+    function getExerciseEffect(t) {
+      return -gaussian(t, 18, 40, 1.0);
+    }
+
+    function getPeriodicNoise(t) {
+      return Math.sin(t * 23) * 2 + Math.sin(t * 47) * 1.5 + Math.sin(t * 13) * 2;
+    }
+
+    function getGlucoseAtTime(t) {
+      const tMod = ((t % 24) + 24) % 24;
+      const circadian = Math.sin((tMod - 0) * (Math.PI / 12)) * 10;
+      let mealImpact = 0;
+      CONFIG.meals.forEach(m => {
+        mealImpact += gaussian(tMod, m.time, m.height, m.width);
+      });
+      const exerciseImpact = getExerciseEffect(tMod);
+      const noise = getPeriodicNoise(tMod);
+      return CONFIG.baseGlucose + circadian + mealImpact + exerciseImpact + noise;
+    }
+
+    const canvas = document.getElementById('chartCanvas');
+    const ctx = canvas.getContext('2d', { alpha: false });
+    const timeDisplay = document.getElementById('timeDisplay');
+
+    let currentTime = 8.0;
+
+    const width = canvas.width;
+    const height = canvas.height;
+
+    const Y_MAX = 350;
+    const Y_MIN = 40;
+    function mapY(val) {
+      return height - ((val - Y_MIN) / (Y_MAX - Y_MIN)) * height;
+    }
+
+    function draw() {
+      currentTime += (CONFIG.minutesPerFrame / 60);
+      if (currentTime > 10000) currentTime %= 24;
+
+      ctx.fillStyle = CONFIG.cBackground;
+      ctx.fillRect(0, 0, width, height);
+
+      const yTargetTop = mapY(CONFIG.targetMax);
+      const yTargetBottom = mapY(CONFIG.targetMin);
+      ctx.fillStyle = CONFIG.cTargetBand;
+      ctx.fillRect(0, yTargetTop, width, yTargetBottom - yTargetTop);
+
+      const viewEnd = currentTime;
+      const viewStart = viewEnd - CONFIG.hoursVisible;
+
+      CONFIG.events.forEach(ev => {
+        if (ev.start > ev.end) {
+          [-24, 0, 24].forEach(offset => {
+             drawEventRect(ev, viewStart, viewEnd, ev.start + offset, ev.end + offset + (ev.start > ev.end ? 24 : 0));
+          });
+        } else {
+          [-24, 0, 24].forEach(offset => {
+            drawEventRect(ev, viewStart, viewEnd, ev.start + offset, ev.end + offset);
+          });
+        }
+      });
+
+      drawGrid();
+
+      ctx.beginPath();
+      ctx.lineWidth = 4;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.strokeStyle = CONFIG.cLine;
+
+      const stepPixels = 2;
+      let first = true;
+
+      for (let x = 0; x <= width; x += stepPixels) {
+        const t = viewStart + (x / width) * CONFIG.hoursVisible;
+        const glucose = getGlucoseAtTime(t);
+        const y = mapY(glucose);
+
+        if (first) {
+          ctx.moveTo(x, y);
+          first = false;
+        } else {
+          ctx.lineTo(x, y);
+        }
+      }
+
+      ctx.stroke();
+
+      ctx.save();
+      ctx.lineWidth = 8;
+      ctx.strokeStyle = CONFIG.cLineShadow;
+      ctx.stroke();
+      ctx.restore();
+
+      const nowVal = getGlucoseAtTime(viewEnd);
+      const nowY = mapY(nowVal);
+
+      ctx.beginPath();
+      ctx.arc(width - 4, nowY, 6, 0, Math.PI * 2);
+      ctx.fillStyle = CONFIG.cLine;
+      ctx.fill();
+      ctx.strokeStyle = '#fff';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      ctx.font = 'bold 14px Inter, sans-serif';
+      ctx.fillStyle = CONFIG.cLine;
+      ctx.textAlign = 'right';
+      ctx.fillText(Math.round(nowVal).toString(), width - 15, nowY - 15);
+
+      updateTimeDisplay(currentTime);
+
+      requestAnimationFrame(draw);
+    }
+
+    function drawEventRect(ev, viewStart, viewEnd, evStartAbs, evEndAbs) {
+      const drawStart = Math.max(viewStart, evStartAbs);
+      const drawEnd = Math.min(viewEnd, evEndAbs);
+
+      if (drawStart < drawEnd) {
+        const x1 = ((drawStart - viewStart) / CONFIG.hoursVisible) * width;
+        const x2 = ((drawEnd - viewStart) / CONFIG.hoursVisible) * width;
+
+        ctx.fillStyle = ev.color;
+        ctx.fillRect(x1, 0, x2 - x1, height);
+
+        if (ev.label && (x2 - x1 > 20)) {
+           ctx.fillStyle = CONFIG.cText;
+           ctx.font = '10px Inter, sans-serif';
+           ctx.textAlign = 'center';
+           ctx.fillText(ev.label.toUpperCase(), x1 + (x2-x1)/2, 20);
+        }
+      }
+    }
+
+    function drawGrid() {
+      const ticks = [70, 180, 250];
+      ctx.textAlign = 'right';
+      ctx.textBaseline = 'middle';
+      ctx.font = '11px Inter, sans-serif';
+
+      ticks.forEach(val => {
+        const y = mapY(val);
+
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
+        ctx.strokeStyle = CONFIG.cGrid;
+        ctx.lineWidth = 1;
+        ctx.setLineDash([4, 4]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        ctx.fillStyle = CONFIG.cText;
+        ctx.fillText(val, width - 6, y - 8);
+      });
+    }
+
+    function updateTimeDisplay(t) {
+      let tMod = ((t % 24) + 24) % 24;
+      const hours = Math.floor(tMod);
+      const minutes = Math.floor((tMod - hours) * 60);
+      const pad = n => n.toString().padStart(2, '0');
+      timeDisplay.innerText = `${pad(hours)}:${pad(minutes)}`;
+    }
+
+    requestAnimationFrame(draw);
+  </script>
+</body>
+</html>
