@@ -397,6 +397,136 @@
             font-size: 1em;
         }
 
+        /* Learning Before Control slide */
+        .learning-slide-intro {
+            font-size: 1.1em;
+            color: var(--text-medium);
+            margin-bottom: 1.2em;
+            max-width: 700px;
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 24px;
+            padding: 2em;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-top: 1em;
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1em;
+        }
+
+        .chart-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.1em;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .chart-legend {
+            display: flex;
+            gap: 1.5em;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+            font-size: 0.85em;
+            color: var(--text-medium);
+        }
+
+        .legend-line {
+            width: 24px;
+            height: 3px;
+            border-radius: 2px;
+        }
+
+        .legend-line.actual {
+            background: var(--text-medium);
+        }
+
+        .legend-line.dossi {
+            background: repeating-linear-gradient(
+                to right,
+                var(--accent) 0px,
+                var(--accent) 4px,
+                transparent 4px,
+                transparent 7px
+            );
+        }
+
+        .glucose-chart {
+            width: 100%;
+            height: 140px;
+        }
+
+        .glucose-path {
+            fill: none;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+        }
+
+        .glucose-path.actual {
+            stroke: var(--text-medium);
+        }
+
+        .glucose-path.dossi {
+            stroke: var(--accent);
+            stroke-dasharray: 8, 4;
+        }
+
+        .delta-fill {
+            fill: rgba(115, 123, 242, 0.2);
+        }
+
+        .key-points {
+            display: flex;
+            gap: 16px;
+            margin-top: 1.5em;
+        }
+
+        .key-point {
+            flex: 1;
+            background: white;
+            border-radius: 16px;
+            padding: 1.2em;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8em;
+        }
+
+        .key-point i {
+            font-size: 1.4em;
+            color: var(--accent);
+            flex-shrink: 0;
+            margin-top: 0.1em;
+        }
+
+        .key-point-content {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4em;
+        }
+
+        .key-point-content strong {
+            font-size: 0.9em;
+            color: var(--text-dark);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .key-point-content span {
+            font-size: 0.85em;
+            color: var(--text-medium);
+            line-height: 1.4;
+        }
+
     </style>
 </head>
 <body>
@@ -455,6 +585,16 @@
                     <div class="gallery-info">
                         <h3>Intelligent Insulin Dosing</h3>
                         <p>60+ factors, personalized recs</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-slide="learning-before-control">
+                    <div class="gallery-preview">
+                        <div class="preview-frame" id="preview-learning-before-control"></div>
+                    </div>
+                    <div class="gallery-info">
+                        <h3>Learning Before Control</h3>
+                        <p>Shadow mode comparison</p>
                     </div>
                 </div>
             </div>
@@ -576,6 +716,58 @@
                             <div class="step-item"><span class="step-num">2.</span><div class="step-content"><strong>Predict Impact</strong> <span>— Machine learning forecasts glucose trajectory</span></div></div>
                             <div class="step-item"><span class="step-num">3.</span><div class="step-content"><strong>Validate Safety</strong> <span>— 5-layer safety checks before every recommendation</span></div></div>
                             <div class="step-item"><span class="step-num">4.</span><div class="step-content"><strong>Learn & Adapt</strong> <span>— Continuously refines based on your outcomes</span></div></div>
+                        </div>
+                    </div>
+                </div>
+            `,
+            'learning-before-control': `
+                <div class="slide">
+                    <div class="slide-content" style="max-width: none;">
+                        <h3>How It Works</h3>
+                        <h2>Learning Before Control</h2>
+                        <p class="learning-slide-intro">A learning phase that builds an understanding of your glucose behavior.</p>
+                        <div class="chart-container">
+                            <div class="chart-header">
+                                <div class="chart-title">24-Hour Glucose Comparison</div>
+                                <div class="chart-legend">
+                                    <div class="legend-item">
+                                        <div class="legend-line actual"></div>
+                                        <span>Actual</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <div class="legend-line dossi"></div>
+                                        <span>Dossi</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <svg class="glucose-chart" viewBox="0 0 800 140" preserveAspectRatio="none">
+                                <path class="delta-fill" d="M0,75 C30,85 50,60 80,45 C110,30 130,25 160,20 C190,15 210,45 240,70 C270,95 290,110 320,95 C350,80 370,50 400,35 C430,20 460,55 490,80 C520,105 540,90 570,70 C600,50 630,30 660,25 C690,20 720,40 750,55 C780,70 800,75 800,75 L800,68 C780,65 750,58 720,55 C690,52 660,48 630,52 C600,56 570,62 540,65 C510,68 480,72 450,68 C420,64 390,55 360,58 C330,61 300,70 270,72 C240,74 210,70 180,65 C150,60 120,55 90,58 C60,61 30,68 0,70 Z" />
+                                <path class="glucose-path actual" d="M0,75 C30,85 50,60 80,45 C110,30 130,25 160,20 C190,15 210,45 240,70 C270,95 290,110 320,95 C350,80 370,50 400,35 C430,20 460,55 490,80 C520,105 540,90 570,70 C600,50 630,30 660,25 C690,20 720,40 750,55 C780,70 800,75 800,75" />
+                                <path class="glucose-path dossi" d="M0,70 C30,68 50,62 80,58 C110,54 130,52 160,50 C190,48 210,55 240,62 C270,69 290,74 320,72 C350,70 370,62 400,58 C430,54 460,60 490,65 C520,70 540,68 570,64 C600,60 630,54 660,52 C690,50 720,55 750,60 C780,65 800,68 800,68" />
+                            </svg>
+                        </div>
+                        <div class="key-points">
+                            <div class="key-point">
+                                <i class="ph ph-eye"></i>
+                                <div class="key-point-content">
+                                    <strong>Reveals hidden response patterns</strong>
+                                    <span>Surfaces personal glucose sensitivities</span>
+                                </div>
+                            </div>
+                            <div class="key-point">
+                                <i class="ph ph-shield-check"></i>
+                                <div class="key-point-content">
+                                    <strong>Validates algorithms without dosing risk</strong>
+                                    <span>Proves safety before any insulin control</span>
+                                </div>
+                            </div>
+                            <div class="key-point">
+                                <i class="ph ph-chart-line-up"></i>
+                                <div class="key-point-content">
+                                    <strong>Generates real-world evidence</strong>
+                                    <span>Creates regulatory-grade performance data</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
