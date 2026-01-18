@@ -944,9 +944,28 @@
             white-space: nowrap;
         }
 
-        .email-form button:hover {
+        .email-form button:hover:not(:disabled) {
             background: var(--accent-dark);
             transform: translateY(-2px);
+        }
+
+        .email-form button:disabled {
+            cursor: not-allowed;
+            opacity: 0.8;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
 
         .email-success {
@@ -990,7 +1009,7 @@
 
         .footer-links a:hover { color: var(--gray-900); }
 
-        .footer-copy { font-size: 13px; color: var(--gray-500); }
+        .footer-copy { font-size: 13px; color: var(--gray-500); margin: 0; }
 
         /* Animations */
         @keyframes slideUp {
@@ -1132,7 +1151,7 @@
             <a href="#how-it-works">How It Works</a>
         </div>
         <div class="nav-cta">
-            <a href="#signup">Stay Updated</a>
+            <a href="#signup">Get Early Access</a>
         </div>
     </nav>
 
@@ -1460,14 +1479,14 @@
     <!-- Closing Section -->
     <section class="closing" id="signup">
         <div class="closing-container animate-on-scroll">
-            <h3>Join the Journey</h3>
-            <h2>Building the future of metabolic intelligence</h2>
-            <p>Dossi is built by someone who lives with T1D every day. This is the tool I wish I had.</p>
-            <form class="email-form" id="emailForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-                <input type="email" name="email" placeholder="Enter your email" required>
-                <button type="submit">Get Updates</button>
+            <h3>Get Early Access</h3>
+            <h2>Be first to experience smarter diabetes management</h2>
+            <p>Join the waitlist to get early access when Dossi launches.</p>
+            <form class="email-form" id="emailForm">
+                <input type="email" name="email" id="emailInput" placeholder="Enter your email" required>
+                <button type="submit" id="submitBtn">Join Waitlist</button>
             </form>
-            <p class="email-success" id="emailSuccess">Thanks for signing up! I'll keep you posted.</p>
+            <p class="email-success" id="emailSuccess">You're on the list! We'll be in touch soon.</p>
         </div>
     </section>
 
@@ -1596,30 +1615,34 @@
 
         // Email form submission
         const emailForm = document.getElementById('emailForm');
+        const emailInput = document.getElementById('emailInput');
+        const submitBtn = document.getElementById('submitBtn');
         const emailSuccess = document.getElementById('emailSuccess');
 
         emailForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const formData = new FormData(emailForm);
-            const submitBtn = emailForm.querySelector('button');
-            submitBtn.textContent = 'Sending...';
+            const email = emailInput.value;
+
+            // Show loading state
+            submitBtn.innerHTML = '<span class="spinner"></span>';
             submitBtn.disabled = true;
+            submitBtn.style.minWidth = submitBtn.offsetWidth + 'px';
 
             try {
-                const response = await fetch(emailForm.action, {
+                const response = await fetch('/api/subscribe', {
                     method: 'POST',
-                    body: formData,
-                    headers: { 'Accept': 'application/json' }
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
                 });
 
                 if (response.ok) {
                     emailForm.style.display = 'none';
                     emailSuccess.classList.add('show');
                 } else {
-                    throw new Error('Form submission failed');
+                    throw new Error('Failed to join waitlist');
                 }
             } catch (error) {
-                submitBtn.textContent = 'Subscribe';
+                submitBtn.innerHTML = 'Join Waitlist';
                 submitBtn.disabled = false;
                 alert('Something went wrong. Please try again.');
             }
