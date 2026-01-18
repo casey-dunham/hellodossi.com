@@ -141,13 +141,15 @@
             position: absolute;
             top: 40%;
             left: 50%;
-            transform: translate(-50%, -50%);
-            width: 400px;
-            height: 500px;
-            background: radial-gradient(ellipse, rgba(115, 123, 242, 0.5) 0%, rgba(115, 123, 242, 0.2) 35%, transparent 65%);
+            transform: translate(-50%, -50%) translateZ(0);
+            width: 450px;
+            height: 550px;
+            background: radial-gradient(ellipse, rgba(115, 123, 242, 0.5) 0%, rgba(115, 123, 242, 0.25) 35%, rgba(115, 123, 242, 0.1) 55%, transparent 75%);
             filter: blur(60px);
             pointer-events: none;
             z-index: 0;
+            will-change: transform;
+            backface-visibility: hidden;
         }
 
         .hero-phone img {
@@ -1183,8 +1185,8 @@
                         <div class="hero-stat-label">Contextual Factors</div>
                     </div>
                     <div class="hero-stat">
-                        <div class="hero-stat-number">5</div>
-                        <div class="hero-stat-label">Analytical Safeguards</div>
+                        <div class="hero-stat-number">4hr</div>
+                        <div class="hero-stat-label">Prediction Horizon</div>
                     </div>
                     <div class="hero-stat">
                         <div class="hero-stat-number">24/7</div>
@@ -1525,14 +1527,14 @@
                 heroPhoneImg.style.transform = `rotateY(${x * 8}deg) rotateX(${-y * 5}deg)`;
             }
             if (heroGlow) {
-                heroGlow.style.transform = `translate(calc(-50% + ${x * 20}px), calc(-50% + ${y * 20}px))`;
+                heroGlow.style.transform = `translate(calc(-50% + ${x * 20}px), calc(-50% + ${y * 20}px)) translateZ(0)`;
             }
         });
 
         // Reset on mouse leave
         document.querySelector('.hero').addEventListener('mouseleave', () => {
             if (heroPhoneImg) heroPhoneImg.style.transform = '';
-            if (heroGlow) heroGlow.style.transform = 'translate(-50%, -50%)';
+            if (heroGlow) heroGlow.style.transform = 'translate(-50%, -50%) translateZ(0)';
         });
 
         // Scroll parallax
@@ -1608,7 +1610,7 @@
             document.querySelectorAll('.hero-stat-number').forEach(num => {
                 const text = num.textContent;
                 if (text.includes('60')) animateValue(num, 0, 60, 1200, '+');
-                else if (text === '5') animateValue(num, 0, 5, 1000, '');
+                else if (text.includes('4hr')) { num.textContent = '4hr'; }
                 else if (text.includes('24')) { num.textContent = '24/7'; }
             });
         }, 800);
