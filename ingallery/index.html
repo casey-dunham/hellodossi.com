@@ -527,6 +527,62 @@
             line-height: 1.4;
         }
 
+        /* Competitive Landscape Slide */
+        .landscape-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 1.5em;
+            max-width: 900px;
+        }
+
+        .landscape-card {
+            background: white;
+            border-radius: 24px;
+            padding: 1.8em 2.5em;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+
+        .landscape-card.dossi-card {
+            background: linear-gradient(135deg, rgba(115, 123, 242, 0.1) 0%, rgba(115, 123, 242, 0.05) 100%);
+            border: 2px solid var(--accent);
+            padding: 2.2em 2.5em;
+        }
+
+        .landscape-logos {
+            display: flex;
+            gap: 3em;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1em;
+        }
+
+        .landscape-logos img {
+            height: 58px;
+            width: auto;
+            opacity: 1;
+        }
+
+        .landscape-card .card-label {
+            font-size: 0.85em;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            margin-bottom: 0.8em;
+        }
+
+        .dossi-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dossi-badge img {
+            height: 44px;
+        }
+
     </style>
 </head>
 <body>
@@ -706,23 +762,33 @@
             `,
             'competitive': `
                 <div class="slide">
-                    <div class="slide-content">
-                        <h3>Why Dossi</h3>
+                    <div class="slide-content" style="max-width: none;">
+                        <h3>Competition</h3>
                         <h2>Competitive Landscape</h2>
-                        <p>Existing apps track glucose passively. Full automation requires FDA clearance and $100M+. Dossi delivers intelligent insights today.</p>
-                        <div class="comparison-table" style="margin-top: 1.5em;">
-                            <table style="max-width: 700px;">
-                                <thead>
-                                    <tr><th style="width: 50%;">Capability</th><th style="text-align: center;">Others</th><th style="text-align: center;">Dossi</th></tr>
-                                </thead>
-                                <tbody>
-                                    <tr><td>Context-aware analysis</td><td style="text-align: center; color: #ef4444;">✗</td><td style="text-align: center; color: #10b981;">✓</td></tr>
-                                    <tr><td>Learns your patterns</td><td style="text-align: center; color: #ef4444;">✗</td><td style="text-align: center; color: #10b981;">✓</td></tr>
-                                    <tr><td>Exercise adjustment</td><td style="text-align: center; color: #ef4444;">✗</td><td style="text-align: center; color: #10b981;">✓</td></tr>
-                                    <tr><td>Macro-aware insights</td><td style="text-align: center; color: #ef4444;">✗</td><td style="text-align: center; color: #10b981;">✓</td></tr>
-                                    <tr><td>Explains reasoning</td><td style="text-align: center; color: #ef4444;">✗</td><td style="text-align: center; color: #10b981;">✓</td></tr>
-                                </tbody>
-                            </table>
+                        <div class="landscape-stack">
+                            <div class="landscape-card">
+                                <div class="card-label">Embedded Pump Algorithms</div>
+                                <div class="landscape-logos">
+                                    <img src="../inventure/Medtronic-Logo.png" alt="Medtronic">
+                                    <img src="../inventure/Tandem_Logo_Mark_RGB.png" alt="Tandem">
+                                    <img src="../inventure/insulet.jpg" alt="Insulet">
+                                    <img src="../inventure/omnipod-logo.png" alt="Omnipod">
+                                </div>
+                            </div>
+                            <div class="landscape-card dossi-card">
+                                <div class="card-label">Predictive Intelligence Layer</div>
+                                <div class="dossi-badge">
+                                    <img src="../inventure/dossi-wordmark.png" alt="Dossi">
+                                </div>
+                            </div>
+                            <div class="landscape-card">
+                                <div class="card-label">Analytics & Reporting</div>
+                                <div class="landscape-logos">
+                                    <img src="../inventure/glooko.png" alt="Glooko">
+                                    <img src="../inventure/sugarmate-1.png.webp" alt="Sugarmate">
+                                    <img src="../inventure/dexcom.png" alt="Dexcom Clarity">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
